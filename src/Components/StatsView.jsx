@@ -3,48 +3,121 @@ import React from "react";
 function StatsView() {
   return (
     <>
-      <div className="flex items-center justify-center bg-gradient-to-r from-gray-900 via-gray-500 to-gray-900 ">
-        <div className="flex-col items-center justify-center text-white">
-          <div className="flex items-center justify-center">
-            <div className="h-40 text-center w-3/4 flex items-center justify-center  text-4xl font-bold">
-              Best website for Tailwind CSS Blocks
+      <section class="text-gray-600 body-font">
+        <div class="container px-5 py-24 mx-auto">
+          <div class="flex flex-col text-center w-full mb-20">
+            <h2 class="text-xs text-green-500 tracking-widest font-medium title-font mb-1">
+              ROOF PARTY POLAROID
+            </h2>
+            <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">
+              Master Cleanse Reliac Heirloom
+            </h1>
+            <p class="lg:w-2/3 mx-auto leading-relaxed text-base">
+              Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical
+              gentrify, subway tile poke farm-to-table. Franzen you probably
+              haven't heard of them man bun deep jianbing selfies heirloom prism
+              food truck ugh squid celiac humblebrag.
+            </p>
+          </div>
+          <div class="flex flex-wrap">
+            <div class="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-l-2 border-gray-200 border-opacity-60">
+              <h2 class="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2">
+                Shooting Stars
+              </h2>
+              <p class="leading-relaxed text-base mb-4">
+                Fingerstache flexitarian street art 8-bit waistcoat. Distillery
+                hexagon disrupt edison bulbche.
+              </p>
+              <a class="text-green-500 inline-flex items-center">
+                Learn More
+                <svg
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  class="w-4 h-4 ml-2"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M5 12h14M12 5l7 7-7 7"></path>
+                </svg>
+              </a>
+            </div>
+            <div class="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-l-2 border-gray-200 border-opacity-60">
+              <h2 class="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2">
+                The Catalyzer
+              </h2>
+              <p class="leading-relaxed text-base mb-4">
+                Fingerstache flexitarian street art 8-bit waistcoat. Distillery
+                hexagon disrupt edison bulbche.
+              </p>
+              <a class="text-green-500 inline-flex items-center">
+                Learn More
+                <svg
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  class="w-4 h-4 ml-2"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M5 12h14M12 5l7 7-7 7"></path>
+                </svg>
+              </a>
+            </div>
+            <div class="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-l-2 border-gray-200 border-opacity-60">
+              <h2 class="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2">
+                Neptune
+              </h2>
+              <p class="leading-relaxed text-base mb-4">
+                Fingerstache flexitarian street art 8-bit waistcoat. Distillery
+                hexagon disrupt edison bulbche.
+              </p>
+              <a class="text-green-500 inline-flex items-center">
+                Learn More
+                <svg
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  class="w-4 h-4 ml-2"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M5 12h14M12 5l7 7-7 7"></path>
+                </svg>
+              </a>
+            </div>
+            <div class="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-l-2 border-gray-200 border-opacity-60">
+              <h2 class="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2">
+                Melanchole
+              </h2>
+              <p class="leading-relaxed text-base mb-4">
+                Fingerstache flexitarian street art 8-bit waistcoat. Distillery
+                hexagon disrupt edison bulbche.
+              </p>
+              <a class="text-green-500 inline-flex items-center">
+                Learn More
+                <svg
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  class="w-4 h-4 ml-2"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M5 12h14M12 5l7 7-7 7"></path>
+                </svg>
+              </a>
             </div>
           </div>
-
-          <div className="flex">
-            <div className="flex md:flex-row flex-col p-4 space-x-4 space-y-2 max-w-7xl justify-around w-full h-auto lg:h-60 items-center ">
-              <div className="h-40 w-[70%] md:w-1/4 flex items-center justify-center ml-4">
-                <div className="flex-col space-y-2 items-center px-0 md:px-6">
-                  <div className="h-1.5 w-10 rounded-2xl bg-white bg-gradient-to-r from-sky-300 via-rose-200 to-lime-300"></div>
-                  <div className="text-5xl font-bold">69%</div>
-                  <div className="text-sm font-medium text-gray-200">
-                    Tailblocks has more than 15k+ visitors per month.
-                  </div>
-                </div>
-              </div>
-              <div className="h-40 w-[70%] md:w-1/4 flex items-center justify-center">
-                <div className="flex-col space-y-2">
-                  <div className="h-1.5 w-10 rounded-2xl bg-white bg-gradient-to-r from-sky-300 via-rose-200 to-lime-300"></div>
-                  <div className="text-5xl font-bold">42%</div>
-                  <div className="text-sm font-medium text-gray-200">
-                    Tailblocks has more than 1.2M+ total users.
-                  </div>
-                </div>
-              </div>
-              <div className="h-40 w-[70%] md:w-1/4 flex items-center justify-center">
-                <div className="flex-col space-y-2">
-                  <div className="h-1.5 w-10 rounded-2xl bg-white bg-gradient-to-r from-sky-300 via-rose-200 to-lime-300"></div>
-                  <div className="text-5xl font-bold">71%</div>
-                  <div className="text-sm font-medium text-gray-200">
-                    Tailblocks has gained 69k+ users last month.
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <button class="flex mx-auto mt-16 text-white bg-green-500 border-0 py-2 px-8 focus:outline-none hover:bg-green-600 rounded text-lg">
+            Button
+          </button>
         </div>
-      </div>
-      <script src="https://cdn.tailwindcss.com"></script>
+      </section>
     </>
   );
 }

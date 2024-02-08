@@ -6,6 +6,7 @@ import Header from "./Components/Header";
 import LandingPage from "./Pages/LandingPage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AboutPage from "./Pages/AboutPage";
+// import Header from "./Components/Header";
 
 function App() {
   const [count, setCount] = useState(0);
