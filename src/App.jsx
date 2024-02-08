@@ -5,6 +5,7 @@ import "./App.css";
 import Header from "./Components/Header";
 import LandingPage from "./Pages/LandingPage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import AboutPage from "./Pages/AboutPage";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -14,6 +15,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LandingPage />} />
+          <Route path="/about" element={<AboutPage />} />
         </Routes>
       </BrowserRouter>
     </>
