@@ -10,6 +10,8 @@ import Ecommerce from "./Pages/Ecommerce";
 // import Header from "./Components/Header";
 import Login from './Pages/Login';
 import SignUpPage from "./Pages/SignUpPage";
+import Stats from "./Pages/Stats";
+import Report from "./Pages/Report";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -23,6 +25,8 @@ function App() {
           <Route path="/ecommerce" element={<Ecommerce/>} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUpPage />} />
+          <Route path="/stats" element={<Stats />} />
+          <Route path="/report" element={<Report />} />
         </Routes>
       </BrowserRouter>
     </>
