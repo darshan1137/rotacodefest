@@ -3,8 +3,18 @@ import React from "react";
 function Blogs() {
   return (
     <section class="text-gray-600 body-font">
-      <div class="container px-5 py-24 mx-auto">
-        <div class="flex flex-wrap -m-4">
+      <div class="container px-5 py-5 mx-auto">
+        <div class="h-1 bg-gray-200 rounded overflow-hidden">
+          <div class="w-ful h-full bg-green-500"></div>
+        </div>
+        <div class="flex flex-wrap sm:flex-row flex-col justify-center items-center mb-12 py-5 lg:mx-auto">
+          <h1 class="text-gray-900 font-medium title-font text-2xl mb-2 sm:mb-0">
+            The Knowledge Hub: Explore Insights, Inspiration, and In-Depth
+            Articles in Our Blog Section.
+          </h1>
+        </div>
+
+        <div class="flex flex-wrap -m-4 ">
           <div class="p-4 lg:w-1/3">
             <div class="h-full bg-gray-100 bg-opacity-75 px-8 pt-16 pb-24 rounded-lg overflow-hidden text-center relative">
               <h2 class="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">

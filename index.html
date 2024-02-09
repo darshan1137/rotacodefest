@@ -4,6 +4,22 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      @keyframes scaleBackground {
+        0% {
+          transform: scale(1);
+        }
+        100% {
+          transform: scale(1.25);
+        }
+      }
+  
+      .scaled-background {
+        background-image: url('https://images.unsplash.com/photo-1457530378978-8bac673b8062?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+        background-size: cover;
+        animation: scaleBackground 2s infinite alternate;
+      }
+    </style>
     <title>Vite + React</title>
   </head>
   <body>

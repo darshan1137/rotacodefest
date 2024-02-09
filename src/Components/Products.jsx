@@ -6,16 +6,16 @@ function Products() {
       <div class="container px-5 py-24 mx-auto">
         <div class="flex flex-col">
           <div class="h-1 bg-gray-200 rounded overflow-hidden">
-            <div class="w-24 h-full bg-green-500"></div>
+            <div class="w-ful h-full bg-green-500"></div>
           </div>
           <div class="flex flex-wrap sm:flex-row flex-col py-6 mb-12">
             <h1 class="sm:w-2/5 text-gray-900 font-medium title-font text-2xl mb-2 sm:mb-0">
-              Space The Final Frontier
+              Shop our Eco-friendly now
             </h1>
             <p class="sm:w-3/5 leading-relaxed text-base sm:pl-10 pl-0">
-              Street art subway tile salvia four dollar toast bitters selfies
-              quinoa yuccie synth meditation iPhone intelligentsia prism tofu.
-              Viral gochujang bitters dreamcatcher.
+              Embrace a Greener Lifestyle, Embody Eco-Friendly Choices;
+              Together, Let's Nourish Our Planet, Conserve Resources, and
+              Cultivate a Sustainable Legacy for Generations to Come.
             </p>
           </div>
         </div>
