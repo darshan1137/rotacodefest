@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 function SignUpPage() {
   return (
@@ -9,14 +10,14 @@ function SignUpPage() {
       <form className="mx-auto max-w-lg rounded-lg border">
         <div className="flex flex-col gap-4 p-4 md:p-8">
         <div>
-        <label for="first-name" class="mb-2 inline-block text-sm text-gray-800 sm:text-base">First name*</label>
-        <input name="first-name" class="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
+        <label for="first-name" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">User name</label>
+        <input name="first-name" className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
       </div>
 
-      <div>
+      {/* <div>
         <label for="last-name" class="mb-2 inline-block text-sm text-gray-800 sm:text-base">Last name*</label>
         <input name="last-name" class="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
-      </div>
+      </div> */}
           <div>
             <label for="email" className="mb-2 inline-block text-sm text-gray-800 sm:text-base">Email</label>
             <input name="email" className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
@@ -49,7 +50,7 @@ function SignUpPage() {
         </div>
   
         <div className="flex items-center justify-center bg-gray-100 p-4">
-          <p className="text-center text-sm text-gray-500">Don't have an account? <a href="#" className="text-indigo-500 transition duration-100 hover:text-indigo-600 active:text-indigo-700">Register</a></p>
+          <p className="text-center text-sm text-gray-500">Don't have an account? <Link to="/login"><a href="#" className="text-indigo-500 transition duration-100 hover:text-indigo-600 active:text-indigo-700">Register</a></Link></p>
         </div>
       </form>
     </div>

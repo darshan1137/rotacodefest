@@ -20,7 +20,7 @@ function StatsView() {
             </p>
           </div>
           <div className="flex flex-wrap flex-grow ">
-            <div className="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-l-2 border-gray-200 border-opacity-60 flex-grow">
+            <div className="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6  border-gray-200 border-opacity-60 flex-grow">
               <h2 className="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2 text-center ">
                 Completed Campaigns
               </h2>
@@ -28,7 +28,7 @@ function StatsView() {
                 02
               </p>
             </div>
-            <div className="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-l-2 border-gray-200 border-opacity-60 flex-grow">
+            <div className="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-gray-200 border-opacity-60 flex-grow">
               <h2 className="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2 text-center">
                 Open Campaigns
               </h2>
@@ -36,7 +36,7 @@ function StatsView() {
                 12
               </p>
             </div>
-            <div className="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-l-2 border-gray-200 border-opacity-60 flex-grow">
+            <div className="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-gray-200 border-opacity-60 flex-grow">
               <h2 className="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2 text-center">
                 Upcoming Campaigns
               </h2>

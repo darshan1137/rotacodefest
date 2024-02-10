@@ -12,6 +12,7 @@ import Login from './Pages/Login';
 import SignUpPage from "./Pages/SignUpPage";
 import Stats from "./Pages/Stats";
 import Report from "./Pages/Report";
+import GuidelinesPage from "./Pages/GuidelinesPage";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -27,6 +28,7 @@ function App() {
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/stats" element={<Stats />} />
           <Route path="/report" element={<Report />} />
+          <Route path="/guideline" element={<GuidelinesPage />} />
         </Routes>
       </BrowserRouter>
     </>
