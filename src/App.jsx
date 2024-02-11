@@ -29,6 +29,7 @@ function App() {
           <Route path="/stats" element={<Stats />} />
           <Route path="/report" element={<Report />} />
           <Route path="/guideline" element={<GuidelinesPage />} />
+          
         </Routes>
       </BrowserRouter>
     </>
