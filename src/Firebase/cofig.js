@@ -3,13 +3,13 @@ import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyArMtS2ez5CgaoYTAWyIA6sOkmuV5KdCFg",
-  authDomain: "codevista-7a95e.firebaseapp.com",
-  projectId: "codevista-7a95e",
-  storageBucket: "codevista-7a95e.appspot.com",
-  messagingSenderId: "911534452415",
-  appId: "1:911534452415:web:f8dd7dcb6826defc14200a",
-  measurementId: "G-VDF3294RF3"
+  apiKey: "AIzaSyDZqxJLLuMlf5WjsV5qnq-nT7OjKRJLZXQ",
+  authDomain: "codevista-b8ff8.firebaseapp.com",
+  projectId: "codevista-b8ff8",
+  storageBucket: "codevista-b8ff8.appspot.com",
+  messagingSenderId: "453770804559",
+  appId: "1:453770804559:web:3b3cef4518a888dca8993a",
+  measurementId: "G-6D3CFQE3T4"
 };
 
 const app = initializeApp(firebaseConfig);
