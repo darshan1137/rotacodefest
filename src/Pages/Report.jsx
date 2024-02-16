@@ -1,14 +1,98 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../Components/Header";
 import "../App.css";
+import { db } from "../Firebase/cofig";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 
 export default function Report() {
+  const [Fname, setFName] = useState();
+  const [Lname, setLname] = useState();
+  const [email, setEmail] = useState();
+  const [phone, setPhone] = useState();
+  const [state, setState] = useState();
+  const [address, setAddress] = useState();
+  const [city, setCity] = useState();
+  const [description, setDescription] = useState();
+  const [latitude, setLatitude] = useState();
+  const [longitude, setLongitude] = useState();
+  const [locationUrl, setLocationUrl] = useState("");
+
+  const reportproblem = async (e) => {
+    e.preventDefault();
+    if (
+      !Fname ||
+      !Lname ||
+      !email ||
+      !phone ||
+      !state ||
+      !city ||
+      !address ||
+      !description
+    ) {
+      alert("Please fill all the details");
+      return;
+    }
+
+    if (latitude === null || longitude === null) {
+      alert("Please turn on your location");
+      return;
+    }
+
+    const newDoc = {
+      [latitude]: {
+        Fname,
+        Lname,
+        email,
+        phone,
+        state,
+        address,
+        city,
+        description,
+        locationUrl,
+        latitude,
+        longitude,
+      },
+    };
+    const docRef = doc(
+      db,
+      "awaiting-reports",
+      city
+        .split(" ")
+        .map(
+          (word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+        )
+        .join(" ")
+    );
+    const options = { merge: true };
+
+    await setDoc(docRef, newDoc, options);
+
+    alert("Reported Successfully");
+    console.log(document);
+  };
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setLatitude(position.coords.latitude);
+        setLongitude(position.coords.longitude);
+        // console.log(latitude, longitude);
+      },
+      (error) => {
+        setError(error.message);
+      }
+    );
+  }, []);
+
+  useEffect(() => {
+    setLocationUrl(`https://maps.google.com/?q=${latitude},${longitude}`);
+  }, [latitude, longitude]);
   return (
     <>
       <div>
         <Header />
       </div>
-      <div  className=" py-6 sm:py-8 lg:py-12 bg-green  ">
+      <div className=" py-6 sm:py-8 lg:py-12 bg-green  ">
         <div className="mx-auto max-w-screen-xl px-4 md:px-8">
           <div className="grid gap-8 md:grid-cols-2 lg:gap-12 ">
             <div>
@@ -63,6 +147,8 @@ export default function Report() {
               </label>
               <input
                 name="first-name"
+                value={Fname}
+                onChange={(e) => setFName(e.target.value)}
                 className="w-full rounded border border-solid border-green-800 bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-green-100 transition duration-100 focus:ring"
               />
             </div>
@@ -75,6 +161,8 @@ export default function Report() {
                 Last name*
               </label>
               <input
+                value={Lname}
+                onChange={(e) => setLname(e.target.value)}
                 name="last-name"
                 className="w-full rounded border border-solid border-green-800 bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-green-100 transition duration-100 focus:ring"
               />
@@ -88,6 +176,8 @@ export default function Report() {
                 Email*
               </label>
               <input
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 name="first-name"
                 className="w-full rounded border border-solid border-green-800 bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-green-100 transition duration-100 focus:ring"
               />
@@ -101,6 +191,8 @@ export default function Report() {
                 Contact no.*
               </label>
               <input
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
                 name="last-name"
                 className="w-full rounded border border-solid border-green-800 bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-green-100 transition duration-100 focus:ring"
               />
@@ -114,6 +206,8 @@ export default function Report() {
                 State
               </label>
               <input
+                value={state}
+                onChange={(e) => setState(e.target.value)}
                 name="company"
                 className="w-full rounded border border-solid border-green-800 bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-green-100 transition duration-100 focus:ring"
               />
@@ -127,6 +221,8 @@ export default function Report() {
                 Address
               </label>
               <input
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
                 name="email"
                 className="w-full rounded border border-solid border-green-800 bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-green-100 transition duration-100 focus:ring"
               />
@@ -140,6 +236,8 @@ export default function Report() {
                 City
               </label>
               <input
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
                 name="subject"
                 className="w-full rounded border border-solid border-green-800 bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-green-100 transition duration-100 focus:ring"
               />
@@ -153,6 +251,8 @@ export default function Report() {
                 Description of the problem
               </label>
               <textarea
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
                 name="message"
                 className="h-64 w-full rounded border border-solid border-green-800 bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-green-100 transition duration-100 focus:ring"
               ></textarea>
@@ -161,6 +261,7 @@ export default function Report() {
             <div className="flex items-center justify-center sm:col-span-2">
               <button
                 // style={customStyle}
+                onClick={reportproblem}
                 className="inline-block rounded-lg px-8 py-3 bg-green-800 text-center text-sm font-semibold text-white outline-none ring-yellow-300 transition duration-100 hover:bg-green-600 focus-visible:ring md:text-base"
               >
                 Report
