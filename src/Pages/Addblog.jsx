@@ -9,22 +9,34 @@ const AddBlog = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+  
     const form = event.target;
     const formData = new FormData(form);
     const userEmail = localStorage.getItem('email');
-
+  
+    // Validate required fields
+    const title = formData.get('title');
+    const subtitle = formData.get('subtitle');
+    const authname = formData.get('authname');
+    const imgLink = formData.get('img-link');
+    const blogContent = formData.get('blogcontent');
+  
+    if (!title || !subtitle || !authname || !imgLink || !blogContent) {
+      alert('Please fill out all required fields.');
+      return;
+    }
+  
     const blogData = {
-      title: formData.get('title'),
-      subtitle: formData.get('subtitle'),
-      blogContent: formData.get('blogcontent'),
+      title,
+      subtitle,
+      blogContent,
       email: userEmail,
-      authname: formData.get('authname'),
+      authname,
       timestamp: serverTimestamp(),
-      imglink: formData.get('img-link'),
-      status:'notapproved'
+      imglink: imgLink,
+      status: 'notapproved'
     };
-
+  
     try {
       await addDoc(collection(db, 'blogs'), blogData);
       alert('Your Blog will be added once admin approves it');
@@ -34,7 +46,6 @@ const AddBlog = () => {
       alert('Error occurred while adding the blog.');
     }
   };
-
   return (
     <div className="bg-white py-6 sm:py-8 lg:py-12 mx-2 md:mx-4">
       <div className="mx-auto max-w-screen-md">

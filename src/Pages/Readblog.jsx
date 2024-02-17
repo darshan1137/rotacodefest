@@ -30,16 +30,12 @@ const Readblog = () => {
 
   return (
     <>
-      <div className="bg-white py-6 sm:py-8 lg:py-12">
-        <div className="mx-auto max-w-screen-md px-4 md:px-8">
-          <h1 className="mb-4 text-center text-2xl font-bold text-gray-800 sm:text-3xl md:mb-6">
-            {blog.title}
-          </h1>
-          <h1 className="mb-4 text-center text-2xl font-bold text-gray-800 sm:text-3xl md:mb-6">
-            {blog.subtitle}
-          </h1>
+      <div className="bg-green-100 py-12">
+        <div className="container mx-auto px-4 md:px-8 text-center">
+          <h1 className="text-3xl md:text-4xl font-bold text-green-800 mb-4">{blog.title}</h1>
+          <h2 className="text-xl md:text-2xl font-semibold text-green-800 mb-4">{blog.subtitle}</h2>
 
-          <div className="relative mb-6 overflow-hidden rounded-lg bg-gray-100 shadow-lg md:mb-8">
+          <div className="mb-8 max-w-2xl mx-auto overflow-hidden rounded-lg shadow-lg">
             <img
               src={blog.imglink}
               loading="lazy"
@@ -48,30 +44,19 @@ const Readblog = () => {
             />
           </div>
 
-          <h2 className="mb-2 text-xl font-semibold text-gray-800 sm:text-2xl md:mb-4">
-            Blog
-          </h2>
+          <div className="max-w-2xl mx-auto text-left text-green-800 mb-8">
+            <p className="text-lg md:text-xl leading-relaxed">{blog.blogContent}</p>
+          </div>
 
-          <p className="mb-6 text-gray-500 sm:text-lg md:mb-8">{blog.blogContent}</p>
-
-          {/* <blockquote className="mb-6 border-l-4 pl-4 italic text-gray-500 sm:text-lg md:mb-8 md:pl-6">
-            {blog.quote}
-          </blockquote> */}
-
-          <h2 className="mb-2 text-xl font-semibold text-gray-800 sm:text-2xl md:mb-4">
-            Author: {blog.authname}
-          </h2>
-          <h2 className="mb-2 text-xl font-semibold text-gray-800 sm:text-2xl md:mb-4">
-            Author's Email: {blog.email}
-          </h2>
-
-          <p className="text-gray-500 sm:text-lg">Published on: {new Date(blog.timestamp.seconds * 1000).toLocaleString()}</p>
-
+          <div className="mb-8">
+            <h2 className="text-xl md:text-2xl font-semibold text-green-800 mb-2">Author: {blog.authname}</h2>
+            <h2 className="text-xl md:text-2xl font-semibold text-green-800 mb-2">Author's Email: {blog.email}</h2>
+            <p className="text-green-500 text-lg">Published on: {new Date(blog.timestamp.seconds * 1000).toLocaleString()}</p>
+          </div>
         </div>
       </div>
     </>
   );
 }
-
 
 export default Readblog;
