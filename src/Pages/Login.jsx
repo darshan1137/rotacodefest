@@ -72,8 +72,8 @@ function Login() {
   return (
     <>
       <div className="bg-green-700 ">
-        <div className="py-6 sm:py-8 lg:py-12 w-screen h-screen">
-          <div className="mx-auto bg-white max-w-xl py-10 px-4  rounded-lg md:px-8 shadow-lg shadow-green-400">
+      <div className="py-6 sm:py-8 lg:py-12 w-screen h-screen flex justify-center items-center">
+    <div className="bg-white max-w-xl py-10 px-4 rounded-lg md:px-8 shadow-lg shadow-green-400 sm:w-full">
             <h2 className="mb-4 text-center text-2xl font-bold text-green-600 md:mb-8 lg:text-3xl">Login</h2>
 
             <form className="mx-auto max-w-lg rounded-lg border">

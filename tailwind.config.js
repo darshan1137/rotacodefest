@@ -33,7 +33,8 @@ const tailwindConfig = {
   theme: {
     extend: {
       animation:{
-        scaleBackground: "scaleBackground 15s infinite alternate"
+        scaleBackground: "scaleBackground 15s infinite alternate",
+        'spinner-fzua35': 'spinner 1s infinite ease'
       },
       keyframes: {
         scaleBackground: {
@@ -46,11 +47,23 @@ const tailwindConfig = {
             animationTimingFunction: "ease-in-out", 
           },
         },
+        spinner: {
+          '0%, 10%, 20%, 30%, 50%, 60%, 70%, 80%, 90%, 100%': {
+            transform: 'rotate(calc(var(--rotation) * 1deg)) translateY(calc(var(--translation) * 1%))',
+          },
+          '50%': {
+            transform: 'rotate(calc(var(--rotation) * 1deg)) translateY(calc(var(--translation) * 1.5%))',
+          },
+        },
       },
       
     },
   },
-  plugins: [],
+  plugins: [
+    // require('@tailwindcss/aspect-ratio'),
+    // require('@tailwindcss/forms'),
+    // // Add other plugins as needed
+  ],
 }
 
 export default tailwindConfig;

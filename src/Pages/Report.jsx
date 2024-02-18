@@ -16,6 +16,7 @@ export default function Report() {
   const [latitude, setLatitude] = useState();
   const [longitude, setLongitude] = useState();
   const [locationUrl, setLocationUrl] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const reportproblem = async (e) => {
     e.preventDefault();
@@ -65,10 +66,30 @@ export default function Report() {
     );
     const options = { merge: true };
 
-    await setDoc(docRef, newDoc, options);
-
-    alert("Reported Successfully");
-    console.log(document);
+    try {
+      setLoading(true);
+      await setDoc(docRef, newDoc, options);
+      alert("Reported Successfully");
+      console.log(document);
+      setFName("");
+      setLname("");
+      setEmail("");
+      setPhone("");
+      setState("");
+      setAddress("");
+      setCity("");
+      setDescription("");
+      setLatitude("");
+      setLongitude("");
+      setLocationUrl("");
+    } catch (error) {
+      console.error("Error reporting problem:", error);
+      alert(
+        "An error occurred while reporting the problem. Please try again later."
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -87,6 +108,34 @@ export default function Report() {
   useEffect(() => {
     setLocationUrl(`https://maps.google.com/?q=${latitude},${longitude}`);
   }, [latitude, longitude]);
+
+  if (loading) {
+    return (
+      //   <div className="flex justify-center items-center h-screen">
+      //   <div className="relative w-9 h-9 animate-spinner-fzua35">
+      //     <div className="absolute w-1/2 h-1/2 bg-black transform rotate-36 translate-y-150 animate-spinner"></div>
+      //     <div className="absolute w-1/2 h-1/2 bg-black transform rotate-72 translate-y-150 animate-spinner"></div>
+      //     <div className="absolute w-1/2 h-1/2 bg-black transform rotate-108 translate-y-150 animate-spinner"></div>
+      //     <div className="absolute w-1/2 h-1/2 bg-black transform rotate-144 translate-y-150 animate-spinner"></div>
+      //     <div className="absolute w-1/2 h-1/2 bg-black transform rotate-180 translate-y-150 animate-spinner"></div>
+      //     <div className="absolute w-1/2 h-1/2 bg-black transform rotate-216 translate-y-150 animate-spinner"></div>
+      //     <div className="absolute w-1/2 h-1/2 bg-black transform rotate-252 translate-y-150 animate-spinner"></div>
+      //     <div className="absolute w-1/2 h-1/2 bg-black transform rotate-288 translate-y-150 animate-spinner"></div>
+      //     <div className="absolute w-1/2 h-1/2 bg-black transform rotate-324 translate-y-150 animate-spinner"></div>
+      //     <div className="absolute w-1/2 h-1/2 bg-black transform rotate-360 translate-y-150 animate-spinner"></div>
+      //   </div>
+      // </div>
+      <div className="h-screen bg-white">
+        <div className="flex justify-center items-center h-full">
+          <img
+            className="h-16 w-16"
+            src="https://icons8.com/preloaders/preloaders/1488/Iphone-spinner-2.gif"
+            alt=""
+          />
+        </div>
+      </div>
+    );
+  }
   return (
     <>
       <div>

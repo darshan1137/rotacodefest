@@ -1,11 +1,13 @@
-import  { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Header from "../Components/Header";
-import ProductCard from './../Components/ProductCard';
+import ProductCard from "../Components/ProductCard";
 import { db } from "../Firebase/cofig";
 import { collection, getDocs } from "firebase/firestore";
 
 function Ecommerce() {
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -16,15 +18,39 @@ function Ecommerce() {
           ...doc.data(),
         }));
         setProducts(productsArray);
-        console.log(productsArray)
       } catch (error) {
         console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchData();
   }, []);
 
+  if (loading) {
+    return (
+    //   <div className="flex justify-center items-center h-screen">
+    //   <div className="relative w-9 h-9 animate-spinner-fzua35">
+    //     <div className="absolute w-1/2 h-1/2 bg-black transform rotate-36 translate-y-150 animate-spinner"></div>
+    //     <div className="absolute w-1/2 h-1/2 bg-black transform rotate-72 translate-y-150 animate-spinner"></div>
+    //     <div className="absolute w-1/2 h-1/2 bg-black transform rotate-108 translate-y-150 animate-spinner"></div>
+    //     <div className="absolute w-1/2 h-1/2 bg-black transform rotate-144 translate-y-150 animate-spinner"></div>
+    //     <div className="absolute w-1/2 h-1/2 bg-black transform rotate-180 translate-y-150 animate-spinner"></div>
+    //     <div className="absolute w-1/2 h-1/2 bg-black transform rotate-216 translate-y-150 animate-spinner"></div>
+    //     <div className="absolute w-1/2 h-1/2 bg-black transform rotate-252 translate-y-150 animate-spinner"></div>
+    //     <div className="absolute w-1/2 h-1/2 bg-black transform rotate-288 translate-y-150 animate-spinner"></div>
+    //     <div className="absolute w-1/2 h-1/2 bg-black transform rotate-324 translate-y-150 animate-spinner"></div>
+    //     <div className="absolute w-1/2 h-1/2 bg-black transform rotate-360 translate-y-150 animate-spinner"></div>
+    //   </div>
+    // </div>
+      <div className="h-screen bg-white">
+<div className="flex justify-center items-center h-full">
+  <img className="h-16 w-16" src="https://icons8.com/preloaders/preloaders/1488/Iphone-spinner-2.gif" alt=""/>
+</div>
+</div>
+    );
+  }
   return (
     <div>
       <div>
