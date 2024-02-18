@@ -17,6 +17,7 @@ import Blogs from "./Pages/Blogs";
 import Readblog from "./Pages/Readblog";
 import AddBlog from "./Pages/Addblog";
 import Admin from "./Pages/Admin"
+import Profile from "./Pages/Profile";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -39,6 +40,7 @@ function App() {
           <Route
             path="/readblog/:id" element={<Readblog />}
           />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </BrowserRouter>
     </>

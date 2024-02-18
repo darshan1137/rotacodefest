@@ -36,6 +36,13 @@ function Header() {
             {" "}
             <Link to="/stats">Statistics</Link>
           </a>
+          <a className="mr-5 hover:text-gray-900">
+            {" "}
+            <Link to="/profile">Profile</Link>
+          </a>
+          
+            
+           
         </nav>
         <div className="flex items-center">
           <button className="bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base">
