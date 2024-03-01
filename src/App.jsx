@@ -19,6 +19,7 @@ import AddBlog from "./Pages/Addblog";
 import Admin from "./Pages/Admin";
 import Profile from "./Pages/Profile";
 import Navbar from "./Components/Navbar";
+import UserProfile from "./Pages/UserProfile";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -39,7 +40,7 @@ function App() {
           <Route path="/addblog" element={<AddBlog />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/readblog/:id" element={<Readblog />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile" element={<UserProfile />} />
         </Routes>
       </BrowserRouter>
     </>
