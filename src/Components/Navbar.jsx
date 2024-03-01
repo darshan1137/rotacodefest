@@ -28,9 +28,9 @@ function Navbar() {
     <header className="bg-white border-b border-gray-500">
       <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 ">
         <div className="flex h-16 items-center justify-between">
-          <div className="flex-1 md:flex md:items-center md:gap-12">
+          <div className="flex-1 md:flex md:items-center md:gap-12 flex item-center">
             <Link to="/">
-              <a className="flex font-medium items-center text-gray-900 mb-4 md:mb-0">
+              <a className="flex font-medium items-center justify-center  text-gray-900  md:mb-0">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
