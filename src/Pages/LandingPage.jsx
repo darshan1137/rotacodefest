@@ -1,15 +1,15 @@
 import React from "react";
-import Header from "../Components/Header";
 import Banner from "../Components/Banner";
 import StatsView from "../Components/StatsView";
 import Footer from "../Components/Footer";
 import Products from "../Components/Products";
 import Blogs from "../Components/Blogs";
+import Navbar from "../Components/Navbar";
 
 function LandingPage() {
   return (
     <div>
-      <Header />
+      <Navbar />
       <Banner />
       <StatsView />
       <Products />

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Readblog from "./Readblog";
-import Header from "../Components/Header";
+import Header from "../Components/Navbar";
 import { Link } from "react-router-dom";
 import { db } from "../Firebase/cofig.js";
 import {
@@ -47,7 +47,8 @@ export default function Blogs() {
           Explore Blogs
         </h1>
         <p className="mx-auto max-w-screen-md text-center text-gray-500 md:text-lg">
-          Discover fascinating insights about waste management and its importance.
+          Discover fascinating insights about waste management and its
+          importance.
         </p>
       </div>
 

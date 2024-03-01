@@ -16,8 +16,9 @@ import GuidelinesPage from "./Pages/GuidelinesPage";
 import Blogs from "./Pages/Blogs";
 import Readblog from "./Pages/Readblog";
 import AddBlog from "./Pages/Addblog";
-import Admin from "./Pages/Admin"
+import Admin from "./Pages/Admin";
 import Profile from "./Pages/Profile";
+import Navbar from "./Components/Navbar";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -37,9 +38,7 @@ function App() {
           <Route path="/blogs" element={<Blogs />} />
           <Route path="/addblog" element={<AddBlog />} />
           <Route path="/admin" element={<Admin />} />
-          <Route
-            path="/readblog/:id" element={<Readblog />}
-          />
+          <Route path="/readblog/:id" element={<Readblog />} />
           <Route path="/profile" element={<Profile />} />
         </Routes>
       </BrowserRouter>

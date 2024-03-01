@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Header from "../Components/Header";
+import Header from "../Components/Navbar";
 import "../App.css";
 import { db } from "../Firebase/cofig";
 import { doc, getDoc, setDoc } from "firebase/firestore";

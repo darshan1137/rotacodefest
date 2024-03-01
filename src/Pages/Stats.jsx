@@ -1,5 +1,5 @@
 import React from "react";
-import Header from "../Components/Header";
+import Header from "../Components/Navbar";
 
 function Stats() {
   return (
@@ -54,13 +54,19 @@ function Stats() {
               <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                 <thead className="text-xs text-gray-700 uppercase dark:text-gray-400">
                   <tr>
-                    <th scope="col" className="px-6 py-3 dark:text-white  bg-green">
+                    <th
+                      scope="col"
+                      className="px-6 py-3 dark:text-white  bg-green"
+                    >
                       Product name
                     </th>
                     <th scope="col" className="px-6 py-3 bg-black-600">
                       Color
                     </th>
-                    <th scope="col" className="px-6 py-3 dark:text-white  bg-green">
+                    <th
+                      scope="col"
+                      className="px-6 py-3 dark:text-white  bg-green"
+                    >
                       Category
                     </th>
                     <th scope="col" className="px-6 py-3">

@@ -1,23 +1,35 @@
 import React, { useEffect, useState } from "react";
 import Readblog from "./Readblog";
-import Header from "../Components/Header.jsx";
+import Header from "../Components/Navbar.jsx";
 import { Link } from "react-router-dom";
-import { db } from '../Firebase/cofig.js'
-import { collection, getDocs, where, query, getFirestore, doc, updateDoc, deleteDoc } from "firebase/firestore";
+import { db } from "../Firebase/cofig.js";
+import {
+  collection,
+  getDocs,
+  where,
+  query,
+  getFirestore,
+  doc,
+  updateDoc,
+  deleteDoc,
+} from "firebase/firestore";
 
 export default function Blogs() {
   const [blogs, setBlogs] = useState([]);
 
   const fetchData = async () => {
     try {
-      const q = query(collection(getFirestore(), "blogs"), where("status", "==", "notapproved"));
+      const q = query(
+        collection(getFirestore(), "blogs"),
+        where("status", "==", "notapproved")
+      );
       const querySnapshot = await getDocs(q);
       const blogsData = querySnapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
       setBlogs(blogsData);
-    //   console.log(blog)
+      //   console.log(blog)
     } catch (error) {
       console.error("Error fetching blogs:", error);
     }
@@ -54,7 +66,7 @@ export default function Blogs() {
       console.error("Error discarding blog:", error);
     }
   };
- 
+
   return (
     <>
       <div>
@@ -66,13 +78,17 @@ export default function Blogs() {
           Admin page
         </h1>
         <p className="mx-auto max-w-screen-md text-center text-gray-500 md:text-lg">
-          Discover fascinating insights about waste management and its importance.
+          Discover fascinating insights about waste management and its
+          importance.
         </p>
       </div>
 
       <div className="m-5 grid gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-8">
         {blogs.map((blog) => (
-          <div key={blog.id} className="group relative flex h-48 flex-col overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-64 xl:h-96">
+          <div
+            key={blog.id}
+            className="group relative flex h-48 flex-col overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-64 xl:h-96"
+          >
             <Link
               to={`/readblog/${blog.id}`}
               className="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110"

@@ -1,20 +1,25 @@
 import React from "react";
-import Header from "../Components/Header";
+import Header from "../Components/Navbar";
 
 function AboutPage() {
   return (
     <div>
       <Header />
       <div class="py-6 sm:py-8 lg:py-12 bg-green">
-  <div className="flex flex-col text-center w-full mb-20">
-    <h1 className="text-2xl text-center text-4xl my-text font-fira-sans font-semibold md:text-center mb-4" style={{ color: 'white' }}>
-      OUR TEAM
-    </h1>
-    <p className="lg:w-2/3 mx-auto leading-relaxed text-base text-white">
-    Want to learn more about the team behind this website? Visit our team page [link] or connect with us on social media! We're always happy to hear from you and value your feedback.
-    </p>
-  </div>
-</div>
+        <div className="flex flex-col text-center w-full mb-20">
+          <h1
+            className="text-2xl text-center text-4xl my-text font-fira-sans font-semibold md:text-center mb-4"
+            style={{ color: "white" }}
+          >
+            OUR TEAM
+          </h1>
+          <p className="lg:w-2/3 mx-auto leading-relaxed text-base text-white">
+            Want to learn more about the team behind this website? Visit our
+            team page [link] or connect with us on social media! We're always
+            happy to hear from you and value your feedback.
+          </p>
+        </div>
+      </div>
 
       <section className="text-gray-600 body-font">
         <div className="container px-5 py-24 mx-auto">
