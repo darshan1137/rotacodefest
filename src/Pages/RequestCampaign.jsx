@@ -125,7 +125,7 @@ function RequestCampaign() {
               />
             </div>
 
-            <div className="sm:col-span-2">
+            <div className="sm:col-span-1">
               <label
                 htmlFor="phone"
                 className="mb-2 inline-block text-sm text-gray-800 sm:text-base"
@@ -140,7 +140,7 @@ function RequestCampaign() {
               />
             </div>
 
-            <div className="sm:col-span-2">
+            <div className="sm:col-span-1">
               <label
                 htmlFor="aadhar-number"
                 className="mb-2 inline-block text-sm text-gray-800 sm:text-base"
