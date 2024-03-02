@@ -12,7 +12,7 @@ function Navbar() {
   };
 
   useEffect(() => {
-    const storedEmail = localStorage.getItem("email");
+    const storedEmail = localStorage.getItem("username");
     sethasEmail(!!storedEmail);
   }, []);
 

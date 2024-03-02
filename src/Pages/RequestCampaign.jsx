@@ -1,6 +1,15 @@
 import React, { useState } from "react";
 // import Header from "../Components/Header";
 import Navbar from "../Components/Navbar";
+import {
+  doc,
+  collection,
+  addDoc,
+  serverTimestamp,
+  setDoc,
+} from "firebase/firestore";
+import { db } from "../Firebase/cofig";
+
 function RequestCampaign() {
   // User details state variables
   const [Fname, setFName] = useState("");
@@ -21,7 +30,67 @@ function RequestCampaign() {
   const [endTime, setEndTime] = useState("");
   // const [endDate, setEndDate] = useState("");
 
-  const reportProblem = () => {};
+  const addRequestAndRecord = async (requestDetails, recordDetails) => {
+    try {
+      const { campaignTitle, startDate, state, city, address } = requestDetails;
+
+      // Convert the startDate string to a Date object
+      const startDateObj = new Date(startDate);
+
+      // Create a formatted date string (e.g., "2022-04-01") from the startDate
+      const formattedDate = startDateObj
+        .toISOString()
+        .split("T")[0]
+        .replace(/-/g, "_");
+
+      const requestsCollectionRef = collection(db, "requests");
+      const dateDocumentRef = doc(requestsCollectionRef, formattedDate);
+
+      // Add a new request with a unique ID and server timestamp
+      await setDoc(dateDocumentRef, {
+        campaignTitle,
+        state,
+        city,
+        address,
+        timestamp: serverTimestamp(),
+      });
+
+      const recordsCollectionRef = collection(dateDocumentRef, "records");
+
+      // Add a new record within the request with a unique ID and server timestamp
+      await addDoc(recordsCollectionRef, {
+        ...recordDetails,
+        timestamp: serverTimestamp(),
+      });
+
+      console.log("Request and record added successfully!");
+    } catch (error) {
+      console.error("Error adding request and record:", error);
+    }
+  };
+
+  const reportProblem = (e) => {
+    e.preventDefault();
+
+    const requestDetails = {
+      campaignTitle,
+      campaignGoals,
+      state,
+      city,
+      address,
+      startDate,
+    };
+
+    const recordDetails = {
+      Fname,
+      Lname,
+      email,
+      phone,
+      aadharNumber,
+    };
+
+    addRequestAndRecord(requestDetails, recordDetails);
+  };
 
   return (
     <>
@@ -325,7 +394,6 @@ function RequestCampaign() {
               </a>
             </p>
           </div>
-
         </div>
       </div>
     </>
