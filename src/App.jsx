@@ -38,9 +38,9 @@ function App() {
           <Route path="/report" element={<Report />} />
           <Route path="/guideline" element={<GuidelinesPage />} />
           <Route path="/blogs" element={<Blogs />} />
+          <Route path="/readblog/:id" element={<Readblog />} />
           <Route path="/addblog" element={<AddBlog />} />
           <Route path="/admin" element={<Admin />} />
-          <Route path="/readblog/:id" element={<Readblog />} />
           <Route path="/profile" element={<UserProfile />} />
           <Route path="/requestcampaign" element={<RequestCampaign />} />
         </Routes>
