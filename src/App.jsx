@@ -23,6 +23,7 @@ import UserProfile from "./Pages/UserProfile";
 import RequestCampaign from "./Pages/RequestCampaign";
 import Registration from "./Pages/Registration";
 import Maps from './Components/Maps';
+import Loader from "./Components/Loader";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -47,6 +48,9 @@ function App() {
           <Route path="/profile" element={<UserProfile />} />
           <Route path="/requestcampaign" element={<RequestCampaign />} />
           <Route path="/maps" element={<Maps />} />
+          <Route path="/maps" element={<Loader />} />
+
+
 
         </Routes>
       </BrowserRouter>

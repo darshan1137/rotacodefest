@@ -264,6 +264,7 @@ import 'leaflet-routing-machine';
 import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
 import wasteCenterIcon from "../assets/office.png";
 import Navbar from "./Navbar";
+import Loader from './Loader';
 
 
 export default function Maps() {
@@ -396,15 +397,7 @@ export default function Maps() {
   
 
   if (loading) {
-    return (
-      <div className="h-screen bg-white flex justify-center items-center">
-        <img
-          className="h-16 w-16"
-          src="https://icons8.com/preloaders/preloaders/1488/Iphone-spinner-2.gif"
-          alt=""
-        />
-      </div>
-    );
+    return <Loader/>;
   }
 
   const wasteCenterMarkerIcon = L.icon({
