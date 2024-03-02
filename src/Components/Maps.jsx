@@ -263,6 +263,7 @@ import markerIconUrl from "leaflet/dist/images/marker-icon.png";
 import 'leaflet-routing-machine';
 import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
 import wasteCenterIcon from "../assets/office.png";
+import Navbar from "./Navbar";
 
 
 export default function Maps() {
@@ -272,7 +273,6 @@ export default function Maps() {
   const [userLocation, setUserLocation] = useState(null);
   const [loading, setLoading] = useState(true);
   const [selectedLocation, setSelectedLocation] = useState(null);
-  const [sidebarWidth, setSidebarWidth] = useState(20); // Initial sidebar width
   const mapRef = useRef(null);
   const routingControlRef = useRef(null);
 
@@ -397,14 +397,12 @@ export default function Maps() {
 
   if (loading) {
     return (
-      <div className="h-screen bg-white">
-        <div className="flex justify-center items-center h-full">
-          <img
-            className="h-16 w-16"
-            src="https://icons8.com/preloaders/preloaders/1488/Iphone-spinner-2.gif"
-            alt=""
-          />
-        </div>
+      <div className="h-screen bg-white flex justify-center items-center">
+        <img
+          className="h-16 w-16"
+          src="https://icons8.com/preloaders/preloaders/1488/Iphone-spinner-2.gif"
+          alt=""
+        />
       </div>
     );
   }
@@ -421,94 +419,69 @@ export default function Maps() {
   };
 
   return (
-    <div className="h-screen w-screen flex">
-      <div
-        className="flex justify-center bg-teal-200 p-4"
-        style={{ width: `${sidebarWidth}%` }}
-      >
-        <h2 className="text-lg font-semibold  font-serif mb-4">Details</h2>
-        {selectedLocation && (
-          <div>
-            <h3 className="text-xl font-semibold mb-2">
-              {selectedLocation.name}
-            </h3>
-            <button
-              className="bg-green-800 p-2 m-2 text-white"
-              onClick={() => handleKnowMore(selectedLocation)}
-            >
-              Know More
-            </button>
-            <button
-              className="bg-green-800 p-2 m-2 text-white"
-              onClick={() => handleShare(selectedLocation)}
-            >
-              Share
-            </button>
-          </div>
-        )}
+    <>
+      <div>
+        <Navbar/>
       </div>
-      <div className=" flex-grow relative">
-        {/* Map */}
-        {userLocation && forestLocations.length > 0 && (
-          <MapContainer
-            center={[userLocation?.lat || 0, userLocation?.lon || 0]}
-            zoom={8}
-            style={{ height: "100%", width: "100%" }}
-            whenCreated={(mapInstance) => {
-              mapRef.current = mapInstance;
-            }}
-            onClick={() => console.log("Map clicked")}
-            // onClick={handleMapClick} // Attach the click handler to the MapContainer
-          >
-            <TileLayer
-              attribution="Google Maps"
-              url="https://www.google.cn/maps/vt?lyrs=m@189&gl=cn&x={x}&y={y}&z={z}"
-            />
-
-            <Marker
-              position={[userLocation.lat, userLocation.lon]}
-              icon={customMarkerIcon}
+      <div className="h-screen flex flex-col justify-center items-center bg-teal-100">
+        <h1 className="text-3xl font-semibold font-serif mb-8">Explore Your Nearest Center</h1>
+        {/* Map Container */}
+        <div className="relative rounded-lg shadow-xl shadow-grey-200 overflow-hidden">
+          {/* Map */}
+          {userLocation && forestLocations.length > 0 && (
+            <MapContainer
+              center={[userLocation?.lat || 0, userLocation?.lon || 0]}
+              zoom={8}
+              style={{ height: "80vh", width: "80vw" }}
+              whenCreated={(mapInstance) => {
+                mapRef.current = mapInstance;
+              }}
+              onClick={() => console.log("Map clicked")}
             >
-              <Popup>Your Location</Popup>
-            </Marker>
-
-            {forestLocations.map((location, index) => (
+              <TileLayer
+                attribution="Google Maps"
+                url="https://www.google.cn/maps/vt?lyrs=m@189&gl=cn&x={x}&y={y}&z={z}"
+              />
+    
+              {/* User Location Marker */}
               <Marker
-                key={index}
-                position={[location.lat, location.lon]}
-                icon={wasteCenterMarkerIcon}
+                position={[userLocation.lat, userLocation.lon]}
+                icon={customMarkerIcon}
               >
-                <Popup>
-                  {location.name}
-                  <div>
-                  <a href={`https://www.google.com/maps/place/${location.name.replace(' ', '+')}`} target="_blank" rel="noopener noreferrer">
-
-                      <button className="bg-green-800 p-2 m-2 text-white">
-                        Know More
-                      </button>
-                    </a>
-                    <button
-                      className="bg-green-800 p-2 m-2 text-white"
-                      onClick={() => handleShare(location.name)}
-                    >
-                      Share
-                    </button>
-                  </div>
-                </Popup>
+                <Popup>Your Location</Popup>
               </Marker>
-            ))}
-          </MapContainer>
-        )}
+    
+              {/* Forest Locations Markers */}
+              {forestLocations.map((location, index) => (
+                <Marker
+                  key={index}
+                  position={[location.lat, location.lon]}
+                  icon={wasteCenterMarkerIcon}
+                >
+                  <Popup>
+                    {location.name}
+                    <div>
+                      <a href={`https://www.google.com/maps/place/${location.name.replace(' ', '+')}`} target="_blank" rel="noopener noreferrer">
+                        <button className="bg-green-800 p-2 m-2 text-white">
+                          Know More
+                        </button>
+                      </a>
+                      <button
+                        className="bg-green-800 p-2 m-2 text-white"
+                        onClick={() => handleShare(location.name)}
+                      >
+                        Share
+                      </button>
+                    </div>
+                  </Popup>
+                </Marker>
+              ))}
+            </MapContainer>
+          )}
+        </div>
       </div>
-      <input
-        type="range"
-        min="10"
-        max="50"
-        value={sidebarWidth}
-        onChange={(e) => setSidebarWidth(parseInt(e.target.value))}
-        className="absolute bottom-0 left-0 w-full"
-        style={{ zIndex: 10 }}
-      />
-    </div>
+    </>
   );
+  
+  
 }
