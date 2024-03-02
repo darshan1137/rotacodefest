@@ -21,6 +21,7 @@ import Profile from "./Pages/Profile";
 import Navbar from "./Components/Navbar";
 import UserProfile from "./Pages/UserProfile";
 import RequestCampaign from "./Pages/RequestCampaign";
+import Registration from "./Pages/Registration";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -34,6 +35,7 @@ function App() {
           <Route path="/ecommerce" element={<Ecommerce />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUpPage />} />
+          <Route path="/register" element={<Registration />} />
           <Route path="/stats" element={<Stats />} />
           <Route path="/report" element={<Report />} />
           <Route path="/guideline" element={<GuidelinesPage />} />

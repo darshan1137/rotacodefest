@@ -197,7 +197,7 @@ function RequestCampaign() {
 
             <div className="sm:col-span-2">
               <label
-                htmlFor="campaign-title"
+                htmlFor="campaign-goal"
                 className="mb-2 inline-block text-sm text-gray-800 sm:text-base"
               >
                 Goal/Objective*
@@ -205,14 +205,14 @@ function RequestCampaign() {
               <input
                 value={campaignGoals}
                 onChange={(e) => setCampaignGoals(e.target.value)}
-                id="campaign-description"
+                id="campaign-goal"
                 className="w-full rounded border border-solid border-green-800 bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-green-100 transition duration-100 focus:ring"
               />
             </div>
 
             <div className="sm:col-span-1">
               <label
-                htmlFor="campaign-title"
+                htmlFor="campaign-state"
                 className="mb-2 inline-block text-sm text-gray-800 sm:text-base"
               >
                 State
@@ -227,7 +227,7 @@ function RequestCampaign() {
 
             <div className="sm:col-span-1">
               <label
-                htmlFor="campaign-title"
+                htmlFor="campaign-city"
                 className="mb-2 inline-block text-sm text-gray-800 sm:text-base"
               >
                 City
@@ -242,7 +242,7 @@ function RequestCampaign() {
 
             <div className="sm:col-span-2">
               <label
-                htmlFor="campaign-title"
+                htmlFor="campaign-address"
                 className="mb-2 inline-block text-sm text-gray-800 sm:text-base"
               >
                 Address
@@ -250,7 +250,7 @@ function RequestCampaign() {
               <input
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
-                id="campaign-city"
+                id="campaign-address"
                 className="w-full rounded border border-solid border-green-800 bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-green-100 transition duration-100 focus:ring"
               />
             </div>
@@ -325,6 +325,7 @@ function RequestCampaign() {
               </a>
             </p>
           </div>
+
         </div>
       </div>
     </>
