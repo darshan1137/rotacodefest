@@ -16,6 +16,7 @@ import {
 
 export default function Blogs() {
   const [blogs, setBlogs] = useState([]);
+  const [campaigns, setCampaigns] = useState([]);
 
   const fetchData = async () => {
     try {
@@ -30,6 +31,18 @@ export default function Blogs() {
       }));
       setBlogs(blogsData);
       //   console.log(blog)
+
+      // Code for Campign Request Section
+      const campaignQuery = query(
+        collection(getFirestore(), "requests"),
+        where("approval", "==", "false")
+      );
+      const campaignSnapshot = await getDocs(campaignQuery);
+      const campaignData = campaignSnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setCampaigns(campaignData);
     } catch (error) {
       console.error("Error fetching blogs:", error);
     }
@@ -130,6 +143,74 @@ export default function Blogs() {
           </div>
         ))}
       </div>
+
+      {/* Done by Darshan */}
+      <section className="bg-white  text-grey-900 border-t-2 border-solid border-gray-500">
+        <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
+          <div className="mx-auto max-w-lg text-center">
+            <h2 className="text-3xl font-bold sm:text-4xl">
+              Approve Requested Campaigns
+            </h2>
+          </div>
+
+          <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {campaigns.map((req) => (
+              <a
+                className="block rounded-xl border border-gray-800 p-8 shadow-xl transition hover:border-pink-500/10 hover:shadow-pink-500/10 relative"
+                href="#"
+              >
+                <div className="sm:flex sm:justify-between sm:gap-4">
+                  <div>
+                    <h3 className="text-lg font-bold text-gray-900 sm:text-xl">
+                      {req.campaignTitle}
+                    </h3>
+                    <p className="mt-1 text-xs font-medium text-gray-600">
+                      {`by ${req.userDetails.Fname} ${req.userDetails.Lname}`}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="mt-4">
+                  <p className="text-pretty text-sm text-gray-500">
+                    {req.campaignDescription}
+                  </p>
+                </div>
+
+                <dl className="mt-6 flex gap-4 sm:gap-6 pb-4">
+                  <div className="flex flex-col-reverse flex-1">
+                    <dt className="text-sm font-medium text-gray-600">Date</dt>
+                    <dd className="text-xs text-gray-500">{req.date}</dd>
+                  </div>
+
+                  <div className="flex flex-col-reverse flex-1">
+                    <dt className="text-sm font-medium text-gray-600">
+                      Start time
+                    </dt>
+                    <dd className="text-xs text-gray-500">{req.startTime}</dd>
+                  </div>
+                  <div className="flex flex-col-reverse flex-1">
+                    <dt className="text-sm font-medium text-gray-600">
+                      End time
+                    </dt>
+                    <dd className="text-xs text-gray-500">{req.endTime}</dd>
+                  </div>
+                </dl>
+
+                <div class="absolute bottom-0 left-0 right-0">
+                  <span class="inline-flex -space-x-px overflow-hidden rounded-md border bg-white shadow-sm w-full rounded-b-xl border">
+                    <button class="inline-block flex-1 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:relative bg-green-500">
+                      Approve
+                    </button>
+                    <button class="inline-block flex-1 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:relative bg-red-500">
+                      Decline
+                    </button>
+                  </span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
     </>
   );
 }

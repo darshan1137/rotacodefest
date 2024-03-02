@@ -9,6 +9,7 @@ import {
   setDoc,
 } from "firebase/firestore";
 import { db } from "../Firebase/cofig";
+import { useNavigate } from "react-router-dom";
 
 function RequestCampaign() {
   // User details state variables
@@ -28,42 +29,50 @@ function RequestCampaign() {
   const [date, setDate] = useState("");
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
+  const navigate = useNavigate();
   // const [endDate, setEndDate] = useState("");
 
-  const addRequestAndRecord = async (requestDetails, recordDetails) => {
+  const addRequestAndRecord = async (requestDetails) => {
     try {
-      const { campaignTitle, startDate, state, city, address } = requestDetails;
-
-      // Convert the startDate string to a Date object
-      const startDateObj = new Date(startDate);
-
-      // Create a formatted date string (e.g., "2022-04-01") from the startDate
-      const formattedDate = startDateObj
-        .toISOString()
-        .split("T")[0]
-        .replace(/-/g, "_");
-
-      const requestsCollectionRef = collection(db, "requests");
-      const dateDocumentRef = doc(requestsCollectionRef, formattedDate);
-
-      // Add a new request with a unique ID and server timestamp
-      await setDoc(dateDocumentRef, {
+      const {
         campaignTitle,
+        campaignGoals,
+        campaignDescription,
         state,
         city,
         address,
+        date,
+        userDetails,
+        startTime,
+        endTime,
+      } = requestDetails;
+
+      if (!date || typeof date !== "string" || date.length !== 10) {
+        throw new Error("Invalid startDate format or empty.");
+      }
+
+      const requestsCollectionRef = collection(db, "requests");
+
+      // Add a new request with an automatically generated unique ID and server timestamp
+      const newRequestRef = doc(requestsCollectionRef);
+
+      await setDoc(newRequestRef, {
+        campaignTitle,
+        campaignGoals,
+        campaignDescription,
+        state,
+        city,
+        address,
+        date,
+        startTime,
+        endTime,
+        approval: "false",
+        userDetails,
         timestamp: serverTimestamp(),
       });
 
-      const recordsCollectionRef = collection(dateDocumentRef, "records");
-
-      // Add a new record within the request with a unique ID and server timestamp
-      await addDoc(recordsCollectionRef, {
-        ...recordDetails,
-        timestamp: serverTimestamp(),
-      });
-
-      console.log("Request and record added successfully!");
+      alert("Request created successfully");
+      navigate("/");
     } catch (error) {
       console.error("Error adding request and record:", error);
     }
@@ -72,16 +81,7 @@ function RequestCampaign() {
   const reportProblem = (e) => {
     e.preventDefault();
 
-    const requestDetails = {
-      campaignTitle,
-      campaignGoals,
-      state,
-      city,
-      address,
-      startDate,
-    };
-
-    const recordDetails = {
+    const userDetails = {
       Fname,
       Lname,
       email,
@@ -89,7 +89,20 @@ function RequestCampaign() {
       aadharNumber,
     };
 
-    addRequestAndRecord(requestDetails, recordDetails);
+    const requestDetails = {
+      campaignTitle,
+      campaignGoals,
+      campaignDescription,
+      state,
+      city,
+      address,
+      date,
+      startTime,
+      endTime,
+      userDetails,
+    };
+
+    addRequestAndRecord(requestDetails);
   };
 
   return (
@@ -377,6 +390,7 @@ function RequestCampaign() {
                 // style={customStyle}
                 // onClick={reportproblem}
                 className="inline-block rounded-lg px-8 py-3 bg-green-800 text-center text-sm font-semibold text-white outline-none ring-yellow-300 transition duration-100 hover:bg-green-600 focus-visible:ring md:text-base"
+                onClick={reportProblem}
               >
                 Submit
               </button>
