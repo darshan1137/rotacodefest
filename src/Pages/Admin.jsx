@@ -10,6 +10,8 @@ import {
   query,
   getFirestore,
   doc,
+  setDoc,
+  getDoc,
   updateDoc,
   deleteDoc,
 } from "firebase/firestore";
@@ -77,6 +79,50 @@ export default function Blogs() {
       alert("Blog discarded!");
     } catch (error) {
       console.error("Error discarding blog:", error);
+    }
+  };
+
+  const approveCampaign = async (campaignId, campaignDate) => {
+    try {
+      const blogRef = doc(db, "requests", campaignId);
+      await updateDoc(blogRef, {
+        approval: true,
+      });
+
+      const campaignsCollectionRef = collection(db, "campaigns");
+      const todayDocRef = doc(campaignsCollectionRef, campaignDate);
+      const todayDocSnapshot = await getDoc(todayDocRef);
+
+      if (todayDocSnapshot.exists()) {
+        await updateDoc(todayDocRef, {
+          count: increment(1),
+          campaign_ids: arrayUnion(campaignId),
+        });
+      } else {
+        await setDoc(todayDocRef, {
+          count: 1,
+          campaign_ids: [campaignId],
+        });
+      }
+
+      fetchData();
+      alert("Campaign Successfully approved!");
+    } catch (error) {
+      console.error("Error approving blog:", error);
+    }
+  };
+
+  const declineCampaign = async (campaignId) => {
+    try {
+      const blogRef = doc(db, "requests", campaignId);
+      await updateDoc(blogRef, {
+        approval: "rejected",
+      });
+
+      fetchData();
+      alert("Campaign Successfully declined!");
+    } catch (error) {
+      console.error("Error approving blog:", error);
     }
   };
 
@@ -149,7 +195,7 @@ export default function Blogs() {
         <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
           <div className="mx-auto max-w-lg text-center">
             <h2 className="text-3xl font-bold sm:text-4xl">
-              Approve Requested Campaigns
+              Campaign Requests
             </h2>
           </div>
 
@@ -198,10 +244,16 @@ export default function Blogs() {
 
                 <div class="absolute bottom-0 left-0 right-0">
                   <span class="inline-flex -space-x-px overflow-hidden rounded-md border bg-white shadow-sm w-full rounded-b-xl border">
-                    <button class="inline-block flex-1 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:relative bg-green-500">
+                    <button
+                      class="inline-block flex-1 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:relative bg-green-500"
+                      onClick={() => approveCampaign(req.id, req.date)}
+                    >
                       Approve
                     </button>
-                    <button class="inline-block flex-1 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:relative bg-red-500">
+                    <button
+                      class="inline-block flex-1 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:relative bg-red-500"
+                      onClick={() => declineCampaign(req.id)}
+                    >
                       Decline
                     </button>
                   </span>

@@ -1,6 +1,75 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { db } from "../Firebase/cofig.js";
+import {
+  collection,
+  getDocs,
+  where,
+  query,
+  getFirestore,
+  doc,
+  setDoc,
+  getDoc,
+  updateDoc,
+  deleteDoc,
+} from "firebase/firestore";
 
 function StatsView() {
+  const [completedCampaignsCount, setCompletedCampaignsCount] = useState(0);
+  const [todayCampaignsCount, setTodayCampaignsCount] = useState(0);
+  const [upcomingCampaignsCount, setUpcomingCampaignsCount] = useState(0);
+
+  useEffect(() => {
+    const fetchCampaigns = async () => {
+      try {
+        const today = new Date();
+        const todayDateString = today.toISOString().split("T")[0];
+
+        // Fetch today's campaign
+        const campaignsCollectionRef = collection(db, "campaigns");
+        const todayDocRef = doc(campaignsCollectionRef, todayDateString);
+        const todayDocSnapshot = await getDoc(todayDocRef);
+
+        let todayCampaigns = 0;
+        let completedCampaigns = 0;
+        let upcomingCampaigns = 0;
+
+        try {
+          const campaignsSnapshot = await getDocs(campaignsCollectionRef);
+
+          campaignsSnapshot.forEach((doc) => {
+            const date = doc.id;
+            const count = doc.data().count || 0;
+            const campaignIds = doc.data().campaign_ids || [];
+
+            console.log(todayDateString);
+            if (date < todayDateString) {
+              console.log(
+                `Date: ${date}, Count: ${count}, Campaign IDs: ${campaignIds}`
+              );
+              completedCampaigns += count;
+            } else if (date > todayDateString) {
+              upcomingCampaigns += count;
+            } else {
+              todayCampaigns = count;
+            }
+          });
+        } catch (error) {
+          console.error("Error fetching upcoming campaigns:", error);
+        }
+
+        setTodayCampaignsCount(todayCampaigns);
+        setCompletedCampaignsCount(completedCampaigns);
+        setUpcomingCampaignsCount(upcomingCampaigns);
+        console.log(upcomingCampaignsCount);
+      } catch (error) {
+        console.error("Error fetching campaigns:", error);
+      }
+    };
+
+    // Call the fetchCampaigns function to retrieve the data
+    fetchCampaigns();
+  }, []);
+
   return (
     <>
       <section className="text-gray-600 body-font">
@@ -25,7 +94,7 @@ function StatsView() {
                 Completed Campaigns
               </h2>
               <p className="leading-relaxed text-base mb-4 text-center text-5xl font-semibold">
-                02
+                {completedCampaignsCount}
               </p>
             </div>
             <div className="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-gray-200 border-opacity-60 flex-grow">
@@ -33,7 +102,7 @@ function StatsView() {
                 Open Campaigns
               </h2>
               <p className="leading-relaxed text-base mb-4 text-center text-5xl font-semibold">
-                12
+                {todayCampaignsCount}
               </p>
             </div>
             <div className="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-gray-200 border-opacity-60 flex-grow">
@@ -41,7 +110,7 @@ function StatsView() {
                 Upcoming Campaigns
               </h2>
               <p className="leading-relaxed text-base mb-4 text-center text-5xl font-semibold">
-                06
+                {upcomingCampaignsCount}
               </p>
             </div>
           </div>
