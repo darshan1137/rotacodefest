@@ -1,6 +1,35 @@
-import React from "react";
+import { useState, useEffect } from "react";
+import Header from "../Components/Navbar";
+import ProductCard from "../Components/ProductCard";
+import { db } from "../Firebase/cofig";
+import { collection, getDocs,limit,query } from "firebase/firestore";
 
 function Products() {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const q = query(collection(db, "products"), limit(4));
+        const querySnapshot = await getDocs(q);
+  
+        const productsArray = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          imageUrl: doc.data().imageUrl,
+          ...doc.data(),
+        }));
+        
+        setProducts(productsArray);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+  
+    fetchData();
+  }, []);
   return (
     <section className="text-gray-600 body-font">
       <div className="container px-5 py-24 mx-auto">
@@ -19,101 +48,37 @@ function Products() {
             </p>
           </div>
         </div>
-        <div className="flex flex-wrap sm:-m-4 -mx-4 -mb-10 -mt-4">
-          <div className="p-4 md:w-1/3 sm:mb-0 mb-6">
-            <div className="rounded-lg h-64 overflow-hidden">
-              <img
-                alt="content"
-                className="object-cover object-center h-full w-full"
-                src="https://dummyimage.com/1203x503"
-              />
-            </div>
-            <h2 className="text-xl font-medium title-font text-gray-900 mt-5">
-              Shooting Stars
-            </h2>
-            <p className="text-base leading-relaxed mt-2">
-              Swag shoivdigoitch literally meditation subway tile tumblr
-              cold-pressed. Gastropub street art beard dreamcatcher neutra,
-              ethical XOXO lumbersexual.
-            </p>
-            <a className="text-green-500 inline-flex items-center mt-3">
-              Learn More
-              <svg
-                fill="none"
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                className="w-4 h-4 ml-2"
-                viewBox="0 0 24 24"
-              >
-                <path d="M5 12h14M12 5l7 7-7 7"></path>
-              </svg>
-            </a>
-          </div>
-          <div className="p-4 md:w-1/3 sm:mb-0 mb-6">
-            <div className="rounded-lg h-64 overflow-hidden">
-              <img
-                alt="content"
-                className="object-cover object-center h-full w-full"
-                src="https://dummyimage.com/1204x504"
-              />
-            </div>
-            <h2 className="text-xl font-medium title-font text-gray-900 mt-5">
-              The Catalyzer
-            </h2>
-            <p className="text-base leading-relaxed mt-2">
-              Swag shoivdigoitch literally meditation subway tile tumblr
-              cold-pressed. Gastropub street art beard dreamcatcher neutra,
-              ethical XOXO lumbersexual.
-            </p>
-            <a className="text-green-500 inline-flex items-center mt-3">
-              Learn More
-              <svg
-                fill="none"
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                className="w-4 h-4 ml-2"
-                viewBox="0 0 24 24"
-              >
-                <path d="M5 12h14M12 5l7 7-7 7"></path>
-              </svg>
-            </a>
-          </div>
-          <div className="p-4 md:w-1/3 sm:mb-0 mb-6">
-            <div className="rounded-lg h-64 overflow-hidden">
-              <img
-                alt="content"
-                className="object-cover object-center h-full w-full"
-                src="https://dummyimage.com/1205x505"
-              />
-            </div>
-            <h2 className="text-xl font-medium title-font text-gray-900 mt-5">
-              The 400 Blows
-            </h2>
-            <p className="text-base leading-relaxed mt-2">
-              Swag shoivdigoitch literally meditation subway tile tumblr
-              cold-pressed. Gastropub street art beard dreamcatcher neutra,
-              ethical XOXO lumbersexual.
-            </p>
-            <a className="text-green-500 inline-flex items-center mt-3">
-              Learn More
-              <svg
-                fill="none"
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                className="w-4 h-4 ml-2"
-                viewBox="0 0 24 24"
-              >
-                <path d="M5 12h14M12 5l7 7-7 7"></path>
-              </svg>
-            </a>
+        <section className="text-gray-600 body-font">
+        <div className="container px-5 py-24 mx-auto">
+          <div className="flex flex-wrap -m-4">
+            {products.map((product) => (
+              <div className="lg:w-1/4 md:w-1/2 p-4  w-full" key={product.id}>
+                <div className="rounded-lg overflow-hidden px-2 py-6 shadow-md hover:shadow-xl">
+                  <a className="block relative h-48 rounded overflow-hidden">
+                    <img
+                      alt="Product"
+                      className="object-cover object-center w-full h-full block"
+                      src={product.imageUrl}
+                    />
+                  </a>
+                  <div className="mt-4">
+                    <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">
+                      {product.category}
+                    </h3>
+                    <h2 className="text-gray-900 title-font text-lg font-medium">
+                      {product.name}
+                    </h2>
+                    <p className="mt-1">${product.price}</p>
+                    <button className="mt-2 px-4 py-2 bg-green-500 text-white font-bold rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
+                      Shop Now
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
+      </section>
       </div>
     </section>
   );

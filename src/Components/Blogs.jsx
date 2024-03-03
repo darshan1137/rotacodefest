@@ -1,6 +1,42 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+
+import { Link } from "react-router-dom";
+import {
+  collection,
+  getDocs,
+  where,
+  query,
+  getFirestore,
+  limit,
+  doc,
+  updateDoc,
+} from "firebase/firestore";
 
 function Blogs() {
+
+  const [blogs, setBlogs] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const q = query(
+          collection(getFirestore(), "blogs"),
+          where("status", "==", "approved"),
+          limit(4)
+        );
+        const querySnapshot = await getDocs(q);
+        const blogsData = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setBlogs(blogsData);
+      } catch (error) {
+        console.error("Error fetching blogs:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
   return (
     <section className="text-gray-600 body-font">
       <div className="container px-5 py-5 mx-auto">
@@ -13,189 +49,48 @@ function Blogs() {
             Articles in Our Blog Section.
           </h1>
         </div>
+        <div className=" m-5 grid gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-8">
+        {blogs.map((blog) => (
+          <Link
+            key={blog.id}
+            to={`/readblog/${blog.id}`}
+            className="group relative flex h-48 flex-col overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-64 xl:h-96"
+          >
+            <img
+              src={blog.imglink}
+              loading="lazy"
+              alt={`Photo for ${blog.title}`}
+              className="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110"
+            />
 
-        <div className="flex flex-wrap -m-4 ">
-          <div className="p-4 lg:w-1/3">
-            <div className="h-full bg-gray-100 bg-opacity-75 px-8 pt-16 pb-24 rounded-lg overflow-hidden text-center relative">
-              <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
-                CATEGORY
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-gray-800 to-transparent md:via-transparent"></div>
+
+            <div className="relative mt-auto p-4">
+              <h2 className="mb-1 text-xl font-semibold text-white transition duration-100">
+                {blog.title}
               </h2>
-              <h1 className="title-font sm:text-2xl text-xl font-medium text-gray-900 mb-3">
-                Raclette Blueberry Nextious Level
-              </h1>
-              <p className="leading-relaxed mb-3">
-                Photo booth fam kinfolk cold-pressed sriracha leggings jianbing
-                microdosing tousled waistcoat.
-              </p>
-              <a className="text-green-500 inline-flex items-center">
-                Learn More
-                <svg
-                  className="w-4 h-4 ml-2"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path d="M5 12h14"></path>
-                  <path d="M12 5l7 7-7 7"></path>
-                </svg>
-              </a>
-              <div className="text-center mt-2 leading-none flex justify-center absolute bottom-0 left-0 w-full py-4">
-                <span className="text-gray-400 mr-3 inline-flex items-center leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
-                  <svg
-                    className="w-4 h-4 mr-1"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    fill="none"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                    <circle cx="12" cy="12" r="3"></circle>
-                  </svg>
-                  1.2K
-                </span>
-                <span className="text-gray-400 inline-flex items-center leading-none text-sm">
-                  <svg
-                    className="w-4 h-4 mr-1"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    fill="none"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"></path>
-                  </svg>
-                  6
-                </span>
-              </div>
+              <p className="text-gray-300 text-sm mb-2">{blog.subtitle}</p>{" "}
+              {/* Added subtitle here */}
+              <span className="block text-sm text-gray-200">
+                {new Date(blog.timestamp.seconds * 1000).toLocaleString()}
+              </span>
+              <span className="font-semibold text-indigo-300">Read more</span>
             </div>
-          </div>
-          <div className="p-4 lg:w-1/3">
-            <div className="h-full bg-gray-100 bg-opacity-75 px-8 pt-16 pb-24 rounded-lg overflow-hidden text-center relative">
-              <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
-                CATEGORY
-              </h2>
-              <h1 className="title-font sm:text-2xl text-xl font-medium text-gray-900 mb-3">
-                Ennui Snackwave Thundercats
-              </h1>
-              <p className="leading-relaxed mb-3">
-                Photo booth fam kinfolk cold-pressed sriracha leggings jianbing
-                microdosing tousled waistcoat.
-              </p>
-              <a className="text-green-500 inline-flex items-center">
-                Learn More
-                <svg
-                  className="w-4 h-4 ml-2"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path d="M5 12h14"></path>
-                  <path d="M12 5l7 7-7 7"></path>
-                </svg>
-              </a>
-              <div className="text-center mt-2 leading-none flex justify-center absolute bottom-0 left-0 w-full py-4">
-                <span className="text-gray-400 mr-3 inline-flex items-center leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
-                  <svg
-                    className="w-4 h-4 mr-1"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    fill="none"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                    <circle cx="12" cy="12" r="3"></circle>
-                  </svg>
-                  1.2K
-                </span>
-                <span className="text-gray-400 inline-flex items-center leading-none text-sm">
-                  <svg
-                    className="w-4 h-4 mr-1"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    fill="none"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"></path>
-                  </svg>
-                  6
-                </span>
-              </div>
-            </div>
-          </div>
-          <div className="p-4 lg:w-1/3">
-            <div className="h-full bg-gray-100 bg-opacity-75 px-8 pt-16 pb-24 rounded-lg overflow-hidden text-center relative">
-              <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
-                CATEGORY
-              </h2>
-              <h1 className="title-font sm:text-2xl text-xl font-medium text-gray-900 mb-3">
-                Selvage Poke Waistcoat Godard
-              </h1>
-              <p className="leading-relaxed mb-3">
-                Photo booth fam kinfolk cold-pressed sriracha leggings jianbing
-                microdosing tousled waistcoat.
-              </p>
-              <a className="text-green-500 inline-flex items-center">
-                Learn More
-                <svg
-                  className="w-4 h-4 ml-2"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path d="M5 12h14"></path>
-                  <path d="M12 5l7 7-7 7"></path>
-                </svg>
-              </a>
-              <div className="text-center mt-2 leading-none flex justify-center absolute bottom-0 left-0 w-full py-4">
-                <span className="text-gray-400 mr-3 inline-flex items-center leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
-                  <svg
-                    className="w-4 h-4 mr-1"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    fill="none"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                    <circle cx="12" cy="12" r="3"></circle>
-                  </svg>
-                  1.2K
-                </span>
-                <span className="text-gray-400 inline-flex items-center leading-none text-sm">
-                  <svg
-                    className="w-4 h-4 mr-1"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    fill="none"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"></path>
-                  </svg>
-                  6
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
+          </Link>
+        ))}
+      </div>
+
+      <div className=" m-5 flex items-center justify-between sm:col-span-2">
+        <Link to="/blogs">
+          <button
+            type="submit"
+            className="inline-block my-10 rounded-lg bg-green-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-green-300 transition duration-100 hover:bg-green-600 focus-visible:ring active:bg-green-700 md:text-base"
+          >
+            Explore Blogs
+          </button>
+        </Link>
+      </div>
+
       </div>
     </section>
   );

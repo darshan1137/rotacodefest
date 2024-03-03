@@ -59,7 +59,7 @@ function SignUpPage() {
       // console.log('Successful Google login', user);
       localStorage.setItem('email', JSON.stringify(userEmail));
       alert('Successful Google login');
-      navigate('/login');
+      navigate('/register');
     } catch (error) {
       console.error('Error during Google login:', error.message);
       alert('Error during Google login. Please try again.');

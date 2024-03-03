@@ -92,8 +92,6 @@ export default function Blogs() {
             Add blog
           </button>
         </Link>
-
-        {/* <span className="text-sm text-gray-500">*Required</span> */}
       </div>
     </>
   );
