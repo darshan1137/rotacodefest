@@ -24,6 +24,7 @@ import RequestCampaign from "./Pages/RequestCampaign";
 import Registration from "./Pages/Registration";
 import Maps from './Components/Maps';
 import Loader from "./Components/Loader";
+import Footprint from "./Pages/FootPrint";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -49,6 +50,8 @@ function App() {
           <Route path="/requestcampaign" element={<RequestCampaign />} />
           <Route path="/maps" element={<Maps />} />
           <Route path="/maps" element={<Loader />} />
+          <Route path="/footprint" element={<Footprint />} />
+
 
 
 
