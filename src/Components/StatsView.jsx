@@ -41,11 +41,7 @@ function StatsView() {
             const count = doc.data().count || 0;
             const campaignIds = doc.data().campaign_ids || [];
 
-            console.log(todayDateString);
             if (date < todayDateString) {
-              console.log(
-                `Date: ${date}, Count: ${count}, Campaign IDs: ${campaignIds}`
-              );
               completedCampaigns += count;
             } else if (date > todayDateString) {
               upcomingCampaigns += count;
