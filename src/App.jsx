@@ -25,6 +25,7 @@ import Registration from "./Pages/Registration";
 import Maps from './Components/Maps';
 import Loader from "./Components/Loader";
 import Footprint from "./Pages/FootPrint";
+import Campaign from "./Pages/Campaign";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -51,6 +52,7 @@ function App() {
           <Route path="/maps" element={<Maps />} />
           <Route path="/maps" element={<Loader />} />
           <Route path="/footprint" element={<Footprint />} />
+          <Route path="/campaign" element={<Campaign />} />
 
 
 
