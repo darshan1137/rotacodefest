@@ -39,7 +39,7 @@ function Blogs() {
   }, []);
   return (
     <section className="text-gray-600 body-font">
-      <div className="container px-5 py-5 mx-auto">
+      <div className="container px-12 py-5 mx-auto">
         <div className="h-1 bg-gray-200 rounded overflow-hidden">
           <div className="w-ful h-full bg-green-500"></div>
         </div>
@@ -49,7 +49,7 @@ function Blogs() {
             Articles in Our Blog Section.
           </h1>
         </div>
-        <div className=" m-5 grid gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-8">
+        <div className="flex flex-wrap -m-4 m-5 grid gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-8 justify-center items-center">
         {blogs.map((blog) => (
           <Link
             key={blog.id}

@@ -11,7 +11,7 @@ function Products() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const q = query(collection(db, "products"), limit(4));
+        const q = query(collection(db, "products"), limit(3));
         const querySnapshot = await getDocs(q);
   
         const productsArray = querySnapshot.docs.map((doc) => ({
@@ -32,7 +32,7 @@ function Products() {
   }, []);
   return (
     <section className="text-gray-600 body-font">
-      <div className="container px-5 py-24 mx-auto">
+      <div className="container px-5 py-10 mx-auto">
         <div className="flex flex-col">
           <div className="h-1 bg-gray-200 rounded overflow-hidden">
             <div className="w-ful h-full bg-green-500"></div>
@@ -49,8 +49,8 @@ function Products() {
           </div>
         </div>
         <section className="text-gray-600 body-font">
-        <div className="container px-5 py-24 mx-auto">
-          <div className="flex flex-wrap -m-4">
+        <div className="container px-15 py-7 mx-auto">
+          <div className="flex flex-wrap -m-4 justify-center items-center ">
             {products.map((product) => (
               <div className="lg:w-1/4 md:w-1/2 p-4  w-full" key={product.id}>
                 <div className="rounded-lg overflow-hidden px-2 py-6 shadow-md hover:shadow-xl">
