@@ -6,48 +6,76 @@ import { getFirestore, Timestamp } from "firebase/firestore";
 
 export default function UserCampaign() {
     const [campaignData, setCampaignData] = useState([]);
-  useEffect(() => {
-    const fetchCampaignData = async () => {
-      try {
-        const today = new Date();
-        const todayDateString = today.toISOString().split("T")[0];
-        // const todayTimestamp = Timestamp.fromDate(new Date());
-        // console.log(todayDateString);
-        // console.log(todayTimestamp);
-        const campaignQuery = query(
-          collection(getFirestore(), "requests"),
+    const [filter, setFilter] = useState("approved"); // "approved" or "notApproved"
 
-          where("date", ">=", todayDateString),
-          where("approval", "==", "true")
-        );
-        // console.log("Campaign Query:", campaignQuery);
-        const campaignSnapshot = await getDocs(campaignQuery);
-        const campaignData = campaignSnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        setCampaignData(campaignData);
-        // console.log("data:", campaignData);
-      } catch (error) {
-        console.error("Error fetching approved data:", error.message);
-      }
-    };
+    const email = localStorage.getItem('email');
+  
+    useEffect(() => {
+        const fetchCampaignData = async () => {
+          try {
+            const today = new Date();
+            const todayDateString = today.toISOString().split("T")[0];
+    
+            let approvalValue;
+            if (filter === "all") {
+                return true;}
+            if (filter === "approved") {
+              approvalValue = "true";
+            } else {
+              approvalValue = "false";
+            }
+    
+            const campaignQuery = query(
+              collection(getFirestore(), "requests"),
+              where("approval", "==", approvalValue),
+              where("userDetails.email", "==", email)
+            );
+    
+            const campaignSnapshot = await getDocs(campaignQuery);
+            const campaignData = campaignSnapshot.docs.map((doc) => ({
+              id: doc.id,
+              ...doc.data(),
+            }));
+            setCampaignData(campaignData);
+            console.log("data:", campaignData);
+          } catch (error) {
+            console.error("Error fetching data:", error.message);
+          }
+        };
+    
+        fetchCampaignData();
+      }, [filter, email]);
 
-    fetchCampaignData();
-  }, []);
+  
 
   return (
     <>
-    <div className=" py-2 flex flex-col text-center w-full mb-20">
+    <div className=" py-2 flex flex-col text-center w-full mb-5">
          
-          <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">
+          <h1 className="sm:text-3xl text-2xl font-medium title-font  text-gray-900">
             Upcoming Campaigns
           </h1>
-          <p className="lg:w-2/3 mx-auto leading-relaxed text-base text-justify xl:text-center">
-            campaigns registerd by you
+          <p className="lg:w-2/3 mx-auto leading-relaxed text-base text-justify xl:text-center my-2">
+            Campaigns Hosted by you
           </p>
         </div>
-        <div className="my-5">
+        
+        <div className="">
+        <div className="mb-4 flex justify-center">
+          <label htmlFor="filter" className="mr-2 text-lg">
+            Filter:
+          </label>
+          <select
+            id="filter"
+            className="mt-1 p-2 border border-black rounded-md bg-white-300 py-1 px-4 focus:outline-none"
+            value={filter}
+            onChange={(e) => setFilter(e.target.value)}
+          >
+            <option value="approved">Approved</option>
+            <option value="notApproved">Not Approved</option>
+            <option value="all">All</option>
+          </select>
+        </div>
           {campaignData.map((req) => (
             <article className="my-5 rounded-xl bg-white p-4 ring ring-green-50 sm:p-6 lg:p-8 ">
               <div className=" my-5 flex items-start sm:gap-8">

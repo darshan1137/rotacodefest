@@ -6,7 +6,7 @@ import { collection, getDocs, where, query } from "firebase/firestore";
 export default function Blogs() {
   const [blogs, setBlogs] = useState([]);
   const email = localStorage.getItem("email"); // Fetch email from local storage
-//   console.log(email);
+  //   console.log(email);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -43,25 +43,25 @@ export default function Blogs() {
 
   return (
     <>
-      <div class="bg-white py-6 sm:py-8 lg:py-12">
-        <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
-          <div class="mb-10 md:mb-16">
-            <h2 class="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl">
+      <div className="bg-white py-6 sm:py-8 lg:py-12">
+        <div className="mx-auto max-w-screen-2xl px-4 md:px-8">
+          <div className="mb-10 md:mb-16">
+            <h2 className="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl">
               Discover Your Stories
             </h2>
 
-            <p class="mx-auto max-w-screen-md text-center text-gray-500 md:text-lg">
-              Uncover blogs written by you and relive your expierences
+            <p className="mx-auto max-w-screen-md text-center text-gray-500 md:text-lg">
+              Uncover blogs written by you and relive your experiences
             </p>
           </div>
 
-          <div className="relative">
-            <div className="mb-4 absolute top-0 right-0" >
-              <label className="block text-sm font-medium text-gray-700">
+          <div>
+            <div className="mb-4 flex items-center justify-center">
+              <label className="block mr-2 text-sm font-medium text-gray-700">
                 Filter By:
               </label>
               <select
-                className="mt-1 p-2 border border-gray-300 rounded-md"
+                className="mt-1 p-2 border border-black rounded-md bg-white-300 py-1 px-4 focus:outline-none"
                 value={filterType}
                 onChange={(e) => setFilterType(e.target.value)}
               >
