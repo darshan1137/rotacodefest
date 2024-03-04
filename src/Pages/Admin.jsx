@@ -15,6 +15,8 @@ import {
   updateDoc,
   deleteDoc,
 } from "firebase/firestore";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Blogs() {
   const [blogs, setBlogs] = useState([]);
@@ -63,7 +65,7 @@ export default function Blogs() {
 
       // After updating the status, you may want to refetch the data or update the local state accordingly.
       fetchData();
-      alert("Blog approved!");
+      toast.success("Blog approved!",1000);
     } catch (error) {
       console.error("Error approving blog:", error);
     }
@@ -76,7 +78,7 @@ export default function Blogs() {
 
       // After deleting the blog, you may want to refetch the data or update the local state accordingly.
       fetchData();
-      alert("Blog discarded!");
+      toast.error("Blog discarded!",1000);
     } catch (error) {
       console.error("Error discarding blog:", error);
     }
@@ -86,9 +88,10 @@ export default function Blogs() {
     try {
       const blogRef = doc(db, "requests", campaignId);
       await updateDoc(blogRef, {
-        approval: true,
+        approval: "true",
       });
-
+      fetchData();
+      toast.success("Campaign Successfully approved!",1000);
       const campaignsCollectionRef = collection(db, "campaigns");
       const todayDocRef = doc(campaignsCollectionRef, campaignDate);
       const todayDocSnapshot = await getDoc(todayDocRef);
@@ -105,8 +108,7 @@ export default function Blogs() {
         });
       }
 
-      fetchData();
-      alert("Campaign Successfully approved!");
+     
     } catch (error) {
       console.error("Error approving blog:", error);
     }
@@ -120,7 +122,7 @@ export default function Blogs() {
       });
 
       fetchData();
-      alert("Campaign Successfully declined!");
+      toast.error("Campaign Successfully declined!",1000);
     } catch (error) {
       console.error("Error approving blog:", error);
     }
@@ -128,6 +130,7 @@ export default function Blogs() {
 
   return (
     <>
+     <ToastContainer />
       <div>
         <Header />
       </div>
@@ -204,6 +207,7 @@ export default function Blogs() {
               <a
                 className="block rounded-xl border border-gray-800 p-8 shadow-xl transition hover:border-pink-500/10 hover:shadow-pink-500/10 relative"
                 href="#"
+                key={req.id}
               >
                 <div className="sm:flex sm:justify-between sm:gap-4">
                   <div>

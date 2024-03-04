@@ -1,11 +1,52 @@
 import React, { useEffect, useState } from "react";
-import { collection, query, getDocs, where } from "firebase/firestore";
+import {
+  collection,
+  query,
+  getDocs,
+  where,
+  doc,
+  updateDoc,
+  arrayUnion,
+  getDoc
+  
+} from "firebase/firestore";
 import { db } from "../Firebase/cofig";
 import { getFirestore, Timestamp } from "firebase/firestore";
 import Navbar from "../Components/Navbar";
 
 function Campaign() {
   const [campaignData, setCampaignData] = useState([]);
+  const [userData, setUserData] = useState(null);
+
+  useEffect(() => {
+    const loadUserData = async () => {
+      const username = localStorage.getItem("username");
+
+      if (username) {
+        const documentRef = doc(db, "users", username);
+
+        try {
+          const docSnap = await getDoc(documentRef);
+
+          if (docSnap.exists()) {
+            const data = docSnap.data();
+            setUserData(data);
+          } else {
+            console.log("User document does not exist");
+          }
+        } catch (error) {
+          console.error("Error fetching user data:", error);
+        } finally {
+          // setLoading(false);
+        }
+      } else {
+        console.log("Username not found in localStorage");
+      }
+    };
+
+    loadUserData();
+  }, []);
+
   useEffect(() => {
     const fetchCampaignData = async () => {
       try {
@@ -17,7 +58,7 @@ function Campaign() {
         const campaignQuery = query(
           collection(getFirestore(), "requests"),
 
-          where("date", ">=", todayDateString),
+          where("date", ">", todayDateString),
           where("approval", "==", "true")
         );
         // console.log("Campaign Query:", campaignQuery);
@@ -48,6 +89,38 @@ function Campaign() {
     setShowModal(false);
   };
 
+  const handleJoinUs = async (docId) => {
+    try {
+      // if (!userData) {
+      //   console.error("User data is not available.");
+      //   return;
+      // }
+
+      const userEmail = userData.email;
+      console.log("User email:", userEmail);
+
+      const docRef = doc(db, "requests", docId);
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        const docData = docSnap.data();
+        if (!docData.volunteers) {
+          await updateDoc(docRef, {
+            volunteers: [userEmail],
+          });
+        } else {
+          await updateDoc(docRef, {
+            volunteers: arrayUnion(userEmail),
+          });
+        }
+        console.log("User joined campaign.");
+      } else {
+        console.error("Document does not exist");
+      }
+    } catch (error) {
+      console.error("Error joining campaign:", error.message);
+    }
+  };
   return (
     <>
       <Navbar />
@@ -69,8 +142,8 @@ function Campaign() {
         </div>
         <div className="my-5">
           {campaignData.map((req) => (
-            <article className="my-5 rounded-xl bg-white p-4 ring ring-green-50 sm:p-6 lg:p-8 ">
-              <div className=" my-5 flex items-start sm:gap-8">
+            <article className="rounded-xl bg-white p-4 ring mb-5 ring-indigo-50 sm:p-6 lg:p-8" key={req.id}>
+              <div className="flex items-start sm:gap-8">
                 <div>
                   <strong className=" rounded border border-green-500 bg-green-500 px-3 py-1.5 text-[10px] font-medium text-white">
                     {req.date}
@@ -169,6 +242,15 @@ function Campaign() {
                       )}
                     </div>
                   </div>
+                </div>
+                <div>
+                  {/* Button to join campaign */}
+                  <button
+                    onClick={() => handleJoinUs(req.id)}
+                    className="rounded-md border border-green-500 bg-green-500 text-white px-2   py-1.5 text-sm font-medium hover:bg-green-600"
+                  >
+                    Join 
+                  </button>
                 </div>
               </div>
             </article>
