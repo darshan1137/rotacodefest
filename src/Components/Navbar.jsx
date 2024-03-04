@@ -78,6 +78,12 @@ function Navbar() {
                     <Link to="/blogs">Blogs</Link>{" "}
                   </a>
                 </li>
+                <li>
+                  <a className="text-gray-500 transition hover:text-gray-500/75">
+                    {" "}
+                    <Link to="/campaign">Campaigns</Link>{" "}
+                  </a>
+                </li>
               </ul>
             </nav>
 
@@ -177,6 +183,7 @@ function Navbar() {
                     Statistics
                   </Link>
                 </li>
+
                 <li>
                   <a className="text-gray-500 transition hover:text-gray-500/75">
                     {" "}
