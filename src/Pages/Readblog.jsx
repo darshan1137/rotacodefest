@@ -4,6 +4,7 @@ import { db } from '../Firebase/cofig.js'
 import { doc, getDoc } from "firebase/firestore";
 import { IonIcon } from "@ionic/react";
 import { mailOutline, personOutline } from "ionicons/icons";
+import Navbar from "../Components/Navbar.jsx";
 
 const Readblog = () => {
   const { id } = useParams(); // Extract id from URL params
@@ -31,6 +32,7 @@ const Readblog = () => {
   }
   return (
     <>
+    <Navbar />
       <div className="bg-white py-6 sm:py-8 lg:py-12">
         <div className="mx-auto max-w-screen-md px-4 md:px-8">
           <h1 className="mb-4 text-center text-2xl font-bold text-gray-800 sm:text-3xl md:mb-6">

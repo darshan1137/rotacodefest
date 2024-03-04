@@ -43,7 +43,7 @@ export default function Blogs() {
       </div>
 
       <div className="text-center mb-10">
-        <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-2 lg:text-3xl">
+        <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-2 lg:text-3xl py-5">
           Explore Blogs
         </h1>
         <p className="mx-auto max-w-screen-md text-center text-gray-500 md:text-lg">
@@ -52,7 +52,7 @@ export default function Blogs() {
         </p>
       </div>
 
-      <div className=" m-5 grid gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-8">
+      <div className=" px-10 m-5 grid gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-8">
         {blogs.map((blog) => (
           <Link
             key={blog.id}
@@ -83,7 +83,7 @@ export default function Blogs() {
         ))}
       </div>
 
-      <div className=" m-5 flex items-center justify-between sm:col-span-2">
+      <div className=" px-10 m-5 flex items-center justify-between sm:col-span-2">
         <Link to="/addblog">
           <button
             type="submit"

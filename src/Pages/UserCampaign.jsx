@@ -1,18 +1,18 @@
+// import React from 'react'
 import React, { useEffect, useState } from "react";
 import { collection, query, getDocs, where } from "firebase/firestore";
 import { db } from "../Firebase/cofig";
 import { getFirestore, Timestamp } from "firebase/firestore";
-import Navbar from "../Components/Navbar";
 
-function Campaign() {
-  const [campaignData, setCampaignData] = useState([]);
+export default function UserCampaign() {
+    const [campaignData, setCampaignData] = useState([]);
   useEffect(() => {
     const fetchCampaignData = async () => {
       try {
         const today = new Date();
         const todayDateString = today.toISOString().split("T")[0];
         // const todayTimestamp = Timestamp.fromDate(new Date());
-        console.log(todayDateString);
+        // console.log(todayDateString);
         // console.log(todayTimestamp);
         const campaignQuery = query(
           collection(getFirestore(), "requests"),
@@ -27,7 +27,7 @@ function Campaign() {
           ...doc.data(),
         }));
         setCampaignData(campaignData);
-        console.log("data:", campaignData);
+        // console.log("data:", campaignData);
       } catch (error) {
         console.error("Error fetching approved data:", error.message);
       }
@@ -36,35 +36,15 @@ function Campaign() {
     fetchCampaignData();
   }, []);
 
-  const [showModal, setShowModal] = useState(false);
-
-  const handleRegisterClick = () => {
-    setShowModal(true);
-  };
-
-  const handleConfirmRegistration = () => {};
-
-  const handleCancelRegistration = () => {
-    setShowModal(false);
-  };
-
   return (
     <>
-      <Navbar />
-      <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
-        <div className="flex flex-col text-center w-full mb-20">
-          <h2 className="text-xs text-green-500 tracking-widest font-medium title-font mb-1">
-            Waste Wise Web's
-          </h2>
+    <div className=" py-2 flex flex-col text-center w-full mb-20">
+         
           <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">
             Upcoming Campaigns
           </h1>
           <p className="lg:w-2/3 mx-auto leading-relaxed text-base text-justify xl:text-center">
-            Empower change, ignite purpose! Join our upcoming campaigns as a
-            volunteer, and let's weave the threads of impact together. Your
-            time, passion, and dedication are the catalysts for a brighter
-            tomorrow. Together, we can turn aspirations into actions and make a
-            lasting difference in the world.
+            campaigns registerd by you
           </p>
         </div>
         <div className="my-5">
@@ -131,52 +111,12 @@ function Campaign() {
                     <p className="mt-2 text-xs font-medium text-gray-500 sm:mt-0">
                       Hosted by {req.userDetails.Fname} {req.userDetails.Lname}
                     </p>
-
-                    <div className="bottom-4 right-4">
-                      <button
-                        className="text-l bg-green-500 text-white py-1 px-1 rounded-md hover:bg-green-600 focus:outline-none focus:shadow-outline-green active:bg-green-800 ml-auto"
-                        onClick={handleRegisterClick}
-                      >
-                        Register Now
-                      </button>
-
-                      {showModal && (
-                        <div className="fixed inset-0 bg-black opacity-50 z-50"></div>
-                      )}
-
-                      {showModal && (
-                        <div className="fixed inset-0 flex items-center justify-center z-50">
-                          <div className="bg-white p-6 rounded shadow-md">
-                            <p className="mb-4">
-                              Do you want to confirm registration?
-                            </p>
-                            <div className="flex justify-end">
-                              <button
-                                className="mr-2 bg-green-500 text-white px-3 py-1 rounded-full hover:bg-green-600 focus:outline-none focus:shadow-outline-green"
-                                onClick={handleConfirmRegistration}
-                              >
-                                Yes
-                              </button>
-                              <button
-                                className="bg-red-500 text-white px-3 py-1 rounded-full hover:bg-red-600 focus:outline-none focus:shadow-outline-red"
-                                onClick={handleCancelRegistration}
-                              >
-                                No
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      )}
-                    </div>
                   </div>
                 </div>
               </div>
             </article>
           ))}
         </div>
-      </div>
     </>
-  );
+  )
 }
-
-export default Campaign;
