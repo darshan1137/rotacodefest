@@ -15,9 +15,6 @@ import {
   updateDoc,
   deleteDoc,
 } from "firebase/firestore";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
 
 export default function Blogs() {
   const [blogs, setBlogs] = useState([]);
@@ -66,8 +63,8 @@ export default function Blogs() {
 
       // After updating the status, you may want to refetch the data or update the local state accordingly.
       fetchData();
-      toast.success("Blog approved!",1000);
-        } catch (error) {
+      alert("Blog approved!");
+    } catch (error) {
       console.error("Error approving blog:", error);
     }
   };
@@ -79,7 +76,7 @@ export default function Blogs() {
 
       // After deleting the blog, you may want to refetch the data or update the local state accordingly.
       fetchData();
-      toast.error("Blog discarded!",1000);
+      alert("Blog discarded!");
     } catch (error) {
       console.error("Error discarding blog:", error);
     }
@@ -89,10 +86,9 @@ export default function Blogs() {
     try {
       const blogRef = doc(db, "requests", campaignId);
       await updateDoc(blogRef, {
-        approval: "true",
+        approval: true,
       });
-      fetchData();
-      toast.success("Campaign Successfully approved!",1000);
+
       const campaignsCollectionRef = collection(db, "campaigns");
       const todayDocRef = doc(campaignsCollectionRef, campaignDate);
       const todayDocSnapshot = await getDoc(todayDocRef);
@@ -109,8 +105,8 @@ export default function Blogs() {
         });
       }
 
-      
-      
+      fetchData();
+      alert("Campaign Successfully approved!");
     } catch (error) {
       console.error("Error approving blog:", error);
     }
@@ -124,7 +120,7 @@ export default function Blogs() {
       });
 
       fetchData();
-      toast.error("Campaign Successfully declined!",1000);
+      alert("Campaign Successfully declined!");
     } catch (error) {
       console.error("Error approving blog:", error);
     }
@@ -132,11 +128,10 @@ export default function Blogs() {
 
   return (
     <>
-    <ToastContainer />
       <div>
         <Header />
       </div>
-      
+
       <div className="text-center mb-10">
         <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-2 lg:text-3xl">
           Admin page
@@ -207,7 +202,6 @@ export default function Blogs() {
           <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
             {campaigns.map((req) => (
               <a
-              key={req.id}
                 className="block rounded-xl border border-gray-800 p-8 shadow-xl transition hover:border-pink-500/10 hover:shadow-pink-500/10 relative"
                 href="#"
               >

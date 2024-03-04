@@ -5,8 +5,6 @@ import { doc, getDoc, serverTimestamp } from "firebase/firestore";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { db } from "../Firebase/cofig";
 import Navbar from "./../Components/Navbar";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 function Login() {
   const [userName, setuserName] = useState("");
@@ -39,24 +37,22 @@ function Login() {
 
           if (dbPass === password) {
             // Successful login
-            toast.success("Successful login",1000);
-
             localStorage.setItem("username", userName);
-            
             console.log("Successful login");
+            alert("Successful login");
             navigate("/");
           } else {
-            toast.error("Invalid email or password",1000);
+            alert("Invalid email or password");
           }
         } else {
-          toast.error("User not found",1000);
+          alert("User not found");
         }
       } else {
-        toast.error("Please enter all the details",1000);
+        alert("Please enter all the details");
       }
     } catch (error) {
       console.error("Error during login:", error);
-      toast.error("Error during login. Please check your credentials.",1000);
+      alert("Error during login. Please check your credentials.");
     }
   };
 
@@ -67,11 +63,11 @@ function Login() {
       const userEmail = user.email;
       // console.log('Successful Google login', user);
       localStorage.setItem("email", JSON.stringify(userEmail));
-      toast.success("Successful Google login",1000);
+      alert("Successful Google login");
       navigate("/");
     } catch (error) {
       console.error("Error during Google login:", error.message);
-      toast.error("Error during Google login. Please try again.",1000);
+      alert("Error during Google login. Please try again.");
     }
   };
 
@@ -86,9 +82,7 @@ function Login() {
           backgroundImage: `url(https://images.unsplash.com/photo-1572248525483-6a953490f4b5?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)`,
           backgroundSize: "cover",
         }}
-
       >
-        <ToastContainer />
         <div className="py-6 sm:py-8 lg:py-12 w-screen h-screen flex justify-center items-center">
           <div className="bg-white/60 max-w-md py-6 px-4 rounded-lg md:px-8 shadow-lg shadow-slate-200 sm:w-full">
             <h2 className="mb-4 text-center text-2xl font-bold text-teal-800 md:mb-8 lg:text-3xl">

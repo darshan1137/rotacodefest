@@ -26,11 +26,10 @@ import Maps from './Components/Maps';
 import Loader from "./Components/Loader";
 import Footprint from "./Pages/FootPrint";
 import Campaign from "./Pages/Campaign";
-import ProtectedRoute from './Components/ProtectedRoute';
 
 function App() {
   const [count, setCount] = useState(0);
-  const username = localStorage.getItem("username");
+
   return (
     <>
       <BrowserRouter>
@@ -51,10 +50,9 @@ function App() {
           <Route path="/profile" element={<UserProfile />} />
           <Route path="/requestcampaign" element={<RequestCampaign />} />
           <Route path="/maps" element={<Maps />} />
-          <Route path="/loader" element={<Loader />} />
+          <Route path="/maps" element={<Loader />} />
           <Route path="/footprint" element={<Footprint />} />
-          <Route path="/campaign" element={
-           <ProtectedRoute user={username} route="/login"><Campaign /></ProtectedRoute>} />
+          <Route path="/campaign" element={<Campaign />} />
 
 
 
