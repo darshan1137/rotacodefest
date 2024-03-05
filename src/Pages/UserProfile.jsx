@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Navbar from "../Components/Navbar";
 import UserBlogs from "../Components/UserBlogs.jsx"
 import UserDetails from "../Components/UserDetails.jsx";
-import UserCampaign from "./UserCampaign.jsx";
+import UserCampaign from "../Components/UserCampaign.jsx";
 import UserCertificates from "../Components/UserCertificates.jsx";
 
 function App() {

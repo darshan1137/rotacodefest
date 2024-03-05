@@ -1,5 +1,6 @@
 // import React from 'react'
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { collection, query, getDocs, where } from "firebase/firestore";
 import { db } from "../Firebase/cofig";
 import { getFirestore, Timestamp } from "firebase/firestore";
@@ -77,7 +78,7 @@ export default function UserCampaign() {
           </select>
         </div>
           {campaignData.map((req) => (
-            <article className="my-5 rounded-xl bg-white p-4 ring ring-green-50 sm:p-6 lg:p-8 ">
+            <article key={req.id} className="my-5 rounded-xl bg-white p-4 ring ring-green-50 sm:p-6 lg:p-8 ">
               <div className=" my-5 flex items-start sm:gap-8">
                 <div>
                   <strong className=" rounded border border-green-500 bg-green-500 px-3 py-1.5 text-[10px] font-medium text-white">
@@ -85,10 +86,9 @@ export default function UserCampaign() {
                   </strong>
 
                   <h3 className="mt-4 text-lg font-medium sm:text-xl">
-                    <a href="#" className="hover:underline">
-                      {" "}
-                      {req.campaignTitle}{" "}
-                    </a>
+                  <Link to={`/campaign/${req.id}`} className="hover:underline">
+                  {req.campaignTitle}
+                </Link>
                   </h3>
 
                   <p className="mt-1 text-sm text-gray-700">

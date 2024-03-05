@@ -27,6 +27,7 @@ import Loader from "./Components/Loader";
 import Footprint from "./Pages/FootPrint";
 import Campaign from "./Pages/Campaign";
 import ProtectedRoute from './Components/ProtectedRoute';
+import VolunteerList from "./Pages/VolunteerList";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -55,6 +56,7 @@ function App() {
           <Route path="/maps" element={<Loader />} />
           <Route path="/loader" element={<Loader />} />
           <Route path="/footprint" element={<Footprint />} />
+          <Route path="/campaign/:id" element={<VolunteerList />} />
          
           <Route path="/campaign" element={
            <ProtectedRoute user={username} route="/login"><Campaign /></ProtectedRoute>} />
