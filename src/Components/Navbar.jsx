@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import Campaign from './../Pages/Campaign';
 
 function Navbar() {
   const [hasEmail, sethasEmail] = useState(false);
@@ -189,6 +190,15 @@ function Navbar() {
                     {" "}
                     <Link to="/blogs">Blogs</Link>{" "}
                   </a>
+                </li>
+                <li>
+                  <Link
+                    to="/campaign"
+                    className="text-gray-500 hover:text-gray-700"
+                    onClick={closeMenu}
+                  >
+                    Campaign
+                  </Link>
                 </li>
               </ul>
             </div>

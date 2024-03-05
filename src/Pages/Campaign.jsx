@@ -17,6 +17,7 @@ import Navbar from "../Components/Navbar";
 function Campaign() {
   const [campaignData, setCampaignData] = useState([]);
   const [userData, setUserData] = useState(null);
+  const [selectedCampaignId, setSelectedCampaignId] = useState(null);
 
   useEffect(() => {
     const loadUserData = async () => {
@@ -79,7 +80,8 @@ function Campaign() {
 
   const [showModal, setShowModal] = useState(false);
 
-  const handleRegisterClick = () => {
+  const handleRegisterClick = (reqId) => {
+    setSelectedCampaignId(reqId);
     setShowModal(true);
   };
 
@@ -89,7 +91,7 @@ function Campaign() {
     setShowModal(false);
   };
 
-  const handleJoinUs = async (docId) => {
+  const handleJoinUs = async () => {
     try {
       // if (!userData) {
       //   console.error("User data is not available.");
@@ -99,7 +101,7 @@ function Campaign() {
       const userEmail = userData.email;
       console.log("User email:", userEmail);
 
-      const docRef = doc(db, "requests", docId);
+      const docRef = doc(db, "requests", selectedCampaignId);
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
@@ -107,13 +109,18 @@ function Campaign() {
         if (!docData.volunteers) {
           await updateDoc(docRef, {
             volunteers: [userEmail],
+            
           });
+          console.log("s1")
         } else {
           await updateDoc(docRef, {
             volunteers: arrayUnion(userEmail),
+            
           });
+          console.log("s2")
         }
         console.log("User joined campaign.");
+        setShowModal(false);
       } else {
         console.error("Document does not exist");
       }
@@ -208,7 +215,7 @@ function Campaign() {
                     <div className="bottom-4 right-4">
                       <button
                         className="text-l bg-green-500 text-white py-1 px-1 rounded-md hover:bg-green-600 focus:outline-none focus:shadow-outline-green active:bg-green-800 ml-auto"
-                        onClick={handleRegisterClick}
+                        onClick={() => handleRegisterClick(req.id)}
                       >
                         Register Now
                       </button>
@@ -226,7 +233,7 @@ function Campaign() {
                             <div className="flex justify-end">
                               <button
                                 className="mr-2 bg-green-500 text-white px-3 py-1 rounded-full hover:bg-green-600 focus:outline-none focus:shadow-outline-green"
-                                onClick={handleConfirmRegistration}
+                                onClick={handleJoinUs}
                               >
                                 Yes
                               </button>
@@ -243,15 +250,15 @@ function Campaign() {
                     </div>
                   </div>
                 </div>
-                <div>
-                  {/* Button to join campaign */}
+                {/* <div>
+                  
                   <button
                     onClick={() => handleJoinUs(req.id)}
                     className="rounded-md border border-green-500 bg-green-500 text-white px-2   py-1.5 text-sm font-medium hover:bg-green-600"
                   >
                     Join 
                   </button>
-                </div>
+                </div> */}
               </div>
             </article>
           ))}
