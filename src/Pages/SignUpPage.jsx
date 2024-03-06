@@ -15,34 +15,18 @@ function SignUpPage() {
   const auth = getAuth();
   const googleProvider = new GoogleAuthProvider();
 
-  const handleAddUser = async () => {
+  const handleAddUser = () => {
+    // Validate inputs
     if (userName.trim() !== '' && email.trim() !== '' && password.trim() !== '') {
       if (password === confirmPassword) {
         const userDetails = {
-          // userName: userName,
+          userName: userName,
           email: email,
           password: password,
-          createdAt: serverTimestamp(),
-          visit:{'A':0,'B':0,'C':0},
         };
 
-        try {
-          // Use the email as the document ID
-          const docRef = doc(db, 'users', userName);
-
-          // Set the user details to Firestore
-          await setDoc(docRef, userDetails);
-
-          alert('User added successfully!');
-          // Reset input fields after successful addition
-          setUserName('');
-          setEmail('');
-          setPassword('');
-          setConfirmPassword('');
-          navigate('/login');
-        } catch (error) {
-          console.error('Error adding user:', error.message);
-        }
+        // Pass user details to the Registration component
+        navigate('/register',  { state: { userName, email,password } });
       } else {
         alert('Passwords do not match!');
       }
@@ -58,8 +42,7 @@ function SignUpPage() {
       const userEmail = user.email;
       // console.log('Successful Google login', user);
       localStorage.setItem('email', JSON.stringify(userEmail));
-      alert('Successful Google login');
-      navigate('/register');
+      navigate('/login');
     } catch (error) {
       console.error('Error during Google login:', error.message);
       alert('Error during Google login. Please try again.');

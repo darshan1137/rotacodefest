@@ -259,6 +259,8 @@ function Campaign() {
                     Join 
                   </button>
                 </div> */}
+                
+                
               </div>
             </article>
           ))}

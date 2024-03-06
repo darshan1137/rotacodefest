@@ -80,7 +80,7 @@ function Blogs() {
         ))}
       </div>
 
-      <div className=" m-5 flex items-center justify-between sm:col-span-2">
+      <div className=" m-5 flex items-center justify-center sm:col-span-2">
         <Link to="/blogs">
           <button
             type="submit"

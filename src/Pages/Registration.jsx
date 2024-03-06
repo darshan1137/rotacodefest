@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { db } from "../Firebase/cofig.js";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useLocation } from "react-router-dom";
 import {
   collection,
   getDoc,
   doc,
   updateDoc,
-  setDoc
+  setDoc,
+  serverTimestamp
 } from "firebase/firestore";
 import Navbar from "../Components/Navbar.jsx";
 // import { navigate } from "gatsby";
@@ -24,12 +25,14 @@ export default function Registration() {
   const [aadharNumber, setAadharNumber] = useState("");
 
   const navigate = useNavigate();
+ 
+  const location = useLocation();
 
-  const username = localStorage.getItem("username");
-//   console.log(username);
-
+  // Extract userName and email from location.state
+  const { userName, email,password } = location.state || {};
   const handleSubmit = async (event) => {
     event.preventDefault();
+    // console.log(userName,email)
 
 
     // Validate required fields
@@ -46,16 +49,11 @@ export default function Registration() {
       alert("Please fill out all required fields.");
       return;
     }
-
-    
-  try {
-    // Retrieve the user document with the specified username
-    const userDoc = await getDoc(doc(db, "users", username));
-
-    // Check if the document exists
-    if (userDoc.exists()) {
+    try {
       // Update the existing document with additional fields
-      await setDoc(doc(db, "users", username), {
+      await setDoc(doc(db, "users", userName), {
+        email,
+        password,
         Fname,
         Lname,
         phone,
@@ -64,19 +62,17 @@ export default function Registration() {
         city,
         address,
         aadharNumber,
-      },{ merge: true });
+        createdAt: serverTimestamp(),
+      });
 
-      alert("User data updated successfully");
-      navigate("/profile");
-      
-    } else {
-      alert("User not found with the specified username.");
+      alert("Registration successful");
+      navigate("/login");
+    } catch (error) {
+      console.error("Error submitting user data:", error);
+      alert("Error occurred while submitting user data.");
     }
-  } catch (error) {
-    console.error("Error submitting user data:", error);
-    alert("Error occurred while submitting user data.");
-  }
-};
+  };
+
 
 
   return (

@@ -26,14 +26,15 @@ export default function UserDetails() {
   
     useEffect(() => {
       const loadUserData = async () => {
-        const username = localStorage.getItem("username");
-  
+        const username =JSON.parse( localStorage.getItem("username"));
+        
+    
         if (username) {
           const documentRef = doc(db, "users", username);
-  
+    
           try {
             const docSnap = await getDoc(documentRef);
-  
+    
             if (docSnap.exists()) {
               const data = docSnap.data();
               setUserData(data);
@@ -46,10 +47,11 @@ export default function UserDetails() {
             setLoading(false);
           }
         } else {
-          console.log("Username not found in localStorage");
+          console.log("Username not found or is an empty string in localStorage");
+          setLoading(false); // Set loading to false even if username is empty
         }
       };
-  
+    
       loadUserData();
     }, []);
   
@@ -66,6 +68,7 @@ export default function UserDetails() {
         return "Invalid Timestamp";
       }
     };
+
     if (loading) {
       return <Loader />;
     }

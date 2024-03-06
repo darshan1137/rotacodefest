@@ -39,8 +39,9 @@ function Login() {
 
           if (dbPass === password) {
             // Successful login
-            localStorage.setItem("username", userName);
-            console.log("Successful login");
+            localStorage.setItem("username", JSON.stringify(userName));
+            localStorage.setItem("email", JSON.stringify(dbemail));
+            // console.log("Successful login");
             toast.success("Successful login",1000);
             navigate("/");
           } else {
