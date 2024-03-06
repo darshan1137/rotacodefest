@@ -22,12 +22,13 @@ import Navbar from "./Components/Navbar";
 import UserProfile from "./Pages/UserProfile";
 import RequestCampaign from "./Pages/RequestCampaign";
 import Registration from "./Pages/Registration";
-import Maps from './Components/Maps';
+import Maps from "./Components/Maps";
 import Loader from "./Components/Loader";
 import Footprint from "./Pages/FootPrint";
 import Campaign from "./Pages/Campaign";
-import ProtectedRoute from './Components/ProtectedRoute';
+import ProtectedRoute from "./Components/ProtectedRoute";
 import VolunteerList from "./Pages/VolunteerList";
+import Certificate from "./Components/Certificate";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -56,14 +57,17 @@ function App() {
           <Route path="/maps" element={<Loader />} />
           <Route path="/loader" element={<Loader />} />
           <Route path="/footprint" element={<Footprint />} />
+          <Route path="/certificate" element={<Certificate />} />
           <Route path="/campaign/:id" element={<VolunteerList />} />
-         
-          <Route path="/campaign" element={
-           <ProtectedRoute user={username} route="/login"><Campaign /></ProtectedRoute>} />
 
-
-
-
+          <Route
+            path="/campaign"
+            element={
+              <ProtectedRoute user={username} route="/login">
+                <Campaign />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </BrowserRouter>
     </>
