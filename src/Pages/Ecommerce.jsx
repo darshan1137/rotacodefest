@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Header from "../Components/Navbar";
 import ProductCard from "../Components/ProductCard";
 import { db } from "../Firebase/cofig";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs,query,where } from "firebase/firestore";
 
 function Ecommerce() {
   const [products, setProducts] = useState([]);
@@ -11,7 +11,9 @@ function Ecommerce() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const querySnapshot = await getDocs(collection(db, "products"));
+        const querySnapshot = await getDocs(
+          query(collection(db, "products"), where("approved", "==", true))
+        );
         const productsArray = querySnapshot.docs.map((doc) => ({
           id: doc.id,
           imageUrl: doc.data().imageUrl,

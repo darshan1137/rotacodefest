@@ -29,6 +29,7 @@ import Campaign from "./Pages/Campaign";
 import ProtectedRoute from "./Components/ProtectedRoute";
 import VolunteerList from "./Pages/VolunteerList";
 import Certificate from "./Components/Certificate";
+import RequestProduct from "./Pages/RequestProduct";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -56,6 +57,7 @@ function App() {
           <Route path="/maps" element={<Maps />} />
           <Route path="/maps" element={<Loader />} />
           <Route path="/loader" element={<Loader />} />
+          <Route path="/requestproduct" element={<RequestProduct />} />
           <Route path="/footprint" element={<Footprint />} />
           <Route path="/certificate" element={<Certificate />} />
           <Route path="/campaign/:id" element={<VolunteerList />} />
