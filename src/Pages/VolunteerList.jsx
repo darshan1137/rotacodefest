@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { db } from "../Firebase/cofig";
-import { doc, getDoc,updateDoc,arrayUnion } from "firebase/firestore";
+import { doc, getDoc, updateDoc, arrayUnion } from "firebase/firestore";
 import Navbar from "../Components/Navbar";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function VolunteerList() {
   const { id } = useParams();
   const [request, setRequest] = useState(null);
+  const [generatedCertificates, setGeneratedCertificates] = useState([]);
+  const [disabledButtons, setDisabledButtons] = useState([]);
 
   useEffect(() => {
     const fetchRequestData = async () => {
@@ -27,22 +31,72 @@ export default function VolunteerList() {
     fetchRequestData();
   }, [id]);
 
-  const generateCertificate = async (volunteerUsername) => {
+  useEffect(() => {
+    const checkCertificates = async () => {
+      if (request && Array.isArray(request.volunteers)) {
+        const disabledButtons = await Promise.all(
+          request.volunteers.map(async (volunteer) => {
+            const username = volunteer.replace(/"/g, "");
+            const userDocRef = doc(db, "users", username);
+            const userSnapshot = await getDoc(userDocRef);
+
+            if (userSnapshot.exists()) {
+              const userCertificates = userSnapshot.data().certificates || [];
+              return userCertificates.includes(id);
+            }
+            return false;
+          })
+        );
+
+        setDisabledButtons(disabledButtons);
+      }
+    };
+
+    checkCertificates();
+  }, [request, id]);
+
+  const generateCertificate = async (volunteerUsername, index) => {
     try {
-      const username = volunteerUsername.replace(/"/g, '');
+      const username = volunteerUsername.replace(/"/g, "");
       const userDocRef = doc(db, "users", username);
-      await updateDoc(userDocRef, {
-        certificates: arrayUnion(id),
-      });
-      console.log("Certificate generated successfully");
+      const userSnapshot = await getDoc(userDocRef);
+
+      if (userSnapshot.exists()) {
+        const userCertificates = userSnapshot.data().certificates || [];
+
+        if (userCertificates.includes(id)) {
+          toast.warning(
+            "Certificate already generated for this volunteer",
+            1000
+          );
+          return;
+        }
+
+        await updateDoc(userDocRef, {
+          certificates: arrayUnion(id),
+        });
+
+        toast.success("Certificate generated successfully", 1000);
+
+        setGeneratedCertificates((prevCertificates) => [
+          ...prevCertificates,
+          index,
+        ]);
+        setDisabledButtons((prevDisabledButtons) => [
+          ...prevDisabledButtons,
+          index,
+        ]);
+      } else {
+        toast.error("User not found", 1000);
+      }
     } catch (error) {
       console.error("Error generating certificate:", error);
     }
   };
-
   return (
     <>
       <Navbar />
+      <ToastContainer />
       <div className=" mx-10 my-10 px-5 py-5  bg-green-100 rounded-lg shadow-md">
         {request ? (
           <div>
@@ -126,8 +180,17 @@ export default function VolunteerList() {
                       </td>
                       <td className="py-2 px-4 border border-green-500">
                         <button
-                          className="bg-green-500 text-white py-1 px-2 rounded-md"
-                          onClick={() => generateCertificate(volunteer)}
+                          className={`py-1 px-2 rounded-md ${
+                            generatedCertificates.includes(index) ||
+                            disabledButtons[index]
+                              ? "bg-gray-500 text-gray-300 cursor-not-allowed"
+                              : "bg-green-500 text-white"
+                          }`}
+                          onClick={() => generateCertificate(volunteer, index)}
+                          disabled={
+                            generatedCertificates.includes(index) ||
+                            disabledButtons[index]
+                          }
                         >
                           Generate
                         </button>
