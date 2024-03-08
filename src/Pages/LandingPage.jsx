@@ -16,7 +16,10 @@ function LandingPage() {
       <Blogs />
       <Footer />
     </div>
+    
   );
+  
 }
+
 
 export default LandingPage;
