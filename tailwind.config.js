@@ -25,38 +25,36 @@
 // }
 /** @type {import('tailwindcss').Config}*/
 const tailwindConfig = {
-  mode:"jit",
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
+  mode: "jit",
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
-      animation:{
+      animation: {
         scaleBackground: "scaleBackground 15s infinite alternate",
-        'spinner-fzua35': 'spinner 1s infinite ease'
+        "spinner-fzua35": "spinner 1s infinite ease",
       },
       keyframes: {
         scaleBackground: {
           "0%": {
             transform: "scale(1)",
-            animationTimingFunction: "ease-in-out", 
+            animationTimingFunction: "ease-in-out",
           },
           "100%": {
             transform: "scale(1.13)",
-            animationTimingFunction: "ease-in-out", 
+            animationTimingFunction: "ease-in-out",
           },
         },
         spinner: {
-          '0%, 10%, 20%, 30%, 50%, 60%, 70%, 80%, 90%, 100%': {
-            transform: 'rotate(calc(var(--rotation) * 1deg)) translateY(calc(var(--translation) * 1%))',
+          "0%, 10%, 20%, 30%, 50%, 60%, 70%, 80%, 90%, 100%": {
+            transform:
+              "rotate(calc(var(--rotation) * 1deg)) translateY(calc(var(--translation) * 1%))",
           },
-          '50%': {
-            transform: 'rotate(calc(var(--rotation) * 1deg)) translateY(calc(var(--translation) * 1.5%))',
+          "50%": {
+            transform:
+              "rotate(calc(var(--rotation) * 1deg)) translateY(calc(var(--translation) * 1.5%))",
           },
         },
       },
-      
     },
   },
   plugins: [
@@ -64,6 +62,6 @@ const tailwindConfig = {
     // require('@tailwindcss/forms'),
     // // Add other plugins as needed
   ],
-}
+};
 
 export default tailwindConfig;

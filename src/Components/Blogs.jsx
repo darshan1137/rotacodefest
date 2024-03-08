@@ -37,8 +37,8 @@ function Blogs() {
     fetchData();
   }, []);
   return (
-    <section className="text-gray-600 body-font">
-      <div className="container px-12 py-5 mx-auto">
+    <section className="text-gray-600 body-font md:px-32">
+      <div className="container mx-auto">
         <div className="h-1 bg-gray-200 rounded overflow-hidden">
           <div className="w-ful h-full bg-green-500"></div>
         </div>

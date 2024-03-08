@@ -7,8 +7,7 @@ import {
   doc,
   updateDoc,
   arrayUnion,
-  getDoc
-  
+  getDoc,
 } from "firebase/firestore";
 import { db } from "../Firebase/cofig";
 import { getFirestore, Timestamp } from "firebase/firestore";
@@ -100,7 +99,7 @@ function Campaign() {
 
       // const userEmail = userData.email;
       // console.log("User email:", userEmail);
-      const username=localStorage.getItem("username")
+      const username = localStorage.getItem("username");
 
       const docRef = doc(db, "requests", selectedCampaignId);
       const docSnap = await getDoc(docRef);
@@ -110,13 +109,11 @@ function Campaign() {
         if (!docData.volunteers) {
           await updateDoc(docRef, {
             volunteers: [username],
-            
           });
           // console.log("s1")
         } else {
           await updateDoc(docRef, {
             volunteers: arrayUnion(username),
-            
           });
           // console.log("s2")
         }
@@ -150,7 +147,10 @@ function Campaign() {
         </div>
         <div className="my-5">
           {campaignData.map((req) => (
-            <article className="rounded-xl bg-white p-4 ring mb-5 ring-indigo-50 sm:p-6 lg:p-8" key={req.id}>
+            <article
+              className="rounded-xl bg-white p-4 ring mb-5 ring-indigo-50 sm:p-6 lg:p-8"
+              key={req.id}
+            >
               <div className="flex items-start sm:gap-8">
                 <div>
                   <strong className=" rounded border border-green-500 bg-green-500 px-3 py-1.5 text-[10px] font-medium text-white">
@@ -222,27 +222,29 @@ function Campaign() {
                       </button>
 
                       {showModal && (
-                        <div className="fixed inset-0 bg-black opacity-50 z-50"></div>
+                        <div className="fixed inset-0 bg-black opacity-30 z-50"></div>
                       )}
 
                       {showModal && (
                         <div className="fixed inset-0 flex items-center justify-center z-50">
-                          <div className="bg-white p-6 rounded shadow-md">
-                            <p className="mb-4">
-                              Do you want to confirm registration?
-                            </p>
-                            <div className="flex justify-end">
+                          <div className="rounded-lg bg-white p-8 shadow-2xl">
+                            <h3 className="text-lg font-bold">
+                              Are you sure you want to register for the
+                              Campaign?
+                            </h3>
+                            <div className="mt-4 flex gap-2">
                               <button
-                                className="mr-2 bg-green-500 text-white px-3 py-1 rounded-full hover:bg-green-600 focus:outline-none focus:shadow-outline-green"
                                 onClick={handleJoinUs}
+                                className="rounded bg-green-50 px-4 py-2 text-sm font-medium text-green-600"
                               >
-                                Yes
+                                Yes, I'm sure
                               </button>
+
                               <button
-                                className="bg-red-500 text-white px-3 py-1 rounded-full hover:bg-red-600 focus:outline-none focus:shadow-outline-red"
                                 onClick={handleCancelRegistration}
+                                className="rounded bg-gray-50 px-4 py-2 text-sm font-medium text-gray-600"
                               >
-                                No
+                                No, go back
                               </button>
                             </div>
                           </div>
@@ -260,8 +262,6 @@ function Campaign() {
                     Join 
                   </button>
                 </div> */}
-                
-                
               </div>
             </article>
           ))}
