@@ -18,6 +18,15 @@ import {
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import NotFound from "../Components/NotFound.jsx";
+import {
+  getStorage,
+  deleteObject,
+  ref,
+  getDownloadURL,
+  listAll,
+} from "firebase/storage";
+
+import { uploadBytes } from "firebase/storage";
 
 export default function Blogs() {
   const [blogs, setBlogs] = useState([]);
@@ -25,6 +34,7 @@ export default function Blogs() {
   const [products, setProducts] = useState([]);
   const username = localStorage.getItem("username");
   const [activeTab, setActiveTab] = useState("blogs");
+  const [files, setFiles] = useState([]);
 
   const fetchData = async () => {
     //code for blogs approval section
@@ -174,6 +184,89 @@ export default function Blogs() {
     }
   };
 
+  const [document, setDocument] = useState(null);
+  const [uploading, setUploading] = useState(false);
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setDocument(file);
+  };
+
+  const handleUpload = async () => {
+    try {
+      if (!document) return;
+
+      setUploading(true);
+
+      // Upload the file to Firebase Storage
+      const storage = getStorage();
+      const storageRef = ref(storage, `manuals/${document.name}`);
+      await uploadBytes(storageRef, document);
+
+      console.log("Document uploaded to storage:", document.name);
+
+      setUploading(false);
+      setDocument(null);
+      toast.success("Document uploaded successfully!");
+    } catch (error) {
+      console.error("Error uploading document: ", error);
+      setUploading(false);
+      toast.error("Error uploading document. Please try again.");
+    }
+  };
+  useEffect(() => {
+    const fetchFiles = async () => {
+      try {
+        const storage = getStorage();
+        const storageRef = ref(storage, "manuals");
+        const res = await listAll(storageRef);
+        const promises = res.items.map(async (itemRef) => {
+          const url = await getDownloadURL(itemRef);
+          return { name: itemRef.name, url };
+        });
+        const files = await Promise.all(promises);
+        setFiles(files);
+      } catch (error) {
+        console.error("Error fetching files:", error);
+      }
+    };
+    fetchFiles();
+  }, []);
+
+  const handleDownload = (url) => {
+    window.open(url, "_blank");
+  };
+
+  const handleDelete = async (documentName) => {
+    try {
+      if (!documentName) {
+        console.error("Document name is undefined or null");
+        toast.error("Document name is undefined or null. Please try again.");
+        return;
+      }
+
+      // Query for the document based on its name
+      const storage = getStorage();
+      const storageRef = ref(storage, `manuals/${documentName}`);
+      const documentSnapshot = await getDownloadURL(storageRef);
+      if (!documentSnapshot) {
+        console.error("Document does not exist");
+        toast.error("Document does not exist.");
+        return;
+      }
+
+      // Delete the document
+      await deleteObject(storageRef);
+      toast.success("Document deleted successfully!");
+
+      // Fetch updated documents after deletion
+      fetchData();
+    } catch (error) {
+      console.error("Error deleting document: ", error);
+      toast.error("Error deleting document. Please try again.");
+    }
+  };
+
   return (
     <>
       <ToastContainer />
@@ -268,6 +361,19 @@ export default function Blogs() {
                 }}
               >
                 Product Approval
+              </a>
+              <a
+                className={`${
+                  activeTab === "documents"
+                    ? "border-sky-500 text-sky-600"
+                    : "border-transparent text-gray-500"
+                } shrink-0 border-b-2 px-1 pb-4 text-sm font-medium transition duration-100 hover:border-gray-300 hover:text-gray-700`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleTabChange("documents");
+                }}
+              >
+                Documents
               </a>
             </nav>
           </div>
@@ -474,6 +580,60 @@ export default function Blogs() {
               </div>
             </div>
           )}
+        </section>
+      )}
+
+      {activeTab === "documents" && (
+        <section className="container mx-auto lg:px-32 px-4 py-8">
+          <div className="mb-4">
+            <h2 className="text-lg font-bold mb-2">Upload Document</h2>
+            <input
+              type="file"
+              onChange={handleFileChange}
+              className="border p-2 rounded "
+            />
+            <button
+              onClick={handleUpload}
+              className="bg-blue-500 text-white py-2 px-4 rounded ml-2"
+              disabled={uploading || !document}
+            >
+              {uploading ? "Uploading..." : "Upload"}
+            </button>
+          </div>
+
+          <div className="">
+            <h2 className="text-lg font-bold mb-2">Documents</h2>
+            {files.length === 0 ? (
+              <NotFound />
+            ) : (
+              <ul className="space-y-2">
+                {files.map((doc) => (
+                  <li
+                    key={doc.id}
+                    className="flex items-center justify-between p-4 lg:flex-row flex-col"
+                  >
+                    <div className="flex flex-col">
+                      <span className="text-blue-500">{doc.name}</span>
+                      <a
+                        href={doc.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-gray-500 text-sm hover:text-blue-600"
+                      >
+                        {doc.url}
+                      </a>
+                    </div>
+                    <button
+                      onClick={() => handleDelete(doc.name)}
+                      className="text-red-500 hover:text-red-700 m-3 "
+                    >
+                      Delete
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
         </section>
       )}
     </>

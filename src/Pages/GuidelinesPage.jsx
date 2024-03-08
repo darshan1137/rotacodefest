@@ -1,6 +1,37 @@
 import Header from "../Components/Navbar";
+import { getStorage, ref, getDownloadURL,listAll } from "firebase/storage";
+import { useState,useEffect } from 'react';
+import ManualCard from "../Components/ManualCard";
+
 
 function GuidelinesPage() {
+  const [files, setFiles] = useState([]);
+
+  useEffect(() => {
+    const fetchFiles = async () => {
+      try {
+        const storage = getStorage();
+        const storageRef = ref(storage, "manuals"); 
+        const res = await listAll(storageRef);
+        const promises = res.items.map(async (itemRef) => {
+          const url = await getDownloadURL(itemRef);
+          return { name: itemRef.name, url };
+        });
+        const files = await Promise.all(promises);
+        setFiles(files);
+      } catch (error) {
+        console.error("Error fetching files:", error);
+      }
+    };
+    fetchFiles();
+  }, []);
+
+  const handleDownload = (url) => {
+    window.open(url, "_blank");
+  };
+
+
+
   return (
     <div>
       <Header />
@@ -156,118 +187,40 @@ function GuidelinesPage() {
           Manuals
         </h1>
       </div>
-      <section className="text-gray-600 body-font flex justify-center items-center bg-green">
-        <div className="container px-5 py-10 ">
-          <div className="flex flex-wrap ">
-            <div className="p-4 lg:w-1/2  ">
-              <div className=" h-full  flex sm:flex-row flex-col items-center sm:justify-start justify-center text-center sm:text-left bg-white rounded-md shadow-green-400/40 shadow-lg hover:shadow-xl hover:shadow-green-600/60">
-                <img
-                  alt="team"
-                  className="flex-shrink-0  p-5 w-40 h-40 mx-5 object-cover object-center sm:mb-0  rounded-full"
-                  src="https://roofandfloor.thehindu.com/raf/real-estate-blog/wp-content/uploads/sites/14/2020/06/Waste-Management-System-At-Home-840x480.png"
-                />
-                {/* <img alt="team" className="flex-shrink-0 rounded-lg w-48 h-48 object-cover object-center sm:mb-0 mb-4" src={require('https://dummyimage.com/200x200')} /> */}
-                <div className="flex-grow sm:pl-8">
-                  <h2 className="title-font font-medium text-lg text-gray-900">
-                    Household Waste
-                  </h2>
-                  {/* <h3 className="text-gray-500 mb-3">UI Developer</h3> */}
-                  <p className="mb-3 m-4">
-                    Importance of waste management at home
-                  </p>
-                  <a
-                    href="https://drive.google.com/file/d/1QJTD5SzdS6pSNrJv3-WeoQnp30LQGh-9/view?usp=sharing" target="_blank"
-                    className="text-green-500 mb-2 inline-flex items-center"
-                  >
-                    Read More
-                  </a>
-                  <br />
-                </div>
-              </div>
-            </div>
-           
-            <div className="p-4 lg:w-1/2  ">
-              <div className=" h-full flex sm:flex-row flex-col items-center sm:justify-start justify-center text-center sm:text-left bg-white rounded-md shadow-green-400/40 shadow-lg hover:shadow-xl hover:shadow-green-600/60">
-                <img
-                  alt="team"
-                  className="flex-shrink-0 p-5 w-40 h-40 mx-5 object-cover object-center sm:mb-0  rounded-full"
-                  src="https://wp-website.safetyculture.com/wp-content/uploads/sites/3/2023/11/hazardous-waste-management-featured.jpg"
-                />
-                {/* <img alt="team" className="flex-shrink-0 rounded-lg w-48 h-48 object-cover object-center sm:mb-0 mb-4" src={require('https://dummyimage.com/200x200')} /> */}
-                <div className="flex-grow sm:pl-8">
-                  <h2 className="title-font font-medium text-lg text-gray-900">
-                    Hazardous Waste Handling
-                  </h2>
-                  {/* <h3 className="text-gray-500 mb-3">UI Developer</h3> */}
-                  <p className="mb-3 mx-4">
-                  5 Tips For Handling Hazardous Waste
-                  </p>
-                  <a
-                    href="https://drive.google.com/file/d/1Z1bgbk1gKtRxWMAUhsJPHH_SgocUzyJc/view?usp=sharing" target="_blank"
-                    className="text-green-500 mb-2 inline-flex items-center"
-                  >
-                    Read More
-                  </a>
-                  <br />
-                </div>
-              </div>
-            </div>
-            <div className="p-4 lg:w-1/2  ">
-              <div className=" h-full flex sm:flex-row flex-col items-center sm:justify-start justify-center text-center sm:text-left bg-white rounded-md shadow-green-400/40 shadow-lg hover:shadow-xl hover:shadow-green-600/60">
-                <img
-                  alt="team"
-                  className="flex-shrink-0 p-5 w-40 h-40 mx-5 object-cover object-center sm:mb-0  rounded-full"
-                  src="https://mcfenvironmental.com/wp-content/uploads/2023/09/industrialwasteheader.jpg"
-                />
-                {/* <img alt="team" className="flex-shrink-0 rounded-lg w-48 h-48 object-cover object-center sm:mb-0 mb-4" src={require('https://dummyimage.com/200x200')} /> */}
-                <div className="flex-grow sm:pl-8">
-                  <h2 className="title-font font-medium text-lg text-gray-900">
-                    Industrial Waste
-                  </h2>
-                  {/* <h3 className="text-gray-500 mb-3">UI Developer</h3> */}
-                  <p className="mb-3 mr-4">
-                    Address waste management in industrial settings..
-                  </p>
-                  <a
-                    href="https://drive.google.com/file/d/1Z1bgbk1gKtRxWMAUhsJPHH_SgocUzyJc/view?usp=sharing" target="_blank"
-                    className="text-green-500 mb-2 inline-flex items-center"
-                  >
-                    Read More
-                  </a>
-                  <br />
-                </div>
-              </div>
-            </div>
-
-            <div className="p-4 lg:w-1/2  ">
-              <div className=" h-full flex sm:flex-row flex-col items-center sm:justify-start justify-center text-center sm:text-left bg-white rounded-md shadow-green-400/40 shadow-lg hover:shadow-xl hover:shadow-green-600/60">
-                <img
-                  alt="team"
-                  className="flex-shrink-0 p-5  w-40 h-40 mx-5 object-cover object-center sm:mb-0  rounded-full"
-                  src="https://lh3.googleusercontent.com/proxy/J44i6v01SdCUQO2MtQ5Zr0DH_TFTT86uYLM-72lUvbhMDK6l5aDuKc8tsNHV46VarsEFQvM6UcmdnIlaiVBFRq82hZZWMvdR9O5Z0TgHvqJchzvE4ULu4d-2xOxC7jNcZ3ijmgmpOx-xydy5bA"
-                />
-                {/* <img alt="team" className="flex-shrink-0 rounded-lg w-48 h-48 object-cover object-center sm:mb-0 mb-4" src={require('https://dummyimage.com/200x200')} /> */}
-                <div className="flex-grow sm:pl-8">
-                  <h2 className="title-font font-medium text-lg text-gray-900">
-                    Community Waste Awareness
-                  </h2>
-                  {/* <h3 className="text-gray-500 mb-3">UI Developer</h3> */}
-                  <p className="mb-3">
-                    Educate the community on waste management.
-                  </p>
-                  <a
-                    href="https://drive.google.com/file/d/1Z1bgbk1gKtRxWMAUhsJPHH_SgocUzyJc/view?usp=sharing" target="_blank"
-                    className="text-green-500 mb-2 inline-flex items-center"
-                  >
-                    Read More
-                  </a>
-                  <br />
-                </div>
-              </div>
-            </div>
-          </div>
+      <section className="text-gray-600 py-5 body-font flex justify-center items-center bg-green ">
+        <div className="container   flex flex-wrap  ">
+         
+          
+            {files.map((file, index) => (
+              <ManualCard key={index} file={file} handleDownload={handleDownload} />
+            ))}
+          
+        
         </div>
       </section>
+      {/* <section>
+        <div className="container px-5 py-10 mx-auto">
+          <h1>my manuals</h1>
+          <div className="flex flex-wrap -m-4">
+            {files.map((file, index) => (
+              <div key={index} className="p-4 lg:w-1/2 w-full">
+                <div className="h-full bg-gray-100 bg-opacity-75 px-8 pt-16 pb-24 rounded-lg overflow-hidden text-center relative">
+                  <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">File</h2>
+                  <h1 className="title-font sm:text-2xl text-xl font-medium text-gray-900 mb-3">{file.name}</h1>
+                  <div className="flex items-center justify-center">
+                    <button
+                      className="text-white bg-green-500 border-0 py-2 px-4 focus:outline-none hover:bg-green-600 rounded text-lg"
+                      onClick={() => handleDownload(file.url)}
+                    >
+                      Download
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section> */}
     </div>
   );
 }
