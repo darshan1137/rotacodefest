@@ -29,13 +29,11 @@ export default function Registration() {
   const location = useLocation();
 
   // Extract userName and email from location.state
-  const { userName, email,password } = location.state || {};
-  const handleSubmit = async (event) => {
+  const { userName = "", email = "", password = "", role = "" } =
+  location.state || {};
+    const handleSubmit = async (event) => {
     event.preventDefault();
-    // console.log(userName,email)
 
-
-    // Validate required fields
     if (
       !Fname ||
       !Lname ||
@@ -49,11 +47,12 @@ export default function Registration() {
       alert("Please fill out all required fields.");
       return;
     }
+
     try {
-      // Update the existing document with additional fields
-      await setDoc(doc(db, "users", userName), {
+      const userDetails = {
         email,
         password,
+        role,
         Fname,
         Lname,
         phone,
@@ -63,13 +62,22 @@ export default function Registration() {
         address,
         aadharNumber,
         createdAt: serverTimestamp(),
-      });
+      };
+
+      // Save user details in the respective collection based on the role
+      if (role === "admin") {
+        await setDoc(doc(db, "admin", userName), userDetails);
+      } else if (role === "user") {
+        await setDoc(doc(db, "users", userName), userDetails);
+      }
 
       alert("Registration successful");
       navigate("/login");
     } catch (error) {
       console.error("Error submitting user data:", error);
       alert("Error occurred while submitting user data.");
+    } finally {
+      // Optional code to execute after try or catch block
     }
   };
 
