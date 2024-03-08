@@ -54,7 +54,7 @@ function Campaign() {
         const today = new Date();
         const todayDateString = today.toISOString().split("T")[0];
         // const todayTimestamp = Timestamp.fromDate(new Date());
-        console.log(todayDateString);
+        // console.log(todayDateString);
         // console.log(todayTimestamp);
         const campaignQuery = query(
           collection(getFirestore(), "requests"),
@@ -69,7 +69,7 @@ function Campaign() {
           ...doc.data(),
         }));
         setCampaignData(campaignData);
-        console.log("data:", campaignData);
+        // console.log("data:", campaignData);
       } catch (error) {
         console.error("Error fetching approved data:", error.message);
       }
@@ -98,8 +98,9 @@ function Campaign() {
       //   return;
       // }
 
-      const userEmail = userData.email;
-      console.log("User email:", userEmail);
+      // const userEmail = userData.email;
+      // console.log("User email:", userEmail);
+      const username=localStorage.getItem("username")
 
       const docRef = doc(db, "requests", selectedCampaignId);
       const docSnap = await getDoc(docRef);
@@ -108,18 +109,18 @@ function Campaign() {
         const docData = docSnap.data();
         if (!docData.volunteers) {
           await updateDoc(docRef, {
-            volunteers: [userEmail],
+            volunteers: [username],
             
           });
-          console.log("s1")
+          // console.log("s1")
         } else {
           await updateDoc(docRef, {
-            volunteers: arrayUnion(userEmail),
+            volunteers: arrayUnion(username),
             
           });
-          console.log("s2")
+          // console.log("s2")
         }
-        console.log("User joined campaign.");
+        // console.log("User joined campaign.");
         setShowModal(false);
       } else {
         console.error("Document does not exist");
