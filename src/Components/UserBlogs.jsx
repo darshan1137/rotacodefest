@@ -5,13 +5,12 @@ import { collection, getDocs, where, query } from "firebase/firestore";
 
 export default function Blogs() {
   const [blogs, setBlogs] = useState([]);
-  const email = JSON.parse(localStorage.getItem("email")); // Fetch email from local storage
+  const email = localStorage.getItem("email"); // Fetch email from local storage
   // console.log(email);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        
         const q = query(collection(db, "blogs"), where("email", "==", email));
         const querySnapshot = await getDocs(q);
 

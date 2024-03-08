@@ -9,16 +9,16 @@ export default function UserCampaign() {
   const [campaignData, setCampaignData] = useState([]);
   const [filter, setFilter] = useState("approved"); // "approved" or "notApproved"
 
-  const email = JSON.parse(localStorage.getItem("email"));
+  const email = localStorage.getItem("email");
 
   useEffect(() => {
     const fetchCampaignData = async () => {
       try {
         const today = new Date();
         const todayDateString = today.toISOString().split("T")[0];
-  
+
         let campaignQuery;
-  
+
         if (filter === "all") {
           // Fetch all documents without the where clause
           campaignQuery = query(
@@ -33,7 +33,7 @@ export default function UserCampaign() {
             where("userDetails.email", "==", email)
           );
         }
-  
+
         const campaignSnapshot = await getDocs(campaignQuery);
         const campaignData = campaignSnapshot.docs.map((doc) => ({
           id: doc.id,
@@ -45,10 +45,10 @@ export default function UserCampaign() {
         console.error("Error fetching data:", error.message);
       }
     };
-  
+
     fetchCampaignData();
   }, [filter, email]);
-  
+
   return (
     <>
       <div className=" py-2 flex flex-col text-center w-full mb-5">

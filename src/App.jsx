@@ -4,7 +4,7 @@ import viteLogo from "/vite.svg";
 import "./App.css";
 import Header from "./Components/Header";
 import LandingPage from "./Pages/LandingPage";
-import { BrowserRouter, Route, Routes,Navigate, } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import AboutPage from "./Pages/AboutPage";
 import Ecommerce from "./Pages/Ecommerce";
 // import Header from "./Components/Header";
@@ -30,16 +30,12 @@ import ProtectedRoute from "./Components/ProtectedRoute";
 import VolunteerList from "./Pages/VolunteerList";
 import Certificate from "./Components/Certificate";
 import RequestProduct from "./Pages/RequestProduct";
-
+import AdminRoute from "./Components/AdminRoute";
 
 function App() {
   // const [count, setCount] = useState(0);
   const username = localStorage.getItem("username");
-  
-
-  
- 
-
+  const isAdmin = localStorage.getItem("isAdmin");
   return (
     <>
       <BrowserRouter>
@@ -64,10 +60,16 @@ function App() {
           <Route path="/requestproduct" element={<RequestProduct />} />
           <Route path="/footprint" element={<Footprint />} />
           <Route path="/certificate" element={<Certificate />} />
-          <Route path="/admin" element={<Admin />} />
+          <Route
+            path="/admin"
+            element={
+              <AdminRoute user={isAdmin} route="/login">
+                <Admin />
+              </AdminRoute>
+            }
+          />
           <Route path="/campaign/:id" element={<VolunteerList />} />
 
-        
           <Route
             path="/campaign"
             element={
@@ -77,12 +79,9 @@ function App() {
             }
           />
         </Routes>
-        
       </BrowserRouter>
     </>
   );
 }
-
-
 
 export default App;
