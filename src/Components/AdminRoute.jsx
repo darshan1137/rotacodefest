@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 const AdminRoute = ({ user, route, children }) => {
   console.log(user);
-  if (user != false) {
+  if (!user) {
     return <Navigate to={route} replace />;
   }
 
@@ -11,7 +11,7 @@ const AdminRoute = ({ user, route, children }) => {
 };
 
 AdminRoute.propTypes = {
-  user: PropTypes.string,
+  user: PropTypes.any,
   route: PropTypes.string,
   children: PropTypes.node,
 };

@@ -35,7 +35,7 @@ import AdminRoute from "./Components/AdminRoute";
 function App() {
   // const [count, setCount] = useState(0);
   const username = localStorage.getItem("username");
-  const isAdmin = localStorage.getItem("isAdmin");
+  const isAdmin = localStorage.getItem("isAdmin") === "true";
   return (
     <>
       <BrowserRouter>
