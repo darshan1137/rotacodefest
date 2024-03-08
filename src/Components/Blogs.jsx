@@ -13,7 +13,6 @@ import {
 } from "firebase/firestore";
 
 function Blogs() {
-
   const [blogs, setBlogs] = useState([]);
 
   useEffect(() => {
@@ -22,7 +21,7 @@ function Blogs() {
         const q = query(
           collection(getFirestore(), "blogs"),
           where("status", "==", "approved"),
-          limit(4)
+          limit(3)
         );
         const querySnapshot = await getDocs(q);
         const blogsData = querySnapshot.docs.map((doc) => ({
@@ -49,48 +48,47 @@ function Blogs() {
             Articles in Our Blog Section.
           </h1>
         </div>
-        <div className="flex flex-wrap -m-4 m-5 grid gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-8 justify-center items-center">
-        {blogs.map((blog) => (
-          <Link
-            key={blog.id}
-            to={`/readblog/${blog.id}`}
-            className="group relative flex h-48 flex-col overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-64 xl:h-96"
-          >
-            <img
-              src={blog.imglink}
-              loading="lazy"
-              alt={`Photo for ${blog.title}`}
-              className="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110"
-            />
+        <div className="flex flex-wrap -m-4 m-5 grid gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-3 xl:grid-cols-3 xl:gap-8 justify-center items-center mx-auto px-10">
+          {blogs.map((blog) => (
+            <Link
+              key={blog.id}
+              to={`/readblog/${blog.id}`}
+              className="group relative flex h-20 sm:h-40 flex-col overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-40 xl:h-64 mx-2 md:mx-3"
+            >
+              <img
+                src={blog.imglink}
+                loading="lazy"
+                alt={`Photo for ${blog.title}`}
+                className="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110"
+              />
 
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-gray-800 to-transparent md:via-transparent"></div>
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-gray-800 to-transparent md:via-transparent"></div>
 
-            <div className="relative mt-auto p-4">
-              <h2 className="mb-1 text-xl font-semibold text-white transition duration-100">
-                {blog.title}
-              </h2>
-              <p className="text-gray-300 text-sm mb-2">{blog.subtitle}</p>{" "}
-              {/* Added subtitle here */}
-              <span className="block text-sm text-gray-200">
-                {new Date(blog.timestamp.seconds * 1000).toLocaleString()}
-              </span>
-              <span className="font-semibold text-indigo-300">Read more</span>
-            </div>
+              <div className="relative mt-auto p-4">
+                <h2 className="mb-1 text-xl font-semibold text-white transition duration-100">
+                  {blog.title}
+                </h2>
+                <p className="text-gray-300 text-sm mb-2">{blog.subtitle}</p>{" "}
+                {/* Added subtitle here */}
+                <span className="block text-sm text-gray-200">
+                  {new Date(blog.timestamp.seconds * 1000).toLocaleString()}
+                </span>
+                <span className="font-semibold text-indigo-300">Read more</span>
+              </div>
+            </Link>
+          ))}
+        </div>
+
+        <div className=" m-5 flex items-center justify-center sm:col-span-2">
+          <Link to="/blogs">
+            <button
+              type="submit"
+              className="inline-block my-10 rounded-lg bg-green-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-green-300 transition duration-100 hover:bg-green-600 focus-visible:ring active:bg-green-700 md:text-base"
+            >
+              Explore Blogs
+            </button>
           </Link>
-        ))}
-      </div>
-
-      <div className=" m-5 flex items-center justify-center sm:col-span-2">
-        <Link to="/blogs">
-          <button
-            type="submit"
-            className="inline-block my-10 rounded-lg bg-green-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-green-300 transition duration-100 hover:bg-green-600 focus-visible:ring active:bg-green-700 md:text-base"
-          >
-            Explore Blogs
-          </button>
-        </Link>
-      </div>
-
+        </div>
       </div>
     </section>
   );

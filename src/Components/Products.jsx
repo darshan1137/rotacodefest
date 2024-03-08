@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Header from "../Components/Navbar";
 import ProductCard from "../Components/ProductCard";
 import { db } from "../Firebase/cofig";
+import { Link } from "react-router-dom";
 import { collection, getDocs,limit,query } from "firebase/firestore";
 
 function Products() {
@@ -79,6 +80,17 @@ function Products() {
           </div>
         </div>
       </section>
+
+      <div className=" m-5 flex items-center justify-center sm:col-span-2">
+          <Link to="/ecommerce">
+            <button
+              type="submit"
+              className="inline-block  rounded-lg bg-green-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-green-300 transition duration-100 hover:bg-green-600 focus-visible:ring active:bg-green-700 md:text-base"
+            >
+              Explore more products
+            </button>
+          </Link>
+        </div>
       </div>
     </section>
   );
