@@ -9,56 +9,59 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function Login() {
-  const [userName, setuserName] = useState("");
-  const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
-  const auth = getAuth();
-  const googleProvider = new GoogleAuthProvider();
+const [userName, setUserName] = useState("");
+const [password, setPassword] = useState("");
+const [role, setRole] = useState("user"); // Default role is user
+const navigate = useNavigate();
+const auth = getAuth();
+const googleProvider = new GoogleAuthProvider();
 
-  const handleuserNameChange = (e) => {
-    setuserName(e.target.value);
-  };
+const handleUserNameChange = (e) => {
+  setUserName(e.target.value);
+};
 
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-  };
+const handlePasswordChange = (e) => {
+  setPassword(e.target.value);
+};
 
-  const handleLogin = async () => {
-    try {
-      if (userName.trim() !== "" && password.trim() !== "") {
-        // Use the email to retrieve the document
-        const documentRef = doc(db, "users", userName);
+const handleRoleChange = (e) => {
+  setRole(e.target.value);
+};
 
-        const docSnap = await getDoc(documentRef);
+const handleLogin = async () => {
+  try {
+    if (userName.trim() !== "" && password.trim() !== "") {
+      // Use the email to retrieve the document based on selected role
+      const documentRef = doc(db, role === "admin" ? "admin" : "users", userName);
 
-        if (docSnap.exists()) {
-          const data = docSnap.data();
-          const dbPass = data.password;
-          const dbemail = data.email;
+      const docSnap = await getDoc(documentRef);
 
-          if (dbPass === password) {
-            // Successful login
-            localStorage.setItem("username", JSON.stringify(userName));
-            localStorage.setItem("email", JSON.stringify(dbemail));
-            // console.log("Successful login");
-            toast.success("Successful login",1000);
-            navigate("/");
-          } else {
-            toast.error("Invalid email or password",1000);
-          }
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        const dbPass = data.password;
+        const dbEmail = data.email;
+
+        if (dbPass === password) {
+          // Successful login
+          localStorage.setItem("username", JSON.stringify(userName));
+          localStorage.setItem("email", JSON.stringify(dbEmail));
+          localStorage.setItem("role", JSON.stringify(role));
+          toast.success("Successful login", 1000);
+          navigate("/");
         } else {
-          toast.error("User not found",1000);
+          toast.error("Invalid email or password", 1000);
         }
       } else {
-        toast.error("Please enter all the details",1000);
-
+        toast.error("User not found", 1000);
       }
-    } catch (error) {
-      console.error("Error during login:", error);
-      toast.error("Error during login. Please check your credentials.",1000);
+    } else {
+      toast.error("Please enter all the details", 1000);
     }
-  };
+  } catch (error) {
+    console.error("Error during login:", error);
+    toast.error("Error during login. Please check your credentials.", 1000);
+  }
+};
 
   const handleGoogleLogin = async () => {
     try {
@@ -95,6 +98,23 @@ function Login() {
 
             <form className="mx-auto max-w-lg rounded-lg border border-teal-400">
               <div className="flex flex-col gap-4 p-4 md:p-8">
+              <div>
+                  <label
+                    htmlFor="role"
+                    className="mb-2 inline-block text-sm text-teal-800 sm:text-base"
+                  >
+                    Role
+                  </label>
+                  <select
+                    id="role"
+                    value={role}
+                    onChange={handleRoleChange}
+                    className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-teal-500 transition duration-100 focus:ring"
+                  >
+                    <option value="user">User</option>
+                    <option value="admin">Admin</option>
+                  </select>
+                </div>
                 <div>
                   <label
                     htmlFor="userName"
@@ -106,7 +126,7 @@ function Login() {
                     id="email"
                     type="email"
                     value={userName}
-                    onChange={handleuserNameChange}
+                    onChange={handleUserNameChange}
                     className="w-full rounded border bg-gray-50 px-3 py-2 text-teal-800 outline-none ring-teal-500 transition duration-100 focus:ring"
                   />
                 </div>
@@ -126,6 +146,7 @@ function Login() {
                     className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-teal-500 transition duration-100 focus:ring"
                   />
                 </div>
+
 
                 <button
                   type="button"

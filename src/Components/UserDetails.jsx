@@ -21,16 +21,26 @@ export default function UserDetails() {
   
     const logout = () => {
       localStorage.removeItem("username");
+      localStorage.removeItem("email");
+      localStorage.removeItem("role");
       navigate("/");
     };
   
     useEffect(() => {
       const loadUserData = async () => {
         const username =JSON.parse( localStorage.getItem("username"));
+        const role = JSON.parse(localStorage.getItem("role"));
+        console.log(role);
+        if (username && role) {
+          let collectionName = "";
+          if (role === "admin") {
+            collectionName = "admin"; // Assuming the collection name for admin users is "admin_users"
+          } else {
+            collectionName = "users"; // Assuming the collection name for regular users is "regular_users"
+          }
+  
+          const documentRef = doc(db, collectionName, username);
         
-    
-        if (username) {
-          const documentRef = doc(db, "users", username);
     
           try {
             const docSnap = await getDoc(documentRef);
