@@ -6,7 +6,6 @@ import UserCampaign from "../Components/UserCampaign.jsx";
 import UserCertificates from "../Components/UserCertificates.jsx";
 import UserUpcomingCampaign from "../Components/UserUpcomingCampaign.jsx";
 
-
 function App() {
   const [activeTab, setActiveTab] = useState("blogs");
 
@@ -16,14 +15,17 @@ function App() {
 
   return (
     <>
-
       <Navbar />
 
       <div className="mb-5">
         <UserDetails />
       </div>
 
-      <div className="flex justify-center ">
+      <div className="h-1 rounded overflow-hidden px-10">
+        <div className="w-ful h-full bg-green-500 px-10"></div>
+      </div>
+
+      <div className="flex justify-center pt-5">
         <div className="w-full max-w-screen-xl">
           <div className="border-b border-gray-200">
             <nav className="-mb-px flex gap-6" aria-label="Tabs">
@@ -72,10 +74,6 @@ function App() {
         </div>
       </div>
 
-      <div className="h-1 rounded overflow-hidden px-10">
-        <div className="w-ful h-full bg-green-500 px-10"></div>
-      </div>
-
       {activeTab === "blogs" && (
         <div className="px-20 bg-white">
           <UserBlogs />
@@ -98,7 +96,6 @@ function App() {
           <UserUpcomingCampaign />
         </div>
       )}
-
     </>
   );
 }
