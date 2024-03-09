@@ -31,6 +31,8 @@ import VolunteerList from "./Pages/VolunteerList";
 import Certificate from "./Components/Certificate";
 import RequestProduct from "./Pages/RequestProduct";
 import AdminRoute from "./Components/AdminRoute";
+import CampaignSuggestion from "./Pages/CampaignSuggestion";
+
 
 function App() {
   // const [count, setCount] = useState(0);
@@ -69,6 +71,7 @@ function App() {
             }
           />
           <Route path="/campaign/:id" element={<VolunteerList />} />
+          <Route path="/campaignsuggestions" element={<CampaignSuggestion />} />
 
           <Route
             path="/campaign"

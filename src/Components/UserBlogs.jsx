@@ -75,7 +75,7 @@ export default function Blogs() {
                 <Link
                   key={blog.id}
                   to={`/readblog/${blog.id}`}
-                  className="group relative flex h-48 flex-col overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-64 xl:h-96"
+                  className="group relative flex flex-col overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-60 xl:h-80"
                 >
                   <img
                     src={blog.imglink}
