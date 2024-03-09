@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { db } from "../Firebase/cofig.js";
-import { useNavigate,useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import {
   collection,
   getDoc,
   doc,
   updateDoc,
   setDoc,
-  serverTimestamp
+  serverTimestamp,
 } from "firebase/firestore";
 import Navbar from "../Components/Navbar.jsx";
 // import { navigate } from "gatsby";
@@ -25,13 +25,17 @@ export default function Registration() {
   const [aadharNumber, setAadharNumber] = useState("");
 
   const navigate = useNavigate();
- 
+
   const location = useLocation();
 
   // Extract userName and email from location.state
-  const { userName = "", email = "", password = "", role = "" } =
-  location.state || {};
-    const handleSubmit = async (event) => {
+  const {
+    userName = "",
+    email = "",
+    password = "",
+    role = "",
+  } = location.state || {};
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     if (
@@ -64,12 +68,7 @@ export default function Registration() {
         createdAt: serverTimestamp(),
       };
 
-      // Save user details in the respective collection based on the role
-      if (role === "admin") {
-        await setDoc(doc(db, "admin", userName), userDetails);
-      } else if (role === "user") {
-        await setDoc(doc(db, "users", userName), userDetails);
-      }
+      await setDoc(doc(db, "users", userName), userDetails);
 
       alert("Registration successful");
       navigate("/login");
@@ -81,13 +80,11 @@ export default function Registration() {
     }
   };
 
-
-
   return (
     <>
-    <div>
-        <Navbar/>
-    </div>
+      <div>
+        <Navbar />
+      </div>
       <div className="bg-white py-6 sm:py-8 lg:py-12">
         <div className="mx-auto max-w-screen-2xl px-4 md:px-8">
           <div className="mb-10 md:mb-16">
@@ -146,7 +143,6 @@ export default function Registration() {
               />
             </div>
 
-
             <div className="sm:col-span-1">
               <label
                 htmlFor="phone"
@@ -164,7 +160,6 @@ export default function Registration() {
               />
             </div>
 
-           
             <div className="sm:col-span-1">
               <label
                 htmlFor="aadhar-number"

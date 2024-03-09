@@ -89,7 +89,7 @@ function StatsView() {
               <h2 className="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2 text-center ">
                 Completed Campaigns
               </h2>
-              <p className="leading-relaxed text-base mb-4 text-center text-5xl font-semibold">
+              <p className="leading-relaxed text-base mb-4 text-center text-xl md:text-4xl font-extrabold">
                 {completedCampaignsCount}
               </p>
             </div>
@@ -97,7 +97,7 @@ function StatsView() {
               <h2 className="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2 text-center">
                 Open Campaigns
               </h2>
-              <p className="leading-relaxed text-base mb-4 text-center text-5xl font-semibold">
+              <p className="leading-relaxed text-base mb-4 text-center text-xl md:text-4xl font-extrabold">
                 {todayCampaignsCount}
               </p>
             </div>
@@ -105,7 +105,7 @@ function StatsView() {
               <h2 className="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2 text-center">
                 Upcoming Campaigns
               </h2>
-              <p className="leading-relaxed text-base mb-4 text-center text-5xl font-semibold">
+              <p className="leading-relaxed text-base mb-4 text-center text-xl md:text-4xl font-extrabold">
                 {upcomingCampaignsCount}
               </p>
             </div>

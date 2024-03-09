@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Campaign from './../Pages/Campaign';
+import Campaign from "./../Pages/Campaign";
 
 function Navbar() {
   const [hasEmail, sethasEmail] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   const navigate = useNavigate();
 
@@ -14,6 +15,8 @@ function Navbar() {
 
   useEffect(() => {
     const storedEmail = localStorage.getItem("username");
+    const isUser = localStorage.getItem("isAdmin");
+    setIsAdmin(isUser === "true");
     sethasEmail(!!storedEmail);
   }, []);
 
@@ -90,13 +93,28 @@ function Navbar() {
 
             <div className="flex items-center gap-4">
               {hasEmail ? (
-                <div className="sm:flex sm:gap-4">
-                  <Link to="/profile" className="flex items-center">
-                    <a className="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white shadow">
-                      Profile
-                    </a>
-                  </Link>
-                </div>
+                isAdmin ? (
+                  <div className="sm:flex sm:gap-4">
+                    <Link to="/admin" className="flex items-center">
+                      <a className="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white shadow">
+                        Dashboard
+                      </a>
+                    </Link>
+                    <Link to="/profile" className="flex items-center">
+                      <a className="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white shadow">
+                        Profile
+                      </a>
+                    </Link>
+                  </div>
+                ) : (
+                  <div className="sm:flex sm:gap-4">
+                    <Link to="/profile" className="flex items-center">
+                      <a className="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white shadow">
+                        Profile
+                      </a>
+                    </Link>
+                  </div>
+                )
               ) : (
                 <div className="sm:flex sm:gap-4">
                   <Link to="/login" className="flex items-center">

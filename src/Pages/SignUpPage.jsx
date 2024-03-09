@@ -164,11 +164,11 @@ function SignUpPage() {
       password.trim() !== ""
     ) {
       if (password === confirmPassword) {
- // const userDetails = {
+        // const userDetails = {
         //   userName: userName,
         //   email: email,
         //   password: password,
-        //   role: role, 
+        //   role: role,
         // };
         console.log(userName);
         navigate("/register", {
@@ -176,15 +176,15 @@ function SignUpPage() {
             userName: userName,
             email: email,
             password: password,
-            role: role
-          }
-             // navigate("/register", { state: { userDetails } 
-      });
+            role: role,
+          },
+          // navigate("/register", { state: { userDetails }
+        });
+      } else {
+        alert("Passwords do not match!");
+      }
     } else {
-      alert("Passwords do not match!");
-    }
-  } else {
-    alert("Please enter all details");
+      alert("Please enter all details");
     }
   };
   const handleGoogleLogin = async () => {
@@ -202,7 +202,7 @@ function SignUpPage() {
   };
   return (
     <>
-     <div>
+      <div>
         <Navbar />
       </div>
       <div
@@ -219,7 +219,7 @@ function SignUpPage() {
             <form className="mx-auto max-w-lg rounded-lg border border-teal-400 ">
               <div className="flex flex-col gap-4 p-2 md:p-6">
                 <div>
-                <label
+                  <label
                     htmlFor="user-name"
                     className="mb-2 inline-block text-sm text-teal-800 sm:text-base"
                   >
@@ -234,7 +234,7 @@ function SignUpPage() {
                   />
                 </div>
                 <div>
-                <label
+                  <label
                     htmlFor="email"
                     className="mb-2 inline-block text-sm text-teal-800 sm:text-base"
                   >
@@ -250,7 +250,7 @@ function SignUpPage() {
                 </div>
 
                 <div>
-                <label
+                  <label
                     htmlFor="password"
                     className="mb-2 inline-block text-sm text-teal-800 sm:text-base"
                   >
@@ -266,7 +266,7 @@ function SignUpPage() {
                 </div>
 
                 <div>
-                <label
+                  <label
                     htmlFor="confirm-password"
                     className="mb-2 inline-block text-sm text-teal-800 sm:text-base"
                   >
@@ -279,24 +279,6 @@ function SignUpPage() {
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-teal-500 transition duration-100 focus:ring"
                   />
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="role"
-                    className="mb-2 inline-block text-sm text-teal-800 sm:text-base"
-                  >
-                    Role
-                  </label>
-                  <select
-                    id="role"
-                    value={role}
-                    onChange={(e) => setRole(e.target.value)}
-                    className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-teal-500 transition duration-100 focus:ring"
-                  >
-                    <option value="user">User</option>
-                    <option value="admin">Admin</option>
-                  </select>
                 </div>
 
                 <button
@@ -317,25 +299,24 @@ function SignUpPage() {
                 <button
                   type="button"
                   onClick={handleGoogleLogin}
-
                   className="flex items-center justify-center gap-2 rounded-lg border border-teal-300 bg-white px-8 py-3 text-center text-sm font-semibold text-gray-800 outline-none ring-gray-300 transition duration-100 hover:bg-gray-100 focus-visible:ring active:bg-gray-200 md:text-base"
+                >
+                  <svg
+                    className="h-5 w-5 shrink-0"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
                   >
-                    <svg
-                      className="h-5 w-5 shrink-0"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      Google icon paths go here
-                    </svg>
-                    Continue with Google
+                    Google icon paths go here
+                  </svg>
+                  Continue with Google
                 </button>
               </div>
 
               <div className="flex items-center justify-center bg-teal-100 p-4">
-              <p className="text-center text-sm text-gray-500">
+                <p className="text-center text-sm text-gray-500">
                   Already have an account?{" "}
                   <Link to="/login">
                     {" "}

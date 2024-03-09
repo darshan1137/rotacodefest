@@ -5,63 +5,73 @@ import { doc, getDoc, serverTimestamp } from "firebase/firestore";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { db } from "../Firebase/cofig";
 import Navbar from "./../Components/Navbar";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Login() {
-const [userName, setUserName] = useState("");
-const [password, setPassword] = useState("");
-const [role, setRole] = useState("user"); // Default role is user
-const navigate = useNavigate();
-const auth = getAuth();
-const googleProvider = new GoogleAuthProvider();
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+  const [role, setRole] = useState("user"); // Default role is user
+  const navigate = useNavigate();
+  const auth = getAuth();
+  const googleProvider = new GoogleAuthProvider();
 
-const handleUserNameChange = (e) => {
-  setUserName(e.target.value);
-};
+  const handleUserNameChange = (e) => {
+    setUserName(e.target.value);
+  };
 
-const handlePasswordChange = (e) => {
-  setPassword(e.target.value);
-};
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
 
-const handleRoleChange = (e) => {
-  setRole(e.target.value);
-};
+  const handleRoleChange = (e) => {
+    setRole(e.target.value);
+  };
 
-const handleLogin = async () => {
-  try {
-    if (userName.trim() !== "" && password.trim() !== "") {
-      // Use the email to retrieve the document based on selected role
-      const documentRef = doc(db, role === "admin" ? "admin" : "users", userName);
+  const handleLogin = async () => {
+    try {
+      if (userName.trim() !== "" && password.trim() !== "") {
+        // Use the email to retrieve the document based on selected role
+        const documentRef = doc(
+          db,
+          role === "admin" ? "admin" : "users",
+          userName
+        );
 
-      const docSnap = await getDoc(documentRef);
+        const docSnap = await getDoc(documentRef);
 
-      if (docSnap.exists()) {
-        const data = docSnap.data();
-        const dbPass = data.password;
-        const dbEmail = data.email;
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          const dbPass = data.password;
+          const dbEmail = data.email;
 
-        if (dbPass === password) {
-          // Successful login
-          localStorage.setItem("username", JSON.stringify(userName));
-          localStorage.setItem("email", JSON.stringify(dbEmail));
-          localStorage.setItem("role", JSON.stringify(role));
-          toast.success("Successful login", 1000);
-          navigate("/");
+          if (dbPass === password) {
+            // Successful login
+            if (role === "admin") {
+              localStorage.setItem("isAdmin", true);
+              localStorage.setItem("username", userName);
+              localStorage.setItem("email", dbEmail);
+            } else {
+              localStorage.setItem("isAdmin", false);
+              localStorage.setItem("username", userName);
+              localStorage.setItem("email", dbEmail);
+            }
+            toast.success("Successful login", 1000);
+            navigate("/");
+          } else {
+            toast.error("Invalid email or password", 1000);
+          }
         } else {
-          toast.error("Invalid email or password", 1000);
+          toast.error("User not found", 1000);
         }
       } else {
-        toast.error("User not found", 1000);
+        toast.error("Please enter all the details", 1000);
       }
-    } else {
-      toast.error("Please enter all the details", 1000);
+    } catch (error) {
+      console.error("Error during login:", error);
+      toast.error("Error during login. Please check your credentials.", 1000);
     }
-  } catch (error) {
-    console.error("Error during login:", error);
-    toast.error("Error during login. Please check your credentials.", 1000);
-  }
-};
+  };
 
   const handleGoogleLogin = async () => {
     try {
@@ -70,11 +80,11 @@ const handleLogin = async () => {
       const userEmail = user.email;
       // console.log('Successful Google login', user);
       localStorage.setItem("email", JSON.stringify(userEmail));
-      toast.success("Successful Google login",1000);
+      toast.success("Successful Google login", 1000);
       navigate("/");
     } catch (error) {
       console.error("Error during Google login:", error.message);
-      toast.error("Error during Google login. Please try again.",1000);
+      toast.error("Error during Google login. Please try again.", 1000);
     }
   };
 
@@ -83,7 +93,7 @@ const handleLogin = async () => {
       <div>
         <Navbar />
       </div>
-<ToastContainer />
+      <ToastContainer />
       <div
         style={{
           backgroundImage: `url(https://images.unsplash.com/photo-1572248525483-6a953490f4b5?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)`,
@@ -98,23 +108,6 @@ const handleLogin = async () => {
 
             <form className="mx-auto max-w-lg rounded-lg border border-teal-400">
               <div className="flex flex-col gap-4 p-4 md:p-8">
-              <div>
-                  <label
-                    htmlFor="role"
-                    className="mb-2 inline-block text-sm text-teal-800 sm:text-base"
-                  >
-                    Role
-                  </label>
-                  <select
-                    id="role"
-                    value={role}
-                    onChange={handleRoleChange}
-                    className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-teal-500 transition duration-100 focus:ring"
-                  >
-                    <option value="user">User</option>
-                    <option value="admin">Admin</option>
-                  </select>
-                </div>
                 <div>
                   <label
                     htmlFor="userName"
@@ -146,7 +139,23 @@ const handleLogin = async () => {
                     className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-teal-500 transition duration-100 focus:ring"
                   />
                 </div>
-
+                <div>
+                  <label
+                    htmlFor="role"
+                    className="mb-2 inline-block text-sm text-teal-800 sm:text-base"
+                  >
+                    Role
+                  </label>
+                  <select
+                    id="role"
+                    value={role}
+                    onChange={handleRoleChange}
+                    className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-teal-500 transition duration-100 focus:ring"
+                  >
+                    <option value="user">User</option>
+                    <option value="admin">Admin</option>
+                  </select>
+                </div>
 
                 <button
                   type="button"
