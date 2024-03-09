@@ -32,6 +32,7 @@ import Certificate from "./Components/Certificate";
 import RequestProduct from "./Pages/RequestProduct";
 import AdminRoute from "./Components/AdminRoute";
 import CampaignSuggestion from "./Pages/CampaignSuggestion";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function App() {

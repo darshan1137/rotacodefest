@@ -29,7 +29,7 @@ function Navbar() {
   };
 
   return (
-    <header className="bg-white border-b border-gray-500">
+    <header className="bg-green-700  border-b border-gray-500">
       <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 ">
         <div className="flex h-16 items-center justify-between">
           <div className="flex-1 md:flex md:items-center md:gap-12 flex item-center">
@@ -47,7 +47,7 @@ function Navbar() {
                 >
                   <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
                 </svg>
-                <span className="ml-3 text-xl">Waste Wise Web</span>
+                <span className="ml-3 text-xl text-white" >Waste Wise Web</span>
               </a>
             </Link>
           </div>
@@ -56,34 +56,34 @@ function Navbar() {
             <nav aria-label="Global" className="hidden md:block">
               <ul className="flex items-center gap-6 text-sm">
                 <li>
-                  <a className="text-gray-500 transition hover:text-gray-500/75">
+                  <a className="text-white font-bold transition hover:text-gray-500/75">
                     {" "}
                     <Link to="/about">About</Link>{" "}
                   </a>
                 </li>
 
                 <li>
-                  <a className="text-gray-500 transition hover:text-gray-500/75">
+                  <a className="text-white font-bold transition hover:text-gray-500/75">
                     {" "}
                     <Link to="/ecommerce">Products</Link>{" "}
                   </a>
                 </li>
 
                 <li>
-                  <a className="text-gray-500 transition hover:text-gray-500/75">
+                  <a className="text-white font-bold transition hover:text-gray-500/75">
                     {" "}
                     <Link to="/stats">Statistics</Link>{" "}
                   </a>
                 </li>
 
                 <li>
-                  <a className="text-gray-500 transition hover:text-gray-500/75">
+                  <a className="text-white  font-bold transition hover:text-gray-500/75">
                     {" "}
                     <Link to="/blogs">Blogs</Link>{" "}
                   </a>
                 </li>
                 <li>
-                  <a className="text-gray-500 transition hover:text-gray-500/75">
+                  <a className="text-white font-bold transition hover:text-gray-500/75">
                     {" "}
                     <Link to="/campaign">Campaigns</Link>{" "}
                   </a>
@@ -96,12 +96,12 @@ function Navbar() {
                 isAdmin ? (
                   <div className="sm:flex sm:gap-4">
                     <Link to="/admin" className="flex items-center">
-                      <a className="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white shadow">
+                      <a className="rounded-md bg-green-900 hover:bg-green-500 px-5 py-2.5 text-sm font-medium text-white shadow">
                         Dashboard
                       </a>
                     </Link>
                     <Link to="/profile" className="flex items-center">
-                      <a className="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white shadow">
+                      <a className="rounded-md bg-green-900 hover:bg-green-500 px-5 py-2.5 text-sm font-medium text-white shadow">
                         Profile
                       </a>
                     </Link>
@@ -109,7 +109,7 @@ function Navbar() {
                 ) : (
                   <div className="sm:flex sm:gap-4">
                     <Link to="/profile" className="flex items-center">
-                      <a className="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white shadow">
+                      <a className="rounded-md bg-green-900 hover:bg-green-500 px-5 py-2.5 text-sm font-medium text-white shadow">
                         Profile
                       </a>
                     </Link>
@@ -118,7 +118,7 @@ function Navbar() {
               ) : (
                 <div className="sm:flex sm:gap-4">
                   <Link to="/login" className="flex items-center">
-                    <a className="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white shadow">
+                    <a className="rounded-md bg-green-900 hover:bg-green-500 px-5 py-2.5 text-sm font-medium text-white shadow">
                       Login
                     </a>
                   </Link>
