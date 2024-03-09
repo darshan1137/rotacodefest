@@ -326,41 +326,66 @@ function Navbar() {
             <nav aria-label="Global" className="hidden md:block">
               <ul className="flex items-center gap-6 text-sm">
                 <li>
-                  <a >
+                  <a>
                     {" "}
-                    <Link to="/about" className="text-gray-500 hover:text-green-500"
-    style={{ textDecoration: 'none' }}>About</Link>{" "}
+                    <Link
+                      to="/about"
+                      className="text-gray-500 hover:text-green-500"
+                      style={{ textDecoration: "none" }}
+                    >
+                      About
+                    </Link>{" "}
                   </a>
                 </li>
 
                 <li>
-                  <a >
+                  <a>
                     {" "}
-                    <Link to="/ecommerce"className="text-gray-500 hover:text-green-500"
-    style={{ textDecoration: 'none' }}>Products</Link>{" "}
+                    <Link
+                      to="/ecommerce"
+                      className="text-gray-500 hover:text-green-500"
+                      style={{ textDecoration: "none" }}
+                    >
+                      Products
+                    </Link>{" "}
                   </a>
                 </li>
 
                 <li>
-                  <a >
+                  <a>
                     {" "}
-                    <Link to="/stats" className="text-gray-500 hover:text-green-500"
-    style={{ textDecoration: 'none' }}>Statistics</Link>{" "}
+                    <Link
+                      to="/stats"
+                      className="text-gray-500 hover:text-green-500"
+                      style={{ textDecoration: "none" }}
+                    >
+                      Statistics
+                    </Link>{" "}
                   </a>
                 </li>
 
                 <li>
-                  <a >
+                  <a>
                     {" "}
-                    <Link to="/blogs" className="text-gray-500 hover:text-green-500"
-    style={{ textDecoration: 'none' }}>Blogs</Link>{" "}
+                    <Link
+                      to="/blogs"
+                      className="text-gray-500 hover:text-green-500"
+                      style={{ textDecoration: "none" }}
+                    >
+                      Blogs
+                    </Link>{" "}
                   </a>
                 </li>
                 <li>
-                  <a >
+                  <a>
                     {" "}
-                    <Link to="/campaign" className="text-gray-500 hover:text-green-500"
-    style={{ textDecoration: 'none' }}>Campaigns</Link>{" "}
+                    <Link
+                      to="/campaign"
+                      className="text-gray-500 hover:text-green-500"
+                      style={{ textDecoration: "none" }}
+                    >
+                      Campaigns
+                    </Link>{" "}
                   </a>
                 </li>
                 <li>
@@ -500,7 +525,7 @@ function Navbar() {
                   </Link>
                 </li>
                 <li>
-                <Link
+                  <Link
                     to="/admin"
                     className="text-gray-500 hover:text-gray-700"
                     onClick={closeMenu}
