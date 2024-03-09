@@ -293,23 +293,30 @@ function Navbar() {
                   <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
                 </svg> */}
                 <svg
-      xmlns="http://www.w3.org/2000/svg"
-      xmlnsXlink="http://www.w3.org/1999/xlink"
-      
-      viewBox="0 0 375 374.999991"
-      preserveAspectRatio="xMidYMid meet"
-      version="1.0"
-      className="rounded-full w-10 h-10 "
-    >
-      <defs>
-        <clipPath id="fb66969001">
-          <path d="M 12.023438 83.3125 L 363 83.3125 L 363 291.8125 L 12.023438 291.8125 Z M 12.023438 83.3125 " clipRule="nonzero" />
-        </clipPath>
-      </defs>
-      <g clipPath="url(#fb66969001)">
-        <path fill="#00bf63" d="M 12.164062 83.3125 L 133.707031 291.683594 L 187.5 198.964844 L 241.503906 291.683594 L 362.835938 83.3125 L 284.496094 83.3125 L 228.179688 180.308594 L 239.609375 200.015625 L 295.929688 103.4375 L 328.121094 103.4375 L 241.503906 251.84375 L 199.140625 179.253906 L 255.039062 83.3125 L 231.753906 83.3125 L 187.5 159.335938 L 143.246094 83.3125 L 120.171875 83.3125 L 176.066406 179.253906 L 133.707031 251.84375 L 47.089844 103.4375 L 76.546875 103.4375 L 132.863281 200.015625 L 144.507812 180.308594 L 87.976562 83.3125 Z M 12.164062 83.3125 " fillOpacity="1" fillRule="nonzero" />
-      </g>
-    </svg>
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlnsXlink="http://www.w3.org/1999/xlink"
+                  viewBox="0 0 375 374.999991"
+                  preserveAspectRatio="xMidYMid meet"
+                  version="1.0"
+                  className="rounded-full w-10 h-10 "
+                >
+                  <defs>
+                    <clipPath id="fb66969001">
+                      <path
+                        d="M 12.023438 83.3125 L 363 83.3125 L 363 291.8125 L 12.023438 291.8125 Z M 12.023438 83.3125 "
+                        clipRule="nonzero"
+                      />
+                    </clipPath>
+                  </defs>
+                  <g clipPath="url(#fb66969001)">
+                    <path
+                      fill="#00bf63"
+                      d="M 12.164062 83.3125 L 133.707031 291.683594 L 187.5 198.964844 L 241.503906 291.683594 L 362.835938 83.3125 L 284.496094 83.3125 L 228.179688 180.308594 L 239.609375 200.015625 L 295.929688 103.4375 L 328.121094 103.4375 L 241.503906 251.84375 L 199.140625 179.253906 L 255.039062 83.3125 L 231.753906 83.3125 L 187.5 159.335938 L 143.246094 83.3125 L 120.171875 83.3125 L 176.066406 179.253906 L 133.707031 251.84375 L 47.089844 103.4375 L 76.546875 103.4375 L 132.863281 200.015625 L 144.507812 180.308594 L 87.976562 83.3125 Z M 12.164062 83.3125 "
+                      fillOpacity="1"
+                      fillRule="nonzero"
+                    />
+                  </g>
+                </svg>
                 <span className="ml-3 text-xl">Waste Wise Web</span>
               </a>
             </Link>
@@ -349,6 +356,12 @@ function Navbar() {
                   <a className="text-gray-500 transition hover:text-gray-500/75">
                     {" "}
                     <Link to="/campaign">Campaigns</Link>{" "}
+                  </a>
+                </li>
+                <li>
+                  <a className="text-gray-500 transition hover:text-gray-500/75">
+                    {" "}
+                    <Link to="/guideline">Guides</Link>{" "}
                   </a>
                 </li>
               </ul>
@@ -480,10 +493,9 @@ function Navbar() {
                   >
                     Campaign
                   </Link>
-                  
                 </li>
                 <li>
-                <Link
+                  <Link
                     to="/dashboard"
                     className="text-gray-500 hover:text-gray-700"
                     onClick={closeMenu}
@@ -501,4 +513,3 @@ function Navbar() {
 }
 
 export default Navbar;
-

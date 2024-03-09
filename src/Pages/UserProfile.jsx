@@ -60,39 +60,26 @@ function App() {
             <div>
               <button
                 className={`${
-                  activeTab === "products"
+                  activeTab === "upcomingCampaigns"
                     ? "bg-sky-500 text-white"
                     : "text-gray-500 hover:text-gray-700"
                 } px-3 py-2 rounded-md transition duration-100`}
-                onClick={() => handleTabChange("products")}
+                onClick={() => handleTabChange("upcomingCampaigns")}
               >
-                Product Approval
+                Enrolled Campaigns
               </button>
             </div>
 
             <div>
               <button
                 className={`${
-                  activeTab === "documents"
+                  activeTab === "certificates"
                     ? "bg-sky-500 text-white"
                     : "text-gray-500 hover:text-gray-700"
                 } px-3 py-2 rounded-md transition duration-100`}
-                onClick={() => handleTabChange("documents")}
+                onClick={() => handleTabChange("certificates")}
               >
-                Document
-              </button>
-            </div>
-
-            <div>
-              <button
-                className={`${
-                  activeTab === "admin"
-                    ? "bg-sky-500 text-white"
-                    : "text-gray-500 hover:text-gray-700"
-                } px-3 py-2 rounded-md transition duration-100`}
-                onClick={() => handleTabChange("admin")}
-              >
-                Create Admin
+                Certificate
               </button>
             </div>
           </fieldset>
