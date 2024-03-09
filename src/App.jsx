@@ -32,8 +32,8 @@ import Certificate from "./Components/Certificate";
 import RequestProduct from "./Pages/RequestProduct";
 import AdminRoute from "./Components/AdminRoute";
 import CampaignSuggestion from "./Pages/CampaignSuggestion";
-import 'bootstrap/dist/css/bootstrap.min.css';
-
+import "bootstrap/dist/css/bootstrap.min.css";
+import Error from "./Pages/Error";
 
 function App() {
   // const [count, setCount] = useState(0);
@@ -82,6 +82,7 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route path="*" element={<Error />} />
         </Routes>
       </BrowserRouter>
     </>

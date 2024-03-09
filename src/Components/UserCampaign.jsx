@@ -53,7 +53,7 @@ export default function UserCampaign() {
     <>
       <div className=" py-2 flex flex-col text-center w-full mb-5">
         <h1 className="sm:text-3xl text-2xl font-medium title-font  text-gray-900">
-        Campaigns Hosted by you
+          Campaigns Hosted by you
         </h1>
       </div>
 
@@ -73,76 +73,101 @@ export default function UserCampaign() {
             <option value="all">All</option>
           </select>
         </div>
-        {campaignData.map((req) => (
-          <article
-            key={req.id}
-            className="my-5 rounded-xl bg-white p-4 ring ring-green-50 sm:p-6 lg:p-8 "
-          >
-            <div className=" my-5 flex items-start sm:gap-8">
-              <div>
-                <strong className=" rounded border border-green-500 bg-green-500 px-3 py-1.5 text-[10px] font-medium text-white">
-                  {req.date}
-                </strong>
-
-                <h3 className="mt-4 text-lg font-medium sm:text-xl">
-                  <Link to={`/campaign/${req.id}`} className="hover:underline">
-                    {req.campaignTitle}
-                  </Link>
-                </h3>
-
-                <p className="mt-1 text-sm text-gray-700">
-                  {req.campaignDescription}
+        {campaignData.length === 0 ? (
+          <>
+            <body class="flex flex-col justify-center items-center ">
+              <div class="flex flex-col items-center pb-4">
+                <h1 class="text-[60px] font-extrabold text-gray-700">
+                  No Campaigns found
+                </h1>
+                <p class="text-2xl font-medium text-gray-600 mb-6">
+                  Looks like you have not hosted any campaigns yet!!!
                 </p>
+                <Link
+                  to="/requestcampaign"
+                  class="px-4 py-2 font-medium text-white bg-indigo-500 rounded-md hover:bg-indigo-600 transition-all duration-200 ease-in-out"
+                >
+                  Request Campaign
+                </Link>
+              </div>
+            </body>
+          </>
+        ) : (
+          campaignData.map((req) => (
+            <article
+              key={req.id}
+              className="my-5 rounded-xl bg-white p-4 ring ring-green-50 sm:p-6 lg:p-8 "
+            >
+              <div className=" my-5 flex items-start sm:gap-8">
+                <div>
+                  <strong className=" rounded border border-green-500 bg-green-500 px-3 py-1.5 text-[10px] font-medium text-white">
+                    {req.date}
+                  </strong>
 
-                <p className="mt-1 text-sm text-gray-700">
-                  <b>Address: </b>
-                  {req.address}
-                </p>
-
-                <p className="mt-1 text-sm text-gray-700">
-                  <b>City: </b>
-                  {req.city}
-                </p>
-
-                <p className="mt-1 text-sm text-gray-700">
-                  <b>State: </b>
-                  {req.state}
-                </p>
-
-                <div className="mt-4 sm:flex sm:items-center sm:gap-2">
-                  <div className="flex items-center gap-1 text-gray-500">
-                    <svg
-                      className="h-4 w-4"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
+                  <h3 className="mt-4 text-lg font-medium sm:text-xl">
+                    <Link
+                      to={`/campaign/${req.id}`}
+                      className="hover:underline"
                     >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                      ></path>
-                    </svg>
+                      {req.campaignTitle}
+                    </Link>
+                  </h3>
 
-                    <p className="text-xs font-medium">
-                      {req.startTime} - {req.endTime}
+                  <p className="mt-1 text-sm text-gray-700">
+                    {req.campaignDescription}
+                  </p>
+
+                  <p className="mt-1 text-sm text-gray-700">
+                    <b>Address: </b>
+                    {req.address}
+                  </p>
+
+                  <p className="mt-1 text-sm text-gray-700">
+                    <b>City: </b>
+                    {req.city}
+                  </p>
+
+                  <p className="mt-1 text-sm text-gray-700">
+                    <b>State: </b>
+                    {req.state}
+                  </p>
+
+                  <div className="mt-4 sm:flex sm:items-center sm:gap-2">
+                    <div className="flex items-center gap-1 text-gray-500">
+                      <svg
+                        className="h-4 w-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                        ></path>
+                      </svg>
+
+                      <p className="text-xs font-medium">
+                        {req.startTime} - {req.endTime}
+                      </p>
+                    </div>
+
+                    <span className="hidden sm:block" aria-hidden="true">
+                      &middot;
+                    </span>
+
+                    <p className="mt-2 text-xs font-medium text-gray-500 sm:mt-0">
+                      Hosted by {req.userDetails.Fname} {req.userDetails.Lname}
                     </p>
                   </div>
-
-                  <span className="hidden sm:block" aria-hidden="true">
-                    &middot;
-                  </span>
-
-                  <p className="mt-2 text-xs font-medium text-gray-500 sm:mt-0">
-                    Hosted by {req.userDetails.Fname} {req.userDetails.Lname}
-                  </p>
                 </div>
               </div>
-            </div>
-          </article>
-        ))}
+            </article>
+          ))
+        )}
+        {}
       </div>
     </>
   );

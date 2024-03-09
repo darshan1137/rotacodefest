@@ -47,7 +47,7 @@ function Navbar() {
                 >
                   <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
                 </svg>
-                <span className="ml-3 text-xl text-white" >Waste Wise Web</span>
+                <span className="ml-3 text-xl text-white">Waste Wise Web</span>
               </a>
             </Link>
           </div>
@@ -66,6 +66,12 @@ function Navbar() {
                   <a className="text-white font-bold transition hover:text-gray-500/75">
                     {" "}
                     <Link to="/ecommerce">Products</Link>{" "}
+                  </a>
+                </li>
+                <li>
+                  <a className="text-white font-bold transition hover:text-gray-500/75">
+                    {" "}
+                    <Link to="/guideline">Guides</Link>{" "}
                   </a>
                 </li>
 
@@ -118,7 +124,7 @@ function Navbar() {
               ) : (
                 <div className="sm:flex sm:gap-4">
                   <Link to="/login" className="flex items-center">
-                    <a className="rounded-md bg-green-900 hover:bg-green-500 px-5 py-2.5 text-sm font-medium text-white shadow">
+                    <a className="rounded-md bg-green-900 hover:bg-grey-500 px-5 py-2.5 text-sm font-medium text-white shadow">
                       Login
                     </a>
                   </Link>
@@ -191,6 +197,15 @@ function Navbar() {
                     onClick={closeMenu}
                   >
                     Products
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/guideline"
+                    className="text-gray-500 hover:text-gray-700"
+                    onClick={closeMenu}
+                  >
+                    Guides
                   </Link>
                 </li>
                 <li>
