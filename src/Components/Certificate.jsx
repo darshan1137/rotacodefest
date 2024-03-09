@@ -27,7 +27,7 @@ function Receipt() {
   }, [navigate]);
 
   useEffect(() => {
-    console.log('Received Props:', userProps, campaignProps);
+    // console.log('Received Props:', userProps, campaignProps);
   }, [userProps, campaignProps]);
 
   return (

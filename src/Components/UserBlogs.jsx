@@ -43,9 +43,9 @@ export default function Blogs() {
   return (
     <>
       <div className="bg-white py-6 sm:py-8 lg:py-12">
-        <div className="mx-auto max-w-screen-2xl px-4 md:px-8">
-          <div className="mb-10 md:mb-16">
-            <h2 className="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl">
+        <div className="mx-auto max-w-screen-2xl px-2 md:px-8">
+          <div className="md:mb-16">
+            <h2 className="text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl">
               Discover Your Stories
             </h2>
 
@@ -55,7 +55,7 @@ export default function Blogs() {
           </div>
 
           <div>
-            <div className="mb-4 flex items-center justify-center">
+            <div className=" flex items-center justify-center">
               <label className="block mr-2 text-sm font-medium text-gray-700">
                 Filter By:
               </label>

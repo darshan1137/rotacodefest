@@ -94,22 +94,7 @@ export default function UserDetails() {
   }
   return (
     <>
-      <div className="bg-white">
-        <div className="flex flex-col items-center justify-center py-5">
-          <div className="flex flex-col items-center">
-            <div className="mb-2 h-24 w-24 overflow-hidden rounded-full bg-gray-100 shadow-lg md:mb-4 md:h-32 md:w-32">
-              {/* Display a placeholder image */}
-              <img
-                src="https://via.placeholder.com/150"
-                loading="lazy"
-                alt="Placeholder"
-                className="h-full w-full object-cover object-center"
-              />
-            </div>
-          </div>
-          {/* Render other user details here */}
-        </div>
-      </div>
+     
 
       <div className="flex items-center justify-center">
         <div className="bg-white p-8 rounded-lg shadow-md max-w-md w-full">
