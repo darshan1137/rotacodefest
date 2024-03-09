@@ -4,6 +4,7 @@ import UserBlogs from "../Components/UserBlogs.jsx";
 import UserDetails from "../Components/UserDetails.jsx";
 import UserCampaign from "../Components/UserCampaign.jsx";
 import UserCertificates from "../Components/UserCertificates.jsx";
+import UserUpcomingCampaign from "../Components/UserUpcomingCampaign.jsx";
 
 
 function App() {
@@ -48,6 +49,16 @@ function App() {
               </a>
               <a
                 className={`${
+                  activeTab === "upcomingCampaigns"
+                    ? "border-sky-500 text-sky-600"
+                    : "border-transparent text-gray-500"
+                }  cursor-pointer shrink-0 border-b-2 px-1 pb-4 text-sm font-medium transition duration-100 hover:border-gray-300 hover:text-gray-700`}
+                onClick={() => handleTabChange("upcomingCampaigns")}
+              >
+                Upcoming Campaigns
+              </a>
+              <a
+                className={`${
                   activeTab === "certificates"
                     ? "border-sky-500 text-sky-600"
                     : "border-transparent text-gray-500"
@@ -80,6 +91,11 @@ function App() {
       {activeTab === "certificates" && (
         <div className="px-20 bg-white">
           <UserCertificates />
+        </div>
+      )}
+      {activeTab === "upcomingCampaigns" && (
+        <div className="px-20 bg-white">
+          <UserUpcomingCampaign />
         </div>
       )}
 

@@ -1,93 +1,88 @@
-// import React from 'react'
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { collection, query, getDocs, where } from "firebase/firestore";
-import { db } from "../Firebase/cofig";
-import { getFirestore, Timestamp } from "firebase/firestore";
+import {
+  doc,
+  getDoc,
+  collection,
+  query,
+  where,
+  getDocs,
+} from "firebase/firestore";
+import { db } from "../Firebase/cofig.js";
 
-export default function UserCampaign() {
+export default function UserUpcomingCampaign() {
   const [campaignData, setCampaignData] = useState([]);
-  const [filter, setFilter] = useState("approved"); // "approved" or "notApproved"
-
-  const email = localStorage.getItem("email");
+  const [filteredCampaigns, setFilteredCampaigns] = useState([]);
 
   useEffect(() => {
-    const fetchCampaignData = async () => {
+    // Fetch campaign data from Firestore
+    const fetchData = async () => {
       try {
-        const today = new Date();
-        const todayDateString = today.toISOString().split("T")[0];
-
-        let campaignQuery;
-
-        if (filter === "all") {
-          // Fetch all documents without the where clause
-          campaignQuery = query(
-            collection(getFirestore(), "requests"),
-            where("userDetails.email", "==", email)
-          );
-        } else {
-          // Fetch documents based on approval status
-          campaignQuery = query(
-            collection(getFirestore(), "requests"),
-            where("approval", "==", filter === "approved" ? "true" : "false"),
-            where("userDetails.email", "==", email)
-          );
-        }
-
-        const campaignSnapshot = await getDocs(campaignQuery);
-        const campaignData = campaignSnapshot.docs.map((doc) => ({
-          id: doc.id,
+        const campaignCollection = collection(db, "requests");
+        const campaignSnapshot = await getDocs(campaignCollection);
+        const data = campaignSnapshot.docs.map((doc) => ({
           ...doc.data(),
+          id: doc.id,
         }));
-        setCampaignData(campaignData);
-        // console.log("data:", campaignData);
+        setCampaignData(data);
       } catch (error) {
-        console.error("Error fetching data:", error.message);
+        console.error("Error fetching campaign data:", error);
       }
     };
 
-    fetchCampaignData();
-  }, [filter, email]);
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    // Filter campaigns based on user's username and upcoming dates
+    const username = localStorage.getItem("username");
+
+    if (username) {
+      const filteredCampaigns = campaignData.filter((campaign) => {
+        const currentDate = new Date();
+
+        // Convert the date string to a Date object
+        const campaignDate = new Date(campaign.date);
+
+        // Check if 'volunteers' is defined and is an array
+        const volunteersArray =
+          Array.isArray(campaign.volunteers) &&
+          campaign.volunteers !== undefined
+            ? campaign.volunteers
+            : [];
+
+        // Check if the user has registered and the campaign is upcoming
+        return volunteersArray.includes(username) && campaignDate > currentDate;
+      });
+
+      setFilteredCampaigns(filteredCampaigns);
+    }
+  }, [campaignData]);
 
   return (
     <>
       <div className=" py-2 flex flex-col text-center w-full mb-5">
         <h1 className="sm:text-3xl text-2xl font-medium title-font  text-gray-900">
-        Campaigns Hosted by you
+          Upcoming Campaigns
         </h1>
       </div>
 
-      <div className="">
-        <div className="mb-4 flex justify-center">
-          <label htmlFor="filter" className="mr-2 text-lg">
-            Filter:
-          </label>
-          <select
-            id="filter"
-            className="mt-1 p-2 border border-black rounded-md bg-white-300 py-1 px-4 focus:outline-none"
-            value={filter}
-            onChange={(e) => setFilter(e.target.value)}
-          >
-            <option value="approved">Approved</option>
-            <option value="notApproved">Not Approved</option>
-            <option value="all">All</option>
-          </select>
-        </div>
-        {campaignData.map((req) => (
+      <div className="my-5">
+        {filteredCampaigns.map((req) => (
           <article
+            className="rounded-xl bg-white p-4 ring mb-5 ring-indigo-50 sm:p-6 lg:p-8"
             key={req.id}
-            className="my-5 rounded-xl bg-white p-4 ring ring-green-50 sm:p-6 lg:p-8 "
           >
-            <div className=" my-5 flex items-start sm:gap-8">
+            <div className="flex items-start sm:gap-8">
               <div>
                 <strong className=" rounded border border-green-500 bg-green-500 px-3 py-1.5 text-[10px] font-medium text-white">
                   {req.date}
                 </strong>
 
                 <h3 className="mt-4 text-lg font-medium sm:text-xl">
-                  <Link to={`/campaign/${req.id}`} className="hover:underline">
-                    {req.campaignTitle}
-                  </Link>
+                  <a href="#" className="hover:underline">
+                    {" "}
+                    {req.campaignTitle}{" "}
+                  </a>
                 </h3>
 
                 <p className="mt-1 text-sm text-gray-700">
