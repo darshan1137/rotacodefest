@@ -21,56 +21,81 @@ function App() {
         <UserDetails />
       </div>
 
-      <div className="h-1 rounded overflow-hidden px-10">
-        <div className="w-ful h-full bg-green-500 px-10"></div>
-      </div>
+      <span class="flex items-center pb-4">
+        <span class="h-px flex-1 bg-green-500"></span>
+        <span class="h-px flex-1 bg-green-500"></span>
+      </span>
 
-      <div className="flex justify-center pt-5">
-        <div className="w-full max-w-screen-xl">
-          <div className="border-b border-gray-200">
-            <nav className="-mb-px flex gap-6" aria-label="Tabs">
-              <a
+      <div className="flex justify-center">
+        <div className="w-full max-w-screen-xl px-4 sm:px-6 lg:px-8">
+          <fieldset className="flex flex-wrap gap-3">
+            <legend className="sr-only">Tab Options</legend>
+
+            <div>
+              <button
                 className={`${
                   activeTab === "blogs"
-                    ? "border-sky-500 text-sky-600"
-                    : "border-transparent text-gray-500"
-                } cursor-pointer shrink-0 border-b-2 px-1 pb-4 text-sm font-medium transition duration-100 hover:border-gray-300 hover:text-gray-700`}
+                    ? "bg-sky-500 text-white"
+                    : "text-gray-500 hover:text-gray-700"
+                } px-3 py-2 rounded-md transition duration-100`}
                 onClick={() => handleTabChange("blogs")}
               >
                 Blogs
-              </a>
-              <a
+              </button>
+            </div>
+
+            <div>
+              <button
                 className={`${
                   activeTab === "campaigns"
-                    ? "border-sky-500 text-sky-600"
-                    : "border-transparent text-gray-500"
-                }  cursor-pointer shrink-0 border-b-2 px-1 pb-4 text-sm font-medium transition duration-100 hover:border-gray-300 hover:text-gray-700`}
+                    ? "bg-sky-500 text-white"
+                    : "text-gray-500 hover:text-gray-700"
+                } px-3 py-2 rounded-md transition duration-100`}
                 onClick={() => handleTabChange("campaigns")}
               >
                 Campaigns
-              </a>
-              <a
+              </button>
+            </div>
+
+            <div>
+              <button
                 className={`${
-                  activeTab === "upcomingCampaigns"
-                    ? "border-sky-500 text-sky-600"
-                    : "border-transparent text-gray-500"
-                }  cursor-pointer shrink-0 border-b-2 px-1 pb-4 text-sm font-medium transition duration-100 hover:border-gray-300 hover:text-gray-700`}
-                onClick={() => handleTabChange("upcomingCampaigns")}
+                  activeTab === "products"
+                    ? "bg-sky-500 text-white"
+                    : "text-gray-500 hover:text-gray-700"
+                } px-3 py-2 rounded-md transition duration-100`}
+                onClick={() => handleTabChange("products")}
               >
-                Upcoming Campaigns
-              </a>
-              <a
+                Product Approval
+              </button>
+            </div>
+
+            <div>
+              <button
                 className={`${
-                  activeTab === "certificates"
-                    ? "border-sky-500 text-sky-600"
-                    : "border-transparent text-gray-500"
-                }  cursor-pointer shrink-0 border-b-2 px-1 pb-4 text-sm font-medium transition duration-100 hover:border-gray-300 hover:text-gray-700`}
-                onClick={() => handleTabChange("certificates")}
+                  activeTab === "documents"
+                    ? "bg-sky-500 text-white"
+                    : "text-gray-500 hover:text-gray-700"
+                } px-3 py-2 rounded-md transition duration-100`}
+                onClick={() => handleTabChange("documents")}
               >
-                Certificates
-              </a>
-            </nav>
-          </div>
+                Document
+              </button>
+            </div>
+
+            <div>
+              <button
+                className={`${
+                  activeTab === "admin"
+                    ? "bg-sky-500 text-white"
+                    : "text-gray-500 hover:text-gray-700"
+                } px-3 py-2 rounded-md transition duration-100`}
+                onClick={() => handleTabChange("admin")}
+              >
+                Create Admin
+              </button>
+            </div>
+          </fieldset>
         </div>
       </div>
 

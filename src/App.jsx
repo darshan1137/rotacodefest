@@ -17,8 +17,6 @@ import Blogs from "./Pages/Blogs";
 import Readblog from "./Pages/Readblog";
 import AddBlog from "./Pages/Addblog";
 import Admin from "./Pages/Admin";
-import Profile from "./Pages/Profile";
-import Navbar from "./Components/Navbar";
 import UserProfile from "./Pages/UserProfile";
 import RequestCampaign from "./Pages/RequestCampaign";
 import Registration from "./Pages/Registration";
