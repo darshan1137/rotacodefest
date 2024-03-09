@@ -27,6 +27,7 @@ import {
 } from "firebase/storage";
 
 import { uploadBytes } from "firebase/storage";
+import AdminRegister from "../Components/AdminRegister.jsx";
 
 export default function Blogs() {
   const [blogs, setBlogs] = useState([]);
@@ -373,7 +374,20 @@ export default function Blogs() {
                   handleTabChange("documents");
                 }}
               >
-                Documents
+                Document
+              </a>
+              <a
+                className={`${
+                  activeTab === "admin"
+                    ? "border-sky-500 text-sky-600"
+                    : "border-transparent text-gray-500"
+                } shrink-0 border-b-2 px-1 pb-4 text-sm font-medium transition duration-100 hover:border-gray-300 hover:text-gray-700`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleTabChange("admin");
+                }}
+              >
+                Create Admin
               </a>
             </nav>
           </div>
@@ -582,6 +596,8 @@ export default function Blogs() {
           )}
         </section>
       )}
+
+      {activeTab === "admin" && <AdminRegister />}
 
       {activeTab === "documents" && (
         <section className="container mx-auto lg:px-32 px-4 py-8">

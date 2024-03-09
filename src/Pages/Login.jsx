@@ -44,6 +44,7 @@ function Login() {
           const data = docSnap.data();
           const dbPass = data.password;
           const dbEmail = data.email;
+         
 
           if (dbPass === password) {
             // Successful login
@@ -55,6 +56,7 @@ function Login() {
               localStorage.setItem("isAdmin", false);
               localStorage.setItem("username", userName);
               localStorage.setItem("email", dbEmail);
+              
             }
             toast.success("Successful login", 1000);
             navigate("/");

@@ -12,6 +12,8 @@ import {
 import { db } from "../Firebase/cofig";
 import { getFirestore, Timestamp } from "firebase/firestore";
 import Navbar from "../Components/Navbar";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Campaign() {
   const [campaignData, setCampaignData] = useState([]);
@@ -99,6 +101,7 @@ function Campaign() {
 
       // const userEmail = userData.email;
       // console.log("User email:", userEmail);
+      setShowModal(false);
       const username = localStorage.getItem("username");
 
       const docRef = doc(db, "requests", selectedCampaignId);
@@ -117,10 +120,11 @@ function Campaign() {
           });
           // console.log("s2")
         }
-        // console.log("User joined campaign.");
-        setShowModal(false);
+        toast.success("Successfully Registrated for campaign ", 1000);
+       
       } else {
         console.error("Document does not exist");
+        toast.error("Successfully Registrated for campaign ", 1000);
       }
     } catch (error) {
       console.error("Error joining campaign:", error.message);

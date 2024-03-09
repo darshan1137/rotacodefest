@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { db } from "../Firebase/cofig";
 import { collection, getDocs, where, query } from "firebase/firestore";
+import NotFound from "./NotFound";
 
 export default function Blogs() {
   const [blogs, setBlogs] = useState([]);
@@ -70,37 +71,58 @@ export default function Blogs() {
               </select>
             </div>
 
-            <div className="mx-15 grid gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-8 mt-12">
-              {filteredBlogs.map((blog) => (
-                <Link
-                  key={blog.id}
-                  to={`/readblog/${blog.id}`}
-                  className="group relative flex flex-col overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-60 xl:h-80"
-                >
-                  <img
-                    src={blog.imglink}
-                    loading="lazy"
-                    alt={`${blog.title}`}
-                    className="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110"
-                  />
-
-                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-gray-800 to-transparent md:via-transparent"></div>
-
-                  <div className="relative mt-auto p-4">
-                    <span className="block text-sm text-gray-200">
-                      {blog.date}
-                    </span>
-                    <h2 className="mb-2 text-xl font-semibold text-white transition duration-100">
-                      {blog.title}
-                    </h2>
-
-                    <span className="font-semibold text-indigo-300">
-                      Read more
-                    </span>
+            {blogs.length === 0 ? (
+              <>
+                <body class="flex flex-col justify-center items-center">
+                  <div class="flex flex-col items-center">
+                    <h1 class="text-[60px] font-extrabold text-gray-700">
+                      No Blogs
+                    </h1>
+                    <p class="text-2xl font-medium text-gray-600 mb-6">
+                      Looks like you have not published any blogs yet!!!
+                    </p>
+                    <Link
+                      to="/addblog"
+                      class="px-4 py-2 font-medium text-white bg-indigo-500 rounded-md hover:bg-indigo-600 transition-all duration-200 ease-in-out"
+                    >
+                      Add Blog
+                    </Link>
                   </div>
-                </Link>
-              ))}
-            </div>
+                </body>
+              </>
+            ) : (
+              <div className="mx-15 grid gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-8 mt-12">
+                {filteredBlogs.map((blog) => (
+                  <Link
+                    key={blog.id}
+                    to={`/readblog/${blog.id}`}
+                    className="group relative flex flex-col overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-60 xl:h-80"
+                  >
+                    <img
+                      src={blog.imglink}
+                      loading="lazy"
+                      alt={`${blog.title}`}
+                      className="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110"
+                    />
+
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-gray-800 to-transparent md:via-transparent"></div>
+
+                    <div className="relative mt-auto p-4">
+                      <span className="block text-sm text-gray-200">
+                        {blog.date}
+                      </span>
+                      <h2 className="mb-2 text-xl font-semibold text-white transition duration-100">
+                        {blog.title}
+                      </h2>
+
+                      <span className="font-semibold text-indigo-300">
+                        Read more
+                      </span>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            )}
           </div>
 
           <div className="flex items-center justify-between sm:col-span-2">

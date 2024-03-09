@@ -4,7 +4,7 @@ import UserBlogs from "../Components/UserBlogs.jsx";
 import UserDetails from "../Components/UserDetails.jsx";
 import UserCampaign from "../Components/UserCampaign.jsx";
 import UserCertificates from "../Components/UserCertificates.jsx";
-
+import UserUpcomingCampaign from "../Components/UserUpcomingCampaign.jsx";
 
 function App() {
   const [activeTab, setActiveTab] = useState("blogs");
@@ -15,14 +15,17 @@ function App() {
 
   return (
     <>
-
       <Navbar />
 
       <div className="mb-5">
         <UserDetails />
       </div>
 
-      <div className="flex justify-center ">
+      <div className="h-1 rounded overflow-hidden px-10">
+        <div className="w-ful h-full bg-green-500 px-10"></div>
+      </div>
+
+      <div className="flex justify-center pt-5">
         <div className="w-full max-w-screen-xl">
           <div className="border-b border-gray-200">
             <nav className="-mb-px flex gap-6" aria-label="Tabs">
@@ -48,6 +51,16 @@ function App() {
               </a>
               <a
                 className={`${
+                  activeTab === "upcomingCampaigns"
+                    ? "border-sky-500 text-sky-600"
+                    : "border-transparent text-gray-500"
+                }  cursor-pointer shrink-0 border-b-2 px-1 pb-4 text-sm font-medium transition duration-100 hover:border-gray-300 hover:text-gray-700`}
+                onClick={() => handleTabChange("upcomingCampaigns")}
+              >
+                Upcoming Campaigns
+              </a>
+              <a
+                className={`${
                   activeTab === "certificates"
                     ? "border-sky-500 text-sky-600"
                     : "border-transparent text-gray-500"
@@ -59,10 +72,6 @@ function App() {
             </nav>
           </div>
         </div>
-      </div>
-
-      <div className="h-1 rounded overflow-hidden px-10">
-        <div className="w-ful h-full bg-green-500 px-10"></div>
       </div>
 
       {activeTab === "blogs" && (
@@ -82,7 +91,11 @@ function App() {
           <UserCertificates />
         </div>
       )}
-
+      {activeTab === "upcomingCampaigns" && (
+        <div className="px-20 bg-white">
+          <UserUpcomingCampaign />
+        </div>
+      )}
     </>
   );
 }
