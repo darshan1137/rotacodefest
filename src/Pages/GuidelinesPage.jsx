@@ -2,10 +2,12 @@ import Header from "../Components/Navbar";
 import { getStorage, ref, getDownloadURL,listAll } from "firebase/storage";
 import { useState,useEffect } from 'react';
 import ManualCard from "../Components/ManualCard";
+import GuidelineCard from "../Components/GuidelineCard";
 
 
 function GuidelinesPage() {
   const [files, setFiles] = useState([]);
+
 
   useEffect(() => {
     const fetchFiles = async () => {
@@ -26,10 +28,33 @@ function GuidelinesPage() {
     fetchFiles();
   }, []);
 
+  
+
+  const [guide, setGuide] = useState([]);
+  
+
+  useEffect(() => {
+    const fetchFiles = async () => {
+      try {
+        const storage = getStorage();
+        const storageRef = ref(storage, "guides"); 
+        const res = await listAll(storageRef);
+        const promises = res.items.map(async (itemRef) => {
+          const url = await getDownloadURL(itemRef);
+          return { name: itemRef.name, url };
+        });
+        const files = await Promise.all(promises);
+        setGuide(files);
+      } catch (error) {
+        console.error("Error fetching files:", error);
+      }
+    };
+    fetchFiles();
+  }, []);
+
   const handleDownload = (url) => {
     window.open(url, "_blank");
   };
-
 
 
   return (
@@ -75,108 +100,15 @@ function GuidelinesPage() {
         </h1>
       </div>
 
-      <section className="text-gray-600 body-font items-center flex justify-center">
-        <div className="container px-5 py-20 mx-auto flex flex-wrap justify-center">
-          <div className="flex relative pt-10 pb-10 sm:items-center md:w-2/3 mx-auto">
-            <div className="h-full w-6 absolute inset-0 flex items-center justify-center">
-              <div className="h-full w-1 bg-green-200 pointer-events-none"></div>
-            </div>
-            <div className="flex-shrink-0 w-6 h-6 rounded-full mt-10 sm:mt-0 inline-flex items-center justify-center bg-green-500 text-white relative z-10 title-font font-medium text-sm hover:bg-green-600">
-              1
-            </div>
-            <div className="flex-grow md:pl-8 pl-6 flex sm:items-center items-start flex-col sm:flex-row">
-              <div className="flex-shrink-0 w-24 h-24 bg-green-100 text-green-500 rounded-full inline-flex items-center justify-center hover:bg-green-600">
-                <a href="#">
-                  <svg
-                    fill="none"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    className="w-12 h-12"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                  </svg>
-                </a>
-              </div>
-              <div className="flex-grow sm:pl-6 mt-6 sm:mt-0">
-                <h2 className="font-medium title-font text-gray-900 mb-1 text-xl">
-                  Refuse and Reuse
-                </h2>
-                <p className="leading-relaxed">
-                  Avoid making unnecessary purchases and choose ..
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className="flex relative pt-10 pb-10 sm:items-center md:w-2/3 mx-auto">
-            <div className="h-full w-6 absolute inset-0 flex items-center justify-center">
-              <div className="h-full w-1 bg-green-200 pointer-events-none"></div>
-            </div>
-            <div className="flex-shrink-0 w-6 h-6 rounded-full mt-10 sm:mt-0 inline-flex items-center justify-center bg-green-500 text-white relative z-10 title-font font-medium text-sm hover:bg-green-600">
-              2
-            </div>
-            <div className="flex-grow md:pl-8 pl-6 flex sm:items-center items-start flex-col sm:flex-row">
-              <div className="flex-shrink-0 w-24 h-24 bg-green-100 text-green-500 rounded-full inline-flex items-center justify-center hover:bg-green-600">
-                <a href="#">
-                  <svg
-                    fill="none"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    className="w-12 h-12"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                  </svg>
-                </a>
-              </div>
-              <div className="flex-grow sm:pl-6 mt-6 sm:mt-0">
-                <h2 className="font-medium title-font text-gray-900 mb-1 text-xl">
-                  Rethink and Reduce
-                </h2>
-                <p className="leading-relaxed">
-                  Review consumption practices; think twice  before
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="flex relative pt-10 pb-10 sm:items-center md:w-2/3 mx-auto">
-            <div className="h-full w-6 absolute inset-0 flex items-center justify-center">
-              <div className="h-full w-1 bg-green-200 pointer-events-none"></div>
-            </div>
-            <div className="flex-shrink-0 w-6 h-6 rounded-full mt-10 sm:mt-0 inline-flex items-center justify-center bg-green-500 text-white relative z-10 title-font font-medium text-sm hover:bg-green-600">
-              3
-            </div>
-            <div className="flex-grow md:pl-8 pl-6 flex sm:items-center items-start flex-col sm:flex-row">
-              <div className="flex-shrink-0 w-24 h-24 bg-green-100 text-green-500 rounded-full inline-flex items-center justify-center hover:bg-green-600">
-                <a href="#">
-                  <svg
-                    fill="none"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    className="w-12 h-12"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                  </svg>
-                </a>
-              </div>
-              <div className="flex-grow sm:pl-6 mt-6 sm:mt-0">
-                <h2 className="font-medium title-font text-gray-900 mb-1 text-xl">
-                  Recycle and Repair
-                </h2>
-                <p className="leading-relaxed">
-                  Review consumption practices; think twice  before
-                </p>
-              </div>
-            </div>
-          </div>
+      <section className="text-gray-600 py-5 body-font flex justify-center items-center bg-white ">
+        <div className="container lg:justify-normal justify-center flex flex-wrap  ">
+         
+          
+            {guide.map((file, index) => (
+              <GuidelineCard key={index} file={file} handleDownload={handleDownload} />
+            ))}
+          
+        
         </div>
       </section>
       {/* manuals */}
@@ -188,7 +120,7 @@ function GuidelinesPage() {
         </h1>
       </div>
       <section className="text-gray-600 py-5 body-font flex justify-center items-center bg-green ">
-        <div className="container   flex flex-wrap  ">
+        <div className="container lg:justify-normal justify-center flex flex-wrap  ">
          
           
             {files.map((file, index) => (

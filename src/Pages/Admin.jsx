@@ -267,7 +267,91 @@ export default function Blogs() {
       toast.error("Error deleting document. Please try again.");
     }
   };
-
+  const [guide, setGuide] = useState(null);
+  const [uploadingGuide, setUploadingGuide] = useState(false);
+  const [guides, setGuides] = useState([]);
+  
+  const handleGuideChange = (e) => {
+    const file = e.target.files[0];
+    setGuide(file);
+  };
+  
+  const handleUploadGuide = async () => {
+    try {
+      if (!guide) return;
+  
+      setUploadingGuide(true);
+  
+      // Upload the guide file to Firebase Storage
+      const storage = getStorage();
+      const storageRef = ref(storage, `guides/${guide.name}`);
+      await uploadBytes(storageRef, guide);
+  
+      console.log("Guide uploaded to storage:", guide.name);
+  
+      setUploadingGuide(false);
+      setGuide(null);
+      toast.success("Guide uploaded successfully!");
+    } catch (error) {
+      console.error("Error uploading guide: ", error);
+      setUploadingGuide(false);
+      toast.error("Error uploading guide. Please try again.");
+    }
+  };
+  
+  useEffect(() => {
+    const fetchGuides = async () => {
+      try {
+        const storage = getStorage();
+        const storageRef = ref(storage, "guides");
+        const res = await listAll(storageRef);
+        const promises = res.items.map(async (itemRef) => {
+          const url = await getDownloadURL(itemRef);
+          return { name: itemRef.name, url };
+        });
+        const guides = await Promise.all(promises);
+        setGuides(guides);
+      } catch (error) {
+        console.error("Error fetching guides:", error);
+      }
+    };
+    fetchGuides();
+  }, []);
+  
+  const handleGuideDownload = (url) => {
+    window.open(url, "_blank");
+  };
+  
+  const handleGuideDelete = async (guideName) => {
+    try {
+      if (!guideName) {
+        console.error("Guide name is undefined or null");
+        toast.error("Guide name is undefined or null. Please try again.");
+        return;
+      }
+  
+      // Query for the guide based on its name
+      const storage = getStorage();
+      const storageRef = ref(storage, `guides/${guideName}`);
+      const guideSnapshot = await getDownloadURL(storageRef);
+      if (!guideSnapshot) {
+        console.error("Guide does not exist");
+        toast.error("Guide does not exist.");
+        return;
+      }
+  
+      // Delete the guide
+      await deleteObject(storageRef);
+      toast.success("Guide deleted successfully!");
+  
+      // Fetch updated guides after deletion
+      fetchGuides();
+    } catch (error) {
+      console.error("Error deleting guide: ", error);
+      toast.error("Error deleting guide. Please try again.");
+    }
+  };
+  
   return (
     <>
       <ToastContainer />
@@ -329,8 +413,8 @@ export default function Blogs() {
       </span>
 
       <div className="flex justify-center">
-        <div className="w-full max-w-screen-xl px-4 sm:px-6 lg:px-8">
-          <fieldset className="flex flex-wrap gap-3">
+        <div className="w-full max-w-screen-xl px-4 sm:px-6 lg:px-8 border-b border-gray-300">
+          <fieldset className="flex flex-wrap gap-3 mb-3">
             <legend className="sr-only">Tab Options</legend>
 
             <div>
@@ -339,7 +423,7 @@ export default function Blogs() {
                   activeTab === "blogs"
                     ? "bg-sky-500 text-white"
                     : "text-gray-500 hover:text-gray-700"
-                } px-3 py-2 rounded-md transition duration-100`}
+                } px-3 py-2 rounded-md transition duration-100 w-[10rem]`}
                 onClick={() => handleTabChange("blogs")}
               >
                 Blogs
@@ -352,7 +436,7 @@ export default function Blogs() {
                   activeTab === "campaigns"
                     ? "bg-sky-500 text-white"
                     : "text-gray-500 hover:text-gray-700"
-                } px-3 py-2 rounded-md transition duration-100`}
+                } px-3 py-2 rounded-md transition duration-100 w-[10rem]`}
                 onClick={() => handleTabChange("campaigns")}
               >
                 Campaigns
@@ -365,7 +449,7 @@ export default function Blogs() {
                   activeTab === "products"
                     ? "bg-sky-500 text-white"
                     : "text-gray-500 hover:text-gray-700"
-                } px-3 py-2 rounded-md transition duration-100`}
+                } px-3 py-2 rounded-md transition duration-100 w-[10rem]`}
                 onClick={() => handleTabChange("products")}
               >
                 Product Approval
@@ -378,7 +462,7 @@ export default function Blogs() {
                   activeTab === "documents"
                     ? "bg-sky-500 text-white"
                     : "text-gray-500 hover:text-gray-700"
-                } px-3 py-2 rounded-md transition duration-100`}
+                } px-3 py-2 rounded-md transition duration-100 w-[10rem]`}
                 onClick={() => handleTabChange("documents")}
               >
                 Document
@@ -391,7 +475,7 @@ export default function Blogs() {
                   activeTab === "admin"
                     ? "bg-sky-500 text-white"
                     : "text-gray-500 hover:text-gray-700"
-                } px-3 py-2 rounded-md transition duration-100`}
+                } px-3 py-2 rounded-md transition duration-100 w-[10rem]`}
                 onClick={() => handleTabChange("admin")}
               >
                 Create Admin
@@ -406,7 +490,7 @@ export default function Blogs() {
           {blogs.length === 0 ? (
             <NotFound />
           ) : (
-            <div className=" m-10 px-10  grid gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-8">
+            <div className=" m-10 lg:px-32  grid gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-8 ">
               {blogs.map((blog) => (
                 <div
                   key={blog.id}
@@ -607,57 +691,114 @@ export default function Blogs() {
       {activeTab === "admin" && <AdminRegister />}
 
       {activeTab === "documents" && (
-        <section className="container mx-auto lg:px-32 px-4 py-8">
-          <div className="mb-4">
-            <h2 className="text-lg font-bold mb-2">Upload Document</h2>
-            <input
-              type="file"
-              onChange={handleFileChange}
-              className="border p-2 rounded "
-            />
-            <button
-              onClick={handleUpload}
-              className="bg-blue-500 text-white py-2 px-4 rounded ml-2"
-              disabled={uploading || !document}
-            >
-              {uploading ? "Uploading..." : "Upload"}
-            </button>
-          </div>
-
-          <div className="">
-            <h2 className="text-lg font-bold mb-2">Documents</h2>
-            {files.length === 0 ? (
-              <NotFound />
-            ) : (
-              <ul className="space-y-2">
-                {files.map((doc) => (
-                  <li
-                    key={doc.id}
-                    className="flex items-center justify-between p-4 lg:flex-row flex-col"
+      <section className="container mx-auto lg:px-32 px-4 py-8">
+      <div className="flex flex-col lg:flex-row justify-between mb-4 lg:px-32 border-b ">
+        {/* Document Upload Section */}
+        <div className="mb-4 lg:mr-4 lg:w-1/2">
+          <h2 className="text-lg font-bold mb-2">Upload Document</h2>
+          <input
+            type="file"
+            onChange={handleFileChange}
+            className="border p-2 rounded"
+          />
+          <button
+            onClick={handleUpload}
+            className="bg-blue-500 text-white py-2 px-4 rounded mt-2"
+            disabled={uploading || !document}
+          >
+            {uploading ? "Uploading..." : "Upload"}
+          </button>
+        </div>
+    
+        {/* Guide Upload Section */}
+        <div className="mb-4 lg:ml-4 lg:w-1/2">
+          <h2 className="text-lg font-bold mb-2">Upload Guide</h2>
+          <input
+            type="file"
+            onChange={handleGuideChange}
+            className="border p-2 rounded"
+          />
+          <button
+            onClick={handleUploadGuide}
+            className="bg-blue-500 text-white py-2 px-4 rounded mt-2"
+            disabled={uploadingGuide || !guide}
+          >
+            {uploadingGuide ? "Uploading..." : "Upload"}
+          </button>
+        </div>
+      </div>
+    
+      {/* Document List Section */}
+      <div className="lg:px-32">
+        <h2 className="text-lg font-bold mb-2">Documents</h2>
+        {files.length === 0 ? (
+          <NotFound />
+        ) : (
+          <ul className="space-y-2">
+            {files.map((doc) => (
+              <li
+                key={doc.id}
+                className="flex items-center justify-between py-4 lg:px-0 lg:flex-row flex-col"
+              >
+                <div className="flex flex-col">
+                  <span className="text-blue-500">{doc.name}</span>
+                  <a
+                    href={doc.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-500 text-sm hover:text-blue-600"
                   >
-                    <div className="flex flex-col">
-                      <span className="text-blue-500">{doc.name}</span>
-                      <a
-                        href={doc.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-gray-500 text-sm hover:text-blue-600"
-                      >
-                        {doc.url}
-                      </a>
-                    </div>
-                    <button
-                      onClick={() => handleDelete(doc.name)}
-                      className="text-red-500 hover:text-red-700 m-3 "
-                    >
-                      Delete
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
-        </section>
+                    {doc.url}
+                  </a>
+                </div>
+                <button
+                  onClick={() => handleDelete(doc.name)}
+                  className="text-red-500 hover:text-red-700 m-3"
+                >
+                  Delete
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    
+      {/* Guide List Section */}
+      <div className="lg:px-32">
+        <h2 className="text-lg font-bold mb-2">Guides</h2>
+        {guides.length === 0 ? (
+          <NotFound />
+        ) : (
+          <ul className="space-y-2">
+            {guides.map((guide) => (
+              <li
+                key={guide.id}
+                className="flex items-center justify-between py-4 lg:px-0 lg:flex-row flex-col"
+              >
+                <div className="flex flex-col">
+                  <span className="text-blue-500">{guide.name}</span>
+                  <a
+                    href={guide.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-500 text-sm hover:text-blue-600"
+                  >
+                    {guide.url}
+                  </a>
+                </div>
+                <button
+                  onClick={() => handleGuideDelete(guide.name)}
+                  className="text-red-500 hover:text-red-700 m-3"
+                >
+                  Delete
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </section>
+    
       )}
     </>
   );

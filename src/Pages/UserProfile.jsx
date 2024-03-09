@@ -27,8 +27,8 @@ function App() {
       </span>
 
       <div className="flex justify-center">
-        <div className="w-full max-w-screen-xl px-4 sm:px-6 lg:px-8">
-          <fieldset className="flex flex-wrap gap-3">
+        <div className="w-full max-w-screen-xl px-4 sm:px-6 lg:px-8 border-b border-gray-300 ">
+          <fieldset className="flex flex-wrap gap-3 mb-3">
             <legend className="sr-only">Tab Options</legend>
 
             <div>
@@ -37,7 +37,7 @@ function App() {
                   activeTab === "blogs"
                     ? "bg-sky-500 text-white"
                     : "text-gray-500 hover:text-gray-700"
-                } px-3 py-2 rounded-md transition duration-100`}
+                } px-3 py-2 rounded-md transition duration-100 w-[10rem]`}
                 onClick={() => handleTabChange("blogs")}
               >
                 Blogs
@@ -50,7 +50,7 @@ function App() {
                   activeTab === "campaigns"
                     ? "bg-sky-500 text-white"
                     : "text-gray-500 hover:text-gray-700"
-                } px-3 py-2 rounded-md transition duration-100`}
+                } px-3 py-2 rounded-md transition duration-100 w-[10rem]`}
                 onClick={() => handleTabChange("campaigns")}
               >
                 Campaigns
@@ -63,7 +63,7 @@ function App() {
                   activeTab === "upcomingCampaigns"
                     ? "bg-sky-500 text-white"
                     : "text-gray-500 hover:text-gray-700"
-                } px-3 py-2 rounded-md transition duration-100`}
+                } px-3 py-2 rounded-md transition duration-100 w-[10rem]`}
                 onClick={() => handleTabChange("upcomingCampaigns")}
               >
                 Enrolled Campaigns
@@ -76,7 +76,7 @@ function App() {
                   activeTab === "certificates"
                     ? "bg-sky-500 text-white"
                     : "text-gray-500 hover:text-gray-700"
-                } px-3 py-2 rounded-md transition duration-100`}
+                } px-3 py-2 rounded-md transition duration-100 w-[10rem]`}
                 onClick={() => handleTabChange("certificates")}
               >
                 Certificate

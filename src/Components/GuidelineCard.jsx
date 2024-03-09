@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ManualCard = ({ file, handleDownload }) => {
+const GuidelineCard = ({ file, handleDownload }) => {
   return (
     <div className=" lg:w-1/2 w-full p-3 ">
       <div className="h-full p-3 flex flex-col lg:flex-row items-center  justify-center text-center sm:text-left bg-white rounded-md shadow-green-400/40 shadow-lg hover:shadow-xl hover:shadow-green-600/60">
@@ -24,4 +24,4 @@ const ManualCard = ({ file, handleDownload }) => {
   );
 };
 
-export default ManualCard;
+export default GuidelineCard;
