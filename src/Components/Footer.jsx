@@ -1,67 +1,117 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Footer() {
   return (
-    <footer class="text-gray-600 body-font">
-      <div class="container px-5 py-24 mx-auto">
-        <div class="flex flex-wrap md:text-left text-center order-first">
-          <div class="lg:w-1/4 md:w-1/2 w-full px-4">
+    <footer class="text-gray-600 body-font shadow-lg">
+      <div class="container px-5 py-5 mx-auto">
+        <div class="flex flex-wrap md:text-left text-center order-first ">
+          <div class="lg:w-1/4 md:w-1/2 w-full text  text-left">
+            <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">
+              CATEGORY
+            </h2>
+            <nav class="list-none mb-10">
+            <li>
+                <Link
+                  to="/about"
+                  className="text-gray-600 hover:text-gray-800"
+                >
+                  About Us
+                </Link>
+              </li>
+            <li>
+                <Link
+                  to="/about"
+                  className="text-gray-600 hover:text-gray-800"
+                >
+                  Contact Us
+                </Link>
+              </li>
+            <li>
+                <Link
+                  to="/stats"
+                  className="text-gray-600 hover:text-gray-800"
+                >
+                  Statistics
+                </Link>
+              </li>
+           
+            </nav>
+          </div>
+          <div class="lg:w-1/4 md:w-1/2 w-full px-4 text  text-left" >
             <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">
               OUR SERVICES
             </h2>
             <nav class="list-none mb-10">
               <li>
-                <a class="text-gray-600 hover:text-gray-800">First Link</a>
+                <Link
+                  to="/ecommerce"
+                  className="text-gray-600 hover:text-gray-800"
+                >
+                  Eco-friendly products
+                </Link>
               </li>
               <li>
-                <a class="text-gray-600 hover:text-gray-800">Second Link</a>
+                <Link to="/requestcampaign" className="text-gray-600 hover:text-gray-800">
+                  Request Campaigns
+                </Link>
               </li>
               <li>
-                <a class="text-gray-600 hover:text-gray-800">Third Link</a>
+                <Link
+                  to="/campaign"
+                  className="text-gray-600 hover:text-gray-800"
+                >
+                  Campaigns
+                </Link>
               </li>
               <li>
-                <a class="text-gray-600 hover:text-gray-800">Fourth Link</a>
+                <Link
+                  to="/guideline"
+                  className="text-gray-600 hover:text-gray-800"
+                >
+                  Guidelines
+                </Link>
               </li>
+
+            
             </nav>
           </div>
-          <div class="lg:w-1/4 md:w-1/2 w-full px-4">
+          <div class="lg:w-1/4 md:w-1/2 w-full px-4 text  text-left">
             <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">
-              CATEGORIES
+              OUR SERVICES
             </h2>
             <nav class="list-none mb-10">
               <li>
-                <a class="text-gray-600 hover:text-gray-800">First Link</a>
+                <Link
+                  to="/footprint"
+                  className="text-gray-600 hover:text-gray-800"
+                >
+                  Carbon Footprints
+                </Link>
               </li>
               <li>
-                <a class="text-gray-600 hover:text-gray-800">Second Link</a>
+                <Link
+                  to="/report"
+                  className="text-gray-600 hover:text-gray-800"
+                >
+                  Report problems
+                </Link>
               </li>
+
               <li>
-                <a class="text-gray-600 hover:text-gray-800">Third Link</a>
+                <Link to="/maps" className="text-gray-600 hover:text-gray-800">
+                  Bin locations
+                </Link>
               </li>
+
               <li>
-                <a class="text-gray-600 hover:text-gray-800">Fourth Link</a>
+                <Link to="/blogs" className="text-gray-600 hover:text-gray-800">
+                  Blogs
+                </Link>
               </li>
             </nav>
           </div>
-          <div class="lg:w-1/4 md:w-1/2 w-full px-4">
-            <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">
-              CATEGORIES
-            </h2>
-            <nav class="list-none mb-10">
-              <li>
-                <a class="text-gray-600 hover:text-gray-800">First Link</a>
-              </li>
-              <li>
-                <a class="text-gray-600 hover:text-gray-800">Second Link</a>
-              </li>
-              <li>
-                <a class="text-gray-600 hover:text-gray-800">Third Link</a>
-              </li>
-              <li>
-                <a class="text-gray-600 hover:text-gray-800">Fourth Link</a>
-              </li>
-            </nav>
-          </div>
+
           <div class="lg:w-1/4 md:w-1/2 w-full px-4">
             <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">
               SUBSCRIBE
@@ -103,7 +153,7 @@ function Footer() {
               stroke-linecap="round"
               stroke-linejoin="round"
               stroke-width="2"
-              class="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full"
+              class="w-10 my-2 h-10 text-white p-2 bg-indigo-500 rounded-full"
               viewBox="0 0 24 24"
             >
               <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
