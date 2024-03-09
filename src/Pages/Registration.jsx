@@ -86,7 +86,7 @@ export default function Registration() {
         <Navbar />
       </div>
       <div className="bg-white py-6 sm:py-8 lg:py-12">
-        <div className="mx-auto max-w-screen-2xl px-4 md:px-8">
+        <div className="mx-auto max-w-screen-xl px-4 md:px-8">
           <div className="mb-10 md:mb-16">
             <h2 className="mb-4 text-center  font-bold  font-custom text-gray-800 md:mb-6 lg:text-4xl ">
               User Details
@@ -94,7 +94,7 @@ export default function Registration() {
           </div>
 
           <form
-            className="mx-auto grid max-w-screen-lg gap-5 sm:grid-cols-2"
+            className="mx-auto grid max-w-screen-sm gap-5 sm:grid-cols-2"
             onSubmit={handleSubmit}
           >
             <div className="sm:col-span-2">
