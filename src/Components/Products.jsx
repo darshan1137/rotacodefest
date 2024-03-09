@@ -1,9 +1,109 @@
-import { useState, useEffect } from "react";
+// import { useState, useEffect } from "react";
+// import Header from "../Components/Navbar";
+// import ProductCard from "../Components/ProductCard";
+// import { db } from "../Firebase/cofig";
+// import { Link } from "react-router-dom";
+// import { collection, getDocs,limit,query } from "firebase/firestore";
+
+// function Products() {
+//   const [products, setProducts] = useState([]);
+//   const [loading, setLoading] = useState(true);
+
+//   useEffect(() => {
+//     const fetchData = async () => {
+//       try {
+//         const q = query(collection(db, "products"), limit(3));
+//         const querySnapshot = await getDocs(q);
+  
+//         const productsArray = querySnapshot.docs.map((doc) => ({
+//           id: doc.id,
+//           imageUrl: doc.data().imageUrl,
+//           ...doc.data(),
+//         }));
+        
+//         setProducts(productsArray);
+//       } catch (error) {
+//         console.error("Error fetching data:", error);
+//       } finally {
+//         setLoading(false);
+//       }
+//     };
+  
+//     fetchData();
+//   }, []);
+//   return (
+//     <section className="text-gray-600 body-font">
+//       <div className="container px-5 py-10 mx-auto">
+//         <div className="flex flex-col">
+//           <div className="h-1 bg-gray-200 rounded overflow-hidden">
+//             <div className="w-ful h-full bg-green-500"></div>
+//           </div>
+//           <div className="flex flex-col text-center w-full pt-4 mb-20">
+//           <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">
+//               Shop our Eco-friendly now
+//             </h1>
+//             <p className="lg:w-2/3 mx-auto leading-relaxed text-base text-justify xl:text-center">
+//               Embrace a Greener Lifestyle, Embody Eco-Friendly Choices;
+//               Together, Let's Nourish Our Planet, Conserve Resources, and
+//               Cultivate a Sustainable Legacy for Generations to Come.
+//             </p>
+//           </div>
+//         </div>
+//         <section className="text-gray-600 body-font">
+//         <div className="container px-15 py-7 mx-auto">
+//           <div className="flex flex-wrap -m-4 justify-center items-center ">
+//             {products.map((product) => (
+//               <div className="lg:w-1/4 md:w-1/2 p-4  w-full" key={product.id}>
+                // <div className="rounded-lg overflow-hidden px-2 py-6 shadow-md hover:shadow-xl">
+                //   <a className="block relative h-48 rounded overflow-hidden">
+                //     <img
+                //       alt="Product"
+                //       className="object-cover object-center w-full h-full block"
+                //       src={product.imageUrl}
+                //     />
+                //   </a>
+                //   <div className="mt-4">
+                //     <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">
+                //       {product.category}
+                //     </h3>
+                //     <h2 className="text-gray-900 title-font text-lg font-medium">
+                //       {product.name}
+                //     </h2>
+                //     <p className="mt-1">${product.price}</p>
+                //     <button className="mt-2 px-4 py-2 bg-green-500 text-white font-bold rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
+                //       Shop Now
+                //     </button>
+                //   </div>
+                // </div>
+//               </div>
+//             ))}
+//           </div>
+//         </div>
+//       </section>
+
+//       <div className=" m-5 flex items-center justify-center sm:col-span-2">
+//           <Link to="/ecommerce">
+//             <button
+//               type="submit"
+//               className="inline-block  rounded-lg bg-green-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-green-300 transition duration-100 hover:bg-green-600 focus-visible:ring active:bg-green-700 md:text-base"
+//             >
+//               Explore more products
+//             </button>
+//           </Link>
+//         </div>
+//       </div>
+//     </section>
+//   );
+// }
+
+// export default Products;
+import React, { useState, useEffect } from "react";
 import Header from "../Components/Navbar";
 import ProductCard from "../Components/ProductCard";
 import { db } from "../Firebase/cofig";
 import { Link } from "react-router-dom";
-import { collection, getDocs,limit,query } from "firebase/firestore";
+import { collection, getDocs, limit, query } from "firebase/firestore";
+import { motion } from "framer-motion";
 
 function Products() {
   const [products, setProducts] = useState([]);
@@ -14,13 +114,13 @@ function Products() {
       try {
         const q = query(collection(db, "products"), limit(3));
         const querySnapshot = await getDocs(q);
-  
+
         const productsArray = querySnapshot.docs.map((doc) => ({
           id: doc.id,
           imageUrl: doc.data().imageUrl,
           ...doc.data(),
         }));
-        
+console.log("fetching");
         setProducts(productsArray);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -28,9 +128,10 @@ function Products() {
         setLoading(false);
       }
     };
-  
+
     fetchData();
   }, []);
+
   return (
     <section className="text-gray-600 body-font">
       <div className="container px-5 py-10 mx-auto">
@@ -39,7 +140,7 @@ function Products() {
             <div className="w-ful h-full bg-green-500"></div>
           </div>
           <div className="flex flex-col text-center w-full pt-4 mb-20">
-          <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">
+            <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">
               Shop our Eco-friendly now
             </h1>
             <p className="lg:w-2/3 mx-auto leading-relaxed text-base text-justify xl:text-center">
@@ -50,11 +151,32 @@ function Products() {
           </div>
         </div>
         <section className="text-gray-600 body-font">
-        <div className="container px-15 py-7 mx-auto">
-          <div className="flex flex-wrap -m-4 justify-center items-center ">
-            {products.map((product) => (
-              <div className="lg:w-1/4 md:w-1/2 p-4  w-full" key={product.id}>
-                <div className="rounded-lg overflow-hidden px-2 py-6 shadow-md hover:shadow-xl">
+          <div className="container px-15 py-7 mx-auto">
+            <div className="flex flex-wrap -m-4 justify-center items-center ">
+              {products.map((product, index) => (
+                <motion.div
+                  className="lg:w-1/4 md:w-1/2 p-4 w-full"
+                  key={product.id}
+                  initial={{
+                    opacity: 0,
+                    
+                    y:50
+                  }}
+                  whileInView={{
+                    opacity: 1,
+                    y: 0, 
+                    transition: {
+                      duration: 1, 
+                      delay:index*0.2
+                    },
+                    animate:{
+                      opacity: 1,
+                      y: 0
+                    }
+                  }}
+                  viewport={{ once: false }}
+                >
+                   <div className="rounded-lg overflow-hidden px-2 py-6 shadow-md hover:shadow-xl">
                   <a className="block relative h-48 rounded overflow-hidden">
                     <img
                       alt="Product"
@@ -75,13 +197,13 @@ function Products() {
                     </button>
                   </div>
                 </div>
-              </div>
-            ))}
+                </motion.div>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <div className=" m-5 flex items-center justify-center sm:col-span-2">
+        <div className=" m-5 flex items-center justify-center sm:col-span-2">
           <Link to="/ecommerce">
             <button
               type="submit"
