@@ -6,55 +6,62 @@ import GuidelineCard from "../Components/GuidelineCard";
 
 
 function GuidelinesPage() {
-  const [files, setFiles] = useState([]);
-
+  const [manuals, setManuals] = useState([]);
+  const [guides, setGuides] = useState([]);
 
   useEffect(() => {
-    const fetchFiles = async () => {
+    const fetchManuals = async () => {
       try {
         const storage = getStorage();
-        const storageRef = ref(storage, "manuals"); 
+        const storageRef = ref(storage, "manuals");
         const res = await listAll(storageRef);
-        const promises = res.items.map(async (itemRef) => {
-          const url = await getDownloadURL(itemRef);
-          return { name: itemRef.name, url };
+        const promises = res.prefixes.map(async (manualFolderRef) => {
+          const fileList = await listAll(manualFolderRef);
+          const filePromises = fileList.items.map(async (itemRef) => {
+            const url = await getDownloadURL(itemRef);
+            return { name: itemRef.name, url };
+          });
+          const files = await Promise.all(filePromises);
+          return { name: manualFolderRef.name, files };
         });
-        const files = await Promise.all(promises);
-        setFiles(files);
+        const manuals = await Promise.all(promises);
+        setManuals(manuals);
       } catch (error) {
-        console.error("Error fetching files:", error);
+        console.error("Error fetching manuals:", error);
       }
     };
-    fetchFiles();
+    fetchManuals();
   }, []);
 
-  
-
-  const [guide, setGuide] = useState([]);
-  
-
   useEffect(() => {
-    const fetchFiles = async () => {
+    const fetchGuides = async () => {
       try {
         const storage = getStorage();
-        const storageRef = ref(storage, "guides"); 
+        const storageRef = ref(storage, "guides");
         const res = await listAll(storageRef);
-        const promises = res.items.map(async (itemRef) => {
-          const url = await getDownloadURL(itemRef);
-          return { name: itemRef.name, url };
+        const promises = res.prefixes.map(async (guideFolderRef) => {
+          const fileList = await listAll(guideFolderRef);
+          const filePromises = fileList.items.map(async (itemRef) => {
+            const url = await getDownloadURL(itemRef);
+            return { name: itemRef.name, url };
+          });
+          const files = await Promise.all(filePromises);
+          return { name: guideFolderRef.name, files };
         });
-        const files = await Promise.all(promises);
-        setGuide(files);
+        const guides = await Promise.all(promises);
+        console.log("success")
+        setGuides(guides);
       } catch (error) {
-        console.error("Error fetching files:", error);
+        console.error("Error fetching guides:", error);
       }
     };
-    fetchFiles();
+    fetchGuides();
   }, []);
 
   const handleDownload = (url) => {
     window.open(url, "_blank");
   };
+
 
 
   return (
@@ -101,16 +108,26 @@ function GuidelinesPage() {
       </div>
 
       <section className="text-gray-600 py-5 body-font flex justify-center items-center bg-white ">
-        <div className="container lg:justify-normal justify-center flex flex-wrap  ">
-         
-          
-            {guide.map((file, index) => (
-              <GuidelineCard key={index} file={file} handleDownload={handleDownload} />
-            ))}
-          
-        
-        </div>
-      </section>
+  <div className="container lg:justify-normal justify-center flex flex-wrap  ">
+    {guides.map((guide, index) => {
+  // console.log("Guide:", guide);
+  const imageFile = guide.files.find(file => file.name.endsWith('.png') || file.name.endsWith('.jpg') || file.name.endsWith('.jpeg') || file.name.endsWith('.gif'));
+  const documentFile = guide.files.find(file => file.name.endsWith('.pdf') || file.name.endsWith('.doc') || file.name.endsWith('.docx'));
+  // console.log("Image File:", imageFile);
+  // console.log("Document File:", documentFile);
+  return (
+    <GuidelineCard
+      key={index}
+      imageFile={imageFile}
+      documentFile={documentFile}
+      handleDownload={handleDownload}
+    />
+  );
+})}
+
+  </div>
+</section>
+
       {/* manuals */}
 
       <div className="w-full h-full bg-green-500"></div>
@@ -123,9 +140,21 @@ function GuidelinesPage() {
         <div className="container lg:justify-normal justify-center flex flex-wrap  ">
          
           
-            {files.map((file, index) => (
-              <ManualCard key={index} file={file} handleDownload={handleDownload} />
-            ))}
+        {manuals.map((manual, index) => {
+  // console.log("Guide:", guide);
+  const imageFile = manual.files.find(file => file.name.endsWith('.png') || file.name.endsWith('.jpg') || file.name.endsWith('.jpeg') || file.name.endsWith('.gif'));
+  const documentFile = manual.files.find(file => file.name.endsWith('.pdf') || file.name.endsWith('.doc') || file.name.endsWith('.docx'));
+  // console.log("Image File:", imageFile);
+  // console.log("Document File:", documentFile);
+  return (
+    <ManualCard
+      key={index}
+      imageFile={imageFile}
+      documentFile={documentFile}
+      handleDownload={handleDownload}
+    />
+  );
+})}
           
         
         </div>

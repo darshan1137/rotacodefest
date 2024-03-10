@@ -185,172 +185,317 @@ export default function Blogs() {
     }
   };
 
-  const [document, setDocument] = useState(null);
-  const [uploading, setUploading] = useState(false);
+  const [manualFile, setManualFile] = useState(null);
+  const [manualImageFile, setManualImageFile] = useState(null);
+  const [uploadingManual, setUploadingManual] = useState(false);
+  const [manuals, setManuals] = useState([]);
 
   const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    setDocument(file);
-  };
-
-  const handleUpload = async () => {
-    try {
-      if (!document) return;
-
-      setUploading(true);
-
-      // Upload the file to Firebase Storage
-      const storage = getStorage();
-      const storageRef = ref(storage, `manuals/${document.name}`);
-      await uploadBytes(storageRef, document);
-
-      console.log("Document uploaded to storage:", document.name);
-
-      setUploading(false);
-      setDocument(null);
-      toast.success("Document uploaded successfully!");
-    } catch (error) {
-      console.error("Error uploading document: ", error);
-      setUploading(false);
-      toast.error("Error uploading document. Please try again.");
+    const files = e.target.files;
+    if (files.length === 1) {
+      const file = files[0];
+      if (file.type.includes("image")) {
+        setManualImageFile(file);
+      } else {
+        setManualFile(file);
+      }
     }
   };
-  useEffect(() => {
-    const fetchFiles = async () => {
-      try {
-        const storage = getStorage();
-        const storageRef = ref(storage, "manuals");
-        const res = await listAll(storageRef);
-        const promises = res.items.map(async (itemRef) => {
+
+  const handleUploadManual = async () => {
+    try {
+      if (!manualFile || !manualImageFile) {
+        toast.error("Please select both a manual file and an image file.");
+        return;
+      }
+
+      setUploadingManual(true);
+
+      const manualFolderName = manualFile.name.replace(/\.[^/.]+$/, "");
+      const storage = getStorage();
+      const storageRef = ref(storage);
+      const manualFolderRef = ref(storageRef, `manuals/${manualFolderName}`);
+      const manualFilePath = ref(manualFolderRef, manualFile.name);
+      const manualImageFilePath = ref(manualFolderRef, manualImageFile.name);
+
+      await Promise.all([
+        uploadBytes(manualFilePath, manualFile),
+        uploadBytes(manualImageFilePath, manualImageFile),
+      ]);
+
+      setUploadingManual(false);
+      setManualFile(null);
+      setManualImageFile(null);
+      toast.success("Manual and image uploaded successfully!");
+      fetchManuals();
+    } catch (error) {
+      console.error("Error uploading manual and image: ", error);
+      setUploadingManual(false);
+      toast.error("Error uploading manual and image. Please try again.");
+    }
+  };
+
+  const fetchManuals = async () => {
+    try {
+      const storage = getStorage();
+      const storageRef = ref(storage, "manuals");
+      const res = await listAll(storageRef);
+      const promises = res.prefixes.map(async (folderRef) => {
+        const fileList = await listAll(folderRef);
+        const filePromises = fileList.items.map(async (itemRef) => {
           const url = await getDownloadURL(itemRef);
           return { name: itemRef.name, url };
         });
-        const files = await Promise.all(promises);
-        setFiles(files);
-      } catch (error) {
-        console.error("Error fetching files:", error);
-      }
-    };
-    fetchFiles();
-  }, []);
-
-  const handleDownload = (url) => {
-    window.open(url, "_blank");
-  };
-
-  const handleDelete = async (documentName) => {
-    try {
-      if (!documentName) {
-        console.error("Document name is undefined or null");
-        toast.error("Document name is undefined or null. Please try again.");
-        return;
-      }
-
-      // Query for the document based on its name
-      const storage = getStorage();
-      const storageRef = ref(storage, `manuals/${documentName}`);
-      const documentSnapshot = await getDownloadURL(storageRef);
-      if (!documentSnapshot) {
-        console.error("Document does not exist");
-        toast.error("Document does not exist.");
-        return;
-      }
-
-      // Delete the document
-      await deleteObject(storageRef);
-      toast.success("Document deleted successfully!");
-
-      // Fetch updated documents after deletion
-      fetchData();
+        const files = await Promise.all(filePromises);
+        return { name: folderRef.name, files };
+      });
+      const manuals = await Promise.all(promises);
+      setManuals(manuals);
     } catch (error) {
-      console.error("Error deleting document: ", error);
-      toast.error("Error deleting document. Please try again.");
+      console.error("Error fetching manuals:", error);
     }
   };
-  const [guide, setGuide] = useState(null);
+
+  const handleManualDelete = async (manualName) => {
+    try {
+      if (!manualName) {
+        console.error("Manual name is undefined or null");
+        toast.error("Manual name is undefined or null. Please try again.");
+        return;
+      }
+
+      const storage = getStorage();
+      const folderRef = ref(storage, `manuals/${manualName}`);
+
+      const listResult = await listAll(folderRef);
+
+      await Promise.all(
+        listResult.items.map(async (item) => {
+          await deleteObject(item);
+        })
+      );
+
+      await deleteObject(folderRef);
+
+      toast.success("Manual and its contents deleted successfully!");
+      fetchManuals();
+    } catch (error) {
+      console.error("Error deleting manual: ", error);
+      // if (error.code === "storage/object-not-found") {
+      //   console.error(`Manual '${manualName}' not found.`);
+      //   toast.error(`Manual '${manualName}' not found.`);
+      // } else {
+      //   console.error("Unknown error occurred while deleting manual.");
+      //   toast.error(
+      //     "Unknown error occurred while deleting manual. Please try again."
+      //   );
+      // }
+      fetchManuals();
+    }
+  };
+
+  useEffect(() => {
+    fetchManuals();
+  }, []);
+
+  // const [guide, setGuide] = useState(null);
+  // const [uploadingGuide, setUploadingGuide] = useState(false);
+  // const [guides, setGuides] = useState([]);
+
+  // const handleGuideChange = (e) => {
+  //   const file = e.target.files[0];
+  //   setGuide(file);
+  // };
+
+  // const handleUploadGuide = async () => {
+  //   try {
+  //     if (!guide) return;
+
+  //     setUploadingGuide(true);
+
+  //     // Upload the guide file to Firebase Storage
+  //     const storage = getStorage();
+  //     const storageRef = ref(storage, `guides/${guide.name}`);
+  //     await uploadBytes(storageRef, guide);
+
+  //     console.log("Guide uploaded to storage:", guide.name);
+
+  //     setUploadingGuide(false);
+  //     setGuide(null);
+  //     toast.success("Guide uploaded successfully!");
+  //   } catch (error) {
+  //     console.error("Error uploading guide: ", error);
+  //     setUploadingGuide(false);
+  //     toast.error("Error uploading guide. Please try again.");
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   const fetchGuides = async () => {
+  //     try {
+  //       const storage = getStorage();
+  //       const storageRef = ref(storage, "guides");
+  //       const res = await listAll(storageRef);
+  //       const promises = res.items.map(async (itemRef) => {
+  //         const url = await getDownloadURL(itemRef);
+  //         return { name: itemRef.name, url };
+  //       });
+  //       const guides = await Promise.all(promises);
+  //       setGuides(guides);
+  //     } catch (error) {
+  //       console.error("Error fetching guides:", error);
+  //     }
+  //   };
+  //   fetchGuides();
+  // }, []);
+
+  // const handleGuideDownload = (url) => {
+  //   window.open(url, "_blank");
+  // };
+
+  // const handleGuideDelete = async (guideName) => {
+  //   try {
+  //     if (!guideName) {
+  //       console.error("Guide name is undefined or null");
+  //       toast.error("Guide name is undefined or null. Please try again.");
+  //       return;
+  //     }
+
+  //     // Query for the guide based on its name
+  //     const storage = getStorage();
+  //     const storageRef = ref(storage, `guides/${guideName}`);
+  //     const guideSnapshot = await getDownloadURL(storageRef);
+  //     if (!guideSnapshot) {
+  //       console.error("Guide does not exist");
+  //       toast.error("Guide does not exist.");
+  //       return;
+  //     }
+
+  //     // Delete the guide
+  //     await deleteObject(storageRef);
+  //     toast.success("Guide deleted successfully!");
+
+  //     // Fetch updated guides after deletion
+  //     fetchGuides();
+  //   } catch (error) {
+  //     console.error("Error deleting guide: ", error);
+  //     toast.error("Error deleting guide. Please try again.");
+  //   }
+  // };
+  const [guideFile, setGuideFile] = useState(null);
+  const [imageFile, setImageFile] = useState(null);
   const [uploadingGuide, setUploadingGuide] = useState(false);
   const [guides, setGuides] = useState([]);
 
   const handleGuideChange = (e) => {
-    const file = e.target.files[0];
-    setGuide(file);
+        const files = e.target.files;
+    if (files.length === 1) {
+      const file = files[0];
+      if (file.type.includes("image")) {
+        setImageFile(file);
+      } else {
+        setGuideFile(file);
+      }
+    }
   };
+
 
   const handleUploadGuide = async () => {
     try {
-      if (!guide) return;
+      if (!guideFile || !imageFile) {
+        toast.error("Please select both a guide file and an image file.");
+        return;
+      }
 
       setUploadingGuide(true);
 
-      // Upload the guide file to Firebase Storage
+      const folderName = guideFile.name.replace(/\.[^/.]+$/, "");
       const storage = getStorage();
-      const storageRef = ref(storage, `guides/${guide.name}`);
-      await uploadBytes(storageRef, guide);
+      const storageRef = ref(storage);
+      const folderRef = ref(storageRef, `guides/${folderName}`);
+      const guideFilePath = ref(folderRef, guideFile.name);
+      const imageFilePath = ref(folderRef, imageFile.name);
 
-      console.log("Guide uploaded to storage:", guide.name);
+      // Upload both files simultaneously
+      await Promise.all([
+        uploadBytes(guideFilePath, guideFile),
+        uploadBytes(imageFilePath, imageFile),
+      ]);
 
       setUploadingGuide(false);
-      setGuide(null);
-      toast.success("Guide uploaded successfully!");
+      setGuideFile(null);
+      setImageFile(null);
+      toast.success("Guide and image uploaded successfully!");
+      fetchGuides()
     } catch (error) {
-      console.error("Error uploading guide: ", error);
+      console.error("Error uploading guide and image: ", error);
       setUploadingGuide(false);
-      toast.error("Error uploading guide. Please try again.");
+      toast.error("Error uploading guide and image. Please try again.");
+    }
+  };
+
+  const fetchGuides = async () => {
+    try {
+      const storage = getStorage();
+      const storageRef = ref(storage, "guides");
+      const res = await listAll(storageRef);
+      const promises = res.prefixes.map(async (folderRef) => {
+        const fileList = await listAll(folderRef);
+        const filePromises = fileList.items.map(async (itemRef) => {
+          const url = await getDownloadURL(itemRef);
+          return { name: itemRef.name, url };
+        });
+        const files = await Promise.all(filePromises);
+        return { name: folderRef.name, files };
+      });
+      const guides = await Promise.all(promises);
+      setGuides(guides);
+    } catch (error) {
+      console.error("Error fetching guides:", error);
+    }
+  };
+
+  const handleGuideDelete = async (folderName) => {
+    try {
+      if (!folderName) {
+        console.error("Folder name is undefined or null");
+        toast.error("Folder name is undefined or null. Please try again.");
+        return;
+      }
+console.log(folderName)
+      const storage = getStorage();
+      const folderRef = ref(storage, `guides/${folderName}`);
+
+      // List all items (files and subfolders) in the folder
+      const listResult = await listAll(folderRef);
+
+      // Delete all items (files and subfolders) in the folder
+      await Promise.all(
+        listResult.items.map(async (item) => {
+          await deleteObject(item);
+        })
+      );
+
+      // Finally, delete the folder itself
+      await deleteObject(folderRef);
+
+      toast.success("Folder and its contents deleted successfully!");
+      fetchGuides();
+    } catch (error) {
+      console.error("Error deleting folder: ", error);
+      // {
+      //   console.error("Unknown error occurred while deleting folder.");
+      //   toast.error(
+      //     "Unknown error occurred while deleting folder. Please try again."
+      //   );
+      // }
+      fetchGuides()
     }
   };
 
   useEffect(() => {
-    const fetchGuides = async () => {
-      try {
-        const storage = getStorage();
-        const storageRef = ref(storage, "guides");
-        const res = await listAll(storageRef);
-        const promises = res.items.map(async (itemRef) => {
-          const url = await getDownloadURL(itemRef);
-          return { name: itemRef.name, url };
-        });
-        const guides = await Promise.all(promises);
-        setGuides(guides);
-      } catch (error) {
-        console.error("Error fetching guides:", error);
-      }
-    };
     fetchGuides();
   }, []);
-
-  const handleGuideDownload = (url) => {
-    window.open(url, "_blank");
-  };
-
-  const handleGuideDelete = async (guideName) => {
-    try {
-      if (!guideName) {
-        console.error("Guide name is undefined or null");
-        toast.error("Guide name is undefined or null. Please try again.");
-        return;
-      }
-
-      // Query for the guide based on its name
-      const storage = getStorage();
-      const storageRef = ref(storage, `guides/${guideName}`);
-      const guideSnapshot = await getDownloadURL(storageRef);
-      if (!guideSnapshot) {
-        console.error("Guide does not exist");
-        toast.error("Guide does not exist.");
-        return;
-      }
-
-      // Delete the guide
-      await deleteObject(storageRef);
-      toast.success("Guide deleted successfully!");
-
-      // Fetch updated guides after deletion
-      fetchGuides();
-    } catch (error) {
-      console.error("Error deleting guide: ", error);
-      toast.error("Error deleting guide. Please try again.");
-    }
-  };
 
   return (
     <>
@@ -704,66 +849,95 @@ export default function Blogs() {
             {/* Document Upload Section */}
             <div className="mb-4 lg:mr-4 lg:w-1/2">
               <h2 className="text-lg font-bold mb-2">Upload Document</h2>
-              <input
-                type="file"
-                onChange={handleFileChange}
-                className="border p-2 rounded"
-              />
+              <div className="  p-2">
+                <h2>Doc</h2>
+                <input
+                  type="file"
+                  accept=".pdf,.doc,.docx"
+                  onChange={handleFileChange}
+                  className="p-2 border-2 rounded-lg my-2"
+                />
+                <h2>image</h2>
+
+                <input
+                  type="file"
+                  accept="image/*"
+                  className="p-2 border-2 rounded-lg my-2"
+                  onChange={handleFileChange}
+                />
+              </div>
               <button
-                onClick={handleUpload}
+                onClick={handleUploadManual}
+                disabled={uploadingManual}
                 className="bg-blue-500 text-white py-2 px-4 rounded mt-2"
-                disabled={uploading || !document}
               >
-                {uploading ? "Uploading..." : "Upload"}
+                {uploadingManual ? "Uploading..." : "Upload Manual"}
               </button>
             </div>
 
             {/* Guide Upload Section */}
-            <div className="mb-4 lg:ml-4 lg:w-1/2">
+            <div className="mb-4 lg:mr-4 lg:w-1/2">
               <h2 className="text-lg font-bold mb-2">Upload Guide</h2>
+              <div className="  p-2">
+              <h2>Doc</h2>
               <input
                 type="file"
+                accept=".pdf,.doc,.docx"
                 onChange={handleGuideChange}
-                className="border p-2 rounded"
+                className="p-2 border-2 rounded-lg my-2"
+
               />
+              <h2>Image</h2>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleGuideChange}
+                className="p-2 border-2 rounded-lg my-2"
+
+              />
+              </div>
               <button
                 onClick={handleUploadGuide}
+                disabled={uploadingGuide}
                 className="bg-blue-500 text-white py-2 px-4 rounded mt-2"
-                disabled={uploadingGuide || !guide}
               >
-                {uploadingGuide ? "Uploading..." : "Upload"}
+                {uploadingGuide ? "Uploading..." : "Upload Guide"}
               </button>
             </div>
           </div>
 
           {/* Document List Section */}
-          <div className="lg:px-32">
-            <h2 className="text-lg font-bold mb-2">Documents</h2>
-            {files.length === 0 ? (
+          <div className="lg:px-32 border-b border-gray-300">
+            <h2 className="text-lg font-bold mb-2">Manuals</h2>
+            {manuals.length === 0 ? (
               <NotFound />
             ) : (
-              <ul className="space-y-2">
-                {files.map((doc) => (
+              <ul className="space-y-4  ">
+                {manuals.map((manual, index) => (
                   <li
-                    key={doc.id}
-                    className="flex items-center justify-between py-4 lg:px-0 lg:flex-row flex-col"
+                    key={index}
+                    className="flex items-center justify-between py-4 lg:px-0 lg:flex-row flex-col "
                   >
-                    <div className="flex flex-col">
-                      <span className="text-blue-500">{doc.name}</span>
-                      <a
-                        href={doc.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-gray-500 text-sm hover:text-blue-600"
-                      >
-                        {doc.url}
-                      </a>
-                    </div>
+                    <h3>{manual.name}</h3>
+                    {manual.files.map((file, index) => (
+                      <div key={index}>
+                        <p className="text-blue-500 py-4"> {file.name}</p>
+                        <a
+                          href={file.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="bg-blue-500 text-white py-1 px-4 rounded   "
+
+                        >
+                          View File
+                        </a>
+                      </div>
+                    ))}
                     <button
-                      onClick={() => handleDelete(doc.name)}
+                      onClick={() => handleManualDelete(manual.name)}
                       className="text-red-500 hover:text-red-700 m-3"
                     >
-                      Delete
+                      Delete Manual
                     </button>
                   </li>
                 ))}
@@ -772,33 +946,36 @@ export default function Blogs() {
           </div>
 
           {/* Guide List Section */}
-          <div className="lg:px-32">
+          <div className="lg:px-32 my-4">
             <h2 className="text-lg font-bold mb-2">Guides</h2>
             {guides.length === 0 ? (
               <NotFound />
             ) : (
-              <ul className="space-y-2">
-                {guides.map((guide) => (
+              <ul className="space-y-4">
+                {guides.map((guide, index) => (
                   <li
-                    key={guide.id}
+                    key={index}
                     className="flex items-center justify-between py-4 lg:px-0 lg:flex-row flex-col"
                   >
-                    <div className="flex flex-col">
-                      <span className="text-blue-500">{guide.name}</span>
-                      <a
-                        href={guide.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-gray-500 text-sm hover:text-blue-600"
-                      >
-                        {guide.url}
-                      </a>
-                    </div>
+                    <h3>{guide.name}</h3>
+                    {guide.files.map((file, index) => (
+                      <div key={index}>
+                        <p className="text-blue-500 py-3"> {file.name}</p>
+                        <a
+                          href={file.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="bg-blue-500 text-white py-1 px-4 rounded   "
+                        >
+                          View File
+                        </a>
+                      </div>
+                    ))}
                     <button
                       onClick={() => handleGuideDelete(guide.name)}
                       className="text-red-500 hover:text-red-700 m-3"
                     >
-                      Delete
+                      Delete Guide
                     </button>
                   </li>
                 ))}
