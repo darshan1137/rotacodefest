@@ -4,10 +4,15 @@ import L from "leaflet";
 import axios from "axios";
 import "leaflet/dist/leaflet.css";
 import markerIconUrl from "leaflet/dist/images/marker-icon.png";
+import { db } from "../Firebase/cofig";
+import { collection, getDocs } from "firebase/firestore";
 
 import "leaflet-routing-machine";
 import "leaflet-routing-machine/dist/leaflet-routing-machine.css";
 import wasteCenterIcon from "../assets/office.png";
+import dustbinIcon from "../assets/dustbin.png";
+import recyclerIcon from "../assets/recycler.png"; // Import the recycler icon
+import ragPickerIcon from "../assets/ragpicker.png"; // Import the rag picker icon
 import Navbar from "./Navbar";
 import Loader from "./Loader";
 
@@ -50,29 +55,17 @@ export default function Maps() {
 
     const fetchForestLocations = async () => {
       try {
-        const forestLocationsArray = [
-          "Elephanta Caves ",
-          "seawoods grand central mall",
-          // Add more as needed
-        ];
-
-        const promises = forestLocationsArray.map(async (location) => {
-          const response = await axios.get(
-            `https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(
-              location
-            )}&key=${locationIQApiKey}`
-          );
-          const firstResult = response.data.results[0];
-          const { lat, lng } = firstResult.geometry;
-
-          return { name: location, lat, lon: lng };
-        });
-
-        const resolvedLocations = await Promise.all(promises);
-
-        setForestLocations(resolvedLocations);
+        const querySnapshot = await getDocs(collection(db, "location"));
+        const locationsArray = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          name: doc.data().name,
+          lat: doc.data().latitude,
+          lon: doc.data().longitude,
+          type: doc.data().type, // Include the type of location
+        }));
+        setForestLocations(locationsArray);
       } catch (error) {
-        console.error("Error fetching forest locations:", error);
+        console.error("Error fetching locations:", error);
       } finally {
         setLoading(false);
       }
@@ -105,6 +98,27 @@ export default function Maps() {
     popupAnchor: [1, -34],
     iconUrl:
       "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png", // Red marker icon
+  });
+
+  const dustbinMarkerIcon = new L.Icon({
+    iconUrl: dustbinIcon,
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+  });
+
+  const recyclerMarkerIcon = new L.Icon({
+    iconUrl: recyclerIcon,
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+  });
+
+  const ragPickerMarkerIcon = new L.Icon({
+    iconUrl: ragPickerIcon,
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
   });
 
   const handleLocationClick = (location) => {
@@ -145,12 +159,6 @@ export default function Maps() {
   if (loading) {
     return <Loader />;
   }
-
-  const wasteCenterMarkerIcon = L.icon({
-    iconUrl: wasteCenterIcon, // Path to the waste center icon image
-    iconSize: [50, 50], // Icon size in pixels
-    iconAnchor: [16, 32], // Position of the icon anchor relative to its top-left corner
-  });
 
   const handleMapClick = (e) => {
     const { lat, lng } = e.latlng;
@@ -197,16 +205,19 @@ export default function Maps() {
                 <Marker
                   key={index}
                   position={[location.lat, location.lon]}
-                  icon={wasteCenterMarkerIcon}
+                  icon={
+                    location.type === "Dustbins"
+                      ? dustbinMarkerIcon
+                      : location.type === "Recyclers"
+                      ? recyclerMarkerIcon
+                      : ragPickerMarkerIcon
+                  }
                 >
                   <Popup>
                     {location.name}
                     <div>
                       <a
-                        href={`https://www.google.com/maps/place/${location.name.replace(
-                          " ",
-                          "+"
-                        )}`}
+                        href={`https://www.google.com/maps/search/?api=1&query=${location.lat},${location.lon}`}
                         target="_blank"
                         rel="noopener noreferrer"
                       >
