@@ -447,33 +447,29 @@ function Footer() {
 
                 <ul className="mt-8 space-y-4 text-sm">
                   <li>
-                    <Link>
-                      <a
-                        className="text-gray-700 transition hover:text-gray-700/75"
-                        to="/products"
-                      >
-                        Eco-friendly Products
-                      </a>
+                    <Link
+                      className="text-gray-700 transition hover:text-gray-700/75"
+                      to="/ecommerce"
+                    >
+                      Eco-friendly Products
                     </Link>
                   </li>
                   <li>
-                    <Link>
-                      <a
-                        className="text-gray-700 transition hover:text-gray-700/75"
-                        to="/footprint"
-                      >
+                    <Link
+                    className="text-gray-700 transition hover:text-gray-700/75"
+                    to="/footprint">
+                     
                         Carbon Footprint Calculator
-                      </a>
+                  
                     </Link>
                   </li>
                   <li>
-                    <Link>
-                      <a
-                        className="text-gray-700 transition hover:text-gray-700/75"
-                        to="/maps"
-                      >
+                    <Link
+                     className="text-gray-700 transition hover:text-gray-700/75"
+                     to="/maps">
+                     
                         Bin Locator
-                      </a>
+                    
                     </Link>
                   </li>
 

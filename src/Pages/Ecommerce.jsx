@@ -3,6 +3,7 @@ import Header from "../Components/Navbar";
 import ProductCard from "../Components/ProductCard";
 import { db } from "../Firebase/cofig";
 import { collection, getDocs,query,where } from "firebase/firestore";
+import { Link } from "react-router-dom";
 
 function Ecommerce() {
   const [products, setProducts] = useState([]);
@@ -99,7 +100,7 @@ function Ecommerce() {
       </div>
 
       <section className="text-gray-600 body-font">
-        <div className="container px-5 py-24 mx-auto">
+        <div className="container px-5 py-15 mx-auto">
           <div className="flex flex-wrap -m-4">
             {products.map((product) => (
               <div className="lg:w-1/4 md:w-1/2 p-4  w-full" key={product.id}>
@@ -118,16 +119,45 @@ function Ecommerce() {
                     <h2 className="text-gray-900 title-font text-lg font-medium">
                       {product.name}
                     </h2>
-                    <p className="mt-1">${product.price}</p>
-                    <button className="mt-2 px-4 py-2 bg-green-500 text-white font-bold rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
-                      Shop Now
-                    </button>
+                    <p className="mt-1">Rs{product.price}</p>
+                    <button
+                        onClick={() =>
+                          (window.location.href = product.affiliatedlink)
+                        }
+                        className="mt-2 px-4 py-2 bg-green-500 text-white font-bold rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+                      >
+                        Shop Now
+                      </button>
+
                   </div>
                 </div>
               </div>
             ))}
           </div>
         </div>
+
+        <div className=" flex items-center justify-center sm:col-span-2">
+        {/* <Link to="/addblog">
+          <button
+            type="submit"
+            className="inline-block my-10 rounded-lg bg-green-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-green-300 transition duration-100 hover:bg-green-600 focus-visible:ring active:bg-green-700 md:text-base"
+          >
+            Add Product
+          </button>
+        </Link> */}
+         <div className="mb-10  mx-auto max-w-100 text-center mt-5">
+            <p className="text-green-800 sm:text-lg ">
+              Want to sell your own Eco-friendly product here?{" "}
+              <Link
+                to="/requestproduct"
+                
+                className="text-green-500 underline transition duration-100 hover:text-green-600 active:text-indigo-700"
+              >
+                Add product
+              </Link>
+            </p>
+          </div>
+      </div>
       </section>
       <section className="bg-green py-6 text-center text-white">
         <h2 className="text-3xl font-bold">

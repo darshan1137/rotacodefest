@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { db } from "../Firebase/cofig.js";
 import { addDoc, serverTimestamp, collection } from "firebase/firestore";
@@ -8,6 +8,7 @@ const RequestProduct = () => {
   const [name, setname] = useState("");
   const [price, setprice] = useState("");
   const [imageUrl, setimageUrl] = useState("");
+  const [affiliatedlink, setaffiliatedlink] = useState("");
   const [category, setcategory] = useState("");
   const navigate = useNavigate();
 
@@ -21,10 +22,11 @@ const RequestProduct = () => {
     // Validate required fields
     const name = formData.get("name");
     const price = formData.get("price");
-    const imageUrl= formData.get("imageUrl");
+    const imageUrl = formData.get("imageUrl");
     const category = formData.get("category");
+    const affiliatedlink = formData.get("affiliatedlink");
 
-    if (!name || !price || !imageUrl || !category) {
+    if (!name || !price || !imageUrl || !category || !affiliatedlink) {
       alert("Please fill out all required fields.");
       return;
     }
@@ -36,7 +38,8 @@ const RequestProduct = () => {
       useremail: useremail,
       timestamp: serverTimestamp(),
       imageUrl: imageUrl,
-      approved:false
+      affiliatedlink: affiliatedlink,
+      approved: false,
     };
 
     try {
@@ -65,7 +68,7 @@ const RequestProduct = () => {
           <div className="grid gap-8 md:grid-cols-2 lg:gap-12">
             <div className="flex flex-col items-center justify-between pt-8 text-white">
               <h2 className="mb-2 text-center text-4xl my-text font-custom font-semibold text-green-900 md:mb-4 md:text-center shadow-xl">
-                  ECO-FRIENDLY PRODUCT
+                ECO-FRIENDLY PRODUCT
               </h2>
 
               {/* <p className="mb-6 text-center sm:text-xl md:mb-8 text-green-900 font-custom2">
@@ -89,9 +92,6 @@ const RequestProduct = () => {
         </div>
       </div>
 
-
-
-
       <div className="bg-white py-6 sm:py-8 lg:py-12 mx-2 md:mx-4">
         <div className="mx-auto max-w-screen-md">
           <div className="mb-6 bg-white p-4 rounded-lg shadow-md">
@@ -100,7 +100,8 @@ const RequestProduct = () => {
             </h2>
 
             <p className="mx-auto max-w-screen-md text-center text-gray-500 md:text-lg">
-              hello
+              Discover a world of sustainable innovation and add your
+              eco-friendly product to make a positive impact!
             </p>
 
             <form
@@ -126,15 +127,14 @@ const RequestProduct = () => {
                 <label
                   htmlFor="price"
                   className="mb-2 inline-block text-sm text-gray-800 sm:text-base"
-                  >
-                  Price of the product (in dollar)
+                >
+                  Price of the product (in rupees)
                 </label>
                 <input
                   name="price"
                   className="w-full rounded border bg-gray-50 px-2 py-1 text-gray-800 outline-none ring-green-300 transition duration-100 focus:ring"
                   value={price}
                   onChange={(e) => setprice(e.target.value)}
-                  
                 />
               </div>
 
@@ -142,7 +142,7 @@ const RequestProduct = () => {
                 <label
                   htmlFor="imageUrl"
                   className="mb-2 inline-block text-sm text-gray-800 sm:text-base"
-                  >
+                >
                   Paste Image Link
                 </label>
                 <input
@@ -150,7 +150,21 @@ const RequestProduct = () => {
                   className="w-full rounded border bg-gray-50 px-2 py-1 text-gray-800 outline-none ring-green-300 transition duration-100 focus:ring"
                   value={imageUrl}
                   onChange={(e) => setimageUrl(e.target.value)}
-                  />
+                />
+              </div>
+              <div className="sm:col-span-2">
+                <label
+                  htmlFor="affiliatedlink"
+                  className="mb-2 inline-block text-sm text-gray-800 sm:text-base"
+                >
+                  Affiliated Link
+                </label>
+                <input
+                  name="affiliatedlink"
+                  className="w-full rounded border bg-gray-50 px-2 py-1 text-gray-800 outline-none ring-green-300 transition duration-100 focus:ring"
+                  value={affiliatedlink}
+                  onChange={(e) => setaffiliatedlink(e.target.value)}
+                />
               </div>
 
               <div className="sm:col-span-2">
@@ -168,7 +182,6 @@ const RequestProduct = () => {
                 />
               </div>
 
-           
               <div className="flex items-center justify-between sm:col-span-2 mt-4">
                 <button
                   type="submit"
