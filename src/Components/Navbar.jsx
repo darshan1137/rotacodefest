@@ -278,7 +278,7 @@ function Navbar() {
       <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 ">
         <div className="flex h-16 items-center justify-between">
           <div className="flex-1 md:flex md:items-center md:gap-12 flex item-center">
-            <Link to="/">
+            <Link to="/" className="ml-3 text-xl  hover:text-green-500" style={{ textDecoration: "none" }}>
               <a className="flex font-medium items-center justify-center  text-gray-900  md:mb-0">
                 {/* <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -317,7 +317,8 @@ function Navbar() {
                     />
                   </g>
                 </svg>
-                <span className="ml-3 text-xl">Waste Wise Web</span>
+                <span className="ml-3 text-xl  hover:text-green-500"
+                      style={{ textDecoration: "none" }}>Waste Wise Web</span>
               </a>
             </Link>
           </div>
@@ -389,9 +390,12 @@ function Navbar() {
                   </a>
                 </li>
                 <li>
-                  <a className="text-gray-500 transition hover:text-gray-500/75">
+                  <a >
                     {" "}
-                    <Link to="/guideline">Guides</Link>{" "}
+                    <Link to="/guideline"
+                    className="text-gray-500 hover:text-green-500"
+                    style={{ textDecoration: "none" }}
+                    >Guides</Link>{" "}
                   </a>
                 </li>
               </ul>
@@ -522,15 +526,6 @@ function Navbar() {
                     onClick={closeMenu}
                   >
                     Campaign
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/guideline"
-                    className="text-gray-500 hover:text-gray-700 "
-                    onClick={closeMenu}
-                  >
-                    Guide
                   </Link>
                 </li>
                 <li>
