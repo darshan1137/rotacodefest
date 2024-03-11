@@ -73,12 +73,10 @@ export default function Blogs() {
 
             {blogs.length === 0 ? (
               <>
-                <body class="flex flex-col justify-center items-center">
-                  <div class="flex flex-col items-center">
-                    <h1 class="text-[60px] font-extrabold text-gray-700">
-                      No Blogs
-                    </h1>
-                    <p class="text-2xl font-medium text-gray-600 mb-6">
+                <body className="flex flex-col justify-center items-center py-4 ">
+                  <div className="flex flex-col items-center">
+                    <NotFound/>
+                    <p className="text-2xl font-medium text-gray-600 mb-6">
                       Looks like you have not published any blogs yet!!!
                     </p>
                     <Link
@@ -91,12 +89,12 @@ export default function Blogs() {
                 </body>
               </>
             ) : (
-              <div className="mx-15 grid gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-8 mt-12">
+              <div className="mx-15 grid gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-8 mt-12 py-4">
                 {filteredBlogs.map((blog) => (
                   <Link
                     key={blog.id}
                     to={`/readblog/${blog.id}`}
-                    className="group relative flex flex-col overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-60 xl:h-80"
+                    className="group relative flex flex-col overflow-hidden rounded-lg  h-60 bg-gray-100 shadow-lg  xl:h-80"
                   >
                     <img
                       src={blog.imglink}

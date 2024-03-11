@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { collection, query, getDocs, where } from "firebase/firestore";
 import { db } from "../Firebase/cofig";
 import { getFirestore, Timestamp } from "firebase/firestore";
+import NotFound from './NotFound';
 
 export default function UserCampaign() {
   const [campaignData, setCampaignData] = useState([]);
@@ -51,7 +52,7 @@ export default function UserCampaign() {
 
   return (
     <>
-      <div className=" py-2 flex flex-col text-center w-full mb-5">
+      <div className=" py-2 flex flex-col text-center w-full mb-5 ">
         <h1 className="sm:text-3xl text-2xl font-medium title-font  text-gray-900">
           Campaigns Hosted by you
         </h1>
@@ -75,12 +76,10 @@ export default function UserCampaign() {
         </div>
         {campaignData.length === 0 ? (
           <>
-            <body class="flex flex-col justify-center items-center ">
+            <body class="flex flex-col justify-center items-center mx-4 py-4">
               <div class="flex flex-col items-center pb-4">
-                <h1 class="text-[60px] font-extrabold text-gray-700">
-                  No Campaigns found
-                </h1>
-                <p class="text-2xl font-medium text-gray-600 mb-6">
+              <NotFound />
+                <p class="text-xl font-medium text-gray-600 mb-6">
                   Looks like you have not hosted any campaigns yet!!!
                 </p>
                 <Link
@@ -96,9 +95,9 @@ export default function UserCampaign() {
           campaignData.map((req) => (
             <article
               key={req.id}
-              className="my-5 rounded-xl bg-white p-4 ring ring-green-50 sm:p-6 lg:p-8 "
+              className="my-5 rounded-xl bg-white p-3 ring ring-green-50  lg:p-5 "
             >
-              <div className=" my-5 flex items-start sm:gap-8">
+              <div className=" my-5 flex items-start sm:gap-8 ">
                 <div>
                   <strong className=" rounded border border-green-500 bg-green-500 px-3 py-1.5 text-[10px] font-medium text-white">
                     {req.date}

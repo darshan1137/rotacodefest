@@ -87,24 +87,24 @@ function App() {
       </div>
 
       {activeTab === "blogs" && (
-        <div className="px-20 bg-white">
+        <div className="px-4 bg-white">
           <UserBlogs />
         </div>
       )}
 
       {activeTab === "campaigns" && (
-        <div className="px-20 bg-white">
+        <div className="px-4 bg-white">
           <UserCampaign />
         </div>
       )}
 
       {activeTab === "certificates" && (
-        <div className="px-20 bg-white">
+        <div className="px-4 bg-white">
           <UserCertificates />
         </div>
       )}
       {activeTab === "upcomingCampaigns" && (
-        <div className="px-20 bg-white">
+        <div className="px-4 bg-white">
           <UserUpcomingCampaign />
         </div>
       )}

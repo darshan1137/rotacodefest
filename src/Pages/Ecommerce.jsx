@@ -99,7 +99,7 @@ function Ecommerce() {
         </div>
       </div>
 
-      <section className="text-gray-600 body-font">
+      <section className="text-gray-600 my-5 body-font">
         <div className="container px-5 py-15 mx-auto">
           <div className="flex flex-wrap -m-4">
             {products.map((product) => (

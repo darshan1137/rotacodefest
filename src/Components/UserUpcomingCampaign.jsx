@@ -8,6 +8,7 @@ import {
   getDocs,
 } from "firebase/firestore";
 import { db } from "../Firebase/cofig.js";
+import NotFound from './NotFound';
 
 export default function UserUpcomingCampaign() {
   const [campaignData, setCampaignData] = useState([]);
@@ -66,10 +67,25 @@ export default function UserUpcomingCampaign() {
         </h1>
       </div>
 
-      <div className="my-5">
-        {filteredCampaigns.map((req) => (
+      <div className="my-8 py-4 ">
+      {filteredCampaigns.length === 0 ? (
+          <>
+            <body class="flex flex-col justify-center items-center py-4  ">
+              <div class="flex flex-col justify-center pb-4">
+                <div className="mb-2">
+                <NotFound />
+                </div>
+                <p class="text-2xl font-medium text-gray-600 mb-6">
+                  Looks like you have not enrolled to any campaigns yet!!!
+                </p>
+                
+              </div>
+            </body>
+          </>
+        ) : (
+        filteredCampaigns.map((req) => (
           <article
-            className="rounded-xl bg-white p-4 ring mb-5 ring-indigo-50 sm:p-6 lg:p-8"
+            className="rounded-xl bg-white p-4 ring mb-5  ring-indigo-50 sm:p-6 lg:p-8"
             key={req.id}
           >
             <div className="flex items-start sm:gap-8">
@@ -137,7 +153,8 @@ export default function UserUpcomingCampaign() {
               </div>
             </div>
           </article>
-        ))}
+        ))
+        )}{}
       </div>
     </>
   );
