@@ -5,6 +5,7 @@ import Footer from "../Components/Footer";
 import Products from "../Components/Products";
 import Blogs from "../Components/Blogs";
 import Navbar from "../Components/Navbar";
+import FAQ from "../Components/FAQ";
 
 function LandingPage() {
   return (
@@ -14,12 +15,10 @@ function LandingPage() {
       <StatsView />
       <Products />
       <Blogs />
+      <FAQ />
       <Footer />
     </div>
-    
   );
-  
 }
-
 
 export default LandingPage;
