@@ -6,6 +6,7 @@ import Products from "../Components/Products";
 import Blogs from "../Components/Blogs";
 import Navbar from "../Components/Navbar";
 import FAQ from "../Components/FAQ";
+import Testimonial from "../Components/Testimonial";
 
 function LandingPage() {
   return (
@@ -15,6 +16,7 @@ function LandingPage() {
       <StatsView />
       <Products />
       <Blogs />
+      <Testimonial/>
       <FAQ />
       <Footer />
     </div>
