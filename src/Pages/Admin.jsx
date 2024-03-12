@@ -388,7 +388,7 @@ export default function Blogs() {
   const [guides, setGuides] = useState([]);
 
   const handleGuideChange = (e) => {
-        const files = e.target.files;
+    const files = e.target.files;
     if (files.length === 1) {
       const file = files[0];
       if (file.type.includes("image")) {
@@ -398,7 +398,6 @@ export default function Blogs() {
       }
     }
   };
-
 
   const handleUploadGuide = async () => {
     try {
@@ -426,7 +425,7 @@ export default function Blogs() {
       setGuideFile(null);
       setImageFile(null);
       toast.success("Guide and image uploaded successfully!");
-      fetchGuides()
+      fetchGuides();
     } catch (error) {
       console.error("Error uploading guide and image: ", error);
       setUploadingGuide(false);
@@ -462,7 +461,7 @@ export default function Blogs() {
         toast.error("Folder name is undefined or null. Please try again.");
         return;
       }
-console.log(folderName)
+      console.log(folderName);
       const storage = getStorage();
       const folderRef = ref(storage, `guides/${folderName}`);
 
@@ -489,7 +488,7 @@ console.log(folderName)
       //     "Unknown error occurred while deleting folder. Please try again."
       //   );
       // }
-      fetchGuides()
+      fetchGuides();
     }
   };
 
@@ -519,9 +518,9 @@ console.log(folderName)
             </div>
 
             <div className="mt-4 flex flex-col gap-4 sm:mt-0 sm:flex-row sm:items-center">
-              <button
+              <Link
                 className="inline-flex items-center justify-center gap-1.5 rounded-lg border border-gray-200 px-5 py-3 text-gray-500 transition hover:bg-gray-50 hover:text-gray-700 focus:outline-none focus:ring"
-                type="button"
+                to="/"
               >
                 <span className="text-sm font-medium"> View Website </span>
 
@@ -539,7 +538,7 @@ console.log(folderName)
                     d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
                   />
                 </svg>
-              </button>
+              </Link>
 
               <button
                 className="block rounded-lg bg-indigo-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-indigo-700 focus:outline-none focus:ring"
@@ -552,9 +551,113 @@ console.log(folderName)
         </div>
       </header>
 
-      <span class="flex items-center pb-4">
-        <span class="h-px flex-1 bg-green-500"></span>
-        <span class="h-px flex-1 bg-green-500"></span>
+      <section className="text-gray-600 body-font bg-red-200">
+        <div className="container px-5 py-4 mx-auto">
+          <div className="flex flex-col text-center w-full mb-8">
+            <h1 className="text-2xl font-bold text-gray-900 sm:text-3xl">
+              Overview
+            </h1>
+            <p className="lg:w-2/3 mx-auto leading-relaxed text-base mt-4">
+              Welcome to the Waste Wise Web Admin Dashboard. This is your
+              central hub for managing and promoting environmental awareness.
+              Explore the latest initiatives, track progress, and engage with
+              the community to make a positive impact on our environment. Let's
+              work together towards a sustainable and waste-free future!
+            </p>
+          </div>
+          <div className="flex flex-wrap -m-4 text-center">
+            <div className="p-4 md:w-1/4 sm:w-1/2 w-full">
+              <div className="border-2 border-gray-200 px-4 py-6 rounded-lg">
+                <svg
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  className="text-green-500 w-12 h-12 mb-3 inline-block"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M8 17l4 4 4-4m-4-5v9"></path>
+                  <path d="M20.88 18.09A5 5 0 0018 9h-1.26A8 8 0 103 16.29"></path>
+                </svg>
+                <h2 className="title-font font-medium text-3xl text-gray-900">
+                  2.7K
+                </h2>
+                <p className="leading-relaxed">Downloads</p>
+              </div>
+            </div>
+            <div className="p-4 md:w-1/4 sm:w-1/2 w-full">
+              <div className="border-2 border-gray-200 px-4 py-6 rounded-lg">
+                <svg
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  className="text-green-500 w-12 h-12 mb-3 inline-block"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"></path>
+                  <circle cx="9" cy="7" r="4"></circle>
+                  <path d="M23 21v-2a4 4 0 00-3-3.87m-4-12a4 4 0 010 7.75"></path>
+                </svg>
+                <h2 className="title-font font-medium text-3xl text-gray-900">
+                  1.3K
+                </h2>
+                <p className="leading-relaxed">Users</p>
+              </div>
+            </div>
+            <div className="p-4 md:w-1/4 sm:w-1/2 w-full">
+              <div className="border-2 border-gray-200 px-4 py-6 rounded-lg">
+                <svg
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  className="text-green-500 w-12 h-12 mb-3 inline-block"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M3 18v-6a9 9 0 0118 0v6"></path>
+                  <path d="M21 19a2 2 0 01-2 2h-1a2 2 0 01-2-2v-3a2 2 0 012-2h3zM3 19a2 2 0 002 2h1a2 2 0 002-2v-3a2 2 0 00-2-2H3z"></path>
+                </svg>
+                <h2 className="title-font font-medium text-3xl text-gray-900">
+                  74
+                </h2>
+                <p className="leading-relaxed">Files</p>
+              </div>
+            </div>
+            <div className="p-4 md:w-1/4 sm:w-1/2 w-full">
+              <div className="border-2 border-gray-200 px-4 py-6 rounded-lg">
+                <svg
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  className="text-green-500 w-12 h-12 mb-3 inline-block"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+                <h2 className="title-font font-medium text-3xl text-gray-900">
+                  46
+                </h2>
+                <p className="leading-relaxed">Places</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div className="flex flex-col md:flex-row">
+        <div className="w-full md:w-3/4 bg-green-500">Hi</div>
+        <div className="w-full md:w-1/4 bg-red-500">Hi</div>
+      </div>
+
+      <span className="flex items-center pb-4">
+        <span className="h-px flex-1 bg-green-500"></span>
+        <span className="h-px flex-1 bg-green-500"></span>
       </span>
 
       <div className="flex justify-center">
@@ -752,16 +855,16 @@ console.log(folderName)
                       </div>
                     </dl>
 
-                    <div class="absolute bottom-0 left-0 right-0">
-                      <span class="inline-flex -space-x-px overflow-hidden rounded-md border bg-white shadow-sm w-full rounded-b-xl border">
+                    <div className="absolute bottom-0 left-0 right-0">
+                      <span className="inline-flex -space-x-px overflow-hidden rounded-md border bg-white shadow-sm w-full rounded-b-xl border">
                         <button
-                          class="inline-block flex-1 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:relative bg-green-500"
+                          className="inline-block flex-1 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:relative bg-green-500"
                           onClick={() => approveCampaign(req.id, req.date)}
                         >
                           Approve
                         </button>
                         <button
-                          class="inline-block flex-1 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:relative bg-red-500"
+                          className="inline-block flex-1 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:relative bg-red-500"
                           onClick={() => declineCampaign(req.id)}
                         >
                           Decline
@@ -879,22 +982,20 @@ console.log(folderName)
             <div className="mb-4 lg:mr-4 lg:w-1/2">
               <h2 className="text-lg font-bold mb-2">Upload Guide</h2>
               <div className="  p-2">
-              <h2>Doc</h2>
-              <input
-                type="file"
-                accept=".pdf,.doc,.docx"
-                onChange={handleGuideChange}
-                className="p-2 border-2 rounded-lg my-2"
-
-              />
-              <h2>Image</h2>
-              <input
-                type="file"
-                accept="image/*"
-                onChange={handleGuideChange}
-                className="p-2 border-2 rounded-lg my-2"
-
-              />
+                <h2>Doc</h2>
+                <input
+                  type="file"
+                  accept=".pdf,.doc,.docx"
+                  onChange={handleGuideChange}
+                  className="p-2 border-2 rounded-lg my-2"
+                />
+                <h2>Image</h2>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleGuideChange}
+                  className="p-2 border-2 rounded-lg my-2"
+                />
               </div>
               <button
                 onClick={handleUploadGuide}
@@ -927,7 +1028,6 @@ console.log(folderName)
                           target="_blank"
                           rel="noopener noreferrer"
                           className="bg-blue-500 text-white py-1 px-4 rounded   "
-
                         >
                           View File
                         </a>
