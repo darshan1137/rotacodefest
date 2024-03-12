@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Readblog from "./Readblog";
 import Header from "../Components/Navbar.jsx";
 import { Link } from "react-router-dom";
@@ -28,6 +28,9 @@ import {
 
 import { uploadBytes } from "firebase/storage";
 import AdminRegister from "../Components/AdminRegister.jsx";
+import Chart from "../Components/Chart.jsx";
+import AdminTeam from "../Components/AdminTeam.jsx";
+import AdminStats from "../Components/AdminStats.jsx";
 
 export default function Blogs() {
   const [blogs, setBlogs] = useState([]);
@@ -36,6 +39,12 @@ export default function Blogs() {
   const username = localStorage.getItem("username");
   const [activeTab, setActiveTab] = useState("blogs");
   const [files, setFiles] = useState([]);
+
+  const targetRef = useRef();
+
+  const handleScrollToElement = () => {
+    targetRef.current.scrollIntoView({ behavior: "smooth" });
+  };
 
   const fetchData = async () => {
     //code for blogs approval section
@@ -298,90 +307,6 @@ export default function Blogs() {
     fetchManuals();
   }, []);
 
-  // const [guide, setGuide] = useState(null);
-  // const [uploadingGuide, setUploadingGuide] = useState(false);
-  // const [guides, setGuides] = useState([]);
-
-  // const handleGuideChange = (e) => {
-  //   const file = e.target.files[0];
-  //   setGuide(file);
-  // };
-
-  // const handleUploadGuide = async () => {
-  //   try {
-  //     if (!guide) return;
-
-  //     setUploadingGuide(true);
-
-  //     // Upload the guide file to Firebase Storage
-  //     const storage = getStorage();
-  //     const storageRef = ref(storage, `guides/${guide.name}`);
-  //     await uploadBytes(storageRef, guide);
-
-  //     console.log("Guide uploaded to storage:", guide.name);
-
-  //     setUploadingGuide(false);
-  //     setGuide(null);
-  //     toast.success("Guide uploaded successfully!");
-  //   } catch (error) {
-  //     console.error("Error uploading guide: ", error);
-  //     setUploadingGuide(false);
-  //     toast.error("Error uploading guide. Please try again.");
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   const fetchGuides = async () => {
-  //     try {
-  //       const storage = getStorage();
-  //       const storageRef = ref(storage, "guides");
-  //       const res = await listAll(storageRef);
-  //       const promises = res.items.map(async (itemRef) => {
-  //         const url = await getDownloadURL(itemRef);
-  //         return { name: itemRef.name, url };
-  //       });
-  //       const guides = await Promise.all(promises);
-  //       setGuides(guides);
-  //     } catch (error) {
-  //       console.error("Error fetching guides:", error);
-  //     }
-  //   };
-  //   fetchGuides();
-  // }, []);
-
-  // const handleGuideDownload = (url) => {
-  //   window.open(url, "_blank");
-  // };
-
-  // const handleGuideDelete = async (guideName) => {
-  //   try {
-  //     if (!guideName) {
-  //       console.error("Guide name is undefined or null");
-  //       toast.error("Guide name is undefined or null. Please try again.");
-  //       return;
-  //     }
-
-  //     // Query for the guide based on its name
-  //     const storage = getStorage();
-  //     const storageRef = ref(storage, `guides/${guideName}`);
-  //     const guideSnapshot = await getDownloadURL(storageRef);
-  //     if (!guideSnapshot) {
-  //       console.error("Guide does not exist");
-  //       toast.error("Guide does not exist.");
-  //       return;
-  //     }
-
-  //     // Delete the guide
-  //     await deleteObject(storageRef);
-  //     toast.success("Guide deleted successfully!");
-
-  //     // Fetch updated guides after deletion
-  //     fetchGuides();
-  //   } catch (error) {
-  //     console.error("Error deleting guide: ", error);
-  //     toast.error("Error deleting guide. Please try again.");
-  //   }
-  // };
   const [guideFile, setGuideFile] = useState(null);
   const [imageFile, setImageFile] = useState(null);
   const [uploadingGuide, setUploadingGuide] = useState(false);
@@ -543,116 +468,34 @@ export default function Blogs() {
               <button
                 className="block rounded-lg bg-indigo-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-indigo-700 focus:outline-none focus:ring"
                 type="button"
+                onClick={handleScrollToElement}
               >
-                Create Post
+                Approve Requests
               </button>
             </div>
           </div>
         </div>
       </header>
 
-      <section className="text-gray-600 body-font bg-red-200">
-        <div className="container px-5 py-4 mx-auto">
-          <div className="flex flex-col text-center w-full mb-8">
-            <h1 className="text-2xl font-bold text-gray-900 sm:text-3xl">
+      <AdminStats guides={guides.length} />
+
+      <div className="flex flex-col md:flex-row md:px-32">
+        <div className="w-full md:w-11/12">
+          <div className="bg-white w-11/12 md:w-full rounded-lg mx-auto my-4 text-center border-2 border-black">
+            <h1 className="text-2xl font-bold text-gray-900 sm:text-3xl py-6">
               Overview
             </h1>
-            <p className="lg:w-2/3 mx-auto leading-relaxed text-base mt-4">
-              Welcome to the Waste Wise Web Admin Dashboard. This is your
-              central hub for managing and promoting environmental awareness.
-              Explore the latest initiatives, track progress, and engage with
-              the community to make a positive impact on our environment. Let's
-              work together towards a sustainable and waste-free future!
-            </p>
-          </div>
-          <div className="flex flex-wrap -m-4 text-center">
-            <div className="p-4 md:w-1/4 sm:w-1/2 w-full">
-              <div className="border-2 border-gray-200 px-4 py-6 rounded-lg">
-                <svg
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  className="text-green-500 w-12 h-12 mb-3 inline-block"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M8 17l4 4 4-4m-4-5v9"></path>
-                  <path d="M20.88 18.09A5 5 0 0018 9h-1.26A8 8 0 103 16.29"></path>
-                </svg>
-                <h2 className="title-font font-medium text-3xl text-gray-900">
-                  2.7K
-                </h2>
-                <p className="leading-relaxed">Downloads</p>
-              </div>
-            </div>
-            <div className="p-4 md:w-1/4 sm:w-1/2 w-full">
-              <div className="border-2 border-gray-200 px-4 py-6 rounded-lg">
-                <svg
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  className="text-green-500 w-12 h-12 mb-3 inline-block"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"></path>
-                  <circle cx="9" cy="7" r="4"></circle>
-                  <path d="M23 21v-2a4 4 0 00-3-3.87m-4-12a4 4 0 010 7.75"></path>
-                </svg>
-                <h2 className="title-font font-medium text-3xl text-gray-900">
-                  1.3K
-                </h2>
-                <p className="leading-relaxed">Users</p>
-              </div>
-            </div>
-            <div className="p-4 md:w-1/4 sm:w-1/2 w-full">
-              <div className="border-2 border-gray-200 px-4 py-6 rounded-lg">
-                <svg
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  className="text-green-500 w-12 h-12 mb-3 inline-block"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M3 18v-6a9 9 0 0118 0v6"></path>
-                  <path d="M21 19a2 2 0 01-2 2h-1a2 2 0 01-2-2v-3a2 2 0 012-2h3zM3 19a2 2 0 002 2h1a2 2 0 002-2v-3a2 2 0 00-2-2H3z"></path>
-                </svg>
-                <h2 className="title-font font-medium text-3xl text-gray-900">
-                  74
-                </h2>
-                <p className="leading-relaxed">Files</p>
-              </div>
-            </div>
-            <div className="p-4 md:w-1/4 sm:w-1/2 w-full">
-              <div className="border-2 border-gray-200 px-4 py-6 rounded-lg">
-                <svg
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  className="text-green-500 w-12 h-12 mb-3 inline-block"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                </svg>
-                <h2 className="title-font font-medium text-3xl text-gray-900">
-                  46
-                </h2>
-                <p className="leading-relaxed">Places</p>
-              </div>
-            </div>
+            <Chart />
           </div>
         </div>
-      </section>
-
-      <div className="flex flex-col md:flex-row">
-        <div className="w-full md:w-3/4 bg-green-500">Hi</div>
-        <div className="w-full md:w-1/4 bg-red-500">Hi</div>
+        <div className="md:flex bg-white w-11/12 md:w-6/12 mx-auto my-4 text-center">
+          <div className=" md:w-11/12 mx-auto border-2 border-black rounded-lg h-full md:justify-end">
+            <h1 className="text-2xl font-bold text-gray-900 sm:text-3xl py-6">
+              Administration Team
+              <AdminTeam />
+            </h1>
+          </div>
+        </div>
       </div>
 
       <span className="flex items-center pb-4">
@@ -660,8 +503,11 @@ export default function Blogs() {
         <span className="h-px flex-1 bg-green-500"></span>
       </span>
 
-      <div className="flex justify-center">
+      <div className="flex justify-center" ref={targetRef}>
         <div className="w-full max-w-screen-xl px-4 sm:px-6 lg:px-8 border-b border-gray-300">
+          <h1 className="text-2xl font-bold text-gray-900 sm:text-3xl text-center pb-4">
+            Approval Section
+          </h1>
           <fieldset className="flex flex-wrap gap-3 mb-3">
             <legend className="sr-only">Tab Options</legend>
 
