@@ -243,20 +243,9 @@ function Footer() {
             <div>
               <div className="flex justify-center text-teal-600 sm:justify-start">
                 <div className="flex-1 md:flex md:items-center md:gap-12 flex item-center">
-                  <Link to="/">
-                    <a className="flex font-medium items-center justify-center  text-gray-900  md:mb-0">
-                      {/* <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  className="w-10 h-10 text-white p-2 bg-green-500 rounded-full"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-                </svg> */}
+                  <div>
+               
+                    <div className="flex font-medium items-center justify-center  text-gray-900  md:mb-0">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -283,16 +272,17 @@ function Footer() {
                         </g>
                       </svg>
                       <span className="ml-3 text-xl">Waste Wise Web</span>
-                    </a>
-                  </Link>
+                    </div>
+
+                    <p className="mt-6 max-w-md text-center leading-relaxed text-gray-500 sm:max-w-xs sm:text-left">
+                      Navigating Sustainability Online for a Greener Tomorrow.
+                    </p>
+                 
+                  </div>
                 </div>
               </div>
 
-              <p className="mt-6 max-w-md text-center leading-relaxed text-gray-500 sm:max-w-xs sm:text-left">
-                Navigating Sustainability Online for a Greener Tomorrow.
-              </p>
-
-              <ul className="mt-8 flex justify-center gap-6 sm:justify-start md:gap-8">
+              <ul className="mt-8 px-10 flex justify-center gap-6 sm:justify-start md:gap-8">
                 <li>
                   <a
                     href="#"
@@ -456,20 +446,18 @@ function Footer() {
                   </li>
                   <li>
                     <Link
-                    className="text-gray-700 transition hover:text-gray-700/75"
-                    to="/footprint">
-                     
-                        Carbon Footprint Calculator
-                  
+                      className="text-gray-700 transition hover:text-gray-700/75"
+                      to="/footprint"
+                    >
+                      Carbon Footprint Calculator
                     </Link>
                   </li>
                   <li>
                     <Link
-                     className="text-gray-700 transition hover:text-gray-700/75"
-                     to="/maps">
-                     
-                        Bin Locator
-                    
+                      className="text-gray-700 transition hover:text-gray-700/75"
+                      to="/maps"
+                    >
+                      Bin Locator
                     </Link>
                   </li>
 

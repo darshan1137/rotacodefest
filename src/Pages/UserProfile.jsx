@@ -5,6 +5,7 @@ import UserDetails from "../Components/UserDetails.jsx";
 import UserCampaign from "../Components/UserCampaign.jsx";
 import UserCertificates from "../Components/UserCertificates.jsx";
 import UserUpcomingCampaign from "../Components/UserUpcomingCampaign.jsx";
+import Footer from "../Components/Footer.jsx";
 
 function App() {
   const [activeTab, setActiveTab] = useState("blogs");
@@ -108,6 +109,10 @@ function App() {
           <UserUpcomingCampaign />
         </div>
       )}
+
+      <div>
+        <Footer />
+      </div>
     </>
   );
 }

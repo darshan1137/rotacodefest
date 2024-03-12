@@ -10,6 +10,7 @@ import {
 } from "firebase/firestore";
 import { db } from "../Firebase/cofig";
 import { useNavigate } from "react-router-dom";
+import Footer from "../Components/Footer";
 
 function RequestCampaign() {
   // User details state variables
@@ -412,6 +413,10 @@ function RequestCampaign() {
             </p>
           </div>
         </div>
+      </div>
+
+      <div>
+        <Footer />
       </div>
     </>
   );

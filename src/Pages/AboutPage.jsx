@@ -1,8 +1,10 @@
 import React from "react";
 import Header from "../Components/Navbar";
+import Footer from "../Components/Footer";
 
 function AboutPage() {
   return (
+    <>
     <div>
       <Header />
       <div className="py-6 sm:py-8 lg:py-12 bg-green">
@@ -282,6 +284,11 @@ function AboutPage() {
         </div>
       </div>
     </div>
+
+    <div>
+        <Footer />
+      </div>
+    </>
   );
 }
 

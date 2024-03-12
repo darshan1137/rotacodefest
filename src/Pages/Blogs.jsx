@@ -12,6 +12,7 @@ import {
   doc,
   updateDoc,
 } from "firebase/firestore";
+import Footer from "../Components/Footer.jsx";
 
 export default function Blogs() {
   const [blogs, setBlogs] = useState([]);
@@ -92,6 +93,10 @@ export default function Blogs() {
             Add blog
           </button>
         </Link>
+      </div>
+
+      <div>
+        <Footer/>
       </div>
     </>
   );

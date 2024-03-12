@@ -3,6 +3,7 @@ import { getStorage, ref, getDownloadURL,listAll } from "firebase/storage";
 import { useState,useEffect } from 'react';
 import ManualCard from "../Components/ManualCard";
 import GuidelineCard from "../Components/GuidelineCard";
+import Footer from "../Components/Footer";
 
 
 function GuidelinesPage() {
@@ -65,6 +66,7 @@ function GuidelinesPage() {
 
 
   return (
+    <>
     <div>
       <Header />
 
@@ -183,6 +185,13 @@ function GuidelinesPage() {
         </div>
       </section> */}
     </div>
+
+    <div>
+        <Footer />
+      </div>
+ 
+    
+    </>
   );
 }
 

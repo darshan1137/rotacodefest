@@ -14,6 +14,7 @@ import { getFirestore, Timestamp } from "firebase/firestore";
 import Navbar from "../Components/Navbar";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Footer from "../Components/Footer";
 
 function Campaign() {
   const [campaignData, setCampaignData] = useState([]);
@@ -270,6 +271,10 @@ function Campaign() {
             </article>
           ))}
         </div>
+      </div>
+
+      <div>
+        <Footer/>
       </div>
     </>
   );

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { db } from "../Firebase/cofig.js";
 import { addDoc, serverTimestamp, collection } from "firebase/firestore";
 import Navbar from "../Components/Navbar.jsx";
+import Footer from "../Components/Footer.jsx";
 
 const RequestProduct = () => {
   const [name, setname] = useState("");
@@ -206,6 +207,11 @@ const RequestProduct = () => {
             </form>
           </div>
         </div>
+      </div>
+
+
+      <div>
+        <Footer />
       </div>
     </>
   );

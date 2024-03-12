@@ -3,6 +3,7 @@ import Header from "../Components/Navbar";
 import "../App.css";
 import { db } from "../Firebase/cofig";
 import { doc, getDoc, setDoc } from "firebase/firestore";
+import Footer from "../Components/Footer";
 
 export default function Report() {
   const [Fname, setFName] = useState();
@@ -330,6 +331,10 @@ export default function Report() {
             </p>
           </div>
         </div>
+      </div>
+
+      <div>
+        <Footer />
       </div>
     </>
   );
