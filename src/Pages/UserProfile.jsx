@@ -26,9 +26,9 @@ function App() {
         <span class="h-px flex-1 bg-green-500"></span>
       </span>
 
-      <div className="flex justify-center">
+      <div className="flex justify-center ">
         <div className="w-full max-w-screen-xl px-4 sm:px-6 lg:px-8 border-b border-gray-300 ">
-          <fieldset className="flex flex-wrap gap-3 mb-3">
+          <fieldset className="flex flex-wrap mb-3">
             <legend className="sr-only">Tab Options</legend>
 
             <div>
