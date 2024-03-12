@@ -23,7 +23,7 @@ function AdminStats(props) {
 
   return (
     <div>
-      <section className="text-gray-600 body-font bg-red-200 md:px-28">
+      <section className="text-gray-600 body-font bg-white md:px-28">
         <div className="container px-5 py-4 mx-auto">
           <div className="flex flex-col text-center w-full mb-8">
             <h1 className="text-2xl font-bold text-gray-900 sm:text-3xl">
@@ -37,9 +37,9 @@ function AdminStats(props) {
               work together towards a sustainable and waste-free future!
             </p>
           </div>
-          <div className="flex flex-wrap -m-4 text-center mx-auto w-full">
+          <div className="flex flex-wrap -m-4 text-center justify-center mx-auto w-full">
             <div className="p-4 md:w-1/4 sm:w-1/2 w-full">
-              <div className="border-2 border-gray-200 px-4 py-6 rounded-lg">
+              <div className="border-2 border-green-600 px-4 py-6 rounded-lg">
                 <svg
                   fill="none"
                   stroke="currentColor"
@@ -60,7 +60,7 @@ function AdminStats(props) {
               </div>
             </div>
             <div className="p-4 md:w-1/4 sm:w-1/2 w-full">
-              <div className="border-2 border-gray-200 px-4 py-6 rounded-lg">
+              <div className="border-2 border-green-600 px-4 py-6 rounded-lg">
                 <svg
                   fill="none"
                   stroke="currentColor"
@@ -80,7 +80,7 @@ function AdminStats(props) {
               </div>
             </div>
             <div className="p-4 md:w-1/4 sm:w-1/2 w-full">
-              <div className="border-2 border-gray-200 px-4 py-6 rounded-lg">
+              <div className="border-2 border-green-600 px-4 py-6 rounded-lg">
                 <svg
                   fill="none"
                   stroke="currentColor"

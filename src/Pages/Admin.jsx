@@ -731,7 +731,7 @@ export default function Blogs() {
             Blogs(<NotFound />)
           ) : (
             <div className="mx-auto max-w-screen-xl sm:px-6 ">
-              <div className="flex flex-wrap -m-4 py-10">
+              <div className="flex flex-wrap -my-4 py-10">
                 {products.map((product) => (
                   <div
                     className="lg:w-1/4 md:w-1/2 p-4  w-full"
@@ -754,16 +754,17 @@ export default function Blogs() {
                         </h2>
                         <p className="mt-1">${product.price}</p>
                       </div>
+                      
+
+                      <div className="px-6">
                       <button
                         onClick={() =>
                           (window.location.href = product.affiliatedlink)
                         }
-                        className="mt-2 px-4 py-2 bg-green-500 text-white font-bold rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+                        className="m-1 px-4 py-1 bg-green-500 text-white font-bold rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
                       >
                         Shop Now
                       </button>
-
-                      <div className="m-8">
                         {product.approved === false && (
                           <div className=" bottom-4 left-4 space-y-2">
                             <button

@@ -162,7 +162,7 @@ export default function UserDetails() {
                 className="group relative flex items-center justify-center rounded bg-green-500 px-8 py-3 text-white focus:outline-none focus:ring active:bg-indigo-500 mx-auto"
                 onClick={logout}
               >
-                <span className="absolute -start-full transition-all group-hover:start-4">
+                <span className="absolute -start-full transition-all  group-hover:start-4">
                   <svg
                     className="size-5 rtl:rotate-180"
                     xmlns="http://www.w3.org/2000/svg"
