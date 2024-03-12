@@ -30,7 +30,7 @@ export default function Testimonial() {
     <>
       <div>
         <div className="h-1  rounded overflow-hidden">
-          <div className="w-3/4 h-full bg-green-500 mx-auto" ></div>
+          <div className="w-3/4 h-full bg-green-500 mx-auto"></div>
         </div>
 
         <h1 className="mt-2 p-2 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl">
@@ -39,12 +39,13 @@ export default function Testimonial() {
       </div>
 
       <Marquee pauseOnHover speed={20}>
-        <div className="max-w-screen-xl px-4 mx-auto text-center lg:py-14 lg:px-6">
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="max-w-screen-2xl  mx-auto text-center">
+        <div className="flex  py-10  px-10align-middle items-center snap-center snap-always">
             {testimonials.map((testimonial, index) => (
-              <figure
+              <div
                 key={index}
-                className="m-3 max-w-md mx-auto bg-white rounded-lg shadow-lg p-6"
+                className="m-3 bg-white rounded-lg shadow-lg p-6"
+                style={{ animationDelay: `${index * 0.2}s` }} // Delay animation for each card
               >
                 <svg
                   className="h-12 mx-auto mb-3 text-green-400 dark:text-green-600"
@@ -58,7 +59,7 @@ export default function Testimonial() {
                   ></path>
                 </svg>
                 <blockquote>
-                  <p className="text-sm font-medium text-green-900 md:text-xl">
+                  <p className="text-sm font-medium text-green-900 md:text-sm">
                     {testimonial.content}
                   </p>
                 </blockquote>
@@ -74,7 +75,7 @@ export default function Testimonial() {
                     </div>
                   </div>
                 </figcaption>
-              </figure>
+              </div>
             ))}
           </div>
         </div>
