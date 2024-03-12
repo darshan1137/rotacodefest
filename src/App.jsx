@@ -32,6 +32,7 @@ import AdminRoute from "./Components/AdminRoute";
 import CampaignSuggestion from "./Pages/CampaignSuggestion";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Error from "./Pages/Error";
+import Feedbacks from "./Pages/Feedbacks";
 
 function App() {
   // const [count, setCount] = useState(0);
@@ -61,6 +62,7 @@ function App() {
           <Route path="/requestproduct" element={<RequestProduct />} />
           <Route path="/footprint" element={<Footprint />} />
           <Route path="/certificate" element={<Certificate />} />
+          <Route path="/feedbacks" element={<Feedbacks />} />
           <Route
             path="/admin"
             element={

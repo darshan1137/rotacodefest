@@ -192,11 +192,17 @@ console.log("fetching");
                       {product.name}
                     </h2>
                     <p className="mt-1">${product.price}</p>
-                    <button className="mt-2 px-4 py-2 bg-green-500 text-white font-bold rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
-                      Shop Now
-                    </button>
+                    <button
+                        onClick={() =>
+                          (window.location.href = product.affiliatedlink)
+                        }
+                        className="mt-2 px-4 py-2 bg-green-500 text-white font-bold rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+                      >
+                        Shop Now
+                      </button>
                   </div>
                 </div>
+              
                 </motion.div>
               ))}
             </div>
