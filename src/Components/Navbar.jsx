@@ -251,6 +251,7 @@ function Navbar() {
   const [hasEmail, sethasEmail] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const navigate = useNavigate();
 
@@ -273,13 +274,24 @@ function Navbar() {
     setIsMenuOpen(false);
   };
 
+  const toggleExtra = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
-    <header className="bg-white border-b border-gray-500">
+    <header className="border-b border-gray-500" style={{ background: "#C5EBAA" }}>
+  
+  
       <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 ">
         <div className="flex h-16 items-center justify-between">
           <div className="flex-1 md:flex md:items-center md:gap-12 flex item-center">
-            <Link to="/" className="ml-3 text-xl  hover:text-green-500" style={{ textDecoration: "none" }}>
-              <a className="flex font-medium items-center justify-center  text-gray-900  md:mb-0">
+            <Link
+              to="/"
+              className="ml-3 text-xl  hover:text-green-500"
+              style={{ textDecoration: "none" }}
+            >
+              <a className="flex font-medium items-center justify-center hover:text-green-500 text-gray-900  md:mb-0"
+              style={{ textDecoration: "none" }}>
                 {/* <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -317,8 +329,12 @@ function Navbar() {
                     />
                   </g>
                 </svg>
-                <span className="ml-3 text-xl  hover:text-green-500"
-                      style={{ textDecoration: "none" }}>Waste Wise Web</span>
+                <span
+                  className="ml-3 text-xl  hover:text-green-500"
+                  style={{ textDecoration: "none" }}
+                >
+                  Waste Wise Web
+                </span>
               </a>
             </Link>
           </div>
@@ -352,18 +368,7 @@ function Navbar() {
                   </a>
                 </li>
 
-                <li>
-                  <a>
-                    {" "}
-                    <Link
-                      to="/stats"
-                      className="text-gray-500 hover:text-green-500"
-                      style={{ textDecoration: "none" }}
-                    >
-                      Statistics
-                    </Link>{" "}
-                  </a>
-                </li>
+                
 
                 <li>
                   <a>
@@ -390,13 +395,71 @@ function Navbar() {
                   </a>
                 </li>
                 <li>
-                  <a >
+                  <a>
                     {" "}
-                    <Link to="/guideline"
-                    className="text-gray-500 hover:text-green-500"
-                    style={{ textDecoration: "none" }}
-                    >Guides</Link>{" "}
+                    <Link
+                      to="/guideline"
+                      className="text-gray-500 hover:text-green-500"
+                      style={{ textDecoration: "none" }}
+                    >
+                      Guides
+                    </Link>{" "}
                   </a>
+                </li>
+                <li>
+                  <div className="relative">
+                    <div className="inline-flex items-center overflow-hidden rounded-md border  px-2"
+                    style={{ background: "#C5EBAA" }}>
+                      <a
+                        href="#"
+                        className="text-gray-500 hover:text-green-500 "
+                      >
+                        More
+                      </a>
+
+                      <button
+                        className="h-full p-2 text-gray-500 hover:text-green-500"
+                        onClick={toggleExtra}
+                      >
+                        <span className="sr-only">Menu</span>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-4 w-4"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </button>
+                    </div>
+                    {isOpen && (
+                      <div
+                        className="absolute end-0 z-10 mt-2 w-40 rounded-md border border-gray-100 bg-white shadow-lg"
+                        role="menu"
+                      >
+                        <li>
+                          <Link
+                            to="/maps"
+                            className="block py-2 px-4 text-gray-700 hover:text-green-500"
+                          >
+                            Maps
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            to="/footprint"
+                            className="block py-2 px-4 text-gray-700 hover:text-green-500"
+                          >
+                            Carbon Footprint
+                          </Link>
+                        </li>
+                      </div>
+                    )}
+                  </div>
                 </li>
               </ul>
             </nav>
@@ -503,15 +566,7 @@ function Navbar() {
                     Products
                   </Link>
                 </li>
-                <li>
-                  <Link
-                    to="/stats"
-                    className="text-gray-500 hover:text-gray-700"
-                    onClick={closeMenu}
-                  >
-                    Statistics
-                  </Link>
-                </li>
+                
 
                 <li>
                   <a className="text-gray-500 transition hover:text-gray-500/75">
@@ -538,12 +593,30 @@ function Navbar() {
                   </Link>
                 </li>
                 <li>
-                <Link
+                  <Link
                     to="/admin"
                     className="text-gray-500 hover:text-gray-700"
                     onClick={closeMenu}
                   >
                     Dashboard
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/maps"
+                    className="text-gray-500 hover:text-gray-700"
+                    onClick={closeMenu}
+                  >
+                    Maps
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/footprint"
+                    className="text-gray-500 hover:text-gray-700"
+                    onClick={closeMenu}
+                  >
+                    Carbon Footprint
                   </Link>
                 </li>
               </ul>

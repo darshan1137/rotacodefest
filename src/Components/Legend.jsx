@@ -6,7 +6,7 @@ import ewasteIcon from "../assets/ewaste.png";
 
 const Legend = () => {
   const legendContainerStyle = {
-    padding: "10px",
+  
     borderRadius: "5px",
     marginLeft: "10px", // Adjust spacing between map and legend
     height: "fit-content", // Limit height to content
@@ -35,7 +35,7 @@ const Legend = () => {
   };
 
   return (
-    <div style={legendContainerStyle}>
+    <div style={legendContainerStyle} className="px-[3rem] py-[1rem]">
 
       <div style={legendItemStyle}>
         <img src={dustbinIcon} alt="Dustbin Icon" style={legendIconStyle} />

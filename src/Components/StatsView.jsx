@@ -1,23 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { db } from "../Firebase/cofig.js";
-import {
-  collection,
-  getDocs,
-  where,
-  query,
-  getFirestore,
-  doc,
-  setDoc,
-  getDoc,
-  updateDoc,
-  deleteDoc,
-} from "firebase/firestore";
+import { db } from "../Firebase/cofig"; // Corrected import path
+import { collection, getDocs, doc } from "firebase/firestore";
+import { motion } from "framer-motion"; // Imported motion from framer-motion
 
 function StatsView() {
   const [completedCampaignsCount, setCompletedCampaignsCount] = useState(0);
   const [todayCampaignsCount, setTodayCampaignsCount] = useState(0);
   const [upcomingCampaignsCount, setUpcomingCampaignsCount] = useState(0);
-  
 
   useEffect(() => {
     const fetchCampaigns = async () => {
@@ -25,45 +14,34 @@ function StatsView() {
         const today = new Date();
         const todayDateString = today.toISOString().split("T")[0];
 
-        // Fetch today's campaign
         const campaignsCollectionRef = collection(db, "campaigns");
-        const todayDocRef = doc(campaignsCollectionRef, todayDateString);
-        const todayDocSnapshot = await getDoc(todayDocRef);
+        const campaignsSnapshot = await getDocs(campaignsCollectionRef);
 
         let todayCampaigns = 0;
         let completedCampaigns = 0;
         let upcomingCampaigns = 0;
 
-        try {
-          const campaignsSnapshot = await getDocs(campaignsCollectionRef);
+        campaignsSnapshot.forEach((doc) => {
+          const date = doc.id;
+          const count = doc.data().count || 0;
 
-          campaignsSnapshot.forEach((doc) => {
-            const date = doc.id;
-            const count = doc.data().count || 0;
-            const campaignIds = doc.data().campaign_ids || [];
-
-            if (date < todayDateString) {
-              completedCampaigns += count;
-            } else if (date > todayDateString) {
-              upcomingCampaigns += count;
-            } else {
-              todayCampaigns = count;
-            }
-          });
-        } catch (error) {
-          console.error("Error fetching upcoming campaigns:", error);
-        }
+          if (date < todayDateString) {
+            completedCampaigns += count;
+          } else if (date === todayDateString) {
+            todayCampaigns += count;
+          } else {
+            upcomingCampaigns += count;
+          }
+        });
 
         setTodayCampaignsCount(todayCampaigns);
         setCompletedCampaignsCount(completedCampaigns);
         setUpcomingCampaignsCount(upcomingCampaigns);
-        console.log(upcomingCampaignsCount);
       } catch (error) {
         console.error("Error fetching campaigns:", error);
       }
     };
 
-    // Call the fetchCampaigns function to retrieve the data
     fetchCampaigns();
   }, []);
 
@@ -85,31 +63,79 @@ function StatsView() {
               eco-friendly future.
             </p>
           </div>
-          <div className="flex flex-wrap flex-grow ">
-            <div className="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6  border-gray-200 border-opacity-60 flex-grow">
-              <h2 className="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2 text-center ">
-                Completed Campaigns
-              </h2>
-              <p className="leading-relaxed text-base mb-4 text-center text-xl md:text-4xl font-extrabold">
-                {completedCampaignsCount}
-              </p>
-            </div>
-            <div className="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-gray-200 border-opacity-60 flex-grow">
-              <h2 className="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2 text-center">
-                Open Campaigns
-              </h2>
-              <p className="leading-relaxed text-base mb-4 text-center text-xl md:text-4xl font-extrabold">
-                {todayCampaignsCount}
-              </p>
-            </div>
-            <div className="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-gray-200 border-opacity-60 flex-grow">
-              <h2 className="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2 text-center">
-                Upcoming Campaigns
-              </h2>
-              <p className="leading-relaxed text-base mb-4 text-center text-xl md:text-4xl font-extrabold">
-                {upcomingCampaignsCount}
-              </p>
-            </div>
+          <div className="flex flex-wrap justify-center">
+            <motion.div
+              className="lg:w-1/4 md:w-1/2 p-4 w-full"
+              initial={{
+                opacity: 0,
+                x: -50
+              }}
+              whileInView={{
+                opacity: 1,
+                x: 0,
+                transition: {
+                  duration: 1,
+                }
+              }}
+              viewport={{ once: false }}
+            >
+              <div className="px-8 py-6 border-gray-200 border-opacity-60">
+                <h2 className="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2 text-center">
+                  Completed Campaigns
+                </h2>
+                <p className="leading-relaxed text-base mb-4 text-center text-xl md:text-4xl font-extrabold">
+                  {completedCampaignsCount}
+                </p>
+              </div>
+            </motion.div>
+            <motion.div
+              className="lg:w-1/4 md:w-1/2 p-4 w-full"
+              initial={{
+                opacity: 0,
+                x: -50
+              }}
+              whileInView={{
+                opacity: 1,
+                x: 0,
+                transition: {
+                  duration: 1,
+                }
+              }}
+              viewport={{ once: false }}
+            >
+              <div className="px-8 py-6 border-gray-200 border-opacity-60">
+                <h2 className="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2 text-center">
+                  Open Campaigns
+                </h2>
+                <p className="leading-relaxed text-base mb-4 text-center text-xl md:text-4xl font-extrabold">
+                  {todayCampaignsCount}
+                </p>
+              </div>
+            </motion.div>
+            <motion.div
+              className="lg:w-1/4 md:w-1/2 p-4 w-full"
+              initial={{
+                opacity: 0,
+                x: -50
+              }}
+              whileInView={{
+                opacity: 1,
+                x: 0,
+                transition: {
+                  duration: 2,
+                }
+              }}
+              viewport={{ once: false }}
+            >
+              <div className="px-8 py-6 border-gray-200 border-opacity-60">
+                <h2 className="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2 text-center">
+                  Upcoming Campaigns
+                </h2>
+                <p className="leading-relaxed text-base mb-4 text-center text-xl md:text-4xl font-extrabold">
+                  {upcomingCampaignsCount}
+                </p>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -118,6 +144,7 @@ function StatsView() {
 }
 
 export default StatsView;
+
 // import React, { useState, useEffect, useRef } from "react";
 // import { db } from "../Firebase/cofig";
 // import { collection, getDocs, doc, getDoc } from "firebase/firestore";

@@ -169,23 +169,25 @@ export default function Maps() {
 
   return (
     <>
-      <div>
+      <div className="" >
         <Navbar />
       </div>
-      <div className="h-screen flex flex-col justify-center items-center bg-teal-100">
-        <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-green-900">
+      <div className="h-screen  bg-teal-100  ">
+        <div className="">
+        <h1 className="sm:text-3xl text-2xl flex flex-col justify-center items-center py-5 font-medium title-font   text-green-900">
           Explore Your Nearest Center
         </h1>
-        <div className="flex">
-          <div style={{ marginRight: "20px" }}> {/* Add space between legend and map */}
+        </div>
+        <div className="flex lg:flex-row flex-col">
+          <div className="mx-10" > {/* Add space between legend and map */}
             <Legend />
           </div>
-          <div className="relative rounded-lg shadow-xl shadow-grey-200 overflow-hidden">
+          <div className="relative rounded-lg shadow-xl flex flex-col justify-center items-center shadow-grey-200 overflow-hidden ">
             {userLocation && forestLocations.length > 0 && (
               <MapContainer
                 center={[userLocation?.lat || 0, userLocation?.lon || 0]}
-                zoom={8}
-                style={{ height: "80vh", width: "80vw" }}
+                zoom={10}
+                style={{ height: "70vh", width: "70vw" }}
                 whenCreated={(mapInstance) => {
                   mapRef.current = mapInstance;
                 }}
