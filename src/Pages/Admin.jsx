@@ -847,7 +847,7 @@ export default function Blogs() {
       {activeTab === "feedback" && (
         <section className="m-3">
           {feedbacks.length === 0 ? (
-            Feedback(<NotFound />)
+            <NotFound />
           ) : (
             <div className="flex flex-col py-10  px-10 align-middle items-center snap-center snap-always">
             {feedbacks.map((feedback, index) => (
