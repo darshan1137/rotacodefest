@@ -279,19 +279,22 @@ function Navbar() {
   };
 
   return (
-    <header className="border-b border-gray-500" style={{ background: "#C5EBAA" }}>
-  
-  
+    <header
+      className="border-b border-gray-700 md:border-b-0 md:border-none"
+      // style={{ background: "#C5EBA8" }}
+    >
       <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 ">
-        <div className="flex h-16 items-center justify-between">
+        <div className="flex h-16 items-center justify-between md:border-b-2 md:border-gray-200">
           <div className="flex-1 md:flex md:items-center md:gap-12 flex item-center">
             <Link
               to="/"
               className="ml-3 text-xl  hover:text-green-500"
               style={{ textDecoration: "none" }}
             >
-              <a className="flex font-medium items-center justify-center hover:text-green-500 text-gray-900  md:mb-0"
-              style={{ textDecoration: "none" }}>
+              <a
+                className="flex font-medium items-center justify-center hover:text-green-500 text-gray-900  md:mb-0"
+                style={{ textDecoration: "none" }}
+              >
                 {/* <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -330,7 +333,7 @@ function Navbar() {
                   </g>
                 </svg>
                 <span
-                  className="ml-3 text-xl  hover:text-green-500"
+                  className="ml-3 text-xl  hover:text-green-500 italic font-bold"
                   style={{ textDecoration: "none" }}
                 >
                   Waste Wise Web
@@ -341,7 +344,7 @@ function Navbar() {
 
           <div className="md:flex md:items-center md:gap-12">
             <nav aria-label="Global" className="hidden md:block">
-              <ul className="flex items-center gap-6 text-sm">
+              <ul className="flex items-center gap-6 text-sm uppercase">
                 <li>
                   <a>
                     {" "}
@@ -367,8 +370,6 @@ function Navbar() {
                     </Link>{" "}
                   </a>
                 </li>
-
-                
 
                 <li>
                   <a>
@@ -408,8 +409,10 @@ function Navbar() {
                 </li>
                 <li>
                   <div className="relative">
-                    <div className="inline-flex items-center overflow-hidden rounded-md border  px-2"
-                    style={{ background: "#C5EBAA" }}>
+                    <div
+                      className="inline-flex items-center overflow-hidden rounded-md   px-2"
+                      // style={{ background: "#C5EBAA" }}
+                    >
                       <a
                         href="#"
                         className="text-gray-500 hover:text-green-500 "
@@ -566,7 +569,6 @@ function Navbar() {
                     Products
                   </Link>
                 </li>
-                
 
                 <li>
                   <a className="text-gray-500 transition hover:text-gray-500/75">
