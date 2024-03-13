@@ -31,11 +31,13 @@ import AdminRegister from "../Components/AdminRegister.jsx";
 import Chart from "../Components/Chart.jsx";
 import AdminTeam from "../Components/AdminTeam.jsx";
 import AdminStats from "../Components/AdminStats.jsx";
+import Feedback from "react-bootstrap/esm/Feedback.js";
 
 export default function Blogs() {
   const [blogs, setBlogs] = useState([]);
   const [campaigns, setCampaigns] = useState([]);
   const [products, setProducts] = useState([]);
+  const [feedbacks, setFeedbacks] = useState([]);
   const username = localStorage.getItem("username");
   const [activeTab, setActiveTab] = useState("blogs");
   const [files, setFiles] = useState([]);
@@ -73,7 +75,7 @@ export default function Blogs() {
       }));
       setCampaigns(campaignData);
 
-      // Code for product Request Section
+      // Code for feedback Request Section
       const productQuery = query(
         collection(getFirestore(), "products"),
         where("approved", "==", false)
@@ -85,9 +87,21 @@ export default function Blogs() {
       }));
       // console.log(productData);
       setProducts(productData);
-    } catch (error) {
-      console.error("Error fetching campaigns:", error);
-    }
+    
+    const feedbackQuery = query(
+      collection(getFirestore(), "feedback"),
+      where("approved", "==", false)
+    );
+    const feedbackSnapshot = await getDocs(feedbackQuery);
+    const feedbackData = feedbackSnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+    // console.log(productData);
+    setFeedbacks(feedbackData);
+  } catch (error) {
+    console.error("Error fetching campaigns:", error);
+  }
   };
 
   useEffect(() => {
@@ -191,6 +205,32 @@ export default function Blogs() {
       toast.error("product discarded!", 1000);
     } catch (error) {
       console.error("Error discarding product:", error);
+    }
+  };
+
+  const approveFeedback = async (feedbackId) => {
+    try {
+      const feedbackRef = doc(db, "feedback", feedbackId);
+      await updateDoc(feedbackRef, {
+        approved: true,
+      });
+
+      fetchData();
+      toast.success("feedback approved!", 1000);
+    } catch (error) {
+      console.error("Error approving feedback:", error);
+    }
+  };
+
+  const discardFeedback = async (feedbackId) => {
+    try {
+      const feedbackRef = doc(db, "feedback", feedbackId);
+      await deleteDoc(feedbackRef);
+
+      fetchData();
+      toast.error("feedback discarded!", 1000);
+    } catch (error) {
+      console.error("Error discarding feedback:", error);
     }
   };
 
@@ -553,6 +593,19 @@ export default function Blogs() {
             <div>
               <button
                 className={`${
+                  activeTab === "feedback"
+                    ? "bg-sky-500 text-white"
+                    : "text-gray-500 hover:text-gray-700"
+                } px-3 py-2 rounded-md transition duration-100 w-[10rem]`}
+                onClick={() => handleTabChange("feedback")}
+              >
+                Feedback Approval
+              </button>
+            </div>
+
+            <div>
+              <button
+                className={`${
                   activeTab === "documents"
                     ? "bg-sky-500 text-white"
                     : "text-gray-500 hover:text-gray-700"
@@ -790,6 +843,71 @@ export default function Blogs() {
           )}
         </section>
       )}
+
+      {activeTab === "feedback" && (
+        <section className="m-3">
+          {feedbacks.length === 0 ? (
+            Feedback(<NotFound />)
+          ) : (
+            <div className="flex flex-col py-10  px-10 align-middle items-center snap-center snap-always">
+            {feedbacks.map((feedback, index) => (
+              <div
+                key={index}
+                className="m-3 bg-white rounded-lg shadow-lg p-6"
+                style={{ animationDelay: `${index * 0.2}s` }} // Delay animation for each card
+              >
+                <svg
+                  className="h-12 mx-auto mb-3 text-green-400 dark:text-green-600"
+                  viewBox="0 0 24 27"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M14.017 18L14.017 10.609C14.017 4.905 17.748 1.039 23 0L23.995 2.151C21.563 3.068 20 5.789 20 8H24V18H14.017ZM0 18V10.609C0 4.905 3.748 1.038 9 0L9.996 2.151C7.563 3.068 6 5.789 6 8H9.983L9.983 18L0 18Z"
+                    fill="currentColor"
+                  ></path>
+                </svg>
+                <blockquote>
+                  <p className="text-sm font-medium text-green-900 md:text-sm">
+                    {feedback.content}
+                  </p>
+                </blockquote>
+                <figcaption className="flex items-center justify-center mt-6 space-x-3">
+                  <img
+                    className="w-6 h-6 rounded-full"
+                    src={feedback.imgLink}
+                    alt="profile picture"
+                  />
+                  <div className="flex items-center divide-x-2 divide-green-500 ">
+                    <div className="pr-3 font-medium text-gray-900 ">
+                      {feedback.authname}
+                    </div>
+                  </div>
+
+                  {feedback.approved === false && (
+                          <div className=" bottom-4 left-4 space-y-2">
+                            <button
+                              className="px-2 py-1 m-1 bg-green-500 text-white rounded-md"
+                              onClick={() => approveFeedback(feedback.id)}
+                            >
+                              Approve
+                            </button>
+                            <button
+                              className="px-2 py-1  m-1 bg-red-500 text-white rounded-md"
+                              onClick={() => discardFeedback(feedback.id)}
+                            >
+                              Discard
+                            </button>
+                          </div>
+                        )}
+                </figcaption>
+              </div>
+            ))}
+          </div>
+          )}
+        </section>
+      )}
+
 
       {activeTab === "admin" && <AdminRegister />}
 
