@@ -87,21 +87,21 @@ export default function Blogs() {
       }));
       // console.log(productData);
       setProducts(productData);
-    
-    const feedbackQuery = query(
-      collection(getFirestore(), "feedback"),
-      where("approved", "==", false)
-    );
-    const feedbackSnapshot = await getDocs(feedbackQuery);
-    const feedbackData = feedbackSnapshot.docs.map((doc) => ({
-      id: doc.id,
-      ...doc.data(),
-    }));
-    // console.log(productData);
-    setFeedbacks(feedbackData);
-  } catch (error) {
-    console.error("Error fetching campaigns:", error);
-  }
+
+      const feedbackQuery = query(
+        collection(getFirestore(), "feedback"),
+        where("approved", "==", false)
+      );
+      const feedbackSnapshot = await getDocs(feedbackQuery);
+      const feedbackData = feedbackSnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      // console.log(productData);
+      setFeedbacks(feedbackData);
+    } catch (error) {
+      console.error("Error fetching campaigns:", error);
+    }
   };
 
   useEffect(() => {
@@ -519,7 +519,7 @@ export default function Blogs() {
 
       <AdminStats guides={guides.length} />
 
-      <div className="flex flex-col md:flex-row md:px-32">
+      <div className="flex flex-col md:flex-row lg:px-32 md:px-32">
         <div className="w-full md:w-11/12">
           <div className="bg-white w-11/12 md:w-full rounded-lg mx-auto my-4 text-center border-2 border-black">
             <h1 className="text-2xl font-bold text-gray-900 sm:text-3xl py-6">
@@ -679,13 +679,13 @@ export default function Blogs() {
                     {blog.status === "notapproved" && (
                       <div className="absolute bottom-4 left-4 space-y-2">
                         <button
-                          className="px-2 py-1 m-1 bg-green-500 text-white rounded-md"
+                          className="px-2 py-1 m-1 bg-green-500 hover:bg-green-600 text-white rounded-md"
                           onClick={() => handleApprove(blog.id)}
                         >
                           Approve
                         </button>
                         <button
-                          className="px-2 py-1 m-1 bg-red-500 text-white rounded-md"
+                          className="px-2 py-1 m-1 bg-red-500 hover:bg-red-600 text-white rounded-md"
                           onClick={() => handleDiscard(blog.id)}
                         >
                           Discard
@@ -757,13 +757,13 @@ export default function Blogs() {
                     <div className="absolute bottom-0 left-0 right-0">
                       <span className="inline-flex -space-x-px overflow-hidden rounded-md border bg-white shadow-sm w-full rounded-b-xl border">
                         <button
-                          className="inline-block flex-1 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:relative bg-green-500"
+                          className="inline-block flex-1 px-4 py-2 text-sm font-medium text-gray-700  focus:relative bg-green-500 hover:bg-green-600"
                           onClick={() => approveCampaign(req.id, req.date)}
                         >
                           Approve
                         </button>
                         <button
-                          className="inline-block flex-1 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:relative bg-red-500"
+                          className="inline-block flex-1 px-4 py-2 text-sm font-medium text-gray-700  focus:relative bg-red-500 hover:bg-red-600"
                           onClick={() => declineCampaign(req.id)}
                         >
                           Decline
@@ -807,27 +807,26 @@ export default function Blogs() {
                         </h2>
                         <p className="mt-1">${product.price}</p>
                       </div>
-                      
 
                       <div className="px-6">
-                      <button
-                        onClick={() =>
-                          (window.location.href = product.affiliatedlink)
-                        }
-                        className="m-1 px-4 py-1 bg-green-500 text-white font-bold rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
-                      >
-                        Shop Now
-                      </button>
+                        <button
+                          onClick={() =>
+                            (window.location.href = product.affiliatedlink)
+                          }
+                          className="m-1 px-4 py-1 bg-green-500 text-white font-bold rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+                        >
+                          Shop Now
+                        </button>
                         {product.approved === false && (
                           <div className=" bottom-4 left-4 space-y-2">
                             <button
-                              className="px-2 py-1 m-1 bg-green-500 text-white rounded-md"
+                              className="px-2 py-1 m-1 bg-green-500 hover:bg-green-600 text-white rounded-md"
                               onClick={() => approveProduct(product.id)}
                             >
                               Approve
                             </button>
                             <button
-                              className="px-2 py-1  m-1 bg-red-500 text-white rounded-md"
+                              className="px-2 py-1  m-1 bg-red-500 hover:bg-red-600 text-white rounded-md"
                               onClick={() => discardProduct(product.id)}
                             >
                               Discard
@@ -849,65 +848,64 @@ export default function Blogs() {
           {feedbacks.length === 0 ? (
             <NotFound />
           ) : (
-            <div className="flex flex-col py-10  px-10 align-middle items-center snap-center snap-always">
-            {feedbacks.map((feedback, index) => (
-              <div
-                key={index}
-                className="m-3 bg-white rounded-lg shadow-lg p-6"
-                style={{ animationDelay: `${index * 0.2}s` }} // Delay animation for each card
-              >
-                <svg
-                  className="h-12 mx-auto mb-3 text-green-400 dark:text-green-600"
-                  viewBox="0 0 24 27"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
+            <div className="flex flex-col py-10 lg:px-32  align-middle items-center snap-center snap-always">
+              {feedbacks.map((feedback, index) => (
+                <div
+                  key={index}
+                  className="m-3 bg-white rounded-lg shadow-lg p-6"
+                  style={{ animationDelay: `${index * 0.2}s` }} // Delay animation for each card
                 >
-                  <path
-                    d="M14.017 18L14.017 10.609C14.017 4.905 17.748 1.039 23 0L23.995 2.151C21.563 3.068 20 5.789 20 8H24V18H14.017ZM0 18V10.609C0 4.905 3.748 1.038 9 0L9.996 2.151C7.563 3.068 6 5.789 6 8H9.983L9.983 18L0 18Z"
-                    fill="currentColor"
-                  ></path>
-                </svg>
-                <blockquote>
-                  <p className="text-sm font-medium text-green-900 md:text-sm">
-                    {feedback.content}
-                  </p>
-                </blockquote>
-                <figcaption className="flex items-center justify-center mt-6 space-x-3">
-                  <img
-                    className="w-6 h-6 rounded-full"
-                    src={feedback.imgLink}
-                    alt="profile picture"
-                  />
-                  <div className="flex items-center divide-x-2 divide-green-500 ">
-                    <div className="pr-3 font-medium text-gray-900 ">
-                      {feedback.authname}
+                  <svg
+                    className="h-12 mx-auto mb-3 text-green-400 dark:text-green-600"
+                    viewBox="0 0 24 27"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M14.017 18L14.017 10.609C14.017 4.905 17.748 1.039 23 0L23.995 2.151C21.563 3.068 20 5.789 20 8H24V18H14.017ZM0 18V10.609C0 4.905 3.748 1.038 9 0L9.996 2.151C7.563 3.068 6 5.789 6 8H9.983L9.983 18L0 18Z"
+                      fill="currentColor"
+                    ></path>
+                  </svg>
+                  <blockquote>
+                    <p className="text-sm font-medium text-green-900 md:text-sm">
+                      {feedback.content}
+                    </p>
+                  </blockquote>
+                  <figcaption className="flex items-center justify-center mt-6 space-x-3">
+                    <img
+                      className="w-6 h-6 rounded-full"
+                      src={feedback.imgLink}
+                      alt="profile picture"
+                    />
+                    <div className="flex items-center divide-x-2 divide-green-500 ">
+                      <div className="pr-3 font-medium text-gray-900 ">
+                        {feedback.authname}
+                      </div>
                     </div>
-                  </div>
 
-                  {feedback.approved === false && (
-                          <div className=" bottom-4 left-4 space-y-2">
-                            <button
-                              className="px-2 py-1 m-1 bg-green-500 text-white rounded-md"
-                              onClick={() => approveFeedback(feedback.id)}
-                            >
-                              Approve
-                            </button>
-                            <button
-                              className="px-2 py-1  m-1 bg-red-500 text-white rounded-md"
-                              onClick={() => discardFeedback(feedback.id)}
-                            >
-                              Discard
-                            </button>
-                          </div>
-                        )}
-                </figcaption>
-              </div>
-            ))}
-          </div>
+                    {feedback.approved === false && (
+                      <div className=" bottom-4 left-4 space-y-2">
+                        <button
+                          className="px-2 py-1 m-1 bg-green-500 hover:bg-green-600 text-white rounded-md"
+                          onClick={() => approveFeedback(feedback.id)}
+                        >
+                          Approve
+                        </button>
+                        <button
+                          className="px-2 py-1  m-1 bg-red-500 hover:bg-red-600 text-white rounded-md"
+                          onClick={() => discardFeedback(feedback.id)}
+                        >
+                          Discard
+                        </button>
+                      </div>
+                    )}
+                  </figcaption>
+                </div>
+              ))}
+            </div>
           )}
         </section>
       )}
-
 
       {activeTab === "admin" && <AdminRegister />}
 
@@ -915,60 +913,124 @@ export default function Blogs() {
         <section className="container mx-auto lg:px-32 px-4 py-8">
           <div className="flex flex-col lg:flex-row justify-between mb-4 lg:px-32 border-b ">
             {/* Document Upload Section */}
-            <div className="mb-4 lg:mr-4 lg:w-1/2">
-              <h2 className="text-lg font-bold mb-2">Upload Document</h2>
+            <div className="mb-4 lg:mr-4 lg:w-1/2 ">
+              <h2 className="text-lg font-bold mb-2 flex justify-center">Upload Manuals</h2>
               <div className="  p-2">
-                <h2>Doc</h2>
-                <input
+                <div className="flex  items-center flex-col lg:flex-row justify-center bg-grey-lighter">
+                  <div className="p-2">
+                    <label className="w-64 flex flex-col items-center px-4 py-6 bg-white text-blue rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-blue hover:text-green-500">
+                      <svg
+                        className="w-8 h-8"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                      >
+                        <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
+                      </svg>
+                      <span className="mt-2 text-base leading-normal">
+                        Select file
+                      </span>
+                      <input
                   type="file"
                   accept=".pdf,.doc,.docx"
                   onChange={handleFileChange}
-                  className="p-2 border-2 rounded-lg my-2"
+                  className="hidden"
                 />
-                <h2>image</h2>
-
-                <input
+                    </label>
+                  </div>
+                  <div className="px-2">
+                    <label className="w-64 flex flex-col items-center px-4 py-6 bg-white text-blue rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-blue hover:text-green-500">
+                      <svg
+                        className="w-8 h-8"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                      >
+                        <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
+                      </svg>
+                      <span className="mt-2 text-base leading-normal">
+                        Select image
+                      </span>
+                      <input
                   type="file"
                   accept="image/*"
-                  className="p-2 border-2 rounded-lg my-2"
+                  className="hidden"
                   onChange={handleFileChange}
                 />
+                    </label>
+                  </div>
+                </div>
               </div>
+              <div className="flex justify-center">
               <button
                 onClick={handleUploadManual}
                 disabled={uploadingManual}
-                className="bg-blue-500 text-white py-2 px-4 rounded mt-2"
+                className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded mt-2"
               >
                 {uploadingManual ? "Uploading..." : "Upload Manual"}
               </button>
+              </div>
             </div>
+          
 
             {/* Guide Upload Section */}
-            <div className="mb-4 lg:mr-4 lg:w-1/2">
-              <h2 className="text-lg font-bold mb-2">Upload Guide</h2>
+            <div className="mb-4 lg:mr-4 lg:w-1/2 ">
+              <h2 className="text-lg font-bold mb-2 flex justify-center">Upload Guide</h2>
               <div className="  p-2">
-                <h2>Doc</h2>
-                <input
-                  type="file"
-                  accept=".pdf,.doc,.docx"
-                  onChange={handleGuideChange}
-                  className="p-2 border-2 rounded-lg my-2"
-                />
-                <h2>Image</h2>
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={handleGuideChange}
-                  className="p-2 border-2 rounded-lg my-2"
-                />
+                <div className="flex  items-center justify-center flex-col lg:flex-row bg-grey-lighter">
+                  <div className="p-2">
+                    <label className="w-64 flex flex-col items-center px-4 py-6 bg-white text-blue rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-blue hover:text-green-500">
+                      <svg
+                        className="w-8 h-8"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                      >
+                        <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
+                      </svg>
+                      <span className="mt-2 text-base leading-normal">
+                        Select file
+                      </span>
+                      <input
+                        type="file"
+                        accept=".pdf,.doc,.docx"
+                        onChange={handleGuideChange}
+                        className="hidden"
+                      />
+                    </label>
+                  </div>
+                  <div className="px-2">
+                    <label className="w-64 flex flex-col items-center px-4 py-6 bg-white text-blue rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-blue hover:text-green-500">
+                      <svg
+                        className="w-8 h-8"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                      >
+                        <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
+                      </svg>
+                      <span className="mt-2 text-base leading-normal">
+                        Select image
+                      </span>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={handleGuideChange}
+                        className="hidden "
+                      />
+                    </label>
+                  </div>
+                </div>
               </div>
+              <div className="flex justify-center">
               <button
                 onClick={handleUploadGuide}
                 disabled={uploadingGuide}
-                className="bg-blue-500 text-white py-2 px-4 rounded mt-2"
+                className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded mt-2 "
               >
                 {uploadingGuide ? "Uploading..." : "Upload Guide"}
               </button>
+              </div>
             </div>
           </div>
 
@@ -978,21 +1040,22 @@ export default function Blogs() {
             {manuals.length === 0 ? (
               <NotFound />
             ) : (
-              <ul className="space-y-4  ">
+              <ul className="space-y-4    ">
                 {manuals.map((manual, index) => (
                   <li
                     key={index}
-                    className="flex items-center justify-between py-4 lg:px-0 lg:flex-row flex-col "
+                    className="flex items-center justify-between py-4 lg:px-0 lg:flex-row flex-col my-2 border rounded-md px-4 shadow-md hover:shadow-xl"
                   >
                     <h3>{manual.name}</h3>
                     {manual.files.map((file, index) => (
-                      <div key={index}>
-                        <p className="text-blue-500 py-4"> {file.name}</p>
+                      <div key={index}
+                      className="flex  items-center justify-center flex-col  ">
+                        <p className="text-blue-500 py-3"> {file.name}</p>
                         <a
                           href={file.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="bg-blue-500 text-white py-1 px-4 rounded   "
+                          className="bg-blue-500 text-white py-1 px-4 rounded hover:bg-blue-600  "
                         >
                           View File
                         </a>
@@ -1016,21 +1079,21 @@ export default function Blogs() {
             {guides.length === 0 ? (
               <NotFound />
             ) : (
-              <ul className="space-y-4">
+              <ul className="space-y-4  ">
                 {guides.map((guide, index) => (
                   <li
                     key={index}
-                    className="flex items-center justify-between py-4 lg:px-0 lg:flex-row flex-col"
+                    className="flex items-center justify-between py-4 lg:px-0 lg:flex-row flex-col my-2 border rounded-md px-4  shadow-md hover:shadow-xl"
                   >
                     <h3>{guide.name}</h3>
                     {guide.files.map((file, index) => (
-                      <div key={index}>
+                      <div key={index} className="flex  items-center justify-center flex-col ">
                         <p className="text-blue-500 py-3"> {file.name}</p>
                         <a
                           href={file.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="bg-blue-500 text-white py-1 px-4 rounded   "
+                          className="bg-blue-500 text-white py-1 px-4 rounded hover:bg-blue-600  "
                         >
                           View File
                         </a>

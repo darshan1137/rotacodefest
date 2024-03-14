@@ -105,7 +105,7 @@ function GuidelinesPage() {
         </div>
 
         <section className="text-gray-600 py-5 body-font flex justify-center items-center bg-white ">
-          <div className="container lg:justify-normal justify-center flex flex-wrap  ">
+          <div className="container lg:justify-normal justify-center flex flex-wrap lg:px-32   ">
             {guides.map((guide, index) => {
               // console.log("Guide:", guide);
               const imageFile = guide.files.find(
@@ -144,7 +144,7 @@ function GuidelinesPage() {
           </h1>
         </div>
         <section className="text-gray-600 py-5 body-font flex justify-center items-center bg-green ">
-          <div className="container lg:justify-normal justify-center flex flex-wrap  ">
+          <div className="container lg:justify-normal justify-center flex flex-wrap lg:px-32">
             {manuals.map((manual, index) => {
               // console.log("Guide:", guide);
               const imageFile = manual.files.find(

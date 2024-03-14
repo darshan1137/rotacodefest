@@ -144,7 +144,6 @@ function Footprint() {
               value={electricityUsage}
               onChange={(e) => setElectricityUsage(e.target.value)}
               className="w-full rounded border border-solid border-green-800 bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-green-100 transition duration-100 focus:ring"
-              required
               min="0"
             />
           </div>
@@ -157,7 +156,7 @@ function Footprint() {
               value={gasUsage}
               onChange={(e) => setGasUsage(e.target.value)}
               className="w-full rounded border border-solid border-green-800 bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-green-100 transition duration-100 focus:ring"
-              required
+              
               min="0"
             />
           </div>
@@ -170,7 +169,7 @@ function Footprint() {
               value={carMiles}
               onChange={(e) => setCarMiles(e.target.value)}
               className="w-full rounded border border-solid border-green-800 bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-green-100 transition duration-100 focus:ring"
-              required
+              
               min="0"
             />
           </div>
@@ -183,7 +182,7 @@ function Footprint() {
               value={publicTransportMiles}
               onChange={(e) => setPublicTransportMiles(e.target.value)}
               className="w-full rounded border border-solid border-green-800 bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-green-100 transition duration-100 focus:ring"
-              required
+              
               min="0"
             />
           </div>
@@ -196,7 +195,7 @@ function Footprint() {
               value={airTravelMiles}
               onChange={(e) => setAirTravelMiles(e.target.value)}
               className="w-full rounded border border-solid border-green-800 bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-green-100 transition duration-100 focus:ring"
-              required
+              
               min="0"
             />
           </div>
@@ -209,7 +208,7 @@ function Footprint() {
               value={meatConsumption}
               onChange={(e) => setMeatConsumption(e.target.value)}
               className="w-full rounded border border-solid border-green-800 bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-green-100 transition duration-100 focus:ring"
-              required
+              
               min="0"
             />
           </div>
@@ -222,7 +221,7 @@ function Footprint() {
               value={foodMiles}
               onChange={(e) => setFoodMiles(e.target.value)}
               className="w-full rounded border border-solid border-green-800 bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-green-100 transition duration-100 focus:ring"
-              required
+              
               min="0"
             />
           </div>
@@ -235,7 +234,7 @@ function Footprint() {
               value={landfillWaste}
               onChange={(e) => setLandfillWaste(e.target.value)}
               className="w-full rounded border border-solid border-green-800 bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-green-100 transition duration-100 focus:ring"
-              required
+              
               min="0"
             />
           </div>
@@ -248,7 +247,7 @@ function Footprint() {
               value={recyclingWaste}
               onChange={(e) => setRecyclingWaste(e.target.value)}
               className="w-full rounded border border-solid border-green-800 bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-green-100 transition duration-100 focus:ring"
-              required
+              
               min="0"
             />
           </div>
@@ -261,7 +260,7 @@ function Footprint() {
               value={shoppingHabits}
               onChange={(e) => setShoppingHabits(e.target.value)}
               className="w-full rounded border border-solid border-green-800 bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-green-100 transition duration-100 focus:ring"
-              required
+              
               min="0"
               max={10}
             />
@@ -275,7 +274,7 @@ function Footprint() {
               value={applianceUsage}
               onChange={(e) => setApplianceUsage(e.target.value)}
               className="w-full rounded border border-solid border-green-800 bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-green-100 transition duration-100 focus:ring"
-              required
+              
               min="0"
               max={10}
             />

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { collection, getDocs, query, getFirestore } from "firebase/firestore";
+import { motion } from "framer-motion";
 
 function AdminStats(props) {
   const [userCount, setuserCount] = useState(0);
@@ -38,7 +39,10 @@ function AdminStats(props) {
             </p>
           </div>
           <div className="flex flex-wrap -m-4 text-center justify-center mx-auto w-full">
-            <div className="p-4 md:w-1/4 sm:w-1/2 w-full">
+            <motion.div className="p-4 md:w-1/4 sm:w-1/2 w-full" 
+            whileHover={{
+              scale: 1.05 // Scale effect on hover
+            }}>
               <div className="border-2 border-green-600 px-4 py-6 rounded-lg">
                 <svg
                   fill="none"
@@ -58,8 +62,11 @@ function AdminStats(props) {
                 </h2>
                 <p className="leading-relaxed">Users</p>
               </div>
-            </div>
-            <div className="p-4 md:w-1/4 sm:w-1/2 w-full">
+            </motion.div>
+            <motion.div className="p-4 md:w-1/4 sm:w-1/2 w-full" 
+            whileHover={{
+              scale: 1.05 // Scale effect on hover
+            }}>
               <div className="border-2 border-green-600 px-4 py-6 rounded-lg">
                 <svg
                   fill="none"
@@ -78,8 +85,11 @@ function AdminStats(props) {
                 </h2>
                 <p className="leading-relaxed">Campaigns</p>
               </div>
-            </div>
-            <div className="p-4 md:w-1/4 sm:w-1/2 w-full">
+            </motion.div>
+            <motion.div className="p-4 md:w-1/4 sm:w-1/2 w-full" 
+            whileHover={{
+              scale: 1.05 // Scale effect on hover
+            }}>
               <div className="border-2 border-green-600 px-4 py-6 rounded-lg">
                 <svg
                   fill="none"
@@ -97,7 +107,7 @@ function AdminStats(props) {
                 </h2>
                 <p className="leading-relaxed">Guides</p>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
