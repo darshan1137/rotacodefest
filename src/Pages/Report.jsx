@@ -319,7 +319,7 @@ export default function Report() {
             </div>
           </form>
 
-          <div className=" mx-auto max-w-100 text-center mt-5">
+          {/* <div className=" mx-auto max-w-100 text-center mt-5">
             <p className="text-green-800 sm:text-lg ">
               Already reported a problem?{" "}
               <a
@@ -329,7 +329,7 @@ export default function Report() {
                 Check progress
               </a>
             </p>
-          </div>
+          </div> */}
         </div>
       </div>
 
