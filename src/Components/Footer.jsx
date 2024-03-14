@@ -546,7 +546,7 @@ function Footer() {
                         />
                       </svg>
 
-                      <span className="flex-1 text-gray-700">john@doe.com</span>
+                      <span className="flex-1 text-gray-700">wastewiseweb@gmail.com</span>
                     </a>
                   </li>
 
@@ -596,7 +596,7 @@ function Footer() {
                     </svg>
 
                     <address className="-mt-0.5 flex-1 not-italic text-gray-700">
-                      213 Lane, London, United Kingdom
+                      Vesit , Chembur, Mumbai - 400074
                     </address>
                   </li>
                 </ul>

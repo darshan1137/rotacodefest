@@ -7,7 +7,7 @@ function FAQ() {
           <div className="w-3/4 py-2 h-full bg-green-500 mx-auto" ></div>
         </div>
   
-    <div className=" md:px-8 lg:px-16 xl:px-32">
+    <div className=" md:px-8 lg:px-16 xl:px-32 py-5">
       
       <h1 className="mt-2 p-3 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl">
         FAQs Section

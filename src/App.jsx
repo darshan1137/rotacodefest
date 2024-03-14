@@ -44,25 +44,115 @@ function App() {
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/about" element={<AboutPage />} />
-          <Route path="/ecommerce" element={<Ecommerce />} />
+          <Route
+            path="/ecommerce"
+            element={
+              <ProtectedRoute user={username} route="/login">
+                <Ecommerce />{" "}
+              </ProtectedRoute>
+            }
+          />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUpPage />} />
-          <Route path="/register" element={<Registration />} />
+          <Route
+            path="/register"
+            element={
+              <ProtectedRoute user={username} route="/login">
+                <Registration />{" "}
+              </ProtectedRoute>
+            }
+          />
           <Route path="/stats" element={<Stats />} />
           <Route path="/report" element={<Report />} />
-          <Route path="/guideline" element={<GuidelinesPage />} />
-          <Route path="/blogs" element={<Blogs />} />
-          <Route path="/readblog/:id" element={<Readblog />} />
-          <Route path="/addblog" element={<AddBlog />} />
-          <Route path="/profile" element={<UserProfile />} />
-          <Route path="/requestcampaign" element={<RequestCampaign />} />
-          <Route path="/maps" element={<Maps />} />
-          <Route path="/maps" element={<Loader />} />
+          <Route
+            path="/guideline"
+            element={
+              <ProtectedRoute user={username} route="/login">
+                <GuidelinesPage />{" "}
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/blogs"
+            element={
+              <ProtectedRoute user={username} route="/login">
+                <Blogs />{" "}
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/readblog/:id"
+            element={
+              <ProtectedRoute user={username} route="/login">
+                <Readblog />{" "}
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/addblog"
+            element={
+              <ProtectedRoute user={username} route="/login">
+                <AddBlog />{" "}
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute user={username} route="/login">
+                <UserProfile />{" "}
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/requestcampaign"
+            element={
+              <ProtectedRoute user={username} route="/login">
+                <RequestCampaign />{" "}
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/maps"
+            element={
+              <ProtectedRoute user={username} route="/login">
+                <Maps />{" "}
+              </ProtectedRoute>
+            }
+          />
           <Route path="/loader" element={<Loader />} />
-          <Route path="/requestproduct" element={<RequestProduct />} />
-          <Route path="/footprint" element={<Footprint />} />
-          <Route path="/certificate" element={<Certificate />} />
-          <Route path="/feedbacks" element={<Feedbacks />} />
+          <Route
+            path="/requestproduct"
+            element={
+              <ProtectedRoute user={username} route="/login">
+                <RequestProduct />{" "}
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/footprint"
+            element={
+              <ProtectedRoute user={username} route="/login">
+                <Footprint />{" "}
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/certificate"
+            element={
+              <ProtectedRoute user={username} route="/login">
+                <Certificate />{" "}
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/feedbacks"
+            element={
+              <ProtectedRoute user={username} route="/login">
+                <Feedbacks />{" "}
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="/admin"
             element={
@@ -71,8 +161,22 @@ function App() {
               </AdminRoute>
             }
           />
-          <Route path="/campaign/:id" element={<VolunteerList />} />
-          <Route path="/campaignsuggestions" element={<CampaignSuggestion />} />
+          <Route
+            path="/campaign/:id"
+            element={
+              <ProtectedRoute user={username} route="/login">
+                <VolunteerList />{" "}
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/campaignsuggestions"
+            element={
+              <ProtectedRoute user={username} route="/login">
+                <CampaignSuggestion />{" "}
+              </ProtectedRoute>
+            }
+          />
 
           <Route
             path="/campaign"

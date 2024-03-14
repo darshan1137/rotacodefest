@@ -411,18 +411,20 @@ function Navbar() {
                   <div className="relative">
                     <div
                       className="inline-flex items-center overflow-hidden rounded-md   px-2"
+                      onClick={toggleExtra}
                       // style={{ background: "#C5EBAA" }}
                     >
                       <a
                         href="#"
                         className="text-gray-500 hover:text-green-500 "
+                        style={{ textDecoration: "none" }}
+                        
                       >
                         More
-                      </a>
+                      
 
                       <button
-                        className="h-full p-2 text-gray-500 hover:text-green-500"
-                        onClick={toggleExtra}
+                        className="h-full px-2 text-gray-500 hover:text-green-500"
                       >
                         <span className="sr-only">Menu</span>
                         <svg
@@ -438,6 +440,7 @@ function Navbar() {
                           />
                         </svg>
                       </button>
+                      </a>
                     </div>
                     {isOpen && (
                       <div
@@ -448,14 +451,18 @@ function Navbar() {
                           <Link
                             to="/maps"
                             className="block py-2 px-4 text-gray-700 hover:text-green-500"
+                            style={{ textDecoration: "none" }}
+
                           >
-                            Maps
+                            Bin Locator
                           </Link>
                         </li>
                         <li>
                           <Link
                             to="/footprint"
                             className="block py-2 px-4 text-gray-700 hover:text-green-500"
+                            style={{ textDecoration: "none" }}
+
                           >
                             Carbon Footprint
                           </Link>

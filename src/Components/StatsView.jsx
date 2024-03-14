@@ -70,6 +70,9 @@ function StatsView() {
                 opacity: 0,
                 x: -50
               }}
+              whileHover={{
+                scale: 1.05 // Scale effect on hover
+              }}
               whileInView={{
                 opacity: 1,
                 x: 0,
@@ -94,6 +97,9 @@ function StatsView() {
                 opacity: 0,
                 x: -50
               }}
+              whileHover={{
+                scale: 1.05 // Scale effect on hover
+              }}
               whileInView={{
                 opacity: 1,
                 x: 0,
@@ -117,6 +123,9 @@ function StatsView() {
               initial={{
                 opacity: 0,
                 x: -50
+              }}
+              whileHover={{
+                scale: 1.05 // Scale effect on hover
               }}
               whileInView={{
                 opacity: 1,

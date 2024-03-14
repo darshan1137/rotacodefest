@@ -48,12 +48,12 @@ function Blogs() {
             Articles in Our Blog Section.
           </h1>
         </div>
-        <div className="flex flex-wrap -m-4 m-5 grid gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-3 xl:grid-cols-3 xl:gap-8 justify-center items-center mx-auto px-10">
+        <div className="  m-5 grid gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-3 xl:grid-cols-3 xl:gap-8 justify-center items-center mx-auto px-10">
           {blogs.map((blog) => (
             <Link
               key={blog.id}
               to={`/readblog/${blog.id}`}
-              className="group relative m-3 flex h-20 sm:h-40 flex-col overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-50 xl:h-80 mx-2 md:mx-3"
+              className="group relative m-3 flex h-48 sm:h-40 flex-col overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-50 xl:h-80 mx-2 md:mx-3"
             >
               <img
                 src={blog.imglink}
