@@ -16,6 +16,7 @@ import ewasteIcon from "../assets/ewaste.png"; // Import the ewaste icon
 import Navbar from "./Navbar";
 import Loader from "./Loader";
 import Legend from "./Legend";
+import Footer from "./Footer";
 
 export default function Maps() {
   const locationIQApiKey = "cade239a09f94860b75b287e661359cc";
@@ -78,9 +79,7 @@ export default function Maps() {
   useEffect(() => {
     if (mapRef.current) {
       L.Routing.control({
-        waypoints: [
-          L.latLng(userLocation?.lat || 0, userLocation?.lon || 0),
-        ],
+        waypoints: [L.latLng(userLocation?.lat || 0, userLocation?.lon || 0)],
         router: new L.Routing.osrmv1({
           serviceUrl: "https://router.project-osrm.org/route/v1",
         }),
@@ -169,20 +168,26 @@ export default function Maps() {
 
   return (
     <>
-      <div className="" >
+      <div className="">
         <Navbar />
       </div>
-      <div className="h-screen  bg-teal-100  ">
-        <div className="">
-        <h1 className="sm:text-3xl text-2xl flex flex-col justify-center items-center py-5 font-medium title-font   text-green-900">
-          Explore Your Nearest Center
-        </h1>
+      <div className="h-screen" style={{ background: "#E2F5D2" }}>
+        <div className="mx-auto text-center md:w-8/12 py-4">
+          <h2 className="text-3xl font-bold sm:text-4xl ">Bin Locator</h2>
+
+          <p className="mt-4">
+            A digital tool facilitating efficient waste management by
+            pinpointing the locations of various bins for different types of
+            waste, including dustbins, recycling bins, e-waste bins, and areas
+            frequented by rag picker
+          </p>
         </div>
-        <div className="flex lg:flex-row flex-col">
-          <div className="mx-10" > {/* Add space between legend and map */}
+        <div className="flex lg:flex-row flex-col pt-3">
+          <div className="mx-10 border-2 border-black w-1/6 rounded-lg bg-white">
+            {" "}
             <Legend />
           </div>
-          <div className="relative rounded-lg shadow-xl flex flex-col justify-center items-center shadow-grey-200 overflow-hidden ">
+          <div className="relative rounded-lg shadow-xl flex flex-col justify-center items-center shadow-grey-200 overflow-hidden mx-auto border-2 border-black">
             {userLocation && forestLocations.length > 0 && (
               <MapContainer
                 center={[userLocation?.lat || 0, userLocation?.lon || 0]}
@@ -244,6 +249,7 @@ export default function Maps() {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 }

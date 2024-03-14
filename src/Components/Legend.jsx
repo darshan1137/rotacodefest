@@ -2,11 +2,10 @@ import React from "react";
 import dustbinIcon from "../assets/dustbin.png";
 import recyclerIcon from "../assets/recycler.png";
 import ragPickerIcon from "../assets/ragpicker.png";
-import ewasteIcon from "../assets/ewaste.png"; 
+import ewasteIcon from "../assets/ewaste.png";
 
 const Legend = () => {
   const legendContainerStyle = {
-  
     borderRadius: "5px",
     marginLeft: "10px", // Adjust spacing between map and legend
     height: "fit-content", // Limit height to content
@@ -35,8 +34,10 @@ const Legend = () => {
   };
 
   return (
-    <div style={legendContainerStyle} className="px-[3rem] py-[1rem]">
-
+    <div className="px-[3rem] py-[1rem]">
+      <div className="text-center">
+        <h1 className="font-bold text-gray-800 mb-2 py-2">Explore Blogs</h1>
+      </div>
       <div style={legendItemStyle}>
         <img src={dustbinIcon} alt="Dustbin Icon" style={legendIconStyle} />
         <span style={legendTextStyle}>Dustbins</span>
@@ -50,10 +51,13 @@ const Legend = () => {
         <span style={legendTextStyle}>Ewaste Bin</span>
       </div>
       <div style={legendItemStyle}>
-        <img src={ragPickerIcon} alt="Rag Picker Icon" style={legendIconStyle} />
+        <img
+          src={ragPickerIcon}
+          alt="Rag Picker Icon"
+          style={legendIconStyle}
+        />
         <span style={legendTextStyle}>Rag Pickers</span>
       </div>
-      
     </div>
   );
 };

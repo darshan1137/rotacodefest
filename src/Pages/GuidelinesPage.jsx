@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import ManualCard from "../Components/ManualCard";
 import GuidelineCard from "../Components/GuidelineCard";
 import Footer from "../Components/Footer";
-import Loader from './../Components/Loader';
+import Loader from "./../Components/Loader";
 
 function GuidelinesPage() {
   const [manuals, setManuals] = useState([]);
@@ -30,14 +30,12 @@ function GuidelinesPage() {
         setManuals(manuals);
       } catch (error) {
         console.error("Error fetching manuals:", error);
-      }finally {
+      } finally {
         setLoading(false);
       }
-      
     };
     fetchManuals();
   }, []);
-  
 
   useEffect(() => {
     const fetchGuides = async () => {
@@ -59,7 +57,7 @@ function GuidelinesPage() {
         setGuides(guides);
       } catch (error) {
         console.error("Error fetching guides:", error);
-      }finally {
+      } finally {
         setLoading(false);
       }
     };
@@ -78,7 +76,10 @@ function GuidelinesPage() {
         <Header />
 
         <section className="text-gray-600 body-font bg-green w-ful h-full flex justify-center items-center">
-          <div className="container p-10 py-20 mx-auto flex flex-col lg:flex-row items-center justify-center">
+          <div
+            className="container p-10 py-20 mx-auto flex flex-col lg:flex-row items-center justify-center md:px-24"
+            style={{ background: "#E2F5D2" }}
+          >
             <div className="lg:w-1/2 lg:px-10 px-5 mb-10 lg:mb-0">
               <img
                 className="object-cover object-center rounded-lg mx-auto lg:mx-0 w-ful"
@@ -87,18 +88,21 @@ function GuidelinesPage() {
               />
             </div>
             <div className="lg:w-1/2 lg:pl-10 lg:pr-5 md:pl-16 flex flex-col items-center justify-center text-center  h-full">
-              <h1 className="title-font sm:text-4xl text-4xl p-5 mb-4 font-medium text-white font-custom2 ">
-                Green solution at your fingertips
-              </h1>
-              <p className="mb-6 sm:text-xl md:mb-8 text-green-300 font-custom2">
-                "Welcome to our sustainable waste management initiative! We
-                believe that small actions today can create a cleaner, healthier
-                environment for generations to come."{" "}
-              </p>
+              <div className="mx-auto text-center md:w-12/12 py-4">
+                <h2 className="text-3xl font-bold sm:text-4xl text-lime-950">
+                  Green solution at your fingertips
+                </h2>
+
+                <p className="mt-4">
+                  Welcome to our sustainable waste management initiative! We
+                  believe that small actions today can create a cleaner,
+                  healthier environment for generations to come.{" "}
+                </p>
+              </div>
               <div className="flex justify-center lg:justify-start px-6">
-                <button className="px-4 py-2 bg-green-500 text-white font-bold rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
+                {/* <button className="px-4 py-2 bg-green-500 text-white font-bold rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
                   Guide Me{" "}
-                </button>
+                </button> */}
                 {/* <button className="ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg">Button</button> */}
               </div>
             </div>
@@ -106,10 +110,10 @@ function GuidelinesPage() {
         </section>
         {/* guidelines */}
         <div className="h-1 bg-gray-200 rounded overflow-hidden">
-          <div className="w-full h-full bg-green-500"></div>
+          <div className="mx-auto md:w-10/12 h-full bg-green-500"></div>
         </div>
         <div className="flex flex-col text-center mt-10 w-full justify-center items-center">
-          <h1 className="text-3xl font-medium title-font text-gray-900 tracking-widest border-b-2 border-green-500 pb-2 mb-4">
+          <h1 className="text-3xl font-bold sm:text-4xl border-b-2 border-green-500 pb-2 mb-4">
             Guidelines
           </h1>
         </div>
@@ -147,43 +151,49 @@ function GuidelinesPage() {
 
         {/* manuals */}
 
-        <div className="w-full h-full bg-green-500"></div>
-        <div className="flex flex-col text-center bg-green pt-10 mt-10 w-full justify-center items-center border-t-4 border-green-500">
-          <h1 className="text-3xl font-medium title-font text-green-500 tracking-widest border-b-2 border-green-500 pb-2 mb-4">
-            Manuals
-          </h1>
+        <div className="h-1 bg-gray-200 rounded overflow-hidden">
+          <div className="mx-auto md:w-10/12 h-full bg-green-500"></div>
         </div>
-        <section className="text-gray-600 py-5 body-font flex justify-center items-center bg-green ">
-          <div className="container lg:justify-normal justify-center flex flex-wrap lg:px-32">
-            {manuals.map((manual, index) => {
-              // console.log("Guide:", guide);
-              const imageFile = manual.files.find(
-                (file) =>
-                  file.name.endsWith(".png") ||
-                  file.name.endsWith(".jpg") ||
-                  file.name.endsWith(".jpeg") ||
-                  file.name.endsWith(".gif")
-              );
-              const documentFile = manual.files.find(
-                (file) =>
-                  file.name.endsWith(".pdf") ||
-                  file.name.endsWith(".doc") ||
-                  file.name.endsWith(".docx")
-              );
-              // console.log("Image File:", imageFile);
-              // console.log("Document File:", documentFile);
-              return (
-                <ManualCard
-                  key={index}
-                  imageFile={imageFile}
-                  documentFile={documentFile}
-                  handleDownload={handleDownload}
-                />
-              );
-            })}
+        <div style={{ background: "#E2F5D2" }}>
+          <div className="flex flex-col text-center pt-10 w-full justify-center items-center">
+            <h1 className="text-3xl font-bold sm:text-4xl border-b-2 border-green-500 pb-2 mb-4">
+              Manuals
+            </h1>
           </div>
-        </section>
-        {/* <section>
+          <section
+            className="text-gray-600 py-5 body-font flex justify-center items-center"
+            // style={{ background: "#E2F5D2" }}
+          >
+            <div className="container lg:justify-normal justify-center flex flex-wrap lg:px-32">
+              {manuals.map((manual, index) => {
+                // console.log("Guide:", guide);
+                const imageFile = manual.files.find(
+                  (file) =>
+                    file.name.endsWith(".png") ||
+                    file.name.endsWith(".jpg") ||
+                    file.name.endsWith(".jpeg") ||
+                    file.name.endsWith(".gif")
+                );
+                const documentFile = manual.files.find(
+                  (file) =>
+                    file.name.endsWith(".pdf") ||
+                    file.name.endsWith(".doc") ||
+                    file.name.endsWith(".docx")
+                );
+                // console.log("Image File:", imageFile);
+                // console.log("Document File:", documentFile);
+                return (
+                  <ManualCard
+                    key={index}
+                    imageFile={imageFile}
+                    documentFile={documentFile}
+                    handleDownload={handleDownload}
+                  />
+                );
+              })}
+            </div>
+          </section>
+          {/* <section>
         <div className="container px-5 py-10 mx-auto">
           <h1>my manuals</h1>
           <div className="flex flex-wrap -m-4">
@@ -206,6 +216,7 @@ function GuidelinesPage() {
           </div>
         </div>
       </section> */}
+        </div>
       </div>
 
       <div>
