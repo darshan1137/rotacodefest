@@ -4,10 +4,12 @@ import { useState, useEffect } from "react";
 import ManualCard from "../Components/ManualCard";
 import GuidelineCard from "../Components/GuidelineCard";
 import Footer from "../Components/Footer";
+import Loader from './../Components/Loader';
 
 function GuidelinesPage() {
   const [manuals, setManuals] = useState([]);
   const [guides, setGuides] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchManuals = async () => {
@@ -28,10 +30,14 @@ function GuidelinesPage() {
         setManuals(manuals);
       } catch (error) {
         console.error("Error fetching manuals:", error);
+      }finally {
+        setLoading(false);
       }
+      
     };
     fetchManuals();
   }, []);
+  
 
   useEffect(() => {
     const fetchGuides = async () => {
@@ -53,6 +59,8 @@ function GuidelinesPage() {
         setGuides(guides);
       } catch (error) {
         console.error("Error fetching guides:", error);
+      }finally {
+        setLoading(false);
       }
     };
     fetchGuides();
@@ -61,7 +69,9 @@ function GuidelinesPage() {
   const handleDownload = (url) => {
     window.open(url, "_blank");
   };
-
+  if (loading) {
+    return <Loader />;
+  }
   return (
     <>
       <div>

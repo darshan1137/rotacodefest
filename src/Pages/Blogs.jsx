@@ -13,9 +13,11 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import Footer from "../Components/Footer.jsx";
+import Loader from "../Components/Loader.jsx";
 
 export default function Blogs() {
   const [blogs, setBlogs] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,11 +34,18 @@ export default function Blogs() {
         setBlogs(blogsData);
       } catch (error) {
         console.error("Error fetching blogs:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchData();
   }, []);
+
+  if (loading) {
+    return <Loader />;
+  }
+
   return (
     <>
       <div>
@@ -96,7 +105,7 @@ export default function Blogs() {
       </div>
 
       <div>
-        <Footer/>
+        <Footer />
       </div>
     </>
   );

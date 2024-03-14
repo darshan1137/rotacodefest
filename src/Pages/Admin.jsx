@@ -25,6 +25,7 @@ import {
   getDownloadURL,
   listAll,
 } from "firebase/storage";
+import Loader from "../Components/Loader.jsx";
 
 import { uploadBytes } from "firebase/storage";
 import AdminRegister from "../Components/AdminRegister.jsx";
@@ -41,6 +42,7 @@ export default function Blogs() {
   const username = localStorage.getItem("username");
   const [activeTab, setActiveTab] = useState("blogs");
   const [files, setFiles] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const targetRef = useRef();
 
@@ -101,6 +103,8 @@ export default function Blogs() {
       setFeedbacks(feedbackData);
     } catch (error) {
       console.error("Error fetching campaigns:", error);
+    }finally {
+      setLoading(false);
     }
   };
 
@@ -120,6 +124,8 @@ export default function Blogs() {
       toast.success("Blog approved!", 1000);
     } catch (error) {
       console.error("Error approving blog:", error);
+    }finally {
+      setLoading(false);
     }
   };
 
@@ -137,6 +143,8 @@ export default function Blogs() {
       toast.error("Blog discarded!", 1000);
     } catch (error) {
       console.error("Error discarding blog:", error);
+    }finally {
+      setLoading(false);
     }
   };
 
@@ -165,6 +173,8 @@ export default function Blogs() {
       }
     } catch (error) {
       console.error("Error approving blog:", error);
+    }finally {
+      setLoading(false);
     }
   };
 
@@ -179,6 +189,8 @@ export default function Blogs() {
       toast.error("Campaign Successfully declined!", 1000);
     } catch (error) {
       console.error("Error approving blog:", error);
+    }finally {
+      setLoading(false);
     }
   };
 
@@ -193,6 +205,8 @@ export default function Blogs() {
       toast.success("Product approved!", 1000);
     } catch (error) {
       console.error("Error approving product:", error);
+    }finally {
+      setLoading(false);
     }
   };
 
@@ -205,6 +219,8 @@ export default function Blogs() {
       toast.error("product discarded!", 1000);
     } catch (error) {
       console.error("Error discarding product:", error);
+    }finally {
+      setLoading(false);
     }
   };
 
@@ -219,6 +235,8 @@ export default function Blogs() {
       toast.success("feedback approved!", 1000);
     } catch (error) {
       console.error("Error approving feedback:", error);
+    }finally {
+      setLoading(false);
     }
   };
 
@@ -231,6 +249,8 @@ export default function Blogs() {
       toast.error("feedback discarded!", 1000);
     } catch (error) {
       console.error("Error discarding feedback:", error);
+    }finally {
+      setLoading(false);
     }
   };
 
@@ -281,6 +301,8 @@ export default function Blogs() {
       console.error("Error uploading manual and image: ", error);
       setUploadingManual(false);
       toast.error("Error uploading manual and image. Please try again.");
+    }finally {
+      setLoading(false);
     }
   };
 
@@ -302,6 +324,8 @@ export default function Blogs() {
       setManuals(manuals);
     } catch (error) {
       console.error("Error fetching manuals:", error);
+    }finally {
+      setLoading(false);
     }
   };
 
@@ -340,6 +364,8 @@ export default function Blogs() {
       //   );
       // }
       fetchManuals();
+    }finally {
+      setLoading(false);
     }
   };
 
@@ -395,6 +421,8 @@ export default function Blogs() {
       console.error("Error uploading guide and image: ", error);
       setUploadingGuide(false);
       toast.error("Error uploading guide and image. Please try again.");
+    }finally {
+      setLoading(false);
     }
   };
 
@@ -416,6 +444,8 @@ export default function Blogs() {
       setGuides(guides);
     } catch (error) {
       console.error("Error fetching guides:", error);
+    }finally {
+      setLoading(false);
     }
   };
 
@@ -460,7 +490,9 @@ export default function Blogs() {
   useEffect(() => {
     fetchGuides();
   }, []);
-
+  if (loading) {
+    return <Loader />;
+  }
   return (
     <>
       <ToastContainer />
@@ -517,7 +549,7 @@ export default function Blogs() {
         </div>
       </header>
 
-      <AdminStats guides={guides.length} />
+      <AdminStats guides={guides.length} manuals={manuals.length}/>
 
       <div className="flex flex-col md:flex-row lg:px-32 md:px-32">
         <div className="w-full md:w-11/12">

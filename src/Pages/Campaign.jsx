@@ -15,11 +15,14 @@ import Navbar from "../Components/Navbar";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Footer from "../Components/Footer";
+import Loader from "../Components/Loader";
 
 function Campaign() {
   const [campaignData, setCampaignData] = useState([]);
   const [userData, setUserData] = useState(null);
   const [selectedCampaignId, setSelectedCampaignId] = useState(null);
+  const [loading, setLoading] = useState(true);
+
 
   useEffect(() => {
     const loadUserData = async () => {
@@ -40,7 +43,7 @@ function Campaign() {
         } catch (error) {
           console.error("Error fetching user data:", error);
         } finally {
-          // setLoading(false);
+          setLoading(false);
         }
       } else {
         console.log("Username not found in localStorage");
@@ -74,6 +77,8 @@ function Campaign() {
         // console.log("data:", campaignData);
       } catch (error) {
         console.error("Error fetching approved data:", error.message);
+      }finally {
+        setLoading(false);
       }
     };
 
@@ -129,8 +134,13 @@ function Campaign() {
       }
     } catch (error) {
       console.error("Error joining campaign:", error.message);
+    }finally {
+      setLoading(false);
     }
   };
+  if (loading) {
+    return <Loader />;
+  }
   return (
     <>
       <Navbar />

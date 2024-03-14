@@ -103,9 +103,9 @@ function AdminStats(props) {
                   <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
                 </svg>
                 <h2 className="title-font font-medium text-3xl text-gray-900">
-                  {props.guides}
+                  {props.guides+props.manuals}
                 </h2>
-                <p className="leading-relaxed">Guides</p>
+                <p className="leading-relaxed">Documents</p>
               </div>
             </motion.div>
           </div>

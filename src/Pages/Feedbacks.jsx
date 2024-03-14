@@ -53,6 +53,8 @@ export default function Feedbacks() {
     } catch (error) {
       console.error("Error adding document: ", error);
       alert("Failed to post feedback!");
+    }finally {
+      setLoading(false);
     }
   };
 
