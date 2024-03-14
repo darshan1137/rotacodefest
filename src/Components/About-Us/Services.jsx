@@ -41,9 +41,7 @@ export default function Services() {
               <h2 className="mt-4 text-xl font-bold text-black ">Campaigns</h2>
 
               <p className="mt-1 text-sm text-gray-700">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex ut
-                quo possimus adipisci distinctio alias voluptatum blanditiis
-                laudantium.
+              Empowering Change Through Community Action. Join our campaigns to request clean-up initiatives or participate in ongoing efforts to make Mumbai cleaner and greener
               </p>
             </Link>
 
@@ -70,9 +68,7 @@ export default function Services() {
               <h2 className="mt-4 text-xl font-bold text-black ">Maps</h2>
 
               <p className="mt-1 text-sm text-gray-700">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex ut
-                quo possimus adipisci distinctio alias voluptatum blanditiis
-                laudantium.
+              Navigate Sustainability Effortlessly. Explore our interactive maps to locate nearby bins, recyclers, e-waste collection points, and connect with local ragpickers for responsible waste disposal.
               </p>
             </Link>
 
@@ -98,9 +94,7 @@ export default function Services() {
               <h2 className="mt-4 text-xl font-bold text-black ">Blogs</h2>
 
               <p className="mt-1 text-sm text-gray-700">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex ut
-                quo possimus adipisci distinctio alias voluptatum blanditiis
-                laudantium.
+              Knowledge for a Sustainable Future. Dive into our collection of insightful blogs covering topics on waste management, environmental conservation, and sustainable living practices.
               </p>
             </Link>
 
@@ -127,9 +121,7 @@ export default function Services() {
               <h2 className="mt-4 text-xl font-bold text-black ">Guideline</h2>
 
               <p className="mt-1 text-sm text-gray-700">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex ut
-                quo possimus adipisci distinctio alias voluptatum blanditiis
-                laudantium.
+              Empowering Responsible Practices. Access our manuals and guidelines for waste management, offering practical insights and best practices to minimize environmental impact.
               </p>
             </Link>
 
@@ -162,9 +154,7 @@ export default function Services() {
               </h2>
 
               <p className="mt-1 text-sm text-gray-700">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex ut
-                quo possimus adipisci distinctio alias voluptatum blanditiis
-                laudantium.
+              Measure Your Environmental Impact. Calculate your carbon footprint with our user-friendly tool, empowering individuals to understand and reduce their contribution to climate change.
               </p>
             </Link>
 
@@ -194,9 +184,7 @@ export default function Services() {
               </h2>
 
               <p className="mt-1 text-sm text-gray-700">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex ut
-                quo possimus adipisci distinctio alias voluptatum blanditiis
-                laudantium.
+              Shop Responsibly, Live Sustainably. Discover eco-friendly products with our calculator, helping you make informed choices that benefit both you and the planet.
               </p>
             </Link>
           </div>
