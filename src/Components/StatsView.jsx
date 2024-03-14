@@ -53,10 +53,10 @@ function StatsView() {
             <h2 className="text-xs text-green-500 tracking-widest font-medium title-font mb-1">
               Waste Wise Web's
             </h2>
-            <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">
+            <h1 className="text-3xl font-bold text-gray-900 sm:text-3xl py-2">
               Statistical Overview
             </h1>
-            <p className="lg:w-2/3 mx-auto leading-relaxed text-base text-justify xl:text-center">
+            <p className="lg:w-2/3 mx-auto leading-relaxed text-base text-justify text-center">
               Waste Wise Web is committed to addressing environmental concerns
               by providing real-time and accurate statistics, fostering
               awareness, and contributing to solutions for a sustainable and
@@ -68,17 +68,17 @@ function StatsView() {
               className="lg:w-1/4 md:w-1/2 p-4 w-full"
               initial={{
                 opacity: 0,
-                x: -50
+                x: -50,
               }}
               whileHover={{
-                scale: 1.05 // Scale effect on hover
+                scale: 1.05, // Scale effect on hover
               }}
               whileInView={{
                 opacity: 1,
                 x: 0,
                 transition: {
                   duration: 1,
-                }
+                },
               }}
               viewport={{ once: false }}
             >
@@ -95,17 +95,17 @@ function StatsView() {
               className="lg:w-1/4 md:w-1/2 p-4 w-full"
               initial={{
                 opacity: 0,
-                x: -50
+                x: -50,
               }}
               whileHover={{
-                scale: 1.05 // Scale effect on hover
+                scale: 1.05, // Scale effect on hover
               }}
               whileInView={{
                 opacity: 1,
                 x: 0,
                 transition: {
                   duration: 1,
-                }
+                },
               }}
               viewport={{ once: false }}
             >
@@ -122,17 +122,17 @@ function StatsView() {
               className="lg:w-1/4 md:w-1/2 p-4 w-full"
               initial={{
                 opacity: 0,
-                x: -50
+                x: -50,
               }}
               whileHover={{
-                scale: 1.05 // Scale effect on hover
+                scale: 1.05, // Scale effect on hover
               }}
               whileInView={{
                 opacity: 1,
                 x: 0,
                 transition: {
                   duration: 2,
-                }
+                },
               }}
               viewport={{ once: false }}
             >

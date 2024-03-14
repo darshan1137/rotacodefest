@@ -237,15 +237,16 @@ function Footer() {
   This component comes with some `rtl` classes. Please remove them if they are not needed in your project.
 */}
 
-      <footer className=""
-      style={{ background: "#C5EBAA"}}>
-        <div className="mx-auto max-w-screen-xl px-4 py-4 sm:px-6 lg:px-8 lg:pt-24">
+      <footer
+        className="border-t-2 border-black"
+        style={{ background: "#C5EBAA" }}
+      >
+        <div className="mx-auto max-w-screen-xl px-4 py-4 sm:px-6 lg:px-8 lg:pt-24 ">
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
             <div>
               <div className="flex justify-center text-teal-600 sm:justify-start">
                 <div className="flex-1 md:flex md:items-center md:gap-12 flex item-center">
                   <div>
-               
                     <div className="flex font-medium items-center justify-center  text-gray-900  md:mb-0">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -278,7 +279,6 @@ function Footer() {
                     <p className="mt-6 max-w-md text-center leading-relaxed text-gray-500 sm:max-w-xs sm:text-left">
                       Navigating Sustainability Online for a Greener Tomorrow.
                     </p>
-                 
                   </div>
                 </div>
               </div>
@@ -546,7 +546,9 @@ function Footer() {
                         />
                       </svg>
 
-                      <span className="flex-1 text-gray-700">wastewiseweb@gmail.com</span>
+                      <span className="flex-1 text-gray-700">
+                        wastewiseweb@gmail.com
+                      </span>
                     </a>
                   </li>
 

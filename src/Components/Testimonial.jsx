@@ -27,10 +27,10 @@ export default function Testimonial() {
   }, []);
 
   return (
-    <>
+    <div style={{ background: "#E2F5D2" }}>
       <div>
-        <div className="h-1  rounded overflow-hidden">
-          <div className="w-3/4 h-full bg-green-500 mx-auto"></div>
+        <div className="h-1 rounded overflow-hidden">
+          <div className="w-full md:w-3/4 h-full bg-green-500 mx-auto"></div>
         </div>
 
         <h1 className="mt-2 p-2 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl">
@@ -40,7 +40,7 @@ export default function Testimonial() {
 
       <Marquee pauseOnHover speed={20}>
         <div className="max-w-screen-2xl  mx-auto text-center">
-        <div className="flex  py-10  px-10align-middle items-center snap-center snap-always">
+          <div className="flex  py-10  px-10align-middle items-center snap-center snap-always">
             {testimonials.map((testimonial, index) => (
               <div
                 key={index}
@@ -80,6 +80,6 @@ export default function Testimonial() {
           </div>
         </div>
       </Marquee>
-    </>
+    </div>
   );
 }

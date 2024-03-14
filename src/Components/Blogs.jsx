@@ -38,15 +38,20 @@ function Blogs() {
   }, []);
   return (
     <section className="text-gray-600 body-font md:px-32">
+      <div className="h-1 bg-gray-200 rounded overflow-hidden">
+        <div className="w-ful h-full bg-green-500"></div>
+      </div>
       <div className="container mx-auto">
-        <div className="h-1 bg-gray-200 rounded overflow-hidden">
-          <div className="w-ful h-full bg-green-500"></div>
-        </div>
-        <div className="flex flex-wrap sm:flex-row flex-col justify-center items-center mb-12 py-5 lg:mx-auto">
-          <h1 className="text-gray-900 font-medium title-font text-2xl mb-2 sm:mb-0">
-            The Knowledge Hub: Explore Insights, Inspiration, and In-Depth
-            Articles in Our Blog Section.
-          </h1>
+        <div className="flex flex-wrap sm:flex-row flex-col justify-center items-center pt-5 lg:mx-auto">
+          <div className="flex flex-col text-center w-full">
+            <h1 className="text-3xl font-bold text-gray-900 sm:text-3xl pb-6">
+              The Knowledge Hub
+            </h1>
+            <p className="lg:w-2/3 mx-auto leading-relaxed text-base text-justify text-center">
+              Explore Insights, Inspiration, and In-Depth Articles in Our Blog
+              Section.
+            </p>
+          </div>
         </div>
         <div className="  m-5 grid gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-3 xl:grid-cols-3 xl:gap-8 justify-center items-center mx-auto px-10">
           {blogs.map((blog) => (
@@ -83,7 +88,7 @@ function Blogs() {
           <Link to="/blogs">
             <button
               type="submit"
-              className="inline-block my-10 rounded-lg bg-green-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-green-300 transition duration-100 hover:bg-green-600 focus-visible:ring active:bg-green-700 md:text-base"
+              className="inline-block  rounded-lg bg-green-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-green-300 transition duration-100 hover:bg-green-600 focus-visible:ring active:bg-green-700 md:text-base"
             >
               Explore Blogs
             </button>
