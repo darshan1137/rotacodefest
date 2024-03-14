@@ -27,15 +27,20 @@ export default function Testimonial() {
   }, []);
 
   return (
-    <div style={{ background: "#E2F5D2" }}>
-      <div>
-        <div className="h-1 rounded overflow-hidden">
-          <div className="w-full md:w-3/4 h-full bg-green-500 mx-auto"></div>
-        </div>
-
+    <div >
+      <div className="lg:px-32">
+        {/* <div className="h-1 rounded overflow-hidden"> */}
+          {/* <div className="w-full md:w-3/4 h-full bg-green-500 mx-auto"></div> */}
+        
+          <div className="h-1 bg-gray-200  rounded overflow-hidden">
+        <div className="w-ful h-full bg-green-500"></div>
+      </div>
         <h1 className="mt-2 p-2 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl">
           Our Testimonials
         </h1>
+        <p className="lg:w-2/3 mx-auto leading-relaxed text-base text-justify text-center">
+          Here's what our users have to say about their experience with our
+            </p>
       </div>
 
       <Marquee pauseOnHover speed={20}>

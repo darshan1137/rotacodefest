@@ -37,7 +37,9 @@ function Blogs() {
     fetchData();
   }, []);
   return (
-    <section className="text-gray-600 body-font md:px-32">
+    <section className="text-gray-600 body-font md:px-32"
+    style={{ background: "#E2F5D2" }}>
+    
       <div className="h-1 bg-gray-200 rounded overflow-hidden">
         <div className="w-ful h-full bg-green-500"></div>
       </div>
@@ -84,7 +86,7 @@ function Blogs() {
           ))}
         </div>
 
-        <div className=" m-5 flex items-center justify-center sm:col-span-2">
+        <div className=" pb-5 flex items-center justify-center sm:col-span-2">
           <Link to="/blogs">
             <button
               type="submit"
@@ -95,6 +97,7 @@ function Blogs() {
           </Link>
         </div>
       </div>
+
     </section>
   );
 }

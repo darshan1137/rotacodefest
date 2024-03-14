@@ -3,14 +3,18 @@ import React from "react";
 function FAQ() {
   return (
     <>
-      <div className="h-1  rounded overflow-hidden">
+      <div className="h-1  rounded overflow-hidden ">
         <div className="w-full md:w-3/4 py-2 h-full bg-green-500 mx-auto"></div>
       </div>
 
-      <div className=" md:px-8 lg:px-16 xl:px-32 py-5">
+      <div className=" md:px-8 lg:px-16 xl:px-32 py-5 "
+      style={{ background: "#E2F5D2" }}>
         <h1 className="mt-2 p-3 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl">
-          FAQs Section
+          FAQs 
         </h1>
+        <p className="lg:w-2/3 mx-auto leading-relaxed text-base pb-5 text-justify text-center">
+          Here are some frequently asked questions about Waste Wise Web.
+            </p>
         <div className="divide-y divide-gray-100 rounded-xl border border-gray-100 bg-white p-4 md:pt-4">
           <details
             className="group p-6 [&_summary::-webkit-details-marker]:hidden"

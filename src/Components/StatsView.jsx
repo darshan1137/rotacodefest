@@ -47,8 +47,10 @@ function StatsView() {
 
   return (
     <>
-      <section className="text-gray-600 body-font">
-        <div className="container px-5 py-5 mx-auto">
+      <section className="text-gray-600 body-font "
+            style={{ background: "#E2F5D2" }}>
+
+        <div className="container px-5 py-5 mx-auto" >
           <div className="flex flex-col text-center w-full mb-20">
             <h2 className="text-xs text-green-500 tracking-widest font-medium title-font mb-1">
               Waste Wise Web's

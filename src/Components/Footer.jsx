@@ -238,8 +238,8 @@ function Footer() {
 */}
 
       <footer
-        className="border-t-2 border-black"
-        style={{ background: "#C5EBAA" }}
+        // className="border-t-2 border-black "
+        
       >
         <div className="mx-auto max-w-screen-xl px-4 py-4 sm:px-6 lg:px-8 lg:pt-24 ">
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">

@@ -135,7 +135,7 @@ function Products() {
   return (
     <section
       className="text-gray-600 body-font"
-      style={{ background: "#E2F5D2" }}
+      
     >
       <div className="h-1 bg-gray-200 rounded overflow-hidden md:w-5/6 mx-auto">
         <div className="w-ful h-full bg-green-500"></div>
