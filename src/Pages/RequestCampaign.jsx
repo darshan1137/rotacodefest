@@ -9,7 +9,7 @@ import {
   setDoc,
 } from "firebase/firestore";
 import { db } from "../Firebase/cofig";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
 import Footer from "../Components/Footer";
 
 function RequestCampaign() {
@@ -403,13 +403,13 @@ function RequestCampaign() {
 
           <div className=" mx-auto max-w-100 text-center mt-5">
             <p className="text-green-800 sm:text-lg ">
-              Already reported a problem?{" "}
-              <a
-                href="#"
+              Already requested a campaign?{" "}
+              <Link
+                 to="/profile"
                 className="text-green-500 underline transition duration-100 hover:text-green-600 active:text-indigo-700"
               >
                 Check progress
-              </a>
+              </Link>
             </p>
           </div>
         </div>

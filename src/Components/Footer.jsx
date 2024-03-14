@@ -411,14 +411,14 @@ function Footer() {
                     </Link>
                   </li>
 
-                  <li>
+                  {/* <li>
                     <Link
                       className="text-gray-700 transition hover:text-gray-700/75"
                       to="/stats"
                     >
                       Statistics
                     </Link>
-                  </li>
+                  </li> */}
 
                   <li>
                     <Link
@@ -461,7 +461,7 @@ function Footer() {
                       Bin Locator
                     </Link>
                   </li>
-
+{/* 
                   <li>
                     <a
                       className="text-gray-700 transition hover:text-gray-700/75"
@@ -470,7 +470,7 @@ function Footer() {
                       {" "}
                       Google Ads{" "}
                     </a>
-                  </li>
+                  </li> */}
                 </ul>
               </div>
 

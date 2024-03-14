@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { collection, query, getDocs, where } from "firebase/firestore";
 import { db } from "../Firebase/cofig";
 import { getFirestore, Timestamp } from "firebase/firestore";
-import NotFound from './NotFound';
+import NotFound from "./NotFound";
 
 export default function UserCampaign() {
   const [campaignData, setCampaignData] = useState([]);
@@ -52,10 +52,15 @@ export default function UserCampaign() {
 
   return (
     <>
-      <div className=" py-2 flex flex-col text-center w-full mb-5 ">
-        <h1 className="sm:text-3xl text-2xl font-medium title-font  text-gray-900">
+      <div className=" py-2 flex flex-col text-center w-full mb-3 ">
+        <h1 className="m-2 sm:text-3xl text-2xl  title-font font-bold text-gray-800">
           Campaigns Hosted by you
         </h1>
+
+        <p className="p-3 mx-auto max-w-screen-md text-center text-gray-500 md:text-lg">
+          "Discover the campaigns you've hosted, reflecting your impactful
+          contributions and shared experiences."
+        </p>
       </div>
 
       <div className="">
@@ -78,7 +83,7 @@ export default function UserCampaign() {
           <>
             <body class="flex flex-col justify-center items-center mx-4 py-4">
               <div class="flex flex-col items-center pb-4">
-              <NotFound />
+                <NotFound />
                 <p class="text-xl font-medium text-gray-600 mb-6">
                   Looks like you have not hosted any campaigns yet!!!
                 </p>
@@ -95,74 +100,75 @@ export default function UserCampaign() {
           campaignData.map((req) => (
             <article
               key={req.id}
-              className="my-5 rounded-xl bg-white p-3 ring ring-green-50  lg:p-5 "
+              className="my-5 rounded-xl bg-white p-3 ring ring-green-50  lg:p-5 no-underline "
             >
-              <div className=" my-5 flex items-start sm:gap-8 ">
-                <div>
-                  <strong className=" rounded border border-green-500 bg-green-500 px-3 py-1.5 text-[10px] font-medium text-white">
-                    {req.date}
-                  </strong>
+              <Link
+                to={`/campaign/${req.id}`}
+                style={{ textDecoration: "none" }}
+              >
+                <div className=" my-5 flex items-start sm:gap-8 ">
+                  <div>
+                    <strong className=" rounded border border-green-500 bg-green-500 px-3 py-1.5 text-[10px] font-medium text-white">
+                      {req.date}
+                    </strong>
 
-                  <h3 className="mt-4 text-lg font-medium sm:text-xl">
-                    <Link
-                      to={`/campaign/${req.id}`}
-                      className="hover:underline"
-                    >
-                      {req.campaignTitle}
-                    </Link>
-                  </h3>
+                    <h3 className="mt-4 text-lg font-medium sm:text-xl">
+                      <div>{req.campaignTitle}</div>
+                    </h3>
 
-                  <p className="mt-1 text-sm text-gray-700">
-                    {req.campaignDescription}
-                  </p>
+                    <p className="mt-1 text-sm text-gray-700">
+                      {req.campaignDescription}
+                    </p>
 
-                  <p className="mt-1 text-sm text-gray-700">
-                    <b>Address: </b>
-                    {req.address}
-                  </p>
+                    <p className="mt-1 text-sm text-gray-700">
+                      <b>Address: </b>
+                      {req.address}
+                    </p>
 
-                  <p className="mt-1 text-sm text-gray-700">
-                    <b>City: </b>
-                    {req.city}
-                  </p>
+                    <p className="mt-1 text-sm text-gray-700">
+                      <b>City: </b>
+                      {req.city}
+                    </p>
 
-                  <p className="mt-1 text-sm text-gray-700">
-                    <b>State: </b>
-                    {req.state}
-                  </p>
+                    <p className="mt-1 text-sm text-gray-700">
+                      <b>State: </b>
+                      {req.state}
+                    </p>
 
-                  <div className="mt-4 sm:flex sm:items-center sm:gap-2">
-                    <div className="flex items-center gap-1 text-gray-500">
-                      <svg
-                        className="h-4 w-4"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                        ></path>
-                      </svg>
+                    <div className="mt-4 sm:flex sm:items-center sm:gap-2">
+                      <div className="flex items-center gap-1 text-gray-500">
+                        <svg
+                          className="h-4 w-4"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                          ></path>
+                        </svg>
 
-                      <p className="text-xs font-medium">
-                        {req.startTime} - {req.endTime}
+                        <p className="text-xs font-medium">
+                          {req.startTime} - {req.endTime}
+                        </p>
+                      </div>
+
+                      <span className="hidden sm:block" aria-hidden="true">
+                        &middot;
+                      </span>
+
+                      <p className="mt-2 text-xs font-medium text-gray-500 sm:mt-0">
+                        Hosted by {req.userDetails.Fname}{" "}
+                        {req.userDetails.Lname}
                       </p>
                     </div>
-
-                    <span className="hidden sm:block" aria-hidden="true">
-                      &middot;
-                    </span>
-
-                    <p className="mt-2 text-xs font-medium text-gray-500 sm:mt-0">
-                      Hosted by {req.userDetails.Fname} {req.userDetails.Lname}
-                    </p>
                   </div>
                 </div>
-              </div>
+              </Link>
             </article>
           ))
         )}

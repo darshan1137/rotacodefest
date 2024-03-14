@@ -118,14 +118,14 @@ export default function UserCertificates() {
             No certificates found!!!
           </p>
         ) : (
-          <div className="mt-8  ">
+          <div className="mt-2 ">
             <h2 className="text-xl font-bold mb-4">
               Download Your certificates here
             </h2>
             <div className="flec justify-center">
             <table className="w-full border border-collapse border-green-500 ">
               <thead>
-                <tr className="bg-green-500 text-white">
+                <tr className="bg-green-600 text-white">
                   <th className="py-2 px-4  border border-green-500">Sr. No.</th>
                   <th className="py-2 px-4  border border-green-500">
                     Campaign
