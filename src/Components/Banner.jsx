@@ -1,6 +1,8 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
+// import video from "../assets"
+import video from "../assets/videoBG.mp4"
 
 function Banner() {
   return (
@@ -10,12 +12,15 @@ function Banner() {
         autoPlay
         loop
         muted
+        style={{ opacity: 0.78 }}
       >
         <source
-          src="https://tecdn.b-cdn.net/img/video/Tropical.mp4"
-          type="video/mp4"
+          src={video} type="video/mp4"
+          // src="https://tecdn.b-cdn.net/img/video/Tropical.mp4"
+         
         />
       </video>
+  
       <AnimatePresence>
         <motion.div
           className="absolute inset-0 flex flex-col justify-center items-center"
@@ -25,13 +30,13 @@ function Banner() {
           exit={{ opacity: 0, y: -50, scale: 0.8 }}
           transition={{ duration: 1, delay: 0.5 }}
         >
-          <div className="container px-5 py-25 max-w-3xl text-center">
-            <h1 className="text-3xl font-extrabold sm:text-5xl text-teal-300">
+          <div className="container px-5 py-25 max-w-3xl text-center bg-gray-100 p-10 bg-opacity-50 rounded-xl shadow-white" >
+            <h1 className="text-3xl font-extrabold sm:text-5xl text-green-900">
               Embrace a Greener Tomorrow
             </h1>
             <p
-              className="mt-4 sm:text-xl/relaxed font-semibold"
-              style={{ color: "black" }}
+              className="mt-4 sm:text-xl/relaxed font-bold text-green-800"
+              // style={{ color: "white" }}
             >
               Make a positive impact with our eco-friendly products. Join us in
               the journey towards a greener tomorrow, where every choice

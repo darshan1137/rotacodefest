@@ -13,8 +13,8 @@ function AdminStats(props) {
     setuserCount(numberOfRecords);
 
     const q_cam = query(collection(getFirestore(), "requests"));
-    const campaignSnapshot = await getDocs(q);
-    const numberofCampaign = querySnapshot.size;
+    const campaignSnapshot = await getDocs(q_cam);
+    const numberofCampaign = campaignSnapshot.size;
     setCampaignCount(numberofCampaign);
   };
 
@@ -39,10 +39,12 @@ function AdminStats(props) {
             </p>
           </div>
           <div className="flex flex-wrap -m-4 text-center justify-center mx-auto w-full">
-            <motion.div className="p-4 md:w-1/4 sm:w-1/2 w-full" 
-            whileHover={{
-              scale: 1.05 // Scale effect on hover
-            }}>
+            <motion.div
+              className="p-4 md:w-1/4 sm:w-1/2 w-full"
+              whileHover={{
+                scale: 1.05, // Scale effect on hover
+              }}
+            >
               <div className="border-2 border-green-600 px-4 py-6 rounded-lg">
                 <svg
                   fill="none"
@@ -63,10 +65,12 @@ function AdminStats(props) {
                 <p className="leading-relaxed">Users</p>
               </div>
             </motion.div>
-            <motion.div className="p-4 md:w-1/4 sm:w-1/2 w-full" 
-            whileHover={{
-              scale: 1.05 // Scale effect on hover
-            }}>
+            <motion.div
+              className="p-4 md:w-1/4 sm:w-1/2 w-full"
+              whileHover={{
+                scale: 1.05, // Scale effect on hover
+              }}
+            >
               <div className="border-2 border-green-600 px-4 py-6 rounded-lg">
                 <svg
                   fill="none"
@@ -86,10 +90,12 @@ function AdminStats(props) {
                 <p className="leading-relaxed">Campaigns</p>
               </div>
             </motion.div>
-            <motion.div className="p-4 md:w-1/4 sm:w-1/2 w-full" 
-            whileHover={{
-              scale: 1.05 // Scale effect on hover
-            }}>
+            <motion.div
+              className="p-4 md:w-1/4 sm:w-1/2 w-full"
+              whileHover={{
+                scale: 1.05, // Scale effect on hover
+              }}
+            >
               <div className="border-2 border-green-600 px-4 py-6 rounded-lg">
                 <svg
                   fill="none"
@@ -103,7 +109,7 @@ function AdminStats(props) {
                   <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
                 </svg>
                 <h2 className="title-font font-medium text-3xl text-gray-900">
-                  {props.guides+props.manuals}
+                  {props.guides + props.manuals}
                 </h2>
                 <p className="leading-relaxed">Documents</p>
               </div>
