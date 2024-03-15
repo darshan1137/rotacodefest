@@ -165,119 +165,119 @@
 //                 className="rounded-xl bg-white p-4  mb-5  sm:p-6 lg:p-8 shadow-md transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105 hover:ring-4 hover:ring-green-500 hover:ring-opacity-50 hover:shadow-lg"
 //                 key={req.id}
 //               >
-                // <div className="flex items-start sm:gap-8">
-                //   <div>
-                //     <strong className=" rounded border border-green-500 bg-green-500 px-3 py-1.5 text-[10px] font-medium text-white">
-                //       {req.date}
-                //     </strong>
+// <div className="flex items-start sm:gap-8">
+//   <div>
+//     <strong className=" rounded border border-green-500 bg-green-500 px-3 py-1.5 text-[10px] font-medium text-white">
+//       {req.date}
+//     </strong>
 
-                //     <h3 className="mt-4 text-lg font-medium sm:text-xl">
-                //       <div >
-                //         {" "}
-                //         {req.campaignTitle}{" "}
-                //       </div>
-                //     </h3>
+//     <h3 className="mt-4 text-lg font-medium sm:text-xl">
+//       <div >
+//         {" "}
+//         {req.campaignTitle}{" "}
+//       </div>
+//     </h3>
 
-                //     <p className="mt-1 text-sm text-gray-700">
-                //       {req.campaignDescription}
-                //     </p>
+//     <p className="mt-1 text-sm text-gray-700">
+//       {req.campaignDescription}
+//     </p>
 
-                //     <p className="mt-1 text-sm text-gray-700">
-                //       <b>Address: </b>
-                //       {req.address}
-                //     </p>
+//     <p className="mt-1 text-sm text-gray-700">
+//       <b>Address: </b>
+//       {req.address}
+//     </p>
 
-                //     <p className="mt-1 text-sm text-gray-700">
-                //       <b>City: </b>
-                //       {req.city}
-                //     </p>
+//     <p className="mt-1 text-sm text-gray-700">
+//       <b>City: </b>
+//       {req.city}
+//     </p>
 
-                //     <p className="mt-1 text-sm text-gray-700">
-                //       <b>State: </b>
-                //       {req.state}
-                //     </p>
+//     <p className="mt-1 text-sm text-gray-700">
+//       <b>State: </b>
+//       {req.state}
+//     </p>
 
-                //     <div className="mt-4 sm:flex sm:items-center sm:gap-2">
-                //       <div className="flex items-center gap-1 text-gray-500">
-                //         <svg
-                //           className="h-4 w-4"
-                //           fill="none"
-                //           stroke="currentColor"
-                //           viewBox="0 0 24 24"
-                //           xmlns="http://www.w3.org/2000/svg"
-                //         >
-                //           <path
-                //             strokeLinecap="round"
-                //             strokeLinejoin="round"
-                //             strokeWidth="2"
-                //             d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                //           ></path>
-                //         </svg>
+//     <div className="mt-4 sm:flex sm:items-center sm:gap-2">
+//       <div className="flex items-center gap-1 text-gray-500">
+//         <svg
+//           className="h-4 w-4"
+//           fill="none"
+//           stroke="currentColor"
+//           viewBox="0 0 24 24"
+//           xmlns="http://www.w3.org/2000/svg"
+//         >
+//           <path
+//             strokeLinecap="round"
+//             strokeLinejoin="round"
+//             strokeWidth="2"
+//             d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+//           ></path>
+//         </svg>
 
-                //         <p className="text-xs font-medium">
-                //           {req.startTime} - {req.endTime}
-                //         </p>
-                //       </div>
+//         <p className="text-xs font-medium">
+//           {req.startTime} - {req.endTime}
+//         </p>
+//       </div>
 
-                //       <span className="hidden sm:block" aria-hidden="true">
-                //         &middot;
-                //       </span>
+//       <span className="hidden sm:block" aria-hidden="true">
+//         &middot;
+//       </span>
 
-                //       <p className="mt-2 text-xs font-medium text-gray-500 sm:mt-0">
-                //         Hosted by {req.userDetails.Fname}{" "}
-                //         {req.userDetails.Lname}
-                //       </p>
+//       <p className="mt-2 text-xs font-medium text-gray-500 sm:mt-0">
+//         Hosted by {req.userDetails.Fname}{" "}
+//         {req.userDetails.Lname}
+//       </p>
 
-                //       <div className="bottom-4 right-4">
-                //         <button
-                //           className="text-l bg-green-500 text-white py-1 px-1 rounded-md hover:bg-green-600 focus:outline-none focus:shadow-outline-green active:bg-green-800 ml-auto flex items-center"
-                //           onClick={() => handleRegisterClick(req.id)}
-                //         >
-                //           Register Now
-                //         </button>
+//       <div className="bottom-4 right-4">
+//         <button
+//           className="text-l bg-green-500 text-white py-1 px-1 rounded-md hover:bg-green-600 focus:outline-none focus:shadow-outline-green active:bg-green-800 ml-auto flex items-center"
+//           onClick={() => handleRegisterClick(req.id)}
+//         >
+//           Register Now
+//         </button>
 
-                //         {showModal && (
-                //           <div className="fixed inset-0 bg-black opacity-30 z-50"></div>
-                //         )}
+//         {showModal && (
+//           <div className="fixed inset-0 bg-black opacity-30 z-50"></div>
+//         )}
 
-                //         {showModal && (
-                //           <div className="fixed inset-0 flex items-center justify-center z-50">
-                //             <div className="rounded-lg bg-white p-8 shadow-2xl">
-                //               <h3 className="text-lg font-bold">
-                //                 Are you sure you want to register for the
-                //                 Campaign?
-                //               </h3>
-                //               <div className="mt-4 flex gap-2">
-                //                 <button
-                //                   onClick={handleJoinUs}
-                //                   className="rounded bg-green-50 px-4 py-2 text-sm font-medium text-green-600"
-                //                 >
-                //                   Yes, I'm sure
-                //                 </button>
+//         {showModal && (
+//           <div className="fixed inset-0 flex items-center justify-center z-50">
+//             <div className="rounded-lg bg-white p-8 shadow-2xl">
+//               <h3 className="text-lg font-bold">
+//                 Are you sure you want to register for the
+//                 Campaign?
+//               </h3>
+//               <div className="mt-4 flex gap-2">
+//                 <button
+//                   onClick={handleJoinUs}
+//                   className="rounded bg-green-50 px-4 py-2 text-sm font-medium text-green-600"
+//                 >
+//                   Yes, I'm sure
+//                 </button>
 
-                //                 <button
-                //                   onClick={handleCancelRegistration}
-                //                   className="rounded bg-gray-50 px-4 py-2 text-sm font-medium text-gray-600"
-                //                 >
-                //                   No, go back
-                //                 </button>
-                //               </div>
-                //             </div>
-                //           </div>
-                //         )}
-                //       </div>
-                //     </div>
-                //   </div>
-                //   {/* <div>
-                  
-                //   <button
-                //     onClick={() => handleJoinUs(req.id)}
-                //     className="rounded-md border border-green-500 bg-green-500 text-white px-2   py-1.5 text-sm font-medium hover:bg-green-600"
-                //   >
-                //     Join 
-                //   </button>
-                // </div> */}
-                // </div>
+//                 <button
+//                   onClick={handleCancelRegistration}
+//                   className="rounded bg-gray-50 px-4 py-2 text-sm font-medium text-gray-600"
+//                 >
+//                   No, go back
+//                 </button>
+//               </div>
+//             </div>
+//           </div>
+//         )}
+//       </div>
+//     </div>
+//   </div>
+//   {/* <div>
+
+//   <button
+//     onClick={() => handleJoinUs(req.id)}
+//     className="rounded-md border border-green-500 bg-green-500 text-white px-2   py-1.5 text-sm font-medium hover:bg-green-600"
+//   >
+//     Join
+//   </button>
+// </div> */}
+// </div>
 //               </article>
 //             ))}
 //           </div>
@@ -291,7 +291,6 @@
 // }
 
 // export default Campaign;
-
 
 import React, { useEffect, useState } from "react";
 import {
@@ -407,7 +406,9 @@ function Campaign() {
             volunteers: arrayUnion(username),
           });
         }
-        toast.success("Successfully Registered for campaign", { autoClose: 1000 });
+        toast.success("Successfully Registered for campaign", {
+          autoClose: 1000,
+        });
       } else {
         console.error("Document does not exist");
         toast.error("Failed to register for campaign", { autoClose: 1000 });
@@ -469,24 +470,18 @@ function Campaign() {
                       }),
                   transition: {
                     duration: 0.5,
-                    
                   },
                 }}
-                
                 viewport={{ once: false }}
-                
               >
-                              <div className="flex items-start sm:gap-8">
+                <div className="flex items-start sm:gap-8">
                   <div>
                     <strong className=" rounded border border-green-500 bg-green-500 px-3 py-1.5 text-[10px] font-medium text-white">
                       {req.date}
                     </strong>
 
                     <h3 className="mt-4 text-lg font-medium sm:text-xl">
-                      <div >
-                        {" "}
-                        {req.campaignTitle}{" "}
-                      </div>
+                      <div> {req.campaignTitle} </div>
                     </h3>
 
                     <p className="mt-1 text-sm text-gray-700">
@@ -600,4 +595,3 @@ function Campaign() {
 }
 
 export default Campaign;
-
