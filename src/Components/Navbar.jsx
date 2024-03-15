@@ -467,6 +467,16 @@ function Navbar() {
                             Carbon Footprint
                           </Link>
                         </li>
+                        <li>
+                          <Link
+                            to="/report"
+                            className="block py-2 px-4 text-gray-700 hover:text-green-500"
+                            style={{ textDecoration: "none" }}
+
+                          >
+                            Report Dumpgrounds
+                          </Link>
+                        </li>
                       </div>
                     )}
                   </div>
@@ -626,6 +636,15 @@ function Navbar() {
                     onClick={closeMenu}
                   >
                     Carbon Footprint
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/report"
+                    className="text-gray-500 hover:text-gray-700"
+                    onClick={closeMenu}
+                  >
+                    Report Dumpgrounds
                   </Link>
                 </li>
               </ul>
