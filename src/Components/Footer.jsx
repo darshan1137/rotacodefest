@@ -238,8 +238,7 @@ function Footer() {
 */}
 
       <footer
-        // className="border-t-2 border-black "
-        
+      // className="border-t-2 border-black "
       >
         <div className="mx-auto max-w-screen-xl px-4 py-4 sm:px-6 lg:px-8 lg:pt-24 ">
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
@@ -397,8 +396,8 @@ function Footer() {
               </ul>
             </div>
 
-            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-4 lg:col-span-2">
-              <div className="text-center sm:text-left">
+            <div className="grid grid-cols-1 gap-8  sm:grid-cols-2 md:grid-cols-4 lg:col-span-2">
+              <div className="text-left sm:text-left">
                 <p className="text-lg font-medium text-gray-900">About Us</p>
 
                 <ul className="mt-8 space-y-4 text-sm">
@@ -431,7 +430,7 @@ function Footer() {
                 </ul>
               </div>
 
-              <div className="text-center sm:text-left">
+              <div className="text-left sm:text-left">
                 <p className="text-lg font-medium text-gray-900">
                   Our Services
                 </p>
@@ -440,19 +439,21 @@ function Footer() {
                   <li>
                     <Link
                       className="text-gray-700 transition hover:text-gray-700/75"
-                      to="/ecommerce"
-                    >
-                      Eco-friendly Products
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      className="text-gray-700 transition hover:text-gray-700/75"
                       to="/footprint"
                     >
                       Carbon Footprint Calculator
                     </Link>
                   </li>
+
+                  <li>
+                    <Link
+                      className="text-gray-700 transition hover:text-gray-700/75"
+                      to="/ecommerce"
+                    >
+                      Eco-friendly Products
+                    </Link>
+                  </li>
+
                   <li>
                     <Link
                       className="text-gray-700 transition hover:text-gray-700/75"
@@ -461,45 +462,25 @@ function Footer() {
                       Bin Locator
                     </Link>
                   </li>
-{/* 
+
                   <li>
-                    <a
+                    <Link
                       className="text-gray-700 transition hover:text-gray-700/75"
-                      href="#"
+                      to="/campaign"
                     >
                       {" "}
-                      Google Ads{" "}
-                    </a>
-                  </li> */}
+                      Campaigns
+                    </Link>
+                  </li>
                 </ul>
               </div>
 
-              <div className="text-center sm:text-left">
+              <div className="text-left sm:text-left">
                 <p className="text-lg font-medium text-gray-900">
                   Helpful Links
                 </p>
 
                 <ul className="mt-8 space-y-4 text-sm">
-                  <li>
-                    <Link
-                      className="text-gray-700 transition hover:text-gray-700/75"
-                      to="/blogs"
-                    >
-                      {" "}
-                      Blogs{" "}
-                    </Link>
-                  </li>
-
-                  <li>
-                    <Link
-                      className="text-gray-700 transition hover:text-gray-700/75"
-                      to="/guideline"
-                    >
-                      {" "}
-                      Guides{" "}
-                    </Link>
-                  </li>
-
                   <li>
                     <Link
                       className="text-gray-700 transition hover:text-gray-700/75"
@@ -517,6 +498,25 @@ function Footer() {
                     >
                       {" "}
                       Report Dumpground{" "}
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      className="text-gray-700 transition hover:text-gray-700/75"
+                      to="/blogs"
+                    >
+                      {" "}
+                      Blogs{" "}
+                    </Link>
+                  </li>
+
+                  <li>
+                    <Link
+                      className="text-gray-700 transition hover:text-gray-700/75"
+                      to="/guideline"
+                    >
+                      {" "}
+                      Guides{" "}
                     </Link>
                   </li>
                 </ul>
