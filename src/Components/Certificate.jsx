@@ -14,13 +14,12 @@ function Receipt() {
 
   useEffect(() => {
     window.print();
-
+    navigate("/profile");
     const handleAfterPrint = () => {
       window.removeEventListener("afterprint", handleAfterPrint);
     };
 
     window.addEventListener("afterprint", handleAfterPrint);
-
     return () => {
       window.removeEventListener("afterprint", handleAfterPrint);
     };
