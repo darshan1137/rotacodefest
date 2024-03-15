@@ -26,6 +26,7 @@ export default function Maps() {
   const [loading, setLoading] = useState(true);
   const [selectedLocation, setSelectedLocation] = useState(null);
   const mapRef = useRef(null);
+  const [mapHeight, setMapHeight] = useState("70vh");
   const routingControlRef = useRef(null);
 
   useEffect(() => {
@@ -50,6 +51,17 @@ export default function Maps() {
             console.error("Error getting user location:", error);
           }
         );
+        function handleResize() {
+          if (window.innerWidth <= 768) {
+            setMapHeight("50vh");
+          } else {
+            setMapHeight("70vh");
+          }
+        }
+
+        handleResize(); // Initial call
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
       };
 
       fetchUserLocation();
@@ -182,74 +194,77 @@ export default function Maps() {
             frequented by rag picker
           </p>
         </div>
-        <div className="flex lg:flex-row flex-col pt-3">
-          <div className="mx-10 border-2 border-black lg:w-1/6 md:1/6 xl:1/6  rounded-lg bg-white">
-            {" "}
-            <Legend />
-          </div>
-          <div className="relative rounded-lg shadow-xl flex flex-col justify-center  items-center shadow-grey-200 overflow-hidden mx-4 border-2 border-black">
-            {userLocation && forestLocations.length > 0 && (
-              <MapContainer
-                center={[userLocation?.lat || 0, userLocation?.lon || 0]}
-                zoom={10}
-                style={{ height: "70vh", width: "70vw" }}
-                whenCreated={(mapInstance) => {
-                  mapRef.current = mapInstance;
-                }}
-                onClick={() => console.log("Map clicked")}
-              >
-                <TileLayer
-                  attribution="Google Maps"
-                  url="https://www.google.cn/maps/vt?lyrs=m@189&gl=cn&x={x}&y={y}&z={z}"
-                />
-                <Marker
-                  position={[userLocation.lat, userLocation.lon]}
-                  icon={customMarkerIcon}
+
+        <div class="flex flex-col md:flex-row md:px-10 mx-auto ">
+          <div class="w-full md:w-11/12 h-full md:flex-grow">
+            <div class="w-11/12 mx-auto rounded-lg my-4 text-center border-2 border-black ">
+              {userLocation && forestLocations.length > 0 && (
+                <MapContainer
+                  center={[userLocation?.lat || 0, userLocation?.lon || 0]}
+                  zoom={10}
+                  style={{ height: mapHeight, width: "100%" }}
+                  whenCreated={(mapInstance) => {
+                    mapRef.current = mapInstance;
+                  }}
+                  onClick={() => console.log("Map clicked")}
                 >
-                  <Popup>Your Location</Popup>
-                </Marker>
-                {forestLocations.map((location, index) => (
+                  <TileLayer
+                    attribution="Google Maps"
+                    url="https://www.google.cn/maps/vt?lyrs=m@189&gl=cn&x={x}&y={y}&z={z}"
+                  />
                   <Marker
-                    key={index}
-                    position={[location.lat, location.lon]}
-                    icon={
-                      location.type === "Dustbins"
-                        ? dustbinMarkerIcon
-                        : location.type === "Recyclers"
-                        ? recyclerMarkerIcon
-                        : location.type === "ewaste"
-                        ? ewasteMarkerIcon // Use the ewaste icon for the "ewaste" type
-                        : ragPickerMarkerIcon
-                    }
+                    position={[userLocation.lat, userLocation.lon]}
+                    icon={customMarkerIcon}
                   >
-                    <Popup>
-                      {location.name}
-                      <div>
-                        <a
-                          href={`https://www.google.com/maps/search/?api=1&query=${location.lat},${location.lon}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <button className="bg-green-800 p-2 m-2 text-white">
-                            Know More
-                          </button>
-                        </a>
-                        <button
-                          className="bg-green-800 p-2 m-2 text-white"
-                          onClick={() => handleShare(location.name)}
-                        >
-                          Share
-                        </button>
-                      </div>
-                    </Popup>
+                    <Popup>Your Location</Popup>
                   </Marker>
-                ))}
-              </MapContainer>
-            )}
+                  {forestLocations.map((location, index) => (
+                    <Marker
+                      key={index}
+                      position={[location.lat, location.lon]}
+                      icon={
+                        location.type === "Dustbins"
+                          ? dustbinMarkerIcon
+                          : location.type === "Recyclers"
+                          ? recyclerMarkerIcon
+                          : location.type === "ewaste"
+                          ? ewasteMarkerIcon // Use the ewaste icon for the "ewaste" type
+                          : ragPickerMarkerIcon
+                      }
+                    >
+                      <Popup>
+                        {location.name}
+                        <div>
+                          <a
+                            href={`https://www.google.com/maps/search/?api=1&query=${location.lat},${location.lon}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <button className="bg-green-800 p-2 m-2 text-white">
+                              Know More
+                            </button>
+                          </a>
+                          <button
+                            className="bg-green-800 p-2 m-2 text-white"
+                            onClick={() => handleShare(location.name)}
+                          >
+                            Share
+                          </button>
+                        </div>
+                      </Popup>
+                    </Marker>
+                  ))}
+                </MapContainer>
+              )}
+            </div>
+          </div>
+          <div className="md:flex w-full md:w-3/12 mx-auto my-4 text-center">
+            <div className=" w-11/12 md:w-11/12 mx-auto border-2 border-black rounded-lg h-full md:justify-end bg-white">
+              <Legend />
+            </div>
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 }
