@@ -142,7 +142,7 @@ export default function Report() {
       <div>
         <Header />
       </div>
-      <div className=" py-6 sm:py-8 lg:py-12 bg-green  ">
+      <div className=" py-6 sm:py-8 lg:py-12" style={{ background: "#E2F5D2" }}>
         <div className="mx-auto max-w-screen-xl px-4 md:px-8">
           <div className="grid gap-8 md:grid-cols-2 lg:gap-12 ">
             <div>
@@ -156,21 +156,27 @@ export default function Report() {
               </div>
             </div>
 
-            <div className="flex flex-col items-center justify-between alimd:pt-8 text-white">
-              <h2 className="mb-2 text-center text-4xl my-text font-custom font-semibold text-white md:mb-4 md:text-center">
+            <div className="flex flex-col justify-between alimd:pt-8 text-black">
+              <h2 className=" text-center text-4xl my-text font-fira-sans font-semibold md:text-center sm:py-8">
                 Report Improper Disposal!
+                {/* <span className="text-green-600">Greener</span>{" "} */}
               </h2>
 
-              <p className="mb-6  text-center sm:text-xl md:mb-8  text-white font-custom2  ">
-                If you come across any unauthorized dumpsite, overflowing
-                dustbin, or witness improper waste disposal,please report it to
-                the authorities by filling out the form below. Your contribution
-                helps maintain a clean and sustainable environment.
+              <p className="text-center mb-6 sm:text-xl md:mb-8 md:py-6 text-grey-200 font-custom2">
+                "Make a positive impact with our curated selection of
+                eco-friendly products. Join us in the journey towards a greener
+                tomorrow, where every choice matters. Explore sustainable
+                solutions for your everyday needs and discover how small changes
+                can lead to a significant difference!"
               </p>
 
-              <h2 className="mb-2 text-center text-4xl font-semibold my-text font-custom  md:mb-4 md:text-centre text-white ">
-                We got you covered!
-              </h2>
+              <div className="flex items-center justify-center mt-6">
+                <h2 className="mb-2 text-center text-4xl font-semibold my-text font-custom md:mb-4 md:text-center text-white">
+                  <span className="text-green-800">Empower</span> |{" "}
+                  <span className="text-green-600">Inspire</span> |{" "}
+                  <span className="text-green-800">Contribute</span>
+                </h2>
+              </div>
             </div>
           </div>
         </div>
@@ -312,7 +318,7 @@ export default function Report() {
               <button
                 // style={customStyle}
                 onClick={reportproblem}
-                className="inline-block rounded-lg px-8 py-3 bg-green-800 text-center text-sm font-semibold text-white outline-none ring-yellow-300 transition duration-100 hover:bg-green-600 focus-visible:ring md:text-base"
+                className="inline-block rounded-lg px-8 py-3 bg-green-600 text-center text-sm font-semibold text-white outline-none ring-yellow-300 transition duration-100 hover:bg-green-700 focus-visible:ring md:text-base"
               >
                 Report
               </button>
