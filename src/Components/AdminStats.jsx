@@ -16,6 +16,7 @@ function AdminStats(props) {
     const campaignSnapshot = await getDocs(q);
     const numberofCampaign = querySnapshot.size;
     setCampaignCount(numberofCampaign);
+    // console.log(campaignCount)
   };
 
   useEffect(() => {

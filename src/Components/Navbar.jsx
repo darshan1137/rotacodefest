@@ -620,7 +620,7 @@ function Navbar() {
                     Dashboard
                   </Link>
                 </li>
-                <li>
+                {/* <li>
                   <Link
                     to="/maps"
                     className="text-gray-500 hover:text-gray-700"
@@ -628,7 +628,7 @@ function Navbar() {
                   >
                     Maps
                   </Link>
-                </li>
+                </li> */}
                 <li>
                   <Link
                     to="/footprint"

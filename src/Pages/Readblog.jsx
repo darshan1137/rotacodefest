@@ -55,7 +55,7 @@ const Readblog = () => {
             Blog
           </h2>
 
-          <p className="mb-6 text-gray-500 sm:text-lg md:mb-8 border-l-4 border-green-800 p-4">{blog.blogContent}</p>
+          <p className="mb-6 text-gray-500 max-w-screen-xl text-justify sm:text-lg md:mb-8 border-l-4 border-green-800 p-4">{blog.blogContent}</p>
 
           {/* <blockquote className="mb-6 border-l-4 pl-4 italic text-gray-500 sm:text-lg md:mb-8 md:pl-6">
             {blog.quote}
