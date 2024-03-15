@@ -5,6 +5,7 @@ import { db } from "../Firebase/cofig";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { Link } from "react-router-dom";
 import Footer from "../Components/Footer";
+import { AnimatePresence, motion } from "framer-motion";
 
 function Ecommerce() {
   const [products, setProducts] = useState([]);
@@ -106,42 +107,58 @@ function Ecommerce() {
         </div>
 
         <section className="text-gray-600 my-5 body-font lg:px-32">
-          <div className="container px-5 py-15 mx-auto">
-            <div className="flex flex-wrap -m-4">
-              {products.map((product) => (
-                <div className="lg:w-1/4 md:w-1/2 p-4  w-full" key={product.id}>
-                  <div className="rounded-lg overflow-hidden px-2 h-[25rem] py-6 shadow-md hover:shadow-xl">
-                    <a className="block relative h-48 rounded overflow-hidden">
-                      <img
-                        alt="Product"
-                        className="object-cover object-center w-full h-full block"
-                        src={product.imageUrl}
-                      />
-                    </a>
-                    <div className="mt-4">
-                      <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">
-                        {product.category}
-                      </h3>
-                      <h2 className="text-gray-900 title-font text-lg font-medium overflow-clip">
-                        {product.name}
-                      </h2>
-                      <p className="mt-1">Rs{product.price}</p>
-                      <div className="mt-auto flex flex-initial">
-            <a
-              href={product.affiliatedlink}
-              target="_blank" // Open link in new tab
-              rel="noopener noreferrer"
-              className="mt-2 px-4 py-2 bg-green-500 text-white font-bold rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 no-underline"
-              style={{textDecoration:"none" }}
-            >
-              Shop Now
-            </a></div>
-                    </div>
+          <AnimatePresence>
+            <div className="container px-5 py-15 mx-auto">
+              <div className="flex flex-wrap -m-4">
+                {products.map((product) => (
+                  <div
+                    className="lg:w-1/4 md:w-1/2 p-4  w-full"
+                    key={product.id}
+                  >
+                    <motion.div
+                      key={product.id}
+                      whileHover={{ scale: 1.05 }} // Scale effect on hover
+                      className="rounded-lg overflow-hidden px-2 h-[25rem] py-6 shadow-md hover:shadow-xl"
+                      initial={{ opacity: 0, y: 20 }} // Initial animation
+                      animate={{ opacity: 1, y: 0 }} // Animation when component mounts
+                      exit={{ opacity: 0, y: -20 }} // Animation when component unmounts
+                      transition={{ duration: 0.5 }} // Transition duration
+                    >
+                      {/* <div className="rounded-lg overflow-hidden px-2 h-[25rem] py-6 shadow-md hover:shadow-xl"> */}
+                      <a className="block relative h-48 rounded overflow-hidden">
+                        <img
+                          alt="Product"
+                          className="object-cover object-center w-full h-full block"
+                          src={product.imageUrl}
+                        />
+                      </a>
+                      <div className="mt-4">
+                        <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">
+                          {product.category}
+                        </h3>
+                        <h2 className="text-gray-900 title-font text-lg font-medium overflow-clip">
+                          {product.name}
+                        </h2>
+                        <p className="mt-1">Rs{product.price}</p>
+                        <div className="mt-auto flex flex-initial">
+                          <a
+                            href={product.affiliatedlink}
+                            target="_blank" // Open link in new tab
+                            rel="noopener noreferrer"
+                            className="mt-2 px-4 py-2 bg-green-500 text-white font-bold rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 no-underline"
+                            style={{ textDecoration: "none" }}
+                          >
+                            Shop Now
+                          </a>
+                        </div>
+                      </div>
+                      {/* </div> */}
+                    </motion.div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
+          </AnimatePresence>
 
           <div className=" flex items-center justify-center sm:col-span-2">
             {/* <Link to="/addblog">
@@ -165,8 +182,8 @@ function Ecommerce() {
             </div>
           </div>
           <div className="h-1 bg-gray-200 rounded overflow-hidden">
-        <div className="w-ful h-full bg-green-500"></div>
-      </div>
+            <div className="w-ful h-full bg-green-500"></div>
+          </div>
         </section>
         {/* <section className="bg-green py-6 text-center text-white">
           <h2 className="text-3xl font-bold">
@@ -183,7 +200,6 @@ function Ecommerce() {
             See More
           </a>
         </section> */}
-        
       </div>
 
       <div>

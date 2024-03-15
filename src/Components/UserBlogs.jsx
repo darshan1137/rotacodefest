@@ -43,7 +43,7 @@ export default function Blogs() {
 
   return (
     <>
-      <div className="bg-white py-3 sm:py-9 lg:py-12">
+      <div className="bg-white py-3 sm:py-9 lg:py-12 ">
         <div className="mx-auto max-w-screen-2xl px-2 md:px-8">
           <div className="md:mb-16">
             <h2 className="text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl">
