@@ -115,14 +115,14 @@ export default function Blogs() {
               y: 0,
               transition: {
                 duration: 1,
-                delay: index * 0.2,
+                delay: index * 0.1,
               },
               animate: {
                 opacity: 1,
                 y: 0,
               },
             }}
-            viewport={{ once: false }}
+            viewport={{ once: true}}
           >
             <Link
               to={`/readblog/${blog.id}`}

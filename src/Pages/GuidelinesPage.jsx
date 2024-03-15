@@ -123,6 +123,7 @@ function GuidelinesPage() {
           <div className="container lg:justify-normal justify-center flex flex-wrap lg:px-32   ">
             {guides.map((guide, index) => {
               // console.log("Guide:", guide);
+              
               const imageFile = guide.files.find(
                 (file) =>
                   file.name.endsWith(".png") ||
