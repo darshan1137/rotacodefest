@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Banner from "../Components/Banner";
 import StatsView from "../Components/StatsView";
 import Footer from "../Components/Footer";
@@ -7,18 +7,27 @@ import Blogs from "../Components/Blogs";
 import Navbar from "../Components/Navbar";
 import FAQ from "../Components/FAQ";
 import Testimonial from "../Components/Testimonial";
+import Preloader from "../Components/Preloader"; 
 
 function LandingPage() {
+  const [isLoaded, setIsLoaded] = useState(false);
+
   return (
     <div>
-      <Navbar />
-      <Banner />
-      <StatsView />
-      <Products />
-      <Blogs />
-      <Testimonial/>
-      <FAQ />
-      <Footer />
+      {!isLoaded && <Preloader setIsLoaded={setIsLoaded} />}
+     
+      {isLoaded && (
+        <>
+          <Navbar />
+          <Banner />
+          <StatsView />
+          <Products />
+          <Blogs />
+          <Testimonial/>
+          <FAQ />
+          <Footer />
+        </>
+      )}
     </div>
   );
 }
