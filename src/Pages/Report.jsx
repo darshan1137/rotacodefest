@@ -151,7 +151,7 @@ export default function Report() {
                   src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSeqfxFqEbDmfqohJEb4dS3Nl7xAn7Hx0oheKpx7-R7iiCJZZu7"
                   loading="lazy"
                   alt="Photo by Martin Sanchez"
-                  className="h-full w-full object-cover object-center opacity-75"
+                  className="h-full w-full object-cover object-center opacity-90"
                 />
               </div>
             </div>
