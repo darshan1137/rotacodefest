@@ -139,20 +139,22 @@ function Footprint() {
       <div>
         <Navbar />
       </div>
-      <div
-        className="py-10 sm:py-10 lg:py-16 bg-cover bg-center relative"
-        style={{
-          backgroundImage:
-            'url("https://images.unsplash.com/photo-1597682754823-430ce5ef46d9?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")',
-          backgroundPosition: "center",
-          position: "relative",
-        }}
-      >
-        <div className="mx-auto max-w-screen-xxl px-4 md:px-8 py-12 md:py-16">
+      <div className="py-6 sm:py-8 lg:py-12 " style={{ background: "#E2F5D2" }}>
+        <div className="mx-auto max-w-screen-xl px-4 md:px-8">
           <div className="grid gap-8 md:grid-cols-2 lg:gap-12">
-            <div className="flex flex-col items-center justify-between pt-8 text-white">
-              <h2 className="mb-2 text-center text-4xl my-text font-custom font-semibold text-green-300 md:mb-4 md:text-center shadow-xl">
-                "calculate your carbon footprint and make a difference!"
+            <div>
+              <div className="overflow-hidden rounded-lg bg-green-100 shadow-lg">
+                <img
+                  src="https://img.freepik.com/premium-photo/ecology-environment-sustainable-concept-hand-man-holding-with-environment-icons_112554-867.jpg?w=900"                alt="Photo by Martin Sanchez"
+                  className="h-full w-full object-center"
+                />
+              </div>
+            </div>
+            <div className="flex flex-col justify-between alimd:pt-8 text-black">
+              <h2 className="mb-4 text-center text-4xl my-text font-fira-sans font-semibold md:text-center">
+                Calculate your{" "}
+                <span className="text-green-600">Carbon-footprints</span> and
+                make a difference!
               </h2>
 
               <p className="mb-6 text-center sm:text-xl md:mb-8 text-white-900 ">
@@ -161,6 +163,12 @@ function Footprint() {
                 Every calculation counts towards a greener planet. Join us today
                 and make a difference!
               </p>
+
+              <div className="flex items-center justify-center mt-6">
+                {/* <button className="px-4 py-2 bg-green-500 text-white font-bold rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
+                    Shop Now
+                  </button> */}
+              </div>
             </div>
           </div>
         </div>
@@ -377,7 +385,7 @@ function Footprint() {
             <div className="flex items-center justify-center sm:col-span-2">
               <button
                 type="submit"
-                className="inline-block rounded-lg px-8 py-3 bg-green-800 text-center text-sm font-semibold text-white outline-none ring-yellow-300 transition duration-100 hover:bg-green-600 focus-visible:ring md:text-base"
+                className="inline-block rounded-lg px-8 py-3 bg-green-600 text-center text-sm font-semibold text-white outline-none ring-yellow-300 transition duration-100 hover:bg-green-600 focus-visible:ring md:text-base"
                 onClick={handleSubmit}
               >
                 Calculate
