@@ -34,7 +34,7 @@ function AboutPage() {
           </div>
           <div className="grid md:grid-cols-3 gap-16">
             <div className="space-y-4">
-              <a href="#" target="_blank" className="space-y-4">
+              <div href="#" target="_blank" className="space-y-4">
                 <img
                   src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7HEU1P9fmbxhXjgICGNw4HMBH6TY5VNA5XhmecGo9S6tqtcMHWCTiz5vBsqz8N9VzNvY&usqp=CAU"
                   className="mx-auto h-40 w-40 rounded-full xl:w-56 xl:h-56"
@@ -43,7 +43,7 @@ function AboutPage() {
                 <h3 className="font-medium text-black text-2xl text-center">
                   Darshan Khapekar
                 </h3>
-              </a>
+              </div>
 
               <div className="flex space-x-4 justify-center items-center">
                 <a
@@ -86,7 +86,7 @@ function AboutPage() {
             </div>
 
             <div className="space-y-4">
-              <a href="#" target="_blank" className="space-y-4">
+              <div href="#" target="_blank" className="space-y-4">
               <img
             src={pranav}
             alt="Your Alt Text"
@@ -96,7 +96,7 @@ function AboutPage() {
                 <h3 className="font-medium text-black text-2xl text-center">
                 Pranav Pol
                 </h3>
-              </a>
+              </div>
 
               <div className="flex space-x-4 justify-center items-center">
                 <a
@@ -140,7 +140,7 @@ function AboutPage() {
             </div>
 
             <div className="space-y-4">
-              <a href="#" target="_blank" className="space-y-4">
+              <div href="#" target="_blank" className="space-y-4">
               <img
             src={shamaila}
             alt="Your Alt Text"
@@ -150,7 +150,7 @@ function AboutPage() {
                 <h3 className="font-medium text-black text-2xl text-center">
                   Shamaila Ansari
                 </h3>
-              </a>
+              </div>
 
               <div className="flex space-x-4 justify-center items-center">
                 <a
@@ -193,8 +193,12 @@ function AboutPage() {
               </div>
             </div>
 
+            </div>
+
+            <div className="mt-20 grid md:grid-cols-2 gap-16">
+
             <div className="space-y-4">
-              <a href="#" target="_blank" className="space-y-4">
+              <div href="#" target="_blank" className="space-y-4">
               <img
             src={sneha}
             alt="Your Alt Text"
@@ -204,7 +208,7 @@ function AboutPage() {
                 <h3 className="font-medium text-black text-2xl text-center">
                   Sneha R Sumbe
                 </h3>
-              </a>
+              </div>
 
               <div className="flex space-x-4 justify-center items-center">
                 <a
@@ -248,7 +252,7 @@ function AboutPage() {
             </div>
 
             <div className="space-y-4">
-              <a href="#" target="_blank" className="space-y-4">
+              <div href="#" target="_blank" className="space-y-4">
               <img
             src={shravani}
             alt="Your Alt Text"
@@ -258,7 +262,7 @@ function AboutPage() {
                 <h3 className="font-medium text-black text-2xl text-center">
                 Shravani Rasam
                 </h3>
-              </a>
+              </div>
 
               <div className="flex space-x-4 justify-center items-center">
                 <a
@@ -300,10 +304,11 @@ function AboutPage() {
                 </a>
               </div>
             </div>
+            </div>
 
 
             
-          </div>
+          
         </div>
       </div>
 

@@ -2,7 +2,7 @@ import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 // import video from "../assets"
-import video from "../assets/videoBG.mp4"
+import video from "../assets/videoBG.mp4";
 
 function Banner() {
   return (
@@ -15,12 +15,12 @@ function Banner() {
         style={{ opacity: 0.78 }}
       >
         <source
-          src={video} type="video/mp4"
+          src={video}
+          type="video/mp4"
           // src="https://tecdn.b-cdn.net/img/video/Tropical.mp4"
-         
         />
       </video>
-  
+
       <AnimatePresence>
         <motion.div
           className="absolute inset-0 flex flex-col justify-center items-center"
@@ -30,21 +30,18 @@ function Banner() {
           exit={{ opacity: 0, y: -50, scale: 0.8 }}
           transition={{ duration: 1, delay: 0.5 }}
         >
-          <div className="container px-5 py-25 max-w-3xl text-center bg-gray-100 p-10 bg-opacity-50 rounded-xl shadow-white" >
-            <h1 className="text-3xl font-bold sm:text-5xl text-green-900 m-3">
+          <div className="container px-2 sm:px-5 py-10 sm:py-25 max-w-screen-sm sm:max-w-3xl text-center bg-gray-100 p-5 sm:p-10 bg-opacity-50 rounded-xl shadow-white">
+            <h1 className="text-3xl sm:text-4xl font-extrabold text-green-900 m-3">
               Embrace a Greener Tomorrow
             </h1>
-            <p
-              className="mt-4 sm:text-xl/relaxed font-bold italic text-green-800"
-              // style={{ color: "white" }}
-            >
+            <p className="mt-4 sm:text-xl/relaxed font-bold italic text-green-800">
               "Make a positive impact with our eco-friendly products. Join us in
               the journey towards a greener tomorrow, where every choice
               matters."
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-4">
               <Link
-                className="block w-full rounded group relative bg-green-600 px-12 py-3 text-sm font-medium text-white shadow hover:bg-grey-700 focus:outline-none focus:ring active:bg-red-500 sm:w-auto"
+                className="block w-full rounded group relative bg-green-600 px-8 py-3 text-sm font-medium text-white shadow hover:bg-grey-700 focus:outline-none focus:ring active:bg-red-500 sm:w-auto"
                 to="/requestCampaign"
               >
                 <span className="absolute -start-full transition-all opacity-0 group-hover:opacity-100 group-hover:start-4">
@@ -63,15 +60,12 @@ function Banner() {
                     ></path>
                   </svg>
                 </span>
-
-                <span className="text-sm font-medium transition-all group-hover:ms-4">
-                  {" "}
-                  Request Campaign{" "}
+                <span className="text-sm font-medium transition-all group-hover:ms-2">
+                  Request Campaign
                 </span>
               </Link>
-
               <Link
-                className="block w-full rounded group relative bg-green-600 px-12 py-3 text-sm font-medium text-white shadow hover:bg-grey-700 focus:outline-none focus:ring active:bg-red-500 sm:w-auto"
+                className="block w-full rounded group relative bg-green-600 px-8 py-3 text-sm font-medium text-white shadow hover:bg-grey-700 focus:outline-none focus:ring active:bg-red-500 sm:w-auto"
                 to="/report"
               >
                 <span className="absolute -start-full transition-all opacity-0 group-hover:opacity-100 group-hover:start-4">
@@ -90,10 +84,8 @@ function Banner() {
                     ></path>
                   </svg>
                 </span>
-
                 <span className="text-sm font-medium transition-all group-hover:ms-2">
-                  {" "}
-                  Report Dumpgrounds{" "}
+                  Report Dumpgrounds
                 </span>
               </Link>
             </div>
