@@ -56,13 +56,13 @@ export default function Services() {
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="feather feather-check-circle"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="feather feather-map"
               >
-                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                <path d="M3 1l9 3 9-3v12l-9 3-9-3V1z"></path>
+                <path d="M9 3v12l9-3"></path>
               </svg>
 
               <h2 className="mt-4 text-xl font-bold text-black ">Maps</h2>

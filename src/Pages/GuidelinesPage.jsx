@@ -75,10 +75,11 @@ function GuidelinesPage() {
       <div>
         <Header />
 
-        <section className="text-gray-600 body-font bg-green w-ful h-full flex justify-center items-center">
+        <section className="text-gray-600 body-font  w-ful h-full flex justify-center items-center"
+        style={{ background: "#E2F5D2" }}>
           <div
             className="container p-10 py-20 mx-auto flex flex-col lg:flex-row items-center justify-center md:px-24"
-            style={{ background: "#E2F5D2" }}
+            
           >
             <div className="lg:w-1/2 lg:px-10 px-5 mb-10 lg:mb-0">
               <img

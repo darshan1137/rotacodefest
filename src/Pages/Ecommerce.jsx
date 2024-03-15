@@ -65,11 +65,14 @@ function Ecommerce() {
         <div>
           <Header />
         </div>
-        <div className="py-6 sm:py-8 lg:py-12 bg-green">
+        <div
+          className="py-6 sm:py-8 lg:py-12 "
+          style={{ background: "#E2F5D2" }}
+        >
           <div className="mx-auto max-w-screen-xl px-4 md:px-8">
             <div className="grid gap-8 md:grid-cols-2 lg:gap-12">
               <div>
-                <div className="overflow-hidden rounded-lg bg-gray-100 shadow-lg">
+                <div className="overflow-hidden rounded-lg bg-green-100 shadow-lg">
                   <img
                     src="https://www.conserve-energy-future.com/wp-content/uploads/2023/04/recycled-boxes.jpg"
                     loading="lazy"
@@ -78,12 +81,13 @@ function Ecommerce() {
                   />
                 </div>
               </div>
-              <div className="flex flex-col justify-between alimd:pt-8 text-white">
+              <div className="flex flex-col justify-between alimd:pt-8 text-black">
                 <h2 className="mb-5 text-center text-4xl my-text font-fira-sans font-semibold md:text-center">
-                  Embrace a Greener Tomorrow
+                  Embrace a <span className="text-green-600">Greener</span>{" "}
+                  Tomorrow
                 </h2>
 
-                <p className="text-center mb-6 sm:text-xl md:mb-8 text-white font-custom2">
+                <p className="text-center mb-6 sm:text-xl md:mb-8 text-grey-200 font-custom2">
                   "Make a positive impact with our curated selection of
                   eco-friendly products. Join us in the journey towards a
                   greener tomorrow, where every choice matters. Explore
@@ -92,16 +96,16 @@ function Ecommerce() {
                 </p>
 
                 <div className="flex items-center justify-center mt-6">
-                  <button className="px-4 py-2 bg-green-500 text-white font-bold rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
+                  {/* <button className="px-4 py-2 bg-green-500 text-white font-bold rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
                     Shop Now
-                  </button>
+                  </button> */}
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        <section className="text-gray-600 my-5 body-font">
+        <section className="text-gray-600 my-5 body-font lg:px-32">
           <div className="container px-5 py-15 mx-auto">
             <div className="flex flex-wrap -m-4">
               {products.map((product) => (
@@ -158,8 +162,11 @@ function Ecommerce() {
               </p>
             </div>
           </div>
+          <div className="h-1 bg-gray-200 rounded overflow-hidden">
+        <div className="w-ful h-full bg-green-500"></div>
+      </div>
         </section>
-        <section className="bg-green py-6 text-center text-white">
+        {/* <section className="bg-green py-6 text-center text-white">
           <h2 className="text-3xl font-bold">
             Explore More Sustainable Solutions
           </h2>
@@ -169,11 +176,12 @@ function Ecommerce() {
           </p>
           <a
             href="#"
-            className="underline bg-green-600 px-4 py-2 rounded-md font-bold hover:bg-green-700"
+            className=" bg-green-600 px-4 py-2 rounded-md font-bold hover:bg-green-700 hover:no-underline text-decoration-none"
           >
             See More
           </a>
-        </section>
+        </section> */}
+        
       </div>
 
       <div>

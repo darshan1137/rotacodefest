@@ -3,6 +3,7 @@ import Header from "../Components/Navbar";
 import Footer from "../Components/Footer";
 import AboutIntro from "../Components/About-Us/AboutIntro";
 import Services from "../Components/About-Us/Services";
+import pranav from "../assets/pranav.jpg"
 
 function AboutPage() {
   return (
@@ -11,18 +12,21 @@ function AboutPage() {
         <Header />
         <AboutIntro />
         <Services />
-        <div className="py-6 sm:py-8 lg:py-12 bg-green md:px-28">
+        <div
+          className="py-6 sm:py-8 lg:py-12  md:px-28"
+          style={{ background: "#E2F5D2" }}
+        >
           <div className="flex flex-col text-center w-full mb-20">
             <h1
               className="text-2xl text-center text-4xl my-text font-fira-sans font-semibold md:text-center mb-4"
-              style={{ color: "white" }}
+              style={{ color: "black" }}
             >
               OUR TEAM
             </h1>
-            <p className="lg:w-2/3 mx-auto leading-relaxed text-base text-white px-4 ">
-              Want to learn more about the team behind this website? Visit our
-              team page [link] or connect with us on social media! We're always
-              happy to hear from you and value your feedback.
+            <p className="lg:w-2/3 mx-auto leading-relaxed text-base text-black px-4 ">
+              Want to learn more about the team behind this website?connect with
+              us on social media! We're always happy to hear from you and value
+              your feedback.
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-16">
@@ -33,7 +37,7 @@ function AboutPage() {
                   className="mx-auto h-40 w-40 rounded-full xl:w-56 xl:h-56"
                 />
 
-                <h3 className="font-medium text-white text-2xl text-center">
+                <h3 className="font-medium text-black text-2xl text-center">
                   Darshan Khapekar
                 </h3>
               </a>
@@ -80,18 +84,19 @@ function AboutPage() {
 
             <div className="space-y-4">
               <a href="#" target="_blank" className="space-y-4">
-                <img
-                  src="https://randomuser.me/api/portraits/men/4.jpg"
-                  className="mx-auto h-40 w-40 rounded-full xl:w-56 xl:h-56"
-                />
+              <img
+            src={pranav}
+            alt="Your Alt Text"
+            className="mx-auto h-40 w-40 rounded-full xl:w-56 xl:h-56"
+          />
 
-                <h3 className="font-medium text-white text-2xl text-center">
+                <h3 className="font-medium text-black text-2xl text-center">
                   Pranav Pol
                 </h3>
               </a>
 
               <div className="flex space-x-4 justify-center items-center">
-              <a
+                <a
                   href="https://www.linkedin.com/in/pranav-pol-9b6774224/"
                   target="_blank"
                   className="text-gray-400 hover:text-gray-500"
@@ -138,7 +143,7 @@ function AboutPage() {
                   className="mx-auto h-40 w-40 rounded-full xl:w-56 xl:h-56"
                 />
 
-                <h3 className="font-medium text-white text-2xl text-center">
+                <h3 className="font-medium text-black text-2xl text-center">
                   Ray
                 </h3>
               </a>
@@ -190,7 +195,7 @@ function AboutPage() {
                   className="mx-auto h-40 w-40 rounded-full xl:w-56 xl:h-56"
                 />
 
-                <h3 className="font-medium text-white text-2xl text-center">
+                <h3 className="font-medium text-black text-2xl text-center">
                   Zep Fietje
                 </h3>
               </a>
@@ -242,7 +247,7 @@ function AboutPage() {
                   className="mx-auto h-40 w-40 rounded-full xl:w-56 xl:h-56"
                 />
 
-                <h3 className="font-medium text-white text-2xl text-center">
+                <h3 className="font-medium text-black text-2xl text-center">
                   Jane doe
                 </h3>
               </a>

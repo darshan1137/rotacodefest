@@ -14,10 +14,12 @@ import {
 } from "firebase/firestore";
 import Footer from "../Components/Footer.jsx";
 import Loader from "../Components/Loader.jsx";
+import { AnimatePresence, motion } from "framer-motion";
 
 export default function Blogs() {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedBlogId, setSelectedBlogId] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -94,11 +96,23 @@ export default function Blogs() {
         </header>
 
         <div className="md:px-20 m-5 grid gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-8">
-          {blogs.map((blog) => (
+      <AnimatePresence>
+        {blogs.map((blog) => (
+          <motion.div
+            key={blog.id}
+            whileHover={{ scale: 1.05 }} // Scale effect on hover
+            className="group relative m-3 flex h-48 flex-col overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-50 xl:h-80"
+            initial={{ opacity: 0, y: 20 }} // Initial animation
+            animate={{ opacity: 1, y: 0 }} // Animation when component mounts
+            exit={{ opacity: 0, y: -20 }} // Animation when component unmounts
+            transition={{ duration: 0.5 }} // Transition duration
+          >
             <Link
-              key={blog.id}
               to={`/readblog/${blog.id}`}
-              className="group relative m-3 flex h-48 flex-col overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-50 xl:h-80"
+              className={`relative flex h-full ${
+                selectedBlogId === blog.id ? 'selected' : ''
+              }`}
+              onClick={() => setSelectedBlogId(blog.id)}
             >
               <img
                 src={blog.imglink}
@@ -121,12 +135,13 @@ export default function Blogs() {
                 <span className="font-semibold text-indigo-300">Read more</span>
               </div>
             </Link>
-          ))}
-        </div>
+          </motion.div>
+        ))}
+      </AnimatePresence>
+    </div>
+        
       </div>
-      <div>
-        <Footer />
-      </div>
+      <Footer />
     </>
   );
 }
