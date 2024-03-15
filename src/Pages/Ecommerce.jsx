@@ -96,10 +96,15 @@ function Ecommerce() {
                   small changes can lead to a significant difference!"
                 </p>
 
-                <div className="flex items-center justify-center mt-6">
-                  {/* <button className="px-4 py-2 bg-green-500 text-white font-bold rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
-                    Shop Now
-                  </button> */}
+                <div className="flex items-center justify-center">
+                  <Link to="/requestproduct">
+                    <button
+                      type="submit"
+                      className="inline-block my-10 rounded-lg bg-green-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-green-300 transition duration-100 hover:bg-green-600 focus-visible:ring active:bg-green-700 md:text-base"
+                    >
+                      Add Product
+                    </button>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -110,17 +115,15 @@ function Ecommerce() {
           <AnimatePresence>
             <div className="container px-5 py-15 mx-auto ">
               <div className="flex flex-wrap -m-4">
-                {products.map((product,index) => (
+                {products.map((product, index) => (
                   <motion.div
-                    className="lg:w-1/4 md:w-1/2 p-4  w-full "
+                    className="lg:w-1/4 md:w-1/2 p-4 w-full"
                     key={product.id}
                     initial={{
                       opacity: 0,
-  
                       y: 50,
                     }}
-                    whileHover={{scale:1.05}}
-
+                    whileHover={{ scale: 1.05 }}
                     whileInView={{
                       opacity: 1,
                       y: 0,
@@ -135,16 +138,15 @@ function Ecommerce() {
                     }}
                     viewport={{ once: true }}
                   >
-                    
-                      <div className="rounded-lg overflow-hidden px-2 h-[25rem] py-6 shadow-md hover:shadow-xl bg-gray-100">
-                      <a className="block relative h-48 rounded overflow-hidden ">
+                    <div className="rounded-lg overflow-hidden px-2 h-[25rem] py-6 shadow-md hover:shadow-xl bg-gray-100 flex flex-col">
+                      <a className="block relative h-48 rounded overflow-hidden">
                         <img
                           alt="Product"
                           className="object-cover object-center w-full h-full block"
                           src={product.imageUrl}
                         />
                       </a>
-                      <div className="mt-4">
+                      <div className="mt-4 flex-grow">
                         <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">
                           {product.category}
                         </h3>
@@ -152,20 +154,19 @@ function Ecommerce() {
                           {product.name}
                         </h2>
                         <p className="mt-1">Rs{product.price}</p>
-                        <div className="mt-auto flex flex-initial">
-                          <a
-                            href={product.affiliatedlink}
-                            target="_blank" // Open link in new tab
-                            rel="noopener noreferrer"
-                            className="mt-2 px-4 py-2 bg-green-500 text-white font-bold rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 no-underline"
-                            style={{ textDecoration: "none" }}
-                          >
-                            Shop Now
-                          </a>
-                        </div>
                       </div>
+                      <div className="mt-auto">
+                        <a
+                          href={product.affiliatedlink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="mt-2 px-4 py-2 bg-green-500 text-white font-bold rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 no-underline"
+                          style={{ textDecoration: "none" }}
+                        >
+                          Shop Now
+                        </a>
                       </div>
-                    
+                    </div>
                   </motion.div>
                 ))}
               </div>
@@ -173,15 +174,7 @@ function Ecommerce() {
           </AnimatePresence>
 
           <div className=" flex items-center justify-center sm:col-span-2">
-            {/* <Link to="/addblog">
-          <button
-            type="submit"
-            className="inline-block my-10 rounded-lg bg-green-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-green-300 transition duration-100 hover:bg-green-600 focus-visible:ring active:bg-green-700 md:text-base"
-          >
-            Add Product
-          </button>
-        </Link> */}
-            <div className="mb-10  mx-auto max-w-100 text-center mt-5">
+            {/* <div className="mb-10  mx-auto max-w-100 text-center mt-5">
               <p className="text-green-800 sm:text-lg ">
                 Want to sell your own Eco-friendly product here?{" "}
                 <Link
@@ -191,7 +184,7 @@ function Ecommerce() {
                   Add product
                 </Link>
               </p>
-            </div>
+            </div> */}
           </div>
           <div className="h-1 bg-gray-200 rounded overflow-hidden">
             <div className="w-ful h-full bg-green-500"></div>
