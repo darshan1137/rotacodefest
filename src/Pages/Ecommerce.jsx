@@ -110,7 +110,7 @@ function Ecommerce() {
             <div className="flex flex-wrap -m-4">
               {products.map((product) => (
                 <div className="lg:w-1/4 md:w-1/2 p-4  w-full" key={product.id}>
-                  <div className="rounded-lg overflow-hidden px-2 py-6 shadow-md hover:shadow-xl">
+                  <div className="rounded-lg overflow-hidden px-2 h-[25rem] py-6 shadow-md hover:shadow-xl">
                     <a className="block relative h-48 rounded overflow-hidden">
                       <img
                         alt="Product"
@@ -122,18 +122,20 @@ function Ecommerce() {
                       <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">
                         {product.category}
                       </h3>
-                      <h2 className="text-gray-900 title-font text-lg font-medium">
+                      <h2 className="text-gray-900 title-font text-lg font-medium overflow-clip">
                         {product.name}
                       </h2>
                       <p className="mt-1">Rs{product.price}</p>
-                      <button
-                        onClick={() =>
-                          (window.location.href = product.affiliatedlink)
-                        }
-                        className="mt-2 px-4 py-2 bg-green-500 text-white font-bold rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
-                      >
-                        Shop Now
-                      </button>
+                      <div className="mt-auto flex flex-initial">
+            <a
+              href={product.affiliatedlink}
+              target="_blank" // Open link in new tab
+              rel="noopener noreferrer"
+              className="mt-2 px-4 py-2 bg-green-500 text-white font-bold rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 no-underline"
+              style={{textDecoration:"none" }}
+            >
+              Shop Now
+            </a></div>
                     </div>
                   </div>
                 </div>
