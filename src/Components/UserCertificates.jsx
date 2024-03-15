@@ -120,7 +120,7 @@ export default function UserCertificates() {
         ) : (
           <div className="mt-2 ">
             <h2 className="text-xl font-bold mb-4">
-              Download Your certificates here
+              Download your certificates here
             </h2>
             <div className="flec justify-center">
             <table className="w-full border border-collapse border-green-500 ">

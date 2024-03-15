@@ -53,11 +53,12 @@ const AddBlog = () => {
         <div className="mx-auto max-w-screen-md">
           <div className="mb-6 bg-white p-4 rounded-lg shadow-md">
             <h2 className="mb-4 text-center text-3xl font-bold text-gray-800 md:mb-6 lg:text-4xl">
-              Add Your Own Forest Blog!
+              Contribute to Our Waste Management Blog!
             </h2>
 
             <p className="mx-auto max-w-screen-md text-center text-gray-500 md:text-lg">
-              Share your forest exploration experiences with the world.
+              Share your insights and experiences in waste management with our
+              community.
             </p>
 
             <form
