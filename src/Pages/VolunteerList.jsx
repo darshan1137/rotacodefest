@@ -11,6 +11,7 @@ export default function VolunteerList() {
   const [request, setRequest] = useState(null);
   const [generatedCertificates, setGeneratedCertificates] = useState([]);
   const [disabledButtons, setDisabledButtons] = useState([]);
+  const [campaignExpired, setCampaignExpired] = useState(false);
 
   useEffect(() => {
     const fetchRequestData = async () => {
@@ -29,6 +30,34 @@ export default function VolunteerList() {
     };
 
     fetchRequestData();
+  }, [id]);
+
+  useEffect(() => {
+    const fetchExpireDate = async () => {
+      try {
+        const requestRef = doc(db, "requests", id);
+        const requestData = await getDoc(requestRef);
+
+        if (requestData.exists()) {
+          setRequest(requestData.data());
+          const currentDate = new Date();
+          const campaignEndDate = new Date(requestData.data().date);
+          console.log(currentDate)
+          console.log(campaignEndDate)
+
+          if (currentDate > campaignEndDate) {
+            setCampaignExpired(true);
+          }
+          console.log(campaignExpired)
+        } else {
+          console.log("Request not found");
+        }
+      } catch (error) {
+        console.error("Error fetching request data:", error);
+      }
+    };
+
+    fetchExpireDate();
   }, [id]);
 
   useEffect(() => {
@@ -158,65 +187,64 @@ export default function VolunteerList() {
       </div>
 
       <div className="mx-10 my-10 px-10">
-        {request &&
-        Array.isArray(request.volunteers) &&
-        request.volunteers.length > 0 ? (
-          <div className="mt-8">
-            <h2 className="text-xl font-bold mb-4">Registered Volunteers</h2>
-            <table className="w-full border border-collapse border-green-900">
-              <thead>
-                <tr className="bg-green-600 text-white">
-                  <th className="py-2 px-4 border border-green-500">Sr. No.</th>
-                  <th className="py-2 px-4 border border-green-500">
-                    Volunteers
-                  </th>
-                  <th className="py-2 px-4 border border-green-500">
-                    Generate Certificate
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {request.volunteers.map((volunteer, index) => (
-                  <tr
-                    key={index}
-                    className={
-                      index % 2 === 0 ? "bg-green-200" : "bg-green-100"
-                    }
-                  >
-                    <td className="py-2 px-4 border border-green-500">
-                      {index + 1}
-                    </td>
-                    <td className="py-2 px-4 border border-green-500">
-                      {volunteer}
-                    </td>
-                    <td className="py-2 px-4 border border-green-500">
-                      <button
-                        className={`py-1 px-2 rounded-md ${
-                          generatedCertificates.includes(index) ||
-                          disabledButtons[index]
-                            ? "bg-gray-500 text-gray-300 cursor-not-allowed"
-                            : "bg-green-500 text-white"
-                        }`}
-                        onClick={() => generateCertificate(volunteer, index)}
-                        disabled={
-                          generatedCertificates.includes(index) ||
-                          disabledButtons[index]
-                        }
-                      >
-                        Generate
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        ) : (
-          <div className="mt-8 text-center text-gray-500 font-bold text-2xl">
-            <p>Hold tight, we're still waiting for volunteers to register.</p>
-          </div>
-        )}
+  {request &&
+    Array.isArray(request.volunteers) &&
+    request.volunteers.length > 0 ? (
+      <div className="mt-8">
+        <h2 className="text-xl font-bold mb-4">Registered Volunteers</h2>
+        <table className="w-full border border-collapse border-green-900">
+          <thead>
+            <tr className="bg-green-600 text-white">
+              <th className="py-2 px-4 border border-green-500">Sr. No.</th>
+              <th className="py-2 px-4 border border-green-500">Volunteers</th>
+              {campaignExpired && (
+                <th className="py-2 px-4 border border-green-500">
+                  Generate Certificate
+                </th>
+              )}
+            </tr>
+          </thead>
+          <tbody>
+            {request.volunteers.map((volunteer, index) => (
+              <tr
+                key={index}
+                className={index % 2 === 0 ? "bg-green-200" : "bg-green-100"}
+              >
+                <td className="py-2 px-4 border border-green-500">
+                  {index + 1}
+                </td>
+                <td className="py-2 px-4 border border-green-500">{volunteer}</td>
+                {campaignExpired && (
+                  <td className="py-2 px-4 border border-green-500">
+                    <button
+                      className={`py-1 px-2 rounded-md ${
+                        generatedCertificates.includes(index) ||
+                        disabledButtons[index]
+                          ? "bg-gray-500 text-gray-300 cursor-not-allowed"
+                          : "bg-green-500 text-white"
+                      }`}
+                      onClick={() => generateCertificate(volunteer, index)}
+                      disabled={
+                        generatedCertificates.includes(index) ||
+                        disabledButtons[index]
+                      }
+                    >
+                      Generate
+                    </button>
+                  </td>
+                )}
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
+    ) : (
+      <div className="mt-8 text-center text-gray-500 font-bold text-2xl">
+        <p>Hold tight, we're still waiting for volunteers to register.</p>
+      </div>
+    )}
+</div>
+
     </>
   );
 }
