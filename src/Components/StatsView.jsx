@@ -58,7 +58,7 @@ function StatsView() {
             <h1 className="text-3xl font-bold text-gray-900 sm:text-3xl py-2">
               Statistical Overview
             </h1>
-            <p className="lg:w-2/3 mx-auto leading-relaxed text-base text-justify text-center">
+            <p className="lg:w-2/3 mx-auto leading-relaxed text-base text-center">
               Waste Wise Web is committed to addressing environmental concerns
               by providing real-time and accurate statistics, fostering
               awareness, and contributing to solutions for a sustainable and
