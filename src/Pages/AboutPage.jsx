@@ -6,7 +6,8 @@ import Services from "../Components/About-Us/Services";
 import pranav from "../assets/pranav.jpg";
 import shamaila from "../assets/shamaila.jpeg";
 import sneha from "../assets/sneha.jpeg";
-import shravani from "../assets/shravani.jpg"
+import shravani from "../assets/shravani.jpg";
+import darshan from "../assets/darshan.png";
 
 function AboutPage() {
   return (
@@ -36,7 +37,7 @@ function AboutPage() {
             <div className="space-y-4">
               <div href="#" target="_blank" className="space-y-4">
                 <img
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7HEU1P9fmbxhXjgICGNw4HMBH6TY5VNA5XhmecGo9S6tqtcMHWCTiz5vBsqz8N9VzNvY&usqp=CAU"
+                  src={darshan}
                   className="mx-auto h-40 w-40 rounded-full xl:w-56 xl:h-56"
                 />
 
@@ -87,14 +88,14 @@ function AboutPage() {
 
             <div className="space-y-4">
               <div href="#" target="_blank" className="space-y-4">
-              <img
-            src={pranav}
-            alt="Your Alt Text"
-            className="mx-auto h-40 w-40 rounded-full xl:w-56 xl:h-56"
-          />
+                <img
+                  src={pranav}
+                  alt="Your Alt Text"
+                  className="mx-auto h-40 w-40 rounded-full xl:w-56 xl:h-56"
+                />
 
                 <h3 className="font-medium text-black text-2xl text-center">
-                Pranav Pol
+                  Pranav Pol
                 </h3>
               </div>
 
@@ -141,11 +142,11 @@ function AboutPage() {
 
             <div className="space-y-4">
               <div href="#" target="_blank" className="space-y-4">
-              <img
-            src={shamaila}
-            alt="Your Alt Text"
-            className="mx-auto h-40 w-40 rounded-full xl:w-56 xl:h-56"
-          />
+                <img
+                  src={shamaila}
+                  alt="Your Alt Text"
+                  className="mx-auto h-40 w-40 rounded-full xl:w-56 xl:h-56"
+                />
 
                 <h3 className="font-medium text-black text-2xl text-center">
                   Shamaila Ansari
@@ -192,18 +193,16 @@ function AboutPage() {
                 </a>
               </div>
             </div>
+          </div>
 
-            </div>
-
-            <div className="mt-20 grid md:grid-cols-2 gap-16">
-
+          <div className="mt-20 grid md:grid-cols-2 gap-16">
             <div className="space-y-4">
               <div href="#" target="_blank" className="space-y-4">
-              <img
-            src={sneha}
-            alt="Your Alt Text"
-            className="mx-auto h-40 w-40 rounded-full xl:w-56 xl:h-56"
-          />
+                <img
+                  src={sneha}
+                  alt="Your Alt Text"
+                  className="mx-auto h-40 w-40 rounded-full xl:w-56 xl:h-56"
+                />
 
                 <h3 className="font-medium text-black text-2xl text-center">
                   Sneha R Sumbe
@@ -253,14 +252,14 @@ function AboutPage() {
 
             <div className="space-y-4">
               <div href="#" target="_blank" className="space-y-4">
-              <img
-            src={shravani}
-            alt="Your Alt Text"
-            className="mx-auto h-40 w-40 rounded-full xl:w-56 xl:h-56"
-          />
+                <img
+                  src={shravani}
+                  alt="Your Alt Text"
+                  className="mx-auto h-40 w-40 rounded-full xl:w-56 xl:h-56"
+                />
 
                 <h3 className="font-medium text-black text-2xl text-center">
-                Shravani Rasam
+                  Shravani Rasam
                 </h3>
               </div>
 
@@ -304,11 +303,7 @@ function AboutPage() {
                 </a>
               </div>
             </div>
-            </div>
-
-
-            
-          
+          </div>
         </div>
       </div>
 

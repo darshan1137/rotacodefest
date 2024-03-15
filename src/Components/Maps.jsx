@@ -187,7 +187,7 @@ export default function Maps() {
         <div className="mx-auto text-center md:w-8/12 py-4">
           <h2 className="text-3xl font-bold sm:text-4xl ">Bin Locator</h2>
 
-          <p className="mt-4">
+          <p className="mt-4 px-4">
             A digital tool facilitating efficient waste management by
             pinpointing the locations of various bins for different types of
             waste, including dustbins, recycling bins, e-waste bins, and areas
@@ -257,17 +257,13 @@ export default function Maps() {
                 </MapContainer>
               )}
             </div>
-            
-            
           </div>
           <div className="md:flex w-full md:w-3/12 mx-auto my-4 text-center">
             <div className=" w-11/12 md:w-11/12 mx-auto border-2 border-black rounded-lg h-full md:justify-end bg-white">
               <Legend />
             </div>
           </div>
-          
         </div>
-        
       </div>
       <Footer />
     </>

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { db } from "../Firebase/cofig.js";
 import { addDoc, serverTimestamp, collection } from "firebase/firestore";
 import Navbar from "../Components/Navbar.jsx";
+import Footer from "../Components/Footer.jsx";
 
 const AddBlog = () => {
   const navigate = useNavigate();
@@ -155,6 +156,7 @@ const AddBlog = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 };

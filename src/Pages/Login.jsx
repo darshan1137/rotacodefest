@@ -7,6 +7,7 @@ import { db } from "../Firebase/cofig";
 import Navbar from "./../Components/Navbar";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Footer from "../Components/Footer";
 
 function Login() {
   const [userName, setUserName] = useState("");
@@ -44,7 +45,6 @@ function Login() {
           const data = docSnap.data();
           const dbPass = data.password;
           const dbEmail = data.email;
-         
 
           if (dbPass === password) {
             // Successful login
@@ -56,7 +56,6 @@ function Login() {
               localStorage.setItem("isAdmin", false);
               localStorage.setItem("username", userName);
               localStorage.setItem("email", dbEmail);
-              
             }
             toast.success("Successful login", 1000);
             navigate("/");
@@ -91,7 +90,7 @@ function Login() {
   };
 
   return (
-    <>
+    <div className="overflow-hidden">
       <div>
         <Navbar />
       </div>
@@ -102,7 +101,7 @@ function Login() {
           backgroundSize: "cover",
         }}
       >
-        <div className="py-6 sm:py-8 lg:py-12 w-screen h-screen flex justify-center items-center">
+        <div className="py-6 sm:py-8 lg:py-12 w-screen h-screen flex justify-center items-center ">
           <div className="bg-white/60 max-w-md py-6 px-4 rounded-lg md:px-8 shadow-lg shadow-slate-200 sm:w-full">
             <h2 className="mb-4 text-center text-2xl font-bold text-teal-800 md:mb-8 lg:text-3xl">
               Login
@@ -198,10 +197,7 @@ function Login() {
                   Don't have an account?{" "}
                   <Link to="/signup">
                     {" "}
-                    <a
-                      href="#"
-                      className="text-teal-500 transition duration-100 hover:text-teal-600 active:text-teal-700"
-                    >
+                    <a className="text-teal-500 transition duration-100 hover:text-teal-600 active:text-teal-700">
                       Register
                     </a>
                   </Link>
@@ -211,7 +207,8 @@ function Login() {
           </div>
         </div>
       </div>
-    </>
+      <Footer />
+    </div>
   );
 }
 

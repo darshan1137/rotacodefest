@@ -44,23 +44,9 @@ function App() {
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/about" element={<AboutPage />} />
-          <Route
-            path="/ecommerce"
-            element={
-              <ProtectedRoute user={username} route="/login">
-                <Ecommerce />{" "}
-              </ProtectedRoute>
-            }
-          />
+          <Route path="/ecommerce" element={<Ecommerce />} />
           <Route path="/login" element={<Login />} />
-          <Route
-            path="/signup"
-            element={
-              <ProtectedRoute user={username} route="/login">
-                <SignUpPage />{" "}
-              </ProtectedRoute>
-            }
-          />
+          <Route path="/signup" element={<SignUpPage />} />
           <Route
             path="/register"
             element={
@@ -79,14 +65,7 @@ function App() {
               </ProtectedRoute>
             }
           />
-          <Route
-            path="/blogs"
-            element={
-              <ProtectedRoute user={username} route="/login">
-                <Blogs />{" "}
-              </ProtectedRoute>
-            }
-          />
+          <Route path="/blogs" element={<Blogs />} />
           <Route
             path="/readblog/:id"
             element={
@@ -127,7 +106,6 @@ function App() {
               </ProtectedRoute>
             }
           />
-          <Route path="/loader" element={<Loader />} />
           <Route
             path="/requestproduct"
             element={

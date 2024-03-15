@@ -418,28 +418,23 @@ function Navbar() {
                         href="#"
                         className="text-gray-500 hover:text-green-500 "
                         style={{ textDecoration: "none" }}
-                        
                       >
                         More
-                      
-
-                      <button
-                        className="h-full px-2 text-gray-500 hover:text-green-500"
-                      >
-                        <span className="sr-only">Menu</span>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="h-4 w-4"
-                          viewBox="0 0 20 20"
-                          fill="currentColor"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
-                      </button>
+                        <button className="h-full px-2 text-gray-500 hover:text-green-500">
+                          <span className="sr-only">Menu</span>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-4 w-4"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        </button>
                       </a>
                     </div>
                     {isOpen && (
@@ -452,7 +447,6 @@ function Navbar() {
                             to="/maps"
                             className="block py-2 px-4 text-gray-700 hover:text-green-500"
                             style={{ textDecoration: "none" }}
-
                           >
                             Bin Locator
                           </Link>
@@ -462,9 +456,17 @@ function Navbar() {
                             to="/footprint"
                             className="block py-2 px-4 text-gray-700 hover:text-green-500"
                             style={{ textDecoration: "none" }}
-
                           >
                             Carbon Footprint
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            to="/requestcampaign"
+                            className="block py-2 px-4 text-gray-700 hover:text-green-500"
+                            style={{ textDecoration: "none" }}
+                          >
+                            Request Campaign
                           </Link>
                         </li>
                         <li>
@@ -472,7 +474,6 @@ function Navbar() {
                             to="/report"
                             className="block py-2 px-4 text-gray-700 hover:text-green-500"
                             style={{ textDecoration: "none" }}
-
                           >
                             Report Dumpgrounds
                           </Link>
@@ -636,6 +637,15 @@ function Navbar() {
                     onClick={closeMenu}
                   >
                     Carbon Footprint
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/requestcampaign"
+                    className="text-gray-500 hover:text-gray-700"
+                    onClick={closeMenu}
+                  >
+                    Request Campaign
                   </Link>
                 </li>
                 <li>

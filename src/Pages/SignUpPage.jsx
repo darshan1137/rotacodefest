@@ -1,4 +1,4 @@
-import React, { useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { sendEmailVerification } from "firebase/auth";
 import { Link } from "react-router-dom";
@@ -7,6 +7,7 @@ import { doc, setDoc, serverTimestamp } from "firebase/firestore";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { db } from "../Firebase/cofig.js";
 import Navbar from "./../Components/Navbar";
+import Footer from "./../Components/Footer";
 
 function SignUpPage() {
   const [userName, setUserName] = useState("");
@@ -26,10 +27,10 @@ function SignUpPage() {
   //       if (password === confirmPassword) {
   //         // Create user in Firebase Authentication
   //         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-  
+
   //         // Send email verification
   //         await sendEmailVerification(userCredential.user);
-  
+
   //         // Check if the email is verified
   //         if (userCredential.user.emailVerified) {
   //           // Add user details to Firestore only if email is verified
@@ -42,9 +43,9 @@ function SignUpPage() {
   //             ...userDetails,
   //             createdAt: serverTimestamp(),
   //           });
-  
+
   //           console.log("User successfully signed up and added to the database:", userCredential.user);
-  
+
   //           // Navigate to /register
   //           navigate("/register", {
   //             state: {
@@ -69,29 +70,36 @@ function SignUpPage() {
   //     alert("Error during sign up. Please try again.");
   //   }
   // };
-  
 
   const handleAddUser = async () => {
     try {
       // Validate inputs
-      if (userName.trim() !== "" && email.trim() !== "" && password.trim() !== "") {
+      if (
+        userName.trim() !== "" &&
+        email.trim() !== "" &&
+        password.trim() !== ""
+      ) {
         if (password === confirmPassword) {
           // Create user in Firebase Authentication
-          const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-  
+          const userCredential = await createUserWithEmailAndPassword(
+            auth,
+            email,
+            password
+          );
+
           // Add user details to Firestore
           const userDetails = {
             userName: userName,
             email: email,
             role: role,
           };
-  
+
           // Add user to Firestore
           // await setDoc(doc(db, "users", userName), {
           //   ...userDetails,
           //   createdAt: serverTimestamp(),
           // });
-  
+
           console.log("User successfully signed up:", userCredential.user);
           navigate("/register", {
             state: {
@@ -110,7 +118,7 @@ function SignUpPage() {
       alert("Error during sign up. Please try again.");
     }
   };
-  
+
   // Function to delete the user account in Authentication
   const deleteAccount = async (user) => {
     try {
@@ -120,8 +128,7 @@ function SignUpPage() {
       console.error("Error deleting user from Authentication:", error.message);
     }
   };
-  
-  
+
   const checkEmailVerification = async (user) => {
     try {
       const userRecord = await auth.currentUser.reload();
@@ -131,9 +138,7 @@ function SignUpPage() {
       return false;
     }
   };
-  
-  
-  
+
   const handleGoogleLogin = async () => {
     try {
       const result = await signInWithPopup(auth, googleProvider);
@@ -149,16 +154,15 @@ function SignUpPage() {
 
   const handleUserNameChange = (e) => {
     const value = e.target.value;
-    if (value.includes(' ')) {
+    if (value.includes(" ")) {
       alert("Username should not contain spaces.");
     } else {
       setUserName(value);
     }
-
   };
 
   return (
-    <>
+    <div className="overflow-hidden">
       <div>
         <Navbar />
       </div>
@@ -290,12 +294,12 @@ function SignUpPage() {
           </div>
         </div>
       </div>
-    </>
+      <Footer />
+    </div>
   );
 }
 
 export default SignUpPage;
-
 
 // import React, { useState } from "react";
 // import { Link } from "react-router-dom";

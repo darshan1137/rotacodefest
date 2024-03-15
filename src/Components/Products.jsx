@@ -133,10 +133,7 @@ function Products() {
   }, []);
 
   return (
-    <section
-      className="text-gray-600 body-font"
-      
-    >
+    <section className="text-gray-600 body-font">
       <div className="h-1 bg-gray-200 rounded overflow-hidden md:w-5/6 mx-auto">
         <div className="w-ful h-full bg-green-500"></div>
       </div>
