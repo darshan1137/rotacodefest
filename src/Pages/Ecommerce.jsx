@@ -108,38 +108,36 @@ function Ecommerce() {
 
         <section className="text-gray-600 my-5 body-font lg:px-32">
           <AnimatePresence>
-            <div className="container px-5 py-15 mx-auto">
+            <div className="container px-5 py-15 mx-auto ">
               <div className="flex flex-wrap -m-4">
                 {products.map((product,index) => (
-                  <div
-                    className="lg:w-1/4 md:w-1/2 p-4  w-full"
+                  <motion.div
+                    className="lg:w-1/4 md:w-1/2 p-4  w-full "
                     key={product.id}
-                  >
-                    <motion.div
-                      key={product.id}
-                      initial={{
-                        opacity: 0,
-    
-                        y: 50,
-                      }}
-                      whileHover={{scale:1.05}}
+                    initial={{
+                      opacity: 0,
+  
+                      y: 50,
+                    }}
+                    whileHover={{scale:1.05}}
 
-                      whileInView={{
+                    whileInView={{
+                      opacity: 1,
+                      y: 0,
+                      transition: {
+                        duration: 1,
+                        delay: index * 0.1,
+                      },
+                      animate: {
                         opacity: 1,
                         y: 0,
-                        transition: {
-                          duration: 1,
-                          delay: index * 0.2,
-                        },
-                        animate: {
-                          opacity: 1,
-                          y: 0,
-                        },
-                      }}
-                      viewport={{ once: true }}
-                    >
-                      {/* <div className="rounded-lg overflow-hidden px-2 h-[25rem] py-6 shadow-md hover:shadow-xl"> */}
-                      <a className="block relative h-48 rounded overflow-hidden">
+                      },
+                    }}
+                    viewport={{ once: true }}
+                  >
+                    
+                      <div className="rounded-lg overflow-hidden px-2 h-[25rem] py-6 shadow-md hover:shadow-xl bg-gray-100">
+                      <a className="block relative h-48 rounded overflow-hidden ">
                         <img
                           alt="Product"
                           className="object-cover object-center w-full h-full block"
@@ -166,9 +164,9 @@ function Ecommerce() {
                           </a>
                         </div>
                       </div>
-                      {/* </div> */}
-                    </motion.div>
-                  </div>
+                      </div>
+                    
+                  </motion.div>
                 ))}
               </div>
             </div>
