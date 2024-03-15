@@ -43,14 +43,14 @@ export default function Blogs() {
 
   return (
     <>
-      <div className="bg-white py-3 sm:py-8 lg:py-12">
+      <div className="bg-white py-3 sm:py-9 lg:py-12">
         <div className="mx-auto max-w-screen-2xl px-2 md:px-8">
           <div className="md:mb-16">
             <h2 className="text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl">
               Discover Your Stories
             </h2>
 
-            <p className="mx-auto max-w-screen-md text-center text-gray-500 md:text-lg">
+            <p className="mx-auto max-w-screen-md text-center text-gray-500 md:text-lg m-2">
               "Uncover blogs written by you and relive your experiences"
             </p>
           </div>
@@ -89,8 +89,13 @@ export default function Blogs() {
                 </body>
               </>
             ) : (
-              <div className="mx-15 grid gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-8 mt-12 py-4">
+            
+              <div className="mx-8 grid gap-6 sm:grid-cols-2 md:gap-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-8 mt-12 py-4">
+              {/* // <div className="mx-32 md:mx-2 grid gap-6 sm:grid-cols-2 md:gap-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-8 mt-12 py-4"> */}
+
+              
                 {filteredBlogs.map((blog) => (
+                  
                   <Link
                     key={blog.id}
                     to={`/readblog/${blog.id}`}
@@ -118,8 +123,11 @@ export default function Blogs() {
                       </span>
                     </div>
                   </Link>
+
+                
                 ))}
               </div>
+             
             )}
           </div>
 

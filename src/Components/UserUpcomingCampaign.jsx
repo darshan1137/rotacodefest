@@ -88,8 +88,9 @@ export default function UserUpcomingCampaign() {
           </>
         ) : (
           filteredCampaigns.map((req) => (
+            <div className="flex items-center justify-center">
             <article
-              className="rounded-xl bg-white p-4 ring mb-5  ring-indigo-50 sm:p-6 lg:p-8"
+              className="rounded-xl bg-white p-8 ring mb-5  ring-indigo-50 sm:p-6 lg:p-8"
               key={req.id}
             >
               <div className="flex items-start sm:gap-8">
@@ -154,6 +155,8 @@ export default function UserUpcomingCampaign() {
                 </div>
               </div>
             </article>
+
+            </div>
           ))
         )}
         {}

@@ -112,18 +112,18 @@ export default function UserCertificates() {
 
   return (
     <>
-      <div className="my-4   py-4 ">
+      <div className="my-4 py-4 ">
         {userCertificates.length === 0 ? (
           <p className="text-2xl font-medium mb-6 text-center h-[55vh]">
             No certificates found!!!
           </p>
         ) : (
           <div className="mt-2 ">
-            <h2 className="text-xl font-bold mb-4">
+            <h2 className="text-xl text-center font-bold mb-4">
               Download your certificates here
             </h2>
-            <div className="flec justify-center">
-            <table className="w-full border border-collapse border-green-500 ">
+            <div className="flex justify-center items-center my-8">
+            <table className="w-3/4 border border-collapse border-green-500 ">
               <thead>
                 <tr className="bg-green-600 text-white">
                   <th className="py-2 px-4  border border-green-500">Sr. No.</th>

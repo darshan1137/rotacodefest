@@ -57,7 +57,7 @@ export default function UserCampaign() {
           Campaigns Hosted by you
         </h1>
 
-        <p className="p-3 mx-auto max-w-screen-md text-center text-gray-500 md:text-lg">
+        <p className="p-3 m-2 mx-auto max-w-screen-md text-center text-gray-500 md:text-lg">
           "Discover the campaigns you've hosted, reflecting your impactful
           contributions and shared experiences."
         </p>
@@ -98,9 +98,11 @@ export default function UserCampaign() {
           </>
         ) : (
           campaignData.map((req) => (
+            <div className="flex items-center justify-center ">
+            
             <article
               key={req.id}
-              className="my-5 rounded-xl bg-white p-3 ring ring-green-50  lg:p-5 no-underline "
+              className="my-3 w-3/4 rounded-xl bg-white p-3  ring ring-green-100  lg:p-5 no-underline "
             >
               <Link
                 to={`/campaign/${req.id}`}
@@ -170,6 +172,8 @@ export default function UserCampaign() {
                 </div>
               </Link>
             </article>
+
+            </div>
           ))
         )}
         {}
