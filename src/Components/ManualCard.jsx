@@ -1,9 +1,31 @@
 import React from "react";
+import { motion } from "framer-motion";
 
-const ManualCard = ({ imageFile, documentFile, handleDownload }) => {
+const ManualCard = ({ imageFile, documentFile, handleDownload, index }) => {
   return (
     <div className=" lg:w-1/2 w-full p-3 ">
-      <div className="h-full p-3 flex flex-col lg:flex-row items-center  justify-center text-center sm:text-left bg-white rounded-md shadow-green-400/40 shadow-lg hover:shadow-xl hover:shadow-green-600/60">
+      <motion.div
+        initial={{
+          opacity: 0,
+
+          y: 50,
+        }}
+        whileHover={{ scale: 1.05 }}
+        whileInView={{
+          opacity: 1,
+          y: 0,
+          transition: {
+            duration: 1,
+            delay: index * 0.1,
+          },
+          animate: {
+            opacity: 1,
+            y: 0,
+          },
+        }}
+        viewport={{ once: true }}
+        className="h-full p-3 flex flex-col lg:flex-row items-center  justify-center text-center sm:text-left bg-white rounded-md shadow-green-400/40 shadow-lg hover:shadow-xl hover:shadow-green-600/60"
+      >
         {imageFile && (
           <img
             alt={imageFile.name}
@@ -29,7 +51,7 @@ const ManualCard = ({ imageFile, documentFile, handleDownload }) => {
             </>
           )}
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };

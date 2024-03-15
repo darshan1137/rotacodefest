@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { db } from "../Firebase/cofig"; // Import your Firebase configuration
 import { collection, getDocs, where, query } from "firebase/firestore";
 import Marquee from "react-fast-marquee";
+import { motion } from "framer-motion";
 
 export default function Testimonial() {
   const [testimonials, setTestimonials] = useState([]);
@@ -47,10 +48,29 @@ export default function Testimonial() {
         <div className="max-w-screen-2xl  mx-auto text-center">
           <div className="flex  py-10  px-10align-middle items-center snap-center snap-always">
             {testimonials.map((testimonial, index) => (
-              <div
+              <motion.div
                 key={index}
                 className="m-3 bg-white rounded-lg shadow-lg p-6"
                 style={{ animationDelay: `${index * 0.2}s` }} // Delay animation for each card
+                initial={{
+                  opacity: 0,
+          
+                  y: 50,
+                }}
+                whileHover={{ scale: 1.05 }}
+                whileInView={{
+                  opacity: 1,
+                  y: 0,
+                  transition: {
+                    duration: 1,
+                    delay: index * 0.1,
+                  },
+                  animate: {
+                    opacity: 1,
+                    y: 0,
+                  },
+                }}
+                viewport={{ once: true }}
               >
                 <svg
                   className="h-12 mx-auto mb-3 text-green-400 dark:text-green-600"
@@ -80,7 +100,7 @@ export default function Testimonial() {
                     </div>
                   </div>
                 </figcaption>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
