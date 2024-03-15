@@ -3,6 +3,7 @@ import { db } from "../Firebase/cofig.js";
 import { doc, getDoc } from "firebase/firestore";
 import Loader from "../Components/Loader.jsx";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 // import UserProfile from "../Components/UserDetails.jsx"
 
 export default function UserDetails() {
@@ -94,8 +95,6 @@ export default function UserDetails() {
   }
   return (
     <>
-     
-
       <div className="flex items-center justify-center">
         <div className="bg-white p-8 rounded-lg shadow-md max-w-md w-full">
           <div className="flow-root rounded-lg border border-gray-100 py-3 shadow-sm">
@@ -158,32 +157,41 @@ export default function UserDetails() {
                   {formatTimestamp(userData.createdAt)}
                 </dd>
               </div>
-              <button
-                className="group relative flex items-center justify-center rounded bg-green-500 px-8 py-3 text-white focus:outline-none focus:ring active:bg-indigo-500 mx-auto"
-                onClick={logout}
-              >
-                <span className="absolute -start-full transition-all  group-hover:start-4">
-                  <svg
-                    className="size-5 rtl:rotate-180"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M17 8l4 4m0 0l-4 4m4-4H3"
-                    />
-                  </svg>
-                </span>
 
-                <span className="text-sm font-medium transition-all group-hover:ms-4">
-                  {" "}
-                  Logout{" "}
-                </span>
-              </button>
+              <div className="mt-3 mx-3 flex items-center justify-center">
+                
+                <button
+                  className="group relative flex items-center justify-center rounded bg-green-500 px-8 py-3 text-white focus:outline-none focus:ring active:bg-indigo-500  mr-4"
+                  onClick={logout}
+                >
+                  <span className="absolute -start-full transition-all group-hover:start-4">
+                    <svg
+                      className="size-5 rtl:rotate-180"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M17 8l4 4m0 0l-4 4m4-4H3"
+                      />
+                    </svg>
+                  </span>
+                  <span className="text-sm font-medium transition-all group-hover:ms-4">
+                    Logout
+                  </span>
+                </button>
+
+                <Link to="/feedbacks" className="no-underline">
+                  <button className="group relative flex items-center justify-center rounded bg-green-500 px-8 py-3 text-white focus:outline-none focus:ring active:bg-green-500 mx-auto no-underline">
+                    Feedback
+                  </button>
+                </Link>
+
+              </div>
             </dl>
           </div>
         </div>
