@@ -97,15 +97,32 @@ export default function Blogs() {
 
         <div className="md:px-20 m-5 grid gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-8">
       <AnimatePresence>
-        {blogs.map((blog) => (
+        {blogs.map((blog,index) => (
           <motion.div
             key={blog.id}
-            whileHover={{ scale: 1.05 }} // Scale effect on hover
+            
             className="group relative m-3 flex h-48 flex-col overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-50 xl:h-80"
-            initial={{ opacity: 0, y: 20 }} // Initial animation
-            animate={{ opacity: 1, y: 0 }} // Animation when component mounts
-            exit={{ opacity: 0, y: -20 }} // Animation when component unmounts
-            transition={{ duration: 0.5 }} // Transition duration
+            initial={{
+              opacity: 0,
+
+              y: 50,
+            }}
+            whileHover={{scale:1.05}}
+
+
+            whileInView={{
+              opacity: 1,
+              y: 0,
+              transition: {
+                duration: 1,
+                delay: index * 0.2,
+              },
+              animate: {
+                opacity: 1,
+                y: 0,
+              },
+            }}
+            viewport={{ once: false }}
           >
             <Link
               to={`/readblog/${blog.id}`}

@@ -53,7 +53,14 @@ function App() {
             }
           />
           <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUpPage />} />
+          <Route
+            path="/signup"
+            element={
+              <ProtectedRoute user={username} route="/login">
+                <SignUpPage />{" "}
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="/register"
             element={

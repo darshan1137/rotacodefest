@@ -183,11 +183,11 @@ export default function Maps() {
           </p>
         </div>
         <div className="flex lg:flex-row flex-col pt-3">
-          <div className="mx-10 border-2 border-black w-1/6 rounded-lg bg-white">
+          <div className="mx-10 border-2 border-black lg:w-1/6 md:1/6 xl:1/6  rounded-lg bg-white">
             {" "}
             <Legend />
           </div>
-          <div className="relative rounded-lg shadow-xl flex flex-col justify-center items-center shadow-grey-200 overflow-hidden mx-auto border-2 border-black">
+          <div className="relative rounded-lg shadow-xl flex flex-col justify-center  items-center shadow-grey-200 overflow-hidden mx-4 border-2 border-black">
             {userLocation && forestLocations.length > 0 && (
               <MapContainer
                 center={[userLocation?.lat || 0, userLocation?.lon || 0]}

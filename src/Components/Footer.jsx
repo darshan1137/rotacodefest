@@ -397,22 +397,22 @@ function Footer() {
             </div>
 
             <div className="grid grid-cols-1 gap-8  sm:grid-cols-2 md:grid-cols-4 lg:col-span-2">
-              <div className="text-left sm:text-left">
+              <div className="text-left  ">
                 <p className="text-lg font-medium text-gray-900">About Us</p>
 
                 <ul className="mt-8 space-y-4 text-sm">
                   <li>
                     <Link
-                      className="text-gray-700 transition hover:text-gray-700/75"
+                      className="text-gray-700 transition hover:text-green-500 "
                       to="/about"
                     >
-                      Meet the Team
+                      About
                     </Link>
                   </li>
 
                   {/* <li>
                     <Link
-                      className="text-gray-700 transition hover:text-gray-700/75"
+                      className="text-gray-700 transition hover:text-green-500"
                       to="/stats"
                     >
                       Statistics
@@ -421,7 +421,7 @@ function Footer() {
 
                   <li>
                     <Link
-                      className="text-gray-700 transition hover:text-gray-700/75"
+                      className="text-gray-700 transition hover:text-green-500"
                       to="/stats"
                     >
                       Contact Us
@@ -438,7 +438,7 @@ function Footer() {
                 <ul className="mt-8 space-y-4 text-sm">
                   <li>
                     <Link
-                      className="text-gray-700 transition hover:text-gray-700/75"
+                      className="text-gray-700 transition hover:text-green-500"
                       to="/footprint"
                     >
                       Carbon Footprint Calculator
@@ -447,7 +447,7 @@ function Footer() {
 
                   <li>
                     <Link
-                      className="text-gray-700 transition hover:text-gray-700/75"
+                      className="text-gray-700 transition hover:text-green-500"
                       to="/ecommerce"
                     >
                       Eco-friendly Products
@@ -456,7 +456,7 @@ function Footer() {
 
                   <li>
                     <Link
-                      className="text-gray-700 transition hover:text-gray-700/75"
+                      className="text-gray-700 transition hover:text-green-500"
                       to="/maps"
                     >
                       Bin Locator
@@ -465,7 +465,7 @@ function Footer() {
 
                   <li>
                     <Link
-                      className="text-gray-700 transition hover:text-gray-700/75"
+                      className="text-gray-700 transition hover:text-green-500"
                       to="/campaign"
                     >
                       {" "}
@@ -483,7 +483,7 @@ function Footer() {
                 <ul className="mt-8 space-y-4 text-sm">
                   <li>
                     <Link
-                      className="text-gray-700 transition hover:text-gray-700/75"
+                      className="text-gray-700 transition hover:text-green-500"
                       to="/requestcampaign"
                     >
                       {" "}
@@ -493,7 +493,7 @@ function Footer() {
 
                   <li>
                     <Link
-                      className="text-gray-700 transition hover:text-gray-700/75"
+                      className="text-gray-700 transition hover:text-green-500"
                       to="/report"
                     >
                       {" "}
@@ -502,7 +502,7 @@ function Footer() {
                   </li>
                   <li>
                     <Link
-                      className="text-gray-700 transition hover:text-gray-700/75"
+                      className="text-gray-700 transition hover:text-green-500"
                       to="/blogs"
                     >
                       {" "}
@@ -512,7 +512,7 @@ function Footer() {
 
                   <li>
                     <Link
-                      className="text-gray-700 transition hover:text-gray-700/75"
+                      className="text-gray-700 transition hover:text-green-500"
                       to="/guideline"
                     >
                       {" "}
@@ -522,7 +522,7 @@ function Footer() {
                 </ul>
               </div>
 
-              <div className="text-center sm:text-left">
+              <div className="text-left sm:text-left">
                 <p className="text-lg font-medium text-gray-900">Contact Us</p>
 
                 <ul className="mt-8 space-y-4 text-sm">

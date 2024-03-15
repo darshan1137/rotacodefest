@@ -110,19 +110,33 @@ function Ecommerce() {
           <AnimatePresence>
             <div className="container px-5 py-15 mx-auto">
               <div className="flex flex-wrap -m-4">
-                {products.map((product) => (
+                {products.map((product,index) => (
                   <div
                     className="lg:w-1/4 md:w-1/2 p-4  w-full"
                     key={product.id}
                   >
                     <motion.div
                       key={product.id}
-                      whileHover={{ scale: 1.05 }} // Scale effect on hover
-                      className="rounded-lg overflow-hidden px-2 h-[25rem] py-6 shadow-md hover:shadow-xl"
-                      initial={{ opacity: 0, y: 20 }} // Initial animation
-                      animate={{ opacity: 1, y: 0 }} // Animation when component mounts
-                      exit={{ opacity: 0, y: -20 }} // Animation when component unmounts
-                      transition={{ duration: 0.5 }} // Transition duration
+                      initial={{
+                        opacity: 0,
+    
+                        y: 50,
+                      }}
+                      whileHover={{scale:1.05}}
+
+                      whileInView={{
+                        opacity: 1,
+                        y: 0,
+                        transition: {
+                          duration: 1,
+                          delay: index * 0.2,
+                        },
+                        animate: {
+                          opacity: 1,
+                          y: 0,
+                        },
+                      }}
+                      viewport={{ once: true }}
                     >
                       {/* <div className="rounded-lg overflow-hidden px-2 h-[25rem] py-6 shadow-md hover:shadow-xl"> */}
                       <a className="block relative h-48 rounded overflow-hidden">

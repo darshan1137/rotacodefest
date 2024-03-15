@@ -11,6 +11,7 @@ import {
   doc,
   updateDoc,
 } from "firebase/firestore";
+import { motion } from "framer-motion";
 
 function Blogs() {
   const [blogs, setBlogs] = useState([]);
@@ -56,12 +57,35 @@ function Blogs() {
           </div>
         </div>
         <div className="  m-5 grid gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-3 xl:grid-cols-3 xl:gap-8 justify-center items-center mx-auto px-10">
-          {blogs.map((blog) => (
+          {blogs.map((blog,index) => (
+            <motion.div
+            
+            key={blog.id}
+              
+            initial={{
+              opacity: 0,
+
+              y: 50,
+            }}
+            whileInView={{
+              opacity: 1,
+              y: 0,
+              transition: {
+                duration: 1,
+                delay: index * 0.2,
+              },
+              animate: {
+                opacity: 1,
+                y: 0,
+              },
+            }}
+            viewport={{ once: false }}
+          >
             <Link
-              key={blog.id}
-              to={`/readblog/${blog.id}`}
-              className="group relative m-3 flex h-48 sm:h-40 flex-col overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-50 xl:h-80 mx-2 md:mx-3"
+            to={`/readblog/${blog.id}`}
+            className="group relative m-3 flex h-48 sm:h-40 flex-col overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-50 xl:h-80 mx-2 md:mx-3"
             >
+            
               <img
                 src={blog.imglink}
                 loading="lazy"
@@ -82,7 +106,8 @@ function Blogs() {
                 </span>
                 <span className="font-semibold text-indigo-300">Read more</span>
               </div>
-            </Link>
+              </Link>
+            </motion.div>
           ))}
         </div>
 

@@ -179,8 +179,8 @@ function Products() {
                   }}
                   viewport={{ once: false }}
                 >
-                  <div className="rounded-lg overflow-hidden px-2 shadow-md hover:shadow-xl p-2 bg-white ">
-                    <a className="block relative h-48 rounded overflow-hidden border-2 border-gray-300">
+                  <div className="rounded-lg overflow-hidden px-2 shadow-md hover:shadow-xl p-2 bg-gray-100 ">
+                    <a className="block relative h-48 rounded overflow-hidden ">
                       <img
                         alt="Product"
                         className="object-cover object-center w-full h-full block "

@@ -446,34 +446,29 @@ function Campaign() {
           </div>
           <div className="my-5">
             {campaignData.map((req, index) => (
-              <motion.article
-                className="rounded-xl bg-white p-4 mb-5 sm:p-6 lg:p-8 shadow-md "
-                key={req.id}
-                initial={{
-                  opacity: -1,
-                  ...(index % 2 === 0
-                    ? {
-                        x: -100,
-                      }
-                    : {
-                        x: 100,
-                      }),
-                }}
-                whileInView={{
-                  opacity: 1,
-                  ...(index % 2 === 0
-                    ? {
-                        x: 0,
-                      }
-                    : {
-                        x: 0,
-                      }),
-                  transition: {
-                    duration: 0.5,
-                  },
-                }}
-                viewport={{ once: false }}
-              >
+             <motion.article
+             className="rounded-xl bg-white p-4 mb-5 sm:p-6 lg:p-8 shadow-md "
+             key={req.id}
+             initial={{
+               opacity: -1,
+              y:20,
+              x:-25
+             }}
+             whileHover={{scale:1.05}}
+             whileInView={{
+               opacity: 1,
+               y:0,
+               x:0,
+               transition: {
+                 duration: 0.5,
+                 
+               },
+             }}
+             
+             viewport={{ once: false }}
+             
+           >
+
                 <div className="flex items-start sm:gap-8">
                   <div>
                     <strong className=" rounded border border-green-500 bg-green-500 px-3 py-1.5 text-[10px] font-medium text-white">

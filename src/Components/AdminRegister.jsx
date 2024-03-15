@@ -88,6 +88,16 @@ export default function Registration() {
     }
   };
 
+  const handleUserNameChange = (e) => {
+    const value = e.target.value;
+    if (value.includes(' ')) {
+      alert("Username should not contain spaces.");
+    } else {
+      setUserName(value);
+    }
+
+  };
+
   return (
     <>
       <div className="bg-white py-6 sm:py-8 lg:py-12">
@@ -113,7 +123,7 @@ export default function Registration() {
                 id="user-name"
                 type="text"
                 value={userName}
-                onChange={(e) => setUserName(e.target.value)}
+                onChange={handleUserNameChange}
                 className="w-full rounded border bg-gray-50 px-3 py-2 text-teal-800 outline-none ring-teal-500 transition duration-100 focus:ring"
               />
             </div>
