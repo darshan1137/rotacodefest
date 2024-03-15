@@ -735,12 +735,12 @@ export default function Blogs() {
       {activeTab === "campaigns" && (
         <section className="bg-white text-grey-900 container px-5 py-10 mx-auto">
           {campaigns.length === 0 ? (
-            Blogs(<NotFound />)
+            (<NotFound />)
           ) : (
             <div className="mx-auto max-w-screen-xl sm:px-6 lg:px-8">
               <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
                 {campaigns.map((req) => (
-                  <a
+                  <div
                     className="block rounded-xl border border-gray-800 p-8 shadow-xl transition hover:border-pink-500/10 hover:shadow-pink-500/10 relative"
                     href="#"
                     key={req.id}
@@ -802,7 +802,7 @@ export default function Blogs() {
                         </button>
                       </span>
                     </div>
-                  </a>
+                  </div>
                 ))}
               </div>
             </div>
@@ -813,7 +813,7 @@ export default function Blogs() {
       {activeTab === "products" && (
         <section>
           {products.length === 0 ? (
-            Blogs(<NotFound />)
+            (<NotFound />)
           ) : (
             <div className="mx-auto max-w-screen-xl sm:px-6 ">
               <div className="flex flex-wrap -my-4 py-10">
