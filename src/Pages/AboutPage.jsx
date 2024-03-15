@@ -4,6 +4,7 @@ import Footer from "../Components/Footer";
 import AboutIntro from "../Components/About-Us/AboutIntro";
 import Services from "../Components/About-Us/Services";
 import pranav from "../assets/pranav.jpg"
+import shamaila from "../assets/shamaila.jpeg"
 
 function AboutPage() {
   return (
@@ -91,7 +92,7 @@ function AboutPage() {
           />
 
                 <h3 className="font-medium text-black text-2xl text-center">
-                  Pranav Pol
+                Pranav Pol
                 </h3>
               </a>
 
@@ -138,36 +139,38 @@ function AboutPage() {
 
             <div className="space-y-4">
               <a href="#" target="_blank" className="space-y-4">
-                <img
-                  src="https://randomuser.me/api/portraits/men/7.jpg"
-                  className="mx-auto h-40 w-40 rounded-full xl:w-56 xl:h-56"
-                />
+              <img
+            src={shamaila}
+            alt="Your Alt Text"
+            className="mx-auto h-40 w-40 rounded-full xl:w-56 xl:h-56"
+          />
 
                 <h3 className="font-medium text-black text-2xl text-center">
-                  Ray
+                  Shamaila Ansari
                 </h3>
               </a>
 
               <div className="flex space-x-4 justify-center items-center">
                 <a
-                  href="#"
+                  href="https://www.linkedin.com/in/shamaila-ansari-285809268/"
                   target="_blank"
                   className="text-gray-400 hover:text-gray-500"
                 >
-                  <span className="sr-only">Twitter</span>
+                  <span className="sr-only">LinkedIn</span>
 
-                  <svg
-                    className="w-6 h-6"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    aria-hidden="true"
-                  >
-                    <path d="M6.29 18.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0020 3.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.073 4.073 0 01.8 7.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 010 16.407a11.616 11.616 0 006.29 1.84"></path>
-                  </svg>
+                  <span class="[&>svg]:h-5 [&>svg]:w-5">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="currentColor"
+                      viewBox="0 0 448 512"
+                    >
+                      <path d="M100.3 448H7.4V148.9h92.9zM53.8 108.1C24.1 108.1 0 83.5 0 53.8a53.8 53.8 0 0 1 107.6 0c0 29.7-24.1 54.3-53.8 54.3zM447.9 448h-92.7V302.4c0-34.7-.7-79.2-48.3-79.2-48.3 0-55.7 37.7-55.7 76.7V448h-92.8V148.9h89.1v40.8h1.3c12.4-23.5 42.7-48.3 87.9-48.3 94 0 111.3 61.9 111.3 142.3V448z" />
+                    </svg>
+                  </span>
                 </a>
 
                 <a
-                  href="#"
+                  href="https://github.com/Ansari-Shamaila"
                   target="_blank"
                   className="text-gray-400 hover:text-gray-500"
                 >
@@ -187,6 +190,7 @@ function AboutPage() {
                 </a>
               </div>
             </div>
+
 
             <div className="space-y-4">
               <a href="#" target="_blank" className="space-y-4">
