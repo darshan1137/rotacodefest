@@ -19,7 +19,7 @@ import Legend from "./Legend";
 import Footer from "./Footer";
 
 export default function Maps() {
-  const locationIQApiKey = "cade239a09f94860b75b287e661359cc";
+  const locationIQApiKey = "ADD YOUR API KEY HERE";
 
   const [forestLocations, setForestLocations] = useState([]);
   const [userLocation, setUserLocation] = useState(null);
