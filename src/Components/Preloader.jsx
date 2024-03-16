@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 const Preloader = ({ setIsLoaded }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -9,17 +9,35 @@ const Preloader = ({ setIsLoaded }) => {
       setIsLoading(false);
       setIsLoaded(true);
     }, 3000);
-    return () => clearTimeout(timer);
+
+    // Add a one-second delay after the animation completes
+    const finalDelayTimer = setTimeout(() => {
+      setIsLoaded(true);
+    }, 4000);
+
+    // Clear the finalDelayTimer when the component unmounts
+    return () => {
+      clearTimeout(timer);
+      clearTimeout(finalDelayTimer);
+    };
   }, [setIsLoaded]);
+
+  const text = "Waste Wise Web";
 
   return (
     <div className="h-screen bg-black flex justify-center items-center">
       {isLoading ? (
         <motion.div
           className="preloader-content flex flex-col items-center"
-          initial={{ opacity: 0, scale: 0, y: '50%' }}
-          animate={{ opacity: 1, scale: 1.2, y: '0%' }}
-          transition={{ delay: 0.5, duration: 2.5, type: 'spring', stiffness: 120, ease: 'easeInOut' }}
+          initial={{ opacity: 0, scale: 0, y: "50%" }}
+          animate={{ opacity: 1, scale: 1.2, y: "0%" }}
+          transition={{
+            delay: 0.5,
+            duration: 2.5,
+            type: "spring",
+            stiffness: 120,
+            ease: "easeInOut",
+          }}
           viewport={{ once: false }}
         >
           <motion.svg
@@ -56,12 +74,28 @@ const Preloader = ({ setIsLoaded }) => {
             </g>
           </motion.svg>
           <motion.h1
-            className="preloader-name text-white text-4xl md:text-6xl lg:text-8xl font-bold ml-4"
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ delay: 1.5, duration: 1 }}
+            className="preloader-name text-white text-xl md:text-3xl lg:text-3xl ml-4 uppercase mx-auto"
+            style={{ fontFamily: "BIZ UDPMincho, serif" }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{
+              delay: 1.5,
+              duration: 1,
+              type: "tween",
+              ease: "easeOut",
+            }}
           >
-            Waste Wise Web
+            {text.split("").map((char, index) => (
+              <motion.span
+                key={index}
+                style={{ display: "inline-block" }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1.5 + index * 0.1 }}
+              >
+                {char === " " ? "\u00A0" : char}
+              </motion.span>
+            ))}
           </motion.h1>
         </motion.div>
       ) : null}
