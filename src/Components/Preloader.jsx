@@ -8,18 +8,8 @@ const Preloader = ({ setIsLoaded }) => {
     const timer = setTimeout(() => {
       setIsLoading(false);
       setIsLoaded(true);
-    }, 3000);
-
-    // Add a one-second delay after the animation completes
-    const finalDelayTimer = setTimeout(() => {
-      setIsLoaded(true);
-    }, 4000);
-
-    // Clear the finalDelayTimer when the component unmounts
-    return () => {
-      clearTimeout(timer);
-      clearTimeout(finalDelayTimer);
-    };
+    }, 3500);
+    return () => clearTimeout(timer);
   }, [setIsLoaded]);
 
   const text = "Waste Wise Web";
@@ -97,6 +87,7 @@ const Preloader = ({ setIsLoaded }) => {
               </motion.span>
             ))}
           </motion.h1>
+          ; ;
         </motion.div>
       ) : null}
     </div>
